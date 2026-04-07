@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Regions — Rigan Roots & Routes</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Nepal's Regions | Rigan Roots & Routes</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <style>
     :root {
       --primary: #991b1b;
@@ -15,67 +15,448 @@
       --gradient-sunrise: linear-gradient(135deg, #f59e0b 0%, #dc2626 50%, #7c2d12 100%);
       --stone-50: #fafaf9;
       --stone-100: #f5f5f4;
+      --stone-200: #e7e5e4;
+      --stone-500: #78716c;
       --stone-600: #57534e;
       --stone-700: #44403c;
       --stone-800: #292524;
       --stone-900: #1c1917;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
       --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
       --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
       --radius-xl: 28px;
+      --radius-lg: 20px;
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--stone-50); color: var(--stone-700); line-height: 1.5; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
-    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1400px; margin: 0 auto; }
-    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .brand-logo { width: 44px; height: 44px; background: var(--gradient-sunrise); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2rem; }
-    .brand-name { font-size: 1.25rem; color: var(--stone-800); }
-    .brand-tagline { font-size: 0.7rem; color: var(--stone-500); }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a { text-decoration: none; color: var(--stone-600); font-weight: 500; font-size: 0.9rem; transition: var(--transition); }
-    .nav-links a:hover { color: var(--primary); }
-    .mobile-menu-btn { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
-    .mobile-menu-btn span { width: 28px; height: 2px; background: var(--stone-700); }
-    @media (max-width: 768px) { .mobile-menu-btn { display: flex; } .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: white; flex-direction: column; justify-content: center; padding: 40px; box-shadow: var(--shadow-xl); transition: right 0.3s; z-index: 99; } .nav-links.active { right: 0; } .nav-container { padding: 16px 24px; } }
-    .hero { padding: 60px 0 40px; text-align: center; }
-    .hero-title { font-size: 3rem; color: var(--stone-900); margin-bottom: 20px; }
-    .hero-subtitle { font-size: 1.1rem; color: var(--stone-500); max-width: 600px; margin: 0 auto; }
-    .regions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 60px 0; }
-    .region-card { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; }
-    .region-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
-    .region-img { height: 250px; background-size: cover; background-position: center; }
-    .region-content { padding: 20px; }
-    .region-name { font-size: 1.3rem; margin-bottom: 8px; color: var(--stone-800); }
-    .region-desc { font-size: 0.85rem; color: var(--stone-500); margin-bottom: 12px; }
-    .region-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .region-tag { background: var(--stone-100); padding: 4px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; color: var(--primary); }
-    @media (max-width: 900px) { .regions-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 550px) { .regions-grid { grid-template-columns: 1fr; } }
-    .footer { background: var(--stone-900); color: white; padding: 60px 0 30px; margin-top: 60px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
-    .footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
-    .footer-links { list-style: none; }
-    .footer-links a { color: white; text-decoration: none; opacity: 0.7; font-size: 0.9rem; }
-    .social-links { display: flex; gap: 16px; }
-    .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
-    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.6; }
-    @media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 550px) { .footer-grid { grid-template-columns: 1fr; } }
-    .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; z-index: 99; }
-    .floating-whatsapp a { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; box-shadow: var(--shadow-lg); }
-    [data-aos] { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
-    [data-aos].aos-animate { opacity: 1; transform: translateY(0); }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--stone-50);
+      color: var(--stone-700);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: var(--stone-900);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient-sunrise);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 1.25rem;
+      color: var(--stone-800);
+      font-weight: 700;
+    }
+
+    .brand-tagline {
+      font-size: 0.72rem;
+      color: var(--stone-500);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--stone-600);
+      font-weight: 500;
+      font-size: 0.92rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .mobile-menu-btn span {
+      width: 28px;
+      height: 2px;
+      background: var(--stone-700);
+    }
+
+    .hero {
+      padding: 72px 0 28px;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: var(--stone-900);
+      margin-bottom: 18px;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 1.08rem;
+      color: var(--stone-500);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .intro-block {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 22px 0 10px;
+    }
+
+    .intro-block h2 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .intro-block p {
+      color: var(--stone-500);
+      font-size: 1rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: rgba(153, 27, 27, 0.08);
+      color: var(--primary);
+      border: 1px solid rgba(153, 27, 27, 0.1);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    .regions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+      padding: 56px 0 72px;
+    }
+
+    .region-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .region-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .region-img {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .region-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.18), rgba(0,0,0,0.02));
+    }
+
+    .region-content {
+      padding: 22px;
+    }
+
+    .region-name {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      color: var(--stone-800);
+    }
+
+    .region-desc {
+      font-size: 0.92rem;
+      color: var(--stone-500);
+      margin-bottom: 14px;
+      min-height: 88px;
+    }
+
+    .region-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .region-tag {
+      background: var(--stone-100);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .highlight-section {
+      padding: 0 0 24px;
+    }
+
+    .highlight-box {
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      padding: 28px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .highlight-box h3 {
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+    }
+
+    .highlight-box p {
+      color: var(--stone-500);
+      max-width: 900px;
+    }
+
+    .footer {
+      background: var(--stone-900);
+      color: white;
+      padding: 60px 0 30px;
+      margin-top: 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .footer p,
+    .footer-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .footer-title {
+      margin-bottom: 14px;
+      font-size: 1rem;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.85rem;
+      opacity: 0.65;
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99;
+    }
+
+    .floating-whatsapp a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: white;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: var(--shadow-xl);
+    }
+
+    [data-aos] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+
+    [data-aos].aos-animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+      .regions-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 72%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        justify-content: center;
+        padding: 40px;
+        box-shadow: var(--shadow-xl);
+        transition: right 0.3s ease;
+        z-index: 999;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-container {
+        padding: 16px 24px;
+      }
+
+      .container {
+        padding: 0 22px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .regions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-whatsapp a span {
+        display: none;
+      }
+
+      .floating-whatsapp a {
+        width: 56px;
+        height: 56px;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50%;
+      }
+    }
   </style>
 </head>
 <body>
 
   <nav class="navbar">
     <div class="nav-container">
-      <a href="index.html" class="brand"><div class="brand-logo">RR</div><div><div class="brand-name">Rigan Roots & Routes</div><div class="brand-tagline">Authentic Nepal Travel</div></div></a>
-      <div class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></div>
+      <a href="index.html" class="brand">
+        <div class="brand-logo">RR</div>
+        <div>
+          <div class="brand-name">Rigan Roots & Routes</div>
+          <div class="brand-tagline">Meaningful Journeys Through Nepal</div>
+        </div>
+      </a>
+
+      <div class="mobile-menu-btn" id="mobileMenuBtn">
+        <span></span><span></span><span></span>
+      </div>
+
       <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
         <a href="experiences.html">Experiences</a>
@@ -87,30 +468,290 @@
     </div>
   </nav>
 
-  <section class="hero"><div class="container"><h1 class="hero-title" data-aos="fade-up">Explore Nepal's Regions</h1><p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Discover the diverse beauty of Nepal — from the Himalayas to the Terai</p></div></section>
+  <section class="hero">
+    <div class="container">
+      <div class="section-label" data-aos="fade-up">Explore Nepal</div>
+      <h1 class="hero-title" data-aos="fade-up">Explore the Many Faces of Nepal</h1>
+      <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+        From sacred cities and timeless villages to remote valleys, hidden lakes, and Himalayan trails, discover the regions that make Nepal unforgettable.
+      </p>
+    </div>
+  </section>
 
   <div class="container">
-    <div class="regions-grid">
-      <div class="region-card" onclick="window.location.href='plan.html'"><div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1548017523-6c1b7ed90d3a?auto=format&fit=crop&w=800&q=80')"></div><div class="region-content"><h3 class="region-name">Kathmandu Valley</h3><p class="region-desc">The cultural heart of Nepal with 7 UNESCO World Heritage Sites, ancient temples, and vibrant Newari culture.</p><div class="region-tags"><span class="region-tag">🏛️ UNESCO</span><span class="region-tag">🍲 Newari Food</span><span class="region-tag">🏯 Temples</span></div></div></div>
-      <div class="region-card" onclick="window.location.href='plan.html'"><div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1599661048171-13b1c58374a4?auto=format&fit=crop&w=800&q=80')"></div><div class="region-content"><h3 class="region-name">Pokhara & Annapurna</h3><p class="region-desc">Gateway to the Annapurna Circuit with Phewa Lake, paragliding, and stunning mountain views.</p><div class="region-tags"><span class="region-tag">🏔️ Trekking</span><span class="region-tag">🪂 Paragliding</span><span class="region-tag">🌊 Phewa Lake</span></div></div></div>
-      <div class="region-card" onclick="window.location.href='plan.html'"><div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80')"></div><div class="region-content"><h3 class="region-name">Everest Region</h3><p class="region-desc">Home to the world's highest peak, Sherpa culture, and the legendary Everest Base Camp trek.</p><div class="region-tags"><span class="region-tag">🗻 Mt. Everest</span><span class="region-tag">🥾 EBC Trek</span><span class="region-tag">🕉️ Monasteries</span></div></div></div>
-      <div class="region-card" onclick="window.location.href='plan.html'"><div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1597149877677-2cc57aa26336?auto=format&fit=crop&w=800&q=80')"></div><div class="region-content"><h3 class="region-name">Chitwan National Park</h3><p class="region-desc">Nepal's premier wildlife destination with one-horned rhinos, Bengal tigers, and elephant safaris.</p><div class="region-tags"><span class="region-tag">🐘 Safari</span><span class="region-tag">🦏 Rhinos</span><span class="region-tag">🎭 Tharu Culture</span></div></div></div>
-      <div class="region-card" onclick="window.location.href='plan.html'"><div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=800&q=80')"></div><div class="region-content"><h3 class="region-name">Eastern Nepal</h3><p class="region-desc">Tea gardens of Ilam, Kanchenjunga (3rd highest peak), and unique Limbu & Rai cultures.</p><div class="region-tags"><span class="region-tag">🍃 Tea Estates</span><span class="region-tag">🗻 Kanchenjunga</span><span class="region-tag">🎋 Bamboo Trails</span></div></div></div>
-      <div class="region-card" onclick="window.location.href='plan.html'"><div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1547994477-73fdf1e58d17?auto=format&fit=crop&w=800&q=80')"></div><div class="region-content"><h3 class="region-name">Lumbini</h3><p class="region-desc">The birthplace of Lord Buddha, with beautiful monasteries from Buddhist communities worldwide.</p><div class="region-tags"><span class="region-tag">🕯️ Buddha</span><span class="region-tag">🛕 Monasteries</span><span class="region-tag">🧘 Meditation</span></div></div></div>
-      <div class="region-card" onclick="window.location.href='plan.html'"><div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1526779259212-939e64788e3c?auto=format&fit=crop&w=800&q=80')"></div><div class="region-content"><h3 class="region-name">Bandipur</h3><p class="region-desc">A beautifully preserved Newari hilltop village with mountain views and traditional homestays.</p><div class="region-tags"><span class="region-tag">🏡 Homestays</span><span class="region-tag">🌄 Sunrise</span><span class="region-tag">🏘️ Newari</span></div></div></div>
-      <div class="region-card" onclick="window.location.href='plan.html'"><div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80')"></div><div class="region-content"><h3 class="region-name">Upper Mustang</h3><p class="region-desc">The hidden kingdom with Tibetan Buddhist culture, ancient cave dwellings, and dramatic landscapes.</p><div class="region-tags"><span class="region-tag">🏯 Hidden Kingdom</span><span class="region-tag">🕉️ Tibetan</span><span class="region-tag">🪨 Caves</span></div></div></div>
+    <div class="intro-block" data-aos="fade-up">
+      <h2>Choose Your Nepal</h2>
+      <p>
+        Every region tells a different story. Some invite adventure, some offer stillness, and others open the door to culture, spirituality, and everyday life. At Rigan, we help travelers go beyond the obvious and discover Nepal with depth.
+      </p>
     </div>
+
+    <div class="regions-grid">
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1548017523-6c1b7ed90d3a?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Kathmandu Valley</h3>
+          <p class="region-desc">The cultural soul of Nepal, where ancient temples, living heritage, hidden courtyards, and vibrant Newari traditions shape every street and square.</p>
+          <div class="region-tags">
+            <span class="region-tag">🏛️ UNESCO</span>
+            <span class="region-tag">🍲 Newari Food</span>
+            <span class="region-tag">🏯 Heritage</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="50">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1599661048171-13b1c58374a4?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Pokhara & Annapurna</h3>
+          <p class="region-desc">A gateway to the Annapurna region, blending peaceful lakes, mountain reflections, soft adventure, village trails, and unforgettable trekking journeys.</p>
+          <div class="region-tags">
+            <span class="region-tag">🏔️ Trekking</span>
+            <span class="region-tag">🪂 Adventure</span>
+            <span class="region-tag">🌊 Lakeside</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="100">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Everest Region</h3>
+          <p class="region-desc">A legendary Himalayan world of Sherpa culture, dramatic alpine landscapes, ancient monasteries, and the iconic route toward Everest Base Camp.</p>
+          <div class="region-tags">
+            <span class="region-tag">🗻 Everest</span>
+            <span class="region-tag">🥾 Trekking</span>
+            <span class="region-tag">🕉️ Monasteries</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1597149877677-2cc57aa26336?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Chitwan National Park</h3>
+          <p class="region-desc">Nepal's wildlife heartland, where jungle safaris, rare rhinos, river landscapes, and rich Tharu culture reveal a completely different side of the country.</p>
+          <div class="region-tags">
+            <span class="region-tag">🐘 Safari</span>
+            <span class="region-tag">🦏 Rhinos</span>
+            <span class="region-tag">🎭 Tharu Culture</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="50">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Eastern Nepal</h3>
+          <p class="region-desc">A lesser-known region of rolling tea gardens, mountain communities, forested hills, and landscapes shaped by Limbu, Rai, and Himalayan traditions.</p>
+          <div class="region-tags">
+            <span class="region-tag">🍃 Tea Estates</span>
+            <span class="region-tag">🗻 Eastern Himalaya</span>
+            <span class="region-tag">🌿 Culture</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="100">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1547994477-73fdf1e58d17?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Lumbini</h3>
+          <p class="region-desc">The birthplace of Buddha, offering a peaceful spiritual atmosphere, international monasteries, sacred gardens, and journeys rooted in reflection and history.</p>
+          <div class="region-tags">
+            <span class="region-tag">🕯️ Buddha</span>
+            <span class="region-tag">🛕 Monasteries</span>
+            <span class="region-tag">🧘 Spiritual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1526779259212-939e64788e3c?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Bandipur</h3>
+          <p class="region-desc">A beautifully preserved hilltop town where Newari heritage, quiet stone lanes, mountain panoramas, and slow travel come together with elegance.</p>
+          <div class="region-tags">
+            <span class="region-tag">🏡 Homestays</span>
+            <span class="region-tag">🌄 Views</span>
+            <span class="region-tag">🏘️ Heritage Town</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="50">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Upper Mustang</h3>
+          <p class="region-desc">A remote Himalayan kingdom of desert-like cliffs, Tibetan Buddhist heritage, walled settlements, and rare cultural depth beyond the usual tourist path.</p>
+          <div class="region-tags">
+            <span class="region-tag">🏯 Hidden Kingdom</span>
+            <span class="region-tag">🕉️ Tibetan Culture</span>
+            <span class="region-tag">🪨 Dramatic Landscapes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="100">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Rara Lake</h3>
+          <p class="region-desc">A remote alpine escape in western Nepal, known for still blue water, pine forests, quiet trails, and the rare feeling of complete Himalayan calm.</p>
+          <div class="region-tags">
+            <span class="region-tag">💙 Hidden Lake</span>
+            <span class="region-tag">🌲 Remote Nature</span>
+            <span class="region-tag">🏕️ Offbeat</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Shey Phoksundo</h3>
+          <p class="region-desc">A striking Dolpo landscape of turquoise lake views, high mountain wilderness, deep valleys, and one of Nepal's most remote adventure experiences.</p>
+          <div class="region-tags">
+            <span class="region-tag">💎 Blue Lake</span>
+            <span class="region-tag">🥾 Dolpo</span>
+            <span class="region-tag">⛰️ Remote Trek</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="50">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Tsum Valley</h3>
+          <p class="region-desc">A hidden Himalayan valley near Manaslu, where Buddhist culture, quiet monasteries, stone villages, and sacred mountain scenery remain beautifully preserved.</p>
+          <div class="region-tags">
+            <span class="region-tag">🙏 Sacred Valley</span>
+            <span class="region-tag">🏔️ Hidden Himalaya</span>
+            <span class="region-tag">🛕 Monasteries</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="100">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Khaptad</h3>
+          <p class="region-desc">A hidden plateau of rolling grasslands, forests, quiet trails, and spiritual stillness in far-western Nepal—ideal for travelers seeking peace and nature.</p>
+          <div class="region-tags">
+            <span class="region-tag">🌿 Meadows</span>
+            <span class="region-tag">🦜 Birdwatching</span>
+            <span class="region-tag">⛺ Camping</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Panch Pokhari</h3>
+          <p class="region-desc">A rewarding offbeat trek to five sacred alpine lakes, offering highland solitude, raw landscapes, and a spiritual atmosphere above the hills of central Nepal.</p>
+          <div class="region-tags">
+            <span class="region-tag">💧 Sacred Lakes</span>
+            <span class="region-tag">🥾 Trekking</span>
+            <span class="region-tag">🕊️ Peaceful</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="50">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1499002238440-d264edd596ec?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Ilam</h3>
+          <p class="region-desc">A soft, green landscape of tea gardens, misty hills, local villages, and eastern calm—perfect for slow journeys, photography, and cultural escape.</p>
+          <div class="region-tags">
+            <span class="region-tag">🍃 Tea Country</span>
+            <span class="region-tag">🌫️ Misty Hills</span>
+            <span class="region-tag">📷 Scenic Escape</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up" data-aos-delay="100">
+        <div class="region-img" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80')"></div>
+        <div class="region-content">
+          <h3 class="region-name">Dhorpatan</h3>
+          <p class="region-desc">A rugged and rarely explored mountain region of alpine meadows, traditional settlements, and wide Himalayan silence far from the crowded trails.</p>
+          <div class="region-tags">
+            <span class="region-tag">🏔️ Remote Trails</span>
+            <span class="region-tag">🌾 Alpine Meadows</span>
+            <span class="region-tag">🧭 Hidden Nepal</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <section class="highlight-section" data-aos="fade-up">
+      <div class="highlight-box">
+        <h3>Beyond the Popular Trail</h3>
+        <p>
+          Nepal is far more than a list of famous stops. Some of its most unforgettable experiences are found in remote valleys, hidden lakes, quiet hill towns, and lesser-known cultural landscapes. Rigan helps travelers discover both the iconic and the unseen.
+        </p>
+      </div>
+    </section>
   </div>
 
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid"><div><div class="footer-logo">Rigan Roots & Routes</div><p>Four siblings sharing the Nepal we know and love.</p></div><div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="regions.html">Regions</a></li><li><a href="plan.html">Plan My Trip</a></li></ul></div><div><h4 class="footer-title">Connect</h4><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div><p>📍 Kathmandu, Nepal<br>✉️ hello@riganroots.com<br>📞 +977 98XXXXXXXX</p></div></div>
-      <div class="footer-bottom"><p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p></div>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">Rigan Roots & Routes</div>
+          <p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="experiences.html">Experiences</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="plan.html">Plan My Trip</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Connect</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+          <p>
+            📍 Kathmandu, Nepal<br />
+            ✉️ riganrootsroutes@gmail.com<br />
+            📞 +977 9843322695
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p>
+      </div>
     </div>
   </footer>
-  <div class="floating-whatsapp"><a href="https://wa.me/97798XXXXXXXX?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank"><i class="fab fa-whatsapp"></i><span>Chat with us</span></a></div>
+
+  <div class="floating-whatsapp">
+    <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank">
+      <i class="fab fa-whatsapp"></i>
+      <span>Chat with us</span>
+    </a>
+  </div>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script> AOS.init({ duration: 800, once: true }); const mobileBtn = document.getElementById('mobileMenuBtn'); const navLinks = document.getElementById('navLinks'); mobileBtn?.addEventListener('click', () => navLinks.classList.toggle('active')); </script>
-<script src="main.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileBtn?.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+  <script src="main.js"></script>
 </body>
 </html>

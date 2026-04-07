@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Rigan Roots & Routes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-dark: #7f1d1d;
+      --gradient-sunrise: linear-gradient(135deg, #f59e0b 0%, #dc2626 50%, #7c2d12 100%);
+      --stone-50: #fafaf9;
+      --stone-600: #57534e;
+      --stone-700: #44403c;
+      --stone-800: #292524;
+      --stone-900: #1c1917;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --radius-xl: 28px;
+      --transition: all 0.3s ease;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--stone-50); color: var(--stone-700); }
+    h1, h2 { font-family: 'Playfair Display', serif; font-weight: 600; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1400px; margin: 0 auto; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-logo { width: 44px; height: 44px; background: var(--gradient-sunrise); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2rem; }
+    .brand-name { font-size: 1.25rem; color: var(--stone-800); }
+    .brand-tagline { font-size: 0.7rem; color: var(--stone-500); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--stone-600); font-weight: 500; font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--primary); }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+    .mobile-menu-btn span { width: 28px; height: 2px; background: var(--stone-700); }
+    @media (max-width: 768px) { .mobile-menu-btn { display: flex; } .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: white; flex-direction: column; justify-content: center; padding: 40px; box-shadow: var(--shadow-xl); transition: right 0.3s; z-index: 99; } .nav-links.active { right: 0; } }
+    .hero { padding: 60px 0 40px; text-align: center; background: linear-gradient(135deg, var(--primary-dark), var(--stone-900)); color: white; }
+    .hero-title { font-size: 3rem; margin-bottom: 20px; color: white; }
+    .hero-subtitle { font-size: 1.1rem; max-width: 700px; margin: 0 auto; opacity: 0.9; }
+    .contact-section { padding: 80px 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .info-card { background: white; border-radius: var(--radius-xl); padding: 30px; box-shadow: var(--shadow-md); }
+    .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+    .info-icon { width: 50px; height: 50px; background: var(--gradient-sunrise); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
+    .form-card { background: white; border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-md); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 8px; color: var(--stone-700); }
+    input, textarea { width: 100%; padding: 14px 16px; border: 1.5px solid #e7e5e4; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 0.9rem; }
+    input:focus, textarea:focus { outline: none; border-color: var(--primary); }
+    .submit-btn { width: 100%; background: var(--gradient-sunrise); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: var(--transition); }
+    .submit-btn:hover { transform: translateY(-2px); }
+    @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; gap: 0; } }
+    .map-section { padding: 0 0 80px; }
+    .map-card { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); height: 400px; }
+    .footer { background: var(--stone-900); color: white; padding: 60px 0 30px; margin-top: 60px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
+    .footer-links { list-style: none; }
+    .footer-links a { color: white; text-decoration: none; opacity: 0.7; font-size: 0.9rem; }
+    .social-links { display: flex; gap: 16px; }
+    .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.6; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .footer-grid { grid-template-columns: 1fr; } }
+    .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; z-index: 99; }
+    .floating-whatsapp a { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; }
+    [data-aos] { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    [data-aos].aos-animate { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand"><div class="brand-logo">RR</div><div><div class="brand-name">Rigan Roots & Routes</div><div class="brand-tagline">Authentic Nepal Travel</div></div></a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="regions.html">Regions</a>
+        <a href="about.html">Our Story</a>
+        <a href="plan.html">Plan My Trip</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero"><div class="container"><h1 class="hero-title" data-aos="fade-up">Get in Touch</h1><p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">We'd love to hear from you. Ask questions, share ideas, or start planning your Nepal adventure.</p></div></section>
+
+  <section class="contact-section"><div class="container"><div class="contact-grid"><div class="info-card" data-aos="fade-right"><h2 style="margin-bottom: 24px;">Contact Information</h2><div class="info-item"><div class="info-icon"><i class="fas fa-map-marker-alt"></i></div><div><h3 style="font-size: 1rem;">Our Office</h3><p>Kathmandu, Nepal</p></div></div><div class="info-item"><div class="info-icon"><i class="fas fa-phone"></i></div><div><h3 style="font-size: 1rem;">Phone / WhatsApp</h3><p>+977 98XXXXXXXX</p></div></div><div class="info-item"><div class="info-icon"><i class="fas fa-envelope"></i></div><div><h3 style="font-size: 1rem;">Email</h3><p>hello@riganroots.com</p></div></div><div class="info-item"><div class="info-icon"><i class="fab fa-instagram"></i></div><div><h3 style="font-size: 1rem;">Social Media</h3><p>@riganroots</p></div></div></div>
+
+    <div class="form-card" data-aos="fade-left"><h2 style="margin-bottom: 24px;">Send us a Message</h2><form id="contactForm"><div class="form-row"><div class="form-group"><label>Your Name</label><input type="text" placeholder="Full name" required></div><div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com" required></div></div><div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+977 98XXXXXXXX"></div><div class="form-group"><label>Subject</label><input type="text" placeholder="What is this regarding?"></div><div class="form-group"><label>Message</label><textarea rows="5" placeholder="Tell us about your Nepal travel plans or any questions..."></textarea></div><button type="submit" class="submit-btn">Send Message →</button></form></div></div></div></section>
+
+  <section class="map-section"><div class="container"><div class="map-card"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.196208902751!2d85.323591315061!3d27.708008982790353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1900f3a409e5%3A0x5f76b4f2fef4f4f4!2sKathmandu%2C%20Nepal!5e0!3m2!1sen!2snp!4v1640000000000!5m2!1sen!2snp" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div></section>
+
+  <footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-logo">Rigan Roots & Routes</div><p>Four siblings sharing the Nepal we know and love.</p></div><div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="regions.html">Regions</a></li><li><a href="plan.html">Plan My Trip</a></li></ul></div><div><h4 class="footer-title">Connect</h4><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div><p>📍 Kathmandu, Nepal<br>✉️ hello@riganroots.com<br>📞 +977 98XXXXXXXX</p></div></div><div class="footer-bottom"><p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p></div></div></footer>
+  <div class="floating-whatsapp"><a href="https://wa.me/97798XXXXXXXX?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank"><i class="fab fa-whatsapp"></i><span>Chat with us</span></a></div>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script> AOS.init({ duration: 800, once: true }); const mobileBtn = document.getElementById('mobileMenuBtn'); const navLinks = document.getElementById('navLinks'); mobileBtn?.addEventListener('click', () => navLinks.classList.toggle('active')); document.getElementById('contactForm')?.addEventListener('submit', (e) => { e.preventDefault(); alert('Thank you for reaching out! We will respond within 24 hours.'); e.target.reset(); }); </script>
+</body>
+</html>

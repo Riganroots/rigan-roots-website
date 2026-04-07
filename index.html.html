@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rigan Roots & Routes — Authentic Nepal Travel Experiences</title>
+  <meta name="description" content="Experience Nepal like a local with Rigan Roots & Routes. Curated cultural tours, Himalayan treks, culinary journeys, and spiritual retreats—all designed and led by Nepalis.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-dark: #7f1d1d;
+      --primary-light: #dc2626;
+      --secondary: #d97706;
+      --accent: #b45309;
+      --stone-50: #fafaf9;
+      --stone-100: #f5f5f4;
+      --stone-200: #e7e5e4;
+      --stone-600: #57534e;
+      --stone-700: #44403c;
+      --stone-800: #292524;
+      --stone-900: #1c1917;
+      --gradient-sunrise: linear-gradient(135deg, #f59e0b 0%, #dc2626 50%, #7c2d12 100%);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, var(--stone-50) 0%, #ffffff 100%); color: var(--stone-700); line-height: 1.5; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.02em; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); transition: var(--transition); }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1400px; margin: 0 auto; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-logo { width: 44px; height: 44px; background: var(--gradient-sunrise); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2rem; transition: var(--transition); }
+    .brand:hover .brand-logo { transform: scale(1.05); border-radius: var(--radius-lg); }
+    .brand-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.25rem; color: var(--stone-800); }
+    .brand-tagline { font-size: 0.7rem; color: var(--stone-500); letter-spacing: 0.3px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--stone-600); font-weight: 500; font-size: 0.9rem; transition: var(--transition); }
+    .nav-links a:hover { color: var(--primary); }
+    .btn-primary { background: var(--gradient-sunrise); color: white; border: none; padding: 10px 24px; border-radius: 999px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+    .mobile-menu-btn span { width: 28px; height: 2px; background: var(--stone-700); transition: var(--transition); }
+    @media (max-width: 768px) { .mobile-menu-btn { display: flex; } .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: white; flex-direction: column; justify-content: center; padding: 40px; box-shadow: var(--shadow-xl); transition: right 0.3s; z-index: 99; } .nav-links.active { right: 0; } .nav-container { padding: 16px 24px; } }
+
+    .hero { padding: 60px 0 40px; }
+    .hero-title { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--stone-900); margin-bottom: 20px; line-height: 1.2; }
+    .hero-subtitle { font-size: 1.1rem; color: var(--stone-500); max-width: 600px; margin-bottom: 32px; }
+    .hero-stats { display: flex; gap: 32px; margin-top: 40px; }
+    .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--primary); font-family: 'Playfair Display', serif; }
+    .stat-label { font-size: 0.8rem; color: var(--stone-500); }
+
+    .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 16px; color: var(--stone-900); }
+    .section-subtitle { text-align: center; color: var(--stone-500); max-width: 700px; margin: 0 auto 48px; }
+
+    .experiences-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .experience-card { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; }
+    .experience-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
+    .experience-img { height: 220px; background-size: cover; background-position: center; position: relative; }
+    .experience-price { position: absolute; bottom: 15px; right: 15px; background: var(--gradient-sunrise); color: white; padding: 5px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+    .experience-badge { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); color: white; padding: 5px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .experience-content { padding: 20px; }
+    .experience-category { display: inline-block; background: var(--stone-100); padding: 4px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
+    .experience-title { font-size: 1.2rem; margin-bottom: 8px; color: var(--stone-800); }
+    .experience-desc { font-size: 0.85rem; color: var(--stone-500); margin-bottom: 12px; line-height: 1.5; }
+    .experience-meta { display: flex; gap: 15px; margin-top: 12px; font-size: 0.8rem; color: var(--stone-500); }
+    .experience-meta i { color: var(--secondary); width: 16px; }
+    @media (max-width: 900px) { .experiences-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .experiences-grid { grid-template-columns: 1fr; } }
+
+    .destinations-section { padding: 60px 0; background: var(--stone-100); }
+    .destinations-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .dest-card { position: relative; border-radius: var(--radius-xl); overflow: hidden; height: 280px; cursor: pointer; }
+    .dest-image { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.5s; }
+    .dest-card:hover .dest-image { transform: scale(1.08); }
+    .dest-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 25px; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); color: white; }
+    .dest-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .dest-tags { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .dest-tag { background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 3px 8px; border-radius: 999px; font-size: 0.7rem; }
+    @media (max-width: 900px) { .destinations-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .destinations-grid { grid-template-columns: 1fr; } }
+
+    .testimonials-section { padding: 60px 0; background: linear-gradient(135deg, var(--stone-900), var(--primary-dark)); color: white; }
+    .testimonials-section .section-title { color: white; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .testimonial-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: var(--radius-xl); padding: 30px; border: 1px solid rgba(255,255,255,0.2); transition: var(--transition); }
+    .testimonial-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.15); }
+    .testimonial-text { font-size: 0.95rem; line-height: 1.7; font-style: italic; margin-bottom: 20px; }
+    .testimonial-author { display: flex; align-items: center; gap: 15px; }
+    .author-avatar { width: 50px; height: 50px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
+    .rating { color: #fbbf24; margin-top: 5px; font-size: 0.8rem; }
+    @media (max-width: 900px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .testimonial-grid { grid-template-columns: 1fr; } }
+
+    .cta { padding: 80px 0; background: linear-gradient(135deg, var(--stone-900), var(--primary-dark)); color: white; text-align: center; }
+    .cta-title { font-size: 2.2rem; margin-bottom: 16px; }
+
+    .footer { background: var(--stone-900); color: white; padding: 60px 0 30px; margin-top: 60px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; font-family: 'Playfair Display', serif; }
+    .footer-links { list-style: none; }
+    .footer-links a { color: white; text-decoration: none; opacity: 0.7; transition: var(--transition); font-size: 0.9rem; }
+    .footer-links a:hover { opacity: 1; padding-left: 5px; }
+    .social-links { display: flex; gap: 16px; }
+    .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: var(--transition); }
+    .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.6; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .footer-grid { grid-template-columns: 1fr; } }
+
+    .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; z-index: 99; }
+    .floating-whatsapp a { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; box-shadow: var(--shadow-lg); transition: var(--transition); }
+    .floating-whatsapp a:hover { transform: translateY(-3px); box-shadow: var(--shadow-xl); }
+
+    [data-aos] { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    [data-aos].aos-animate { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">RR</div>
+        <div><div class="brand-name">Rigan Roots & Routes</div><div class="brand-tagline">Authentic Nepal Travel</div></div>
+      </a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="regions.html">Regions</a>
+        <a href="about.html">Our Story</a>
+        <a href="plan.html">Plan My Trip</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title" data-aos="fade-up">Experience Nepal Through Local Eyes</h1>
+      <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Four siblings sharing the Nepal we know and love—beyond tourist traps, beyond guidebooks.</p>
+      <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat"><div class="stat-number">500+</div><div class="stat-label">Happy Travelers</div></div>
+        <div class="stat"><div class="stat-number">98%</div><div class="stat-label">Recommend Us</div></div>
+        <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Local Support</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 60px 0;">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Authentic Nepal Experiences</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Click any experience to learn more</p>
+      <div class="experiences-grid">
+        <div class="experience-card" data-aos="fade-up" data-aos-delay="200" onclick="window.location.href='plan.html'">
+          <div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1585937421612-70ca5f0c0a0b?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$1,099</span><span class="experience-badge">🍲 Popular</span></div>
+          <div class="experience-content"><span class="experience-category">🍜 Culinary</span><h3 class="experience-title">Taste of Nepal</h3><p class="experience-desc">Cook with local families, explore spice markets, learn traditional recipes.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 8 Days</span><span><i class="fas fa-user-friends"></i> Max 8</span></div></div>
+        </div>
+        <div class="experience-card" data-aos="fade-up" data-aos-delay="250" onclick="window.location.href='plan.html'">
+          <div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1526779259212-939e64788e3c?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$899</span><span class="experience-badge">🏡 Immersive</span></div>
+          <div class="experience-content"><span class="experience-category">🏠 Cultural</span><h3 class="experience-title">Live Like a Nepali</h3><p class="experience-desc">Stay with local families, participate in daily life, learn customs.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 7 Days</span><span><i class="fas fa-user-friends"></i> Max 6</span></div></div>
+        </div>
+        <div class="experience-card" data-aos="fade-up" data-aos-delay="300" onclick="window.location.href='plan.html'">
+          <div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1532556192583-95b0b549ab2e?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$699</span><span class="experience-badge">🌾 Seasonal</span></div>
+          <div class="experience-content"><span class="experience-category">🌾 Festival</span><h3 class="experience-title">Dhaan Ropni (Rice Planting)</h3><p class="experience-desc">Join farmers for Nepal's joyful rice planting festival!</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 3 Days</span><span><i class="fas fa-user-friends"></i> Max 15</span></div></div>
+        </div>
+        <div class="experience-card" data-aos="fade-up" data-aos-delay="350" onclick="window.location.href='plan.html'">
+          <div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1559027615-1fc2727c86a3?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$799</span><span class="experience-badge">🤝 Give Back</span></div>
+          <div class="experience-content"><span class="experience-category">🤝 Volunteer</span><h3 class="experience-title">Community Service</h3><p class="experience-desc">Teach English, build schools, help at monasteries.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 5-14 Days</span><span><i class="fas fa-user-friends"></i> Any Size</span></div></div>
+        </div>
+        <div class="experience-card" data-aos="fade-up" data-aos-delay="400" onclick="window.location.href='plan.html'">
+          <div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$599</span><span class="experience-badge">🚵 Thrilling</span></div>
+          <div class="experience-content"><span class="experience-category">🚵 Adventure</span><h3 class="experience-title">Mountain Bike Riding</h3><p class="experience-desc">Ride through rugged Himalayan trails and villages.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 5 Days</span><span><i class="fas fa-user-friends"></i> Max 8</span></div></div>
+        </div>
+        <div class="experience-card" data-aos="fade-up" data-aos-delay="450" onclick="window.location.href='plan.html'">
+          <div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$2,499</span><span class="experience-badge">💍 Romantic</span></div>
+          <div class="experience-content"><span class="experience-category">💕 Romance</span><h3 class="experience-title">Basecamp Proposal</h3><p class="experience-desc">Propose at Everest Base Camp with helicopter & photographer.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 7 Days</span><span><i class="fas fa-user-friends"></i> Just You Two</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="destinations-section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Explore Nepal's Regions</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">From Himalayas to cultural heartlands</p>
+      <div class="destinations-grid">
+        <div class="dest-card" onclick="window.location.href='regions.html'"><div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1548017523-6c1b7ed90d3a?auto=format&fit=crop&w=800&q=80')"></div><div class="dest-overlay"><div class="dest-name">Kathmandu Valley</div><div class="dest-tags"><span class="dest-tag">UNESCO</span><span class="dest-tag">Temples</span></div></div></div>
+        <div class="dest-card" onclick="window.location.href='regions.html'"><div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1599661048171-13b1c58374a4?auto=format&fit=crop&w=800&q=80')"></div><div class="dest-overlay"><div class="dest-name">Pokhara</div><div class="dest-tags"><span class="dest-tag">Lakes</span><span class="dest-tag">Adventure</span></div></div></div>
+        <div class="dest-card" onclick="window.location.href='regions.html'"><div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80')"></div><div class="dest-overlay"><div class="dest-name">Everest Region</div><div class="dest-tags"><span class="dest-tag">Trekking</span><span class="dest-tag">Sherpa</span></div></div></div>
+        <div class="dest-card" onclick="window.location.href='regions.html'"><div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1597149877677-2cc57aa26336?auto=format&fit=crop&w=800&q=80')"></div><div class="dest-overlay"><div class="dest-name">Chitwan</div><div class="dest-tags"><span class="dest-tag">Wildlife</span><span class="dest-tag">Safari</span></div></div></div>
+        <div class="dest-card" onclick="window.location.href='regions.html'"><div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=800&q=80')"></div><div class="dest-overlay"><div class="dest-name">Eastern Nepal</div><div class="dest-tags"><span class="dest-tag">Tea Gardens</span><span class="dest-tag">Kanchenjunga</span></div></div></div>
+        <div class="dest-card" onclick="window.location.href='regions.html'"><div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1547994477-73fdf1e58d17?auto=format&fit=crop&w=800&q=80')"></div><div class="dest-overlay"><div class="dest-name">Lumbini</div><div class="dest-tags"><span class="dest-tag">Buddha</span><span class="dest-tag">Spiritual</span></div></div></div>
+        <div class="dest-card" onclick="window.location.href='regions.html'"><div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1526779259212-939e64788e3c?auto=format&fit=crop&w=800&q=80')"></div><div class="dest-overlay"><div class="dest-name">Bandipur</div><div class="dest-tags"><span class="dest-tag">Homestays</span><span class="dest-tag">Village</span></div></div></div>
+        <div class="dest-card" onclick="window.location.href='regions.html'"><div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80')"></div><div class="dest-overlay"><div class="dest-name">Mustang</div><div class="dest-tags"><span class="dest-tag">Tibetan</span><span class="dest-tag">Hidden</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Traveler Stories</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card"><p class="testimonial-text">"The village homestay was the highlight of our trip. We cooked with the family and felt like part of the family."</p><div class="testimonial-author"><div class="author-avatar">SC</div><div><strong>Sarah Chen</strong><div class="rating">★★★★★</div></div></div></div>
+        <div class="testimonial-card"><p class="testimonial-text">"I proposed at Everest Base Camp through Rigan Roots. It was magical! Helicopter, champagne, photographer—perfect!"</p><div class="testimonial-author"><div class="author-avatar">JD</div><div><strong>James & Emma</strong><div class="rating">★★★★★</div></div></div></div>
+        <div class="testimonial-card"><p class="testimonial-text">"The mountain bike tour was incredible! Rode through villages and had the best views of the Himalayas."</p><div class="testimonial-author"><div class="author-avatar">MT</div><div><strong>Marco T.</strong><div class="rating">★★★★★</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container"><h2 class="cta-title" data-aos="fade-up">Ready to Experience the Real Nepal?</h2><p class="cta-text" data-aos="fade-up" data-aos-delay="100">Let's create memories that will last a lifetime</p><a href="plan.html" class="btn-primary" style="background: white; color: var(--primary);" data-aos="fade-up" data-aos-delay="200">Start Planning Now →</a></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="footer-logo">Rigan Roots & Routes</div><p>Four siblings sharing the Nepal we know and love—authentic, personal, and from the heart.</p></div>
+        <div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="regions.html">Regions</a></li><li><a href="plan.html">Plan My Trip</a></li></ul></div>
+        <div><h4 class="footer-title">Adventures</h4><ul class="footer-links"><li><a href="plan.html">Mountain Biking</a></li><li><a href="plan.html">Basecamp Proposal</a></li><li><a href="plan.html">Trekking</a></li><li><a href="plan.html">Cultural Tours</a></li></ul></div>
+        <div><h4 class="footer-title">Connect</h4><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div><p style="margin-top: 20px;">📍 Kathmandu, Nepal<br>✉️ hello@riganroots.com<br>📞 +977 98XXXXXXXX</p></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p></div>
+    </div>
+  </footer>
+
+  <div class="floating-whatsapp"><a href="https://wa.me/97798XXXXXXXX?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank"><i class="fab fa-whatsapp"></i><span>Chat with us</span></a></div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 50 });
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    mobileBtn?.addEventListener('click', () => navLinks.classList.toggle('active'));
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+  </script>
+</body>
+</html>

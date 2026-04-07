@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiences — Rigan Roots & Routes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #991b1b;
+      --primary-dark: #7f1d1d;
+      --gradient-sunrise: linear-gradient(135deg, #f59e0b 0%, #dc2626 50%, #7c2d12 100%);
+      --stone-50: #fafaf9;
+      --stone-100: #f5f5f4;
+      --stone-200: #e7e5e4;
+      --stone-600: #57534e;
+      --stone-700: #44403c;
+      --stone-800: #292524;
+      --stone-900: #1c1917;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+      --radius-xl: 28px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, var(--stone-50) 0%, #ffffff 100%); color: var(--stone-700); line-height: 1.5; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1400px; margin: 0 auto; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-logo { width: 44px; height: 44px; background: var(--gradient-sunrise); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2rem; }
+    .brand-name { font-size: 1.25rem; color: var(--stone-800); }
+    .brand-tagline { font-size: 0.7rem; color: var(--stone-500); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--stone-600); font-weight: 500; font-size: 0.9rem; transition: var(--transition); }
+    .nav-links a:hover { color: var(--primary); }
+    .btn-primary { background: var(--gradient-sunrise); color: white; border: none; padding: 10px 24px; border-radius: 999px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+    .mobile-menu-btn span { width: 28px; height: 2px; background: var(--stone-700); }
+    @media (max-width: 768px) { .mobile-menu-btn { display: flex; } .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: white; flex-direction: column; justify-content: center; padding: 40px; box-shadow: var(--shadow-xl); transition: right 0.3s; z-index: 99; } .nav-links.active { right: 0; } .nav-container { padding: 16px 24px; } }
+    .hero { padding: 60px 0 40px; text-align: center; }
+    .hero-title { font-size: 3rem; color: var(--stone-900); margin-bottom: 20px; }
+    .hero-subtitle { font-size: 1.1rem; color: var(--stone-500); max-width: 600px; margin: 0 auto; }
+    .experiences-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 60px 0; }
+    .experience-card { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; }
+    .experience-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
+    .experience-img { height: 220px; background-size: cover; background-position: center; position: relative; }
+    .experience-price { position: absolute; bottom: 15px; right: 15px; background: var(--gradient-sunrise); color: white; padding: 5px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+    .experience-badge { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); color: white; padding: 5px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .experience-content { padding: 20px; }
+    .experience-category { display: inline-block; background: var(--stone-100); padding: 4px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
+    .experience-title { font-size: 1.2rem; margin-bottom: 8px; color: var(--stone-800); }
+    .experience-desc { font-size: 0.85rem; color: var(--stone-500); margin-bottom: 12px; line-height: 1.5; }
+    .experience-meta { display: flex; gap: 15px; margin-top: 12px; font-size: 0.8rem; color: var(--stone-500); }
+    @media (max-width: 900px) { .experiences-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .experiences-grid { grid-template-columns: 1fr; } }
+    .footer { background: var(--stone-900); color: white; padding: 60px 0 30px; margin-top: 60px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; font-family: 'Playfair Display', serif; }
+    .footer-links { list-style: none; }
+    .footer-links a { color: white; text-decoration: none; opacity: 0.7; font-size: 0.9rem; }
+    .social-links { display: flex; gap: 16px; }
+    .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.6; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .footer-grid { grid-template-columns: 1fr; } }
+    .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; z-index: 99; }
+    .floating-whatsapp a { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; box-shadow: var(--shadow-lg); }
+    [data-aos] { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    [data-aos].aos-animate { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand"><div class="brand-logo">RR</div><div><div class="brand-name">Rigan Roots & Routes</div><div class="brand-tagline">Authentic Nepal Travel</div></div></a>
+      <div class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="regions.html">Regions</a>
+        <a href="about.html">Our Story</a>
+        <a href="plan.html">Plan My Trip</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero"><div class="container"><h1 class="hero-title" data-aos="fade-up">Our Experiences</h1><p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Choose your perfect Nepal adventure</p></div></section>
+
+  <div class="container">
+    <div class="experiences-grid">
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1585937421612-70ca5f0c0a0b?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$1,099</span><span class="experience-badge">🍲 Popular</span></div><div class="experience-content"><span class="experience-category">🍜 Culinary</span><h3 class="experience-title">Taste of Nepal</h3><p class="experience-desc">Cook with local families, explore spice markets, learn traditional recipes.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 8 Days</span><span><i class="fas fa-user-friends"></i> Max 8</span></div></div></div>
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1526779259212-939e64788e3c?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$899</span><span class="experience-badge">🏡 Immersive</span></div><div class="experience-content"><span class="experience-category">🏠 Cultural</span><h3 class="experience-title">Live Like a Nepali</h3><p class="experience-desc">Stay with local families, participate in daily life, learn customs.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 7 Days</span><span><i class="fas fa-user-friends"></i> Max 6</span></div></div></div>
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1532556192583-95b0b549ab2e?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$699</span><span class="experience-badge">🌾 Seasonal</span></div><div class="experience-content"><span class="experience-category">🌾 Festival</span><h3 class="experience-title">Dhaan Ropni (Rice Planting)</h3><p class="experience-desc">Join farmers for Nepal's joyful rice planting festival!</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 3 Days</span><span><i class="fas fa-user-friends"></i> Max 15</span></div></div></div>
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1559027615-1fc2727c86a3?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$799</span><span class="experience-badge">🤝 Give Back</span></div><div class="experience-content"><span class="experience-category">🤝 Volunteer</span><h3 class="experience-title">Community Service</h3><p class="experience-desc">Teach English, build schools, help at monasteries.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 5-14 Days</span><span><i class="fas fa-user-friends"></i> Any Size</span></div></div></div>
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$599</span><span class="experience-badge">🚵 Thrilling</span></div><div class="experience-content"><span class="experience-category">🚵 Adventure</span><h3 class="experience-title">Mountain Bike Riding</h3><p class="experience-desc">Ride through rugged Himalayan trails and villages.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 5 Days</span><span><i class="fas fa-user-friends"></i> Max 8</span></div></div></div>
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$2,499</span><span class="experience-badge">💍 Romantic</span></div><div class="experience-content"><span class="experience-category">💕 Romance</span><h3 class="experience-title">Basecamp Proposal</h3><p class="experience-desc">Propose at Everest Base Camp with helicopter & photographer.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 7 Days</span><span><i class="fas fa-user-friends"></i> Just You Two</span></div></div></div>
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$1,299</span><span class="experience-badge">🏔️ Trek</span></div><div class="experience-content"><span class="experience-category">🏔️ Trekking</span><h3 class="experience-title">Annapurna Base Camp</h3><p class="experience-desc">Classic trek with expert guides and panoramic mountain views.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 12 Days</span><span><i class="fas fa-user-friends"></i> Max 6</span></div></div></div>
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$1,199</span><span class="experience-badge">🧘 Wellness</span></div><div class="experience-content"><span class="experience-category">🧘 Wellness</span><h3 class="experience-title">Yoga & Meditation Retreat</h3><p class="experience-desc">Daily yoga, meditation, and Ayurvedic treatments in Pokhara.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 10 Days</span><span><i class="fas fa-user-friends"></i> Max 8</span></div></div></div>
+      <div class="experience-card" onclick="window.location.href='plan.html'"><div class="experience-img" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80')"><span class="experience-price">$299</span><span class="experience-badge">🪂 Fly</span></div><div class="experience-content"><span class="experience-category">🪂 Adventure</span><h3 class="experience-title">Paragliding Over Pokhara</h3><p class="experience-desc">Soar over Phewa Lake with stunning views of the Annapurna range.</p><div class="experience-meta"><span><i class="far fa-calendar"></i> 1 Day</span><span><i class="fas fa-user-friends"></i> Tandem</span></div></div></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid"><div><div class="footer-logo">Rigan Roots & Routes</div><p>Four siblings sharing the Nepal we know and love.</p></div><div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="regions.html">Regions</a></li><li><a href="plan.html">Plan My Trip</a></li></ul></div><div><h4 class="footer-title">Connect</h4><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div><p>📍 Kathmandu, Nepal<br>✉️ hello@riganroots.com<br>📞 +977 98XXXXXXXX</p></div></div>
+      <div class="footer-bottom"><p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p></div>
+    </div>
+  </footer>
+  <div class="floating-whatsapp"><a href="https://wa.me/97798XXXXXXXX?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank"><i class="fab fa-whatsapp"></i><span>Chat with us</span></a></div>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script> AOS.init({ duration: 800, once: true }); const mobileBtn = document.getElementById('mobileMenuBtn'); const navLinks = document.getElementById('navLinks'); mobileBtn?.addEventListener('click', () => navLinks.classList.toggle('active')); </script>
+</body>
+</html>

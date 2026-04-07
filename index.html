@@ -3,97 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nepal Travel Guide | Explore Himalayas</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Rigan Roots & Routes | Nepal Travel Experiences</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #991b1b;
+            --primary-dark: #7f1d1d;
+            --gradient-sunrise: linear-gradient(135deg, #f59e0b 0%, #dc2626 50%, #7c2d12 100%);
+            --stone-50: #fafaf9;
+            --stone-100: #f5f5f4;
+            --stone-200: #e7e5e4;
+            --stone-500: #78716c;
+            --stone-600: #57534e;
+            --stone-700: #44403c;
+            --stone-800: #292524;
+            --stone-900: #1c1917;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--stone-50);
+            color: var(--stone-700);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--stone-900);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-sunrise);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .brand-name {
+            font-size: 1.25rem;
+            color: var(--stone-800);
+            font-weight: 700;
+        }
+
+        .brand-tagline {
+            font-size: 0.72rem;
+            color: var(--stone-500);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--stone-600);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            width: 28px;
+            height: 2px;
+            background: var(--stone-700);
+        }
+
+        .hero {
+            position: relative;
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 3rem 0 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--stone-500);
+            margin-bottom: 3rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            padding: 1.2rem 1.2rem 0.5rem;
+        }
+
+        .card p {
+            padding: 0 1.2rem 1.2rem;
+            color: var(--stone-500);
+        }
+
+        .footer {
+            background: var(--stone-900);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer p, .footer-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+        }
+
+        .footer-title {
+            margin-bottom: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 99;
+        }
+
+        .floating-whatsapp a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: var(--shadow-xl);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                padding: 40px;
+                box-shadow: var(--shadow-xl);
+                transition: right 0.3s ease;
+            }
+            .nav-links.active { right: 0; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .container { padding: 0 20px; }
+        }
+    </style>
 </head>
 <body>
 
-<a href="https://wa.me/9779851234567" class="whatsapp-btn" target="_blank">💬 Chat on WhatsApp</a>
-<a href="#" class="back-to-top">↑</a>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="regions.html">Regions</a>
-    <a href="experiences.html">Experiences</a>
-    <a href="plan.html">Plan</a>
-    <a href="contact.html">Contact</a>
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="brand">
+            <div class="brand-logo">RR</div>
+            <div>
+                <div class="brand-name">Rigan Roots & Routes</div>
+                <div class="brand-tagline">Meaningful Journeys Through Nepal</div>
+            </div>
+        </a>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="experiences.html">Experiences</a>
+            <a href="regions.html">Regions</a>
+            <a href="about.html">Our Story</a>
+            <a href="plan.html">Plan My Trip</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
 </nav>
 
-<div style="position: relative; height: 80vh; background: url('images/hero-himalayas.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: white;">
-    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4);"></div>
-    <div style="position: relative; z-index: 1;">
-        <h1 style="font-size: 3rem;">Welcome to Nepal</h1>
-        <p>Land of the Himalayas | Birthplace of Buddha | Home of Adventure</p>
-        <a href="plan.html" class="btn" style="margin-top: 1rem; display: inline-block;">Plan Your Trip →</a>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Rigan Roots & Routes</h1>
+        <p>Discover Nepal Through Meaningful, Authentic Journeys</p>
+        <a href="plan.html" class="btn">Start Your Journey →</a>
     </div>
-</div>
+</section>
 
 <div class="container">
-    <h2>Discover Nepal</h2>
-    <p>From the world's highest peaks to lush jungles, Nepal offers unforgettable experiences for every traveler.</p>
-    
+    <h2 class="section-title">Experiences That Stay With You</h2>
+    <p class="section-subtitle">From mountain trails to cultural heartlands — travel with purpose and connection.</p>
+
     <div class="card-grid">
-        <div class="card">
-            <img src="images/flags-prayer.jpg" alt="Prayer flags">
-            <h3>Spiritual Journey</h3>
-            <p>Experience peace among prayer flags and ancient monasteries.</p>
-        </div>
-        <div class="card">
-            <img src="images/map-teaser.jpg" alt="Nepal map">
-            <h3>Diverse Landscapes</h3>
-            <p>From mountains at 8,848m to jungles at 60m above sea level.</p>
-        </div>
-        <div class="card">
-            <img src="images/culture-teaser.jpg" alt="Nepali culture">
-            <h3>Rich Culture</h3>
-            <p>Over 125 ethnic groups and 123 languages call Nepal home.</p>
-        </div>
+        <a href="experiences.html" class="card">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80" alt="Trekking">
+            <h3>🏔️ Himalayan Treks</h3>
+            <p>Classic and offbeat treks with local guides, homestays, and deep cultural immersion.</p>
+        </a>
+        <a href="experiences.html" class="card">
+            <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80" alt="Culture">
+            <h3>🏛️ Cultural Journeys</h3>
+            <p>Living heritage, festivals, village walks, and stories from Nepal's diverse communities.</p>
+        </a>
+        <a href="experiences.html" class="card">
+            <img src="https://images.unsplash.com/photo-1599661048171-13b1c58374a4?auto=format&fit=crop&w=800&q=80" alt="Pokhara">
+            <h3>🌊 Pokhara & Beyond</h3>
+            <p>Lakeside serenity, mountain views, and gentle adventures in Nepal's beautiful mid-hills.</p>
+        </a>
     </div>
 </div>
 
-<div class="counters">
-    <div class="counter-item">
-        <div class="counter-number" data-target="8">0</div>
-        <div class="counter-label">Highest Peaks</div>
-    </div>
-    <div class="counter-item">
-        <div class="counter-number" data-target="125">0</div>
-        <div class="counter-label">Ethnic Groups</div>
-    </div>
-    <div class="counter-item">
-        <div class="counter-number" data-target="10">0</div>
-        <div class="counter-label">UNESCO Sites</div>
-    </div>
-</div>
-
-<div class="testimonials">
-    <h2 class="text-center">What Travelers Say</h2>
-    <div class="testimonial-grid">
-        <div class="testimonial-card">
-            <img src="images/user1.jpg" alt="Traveler">
-            <p>"Amazing experience! The trek was well organized."</p>
-            <h4>- Sarah, USA</h4>
-            <div class="rating">★★★★★</div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">Rigan Roots & Routes</div>
+                <p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experiences.html">Experiences</a></li>
+                    <li><a href="regions.html">Regions</a></li>
+                    <li><a href="plan.html">Plan My Trip</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Connect</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p>📍 Kathmandu, Nepal<br>✉️ riganrootsroutes@gmail.com<br>📞 +977 9843322695</p>
+            </div>
         </div>
-        <div class="testimonial-card">
-            <img src="images/user2.jpg" alt="Traveler">
-            <p>"Best decision ever. Nepal exceeded all my expectations!"</p>
-            <h4>- Marco, Italy</h4>
-            <div class="rating">★★★★★</div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p>
         </div>
-    </div>
-</div>
-
-<footer>
-    <p>© <span class="current-year"></span> Nepal Travel Guide</p>
-    <div class="social-icons">
-        <a href="#">Facebook</a>
-        <a href="#">Instagram</a>
-        <a href="#">Twitter</a>
     </div>
 </footer>
 
-<script src="js/main.js"></script>
+<div class="floating-whatsapp">
+    <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat with us</span>
+    </a>
+</div>
+
+<script>
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    mobileBtn?.addEventListener('click', () => navLinks.classList.toggle('active'));
+</script>
+<script src="main.js"></script>
 </body>
 </html>

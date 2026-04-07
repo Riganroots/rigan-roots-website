@@ -1,108 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Story — Rigan Roots & Routes</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #991b1b;
-      --primary-dark: #7f1d1d;
-      --gradient-sunrise: linear-gradient(135deg, #f59e0b 0%, #dc2626 50%, #7c2d12 100%);
-      --stone-50: #fafaf9;
-      --stone-600: #57534e;
-      --stone-700: #44403c;
-      --stone-800: #292524;
-      --stone-900: #1c1917;
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-      --radius-xl: 28px;
-      --transition: all 0.3s ease;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--stone-50); color: var(--stone-700); line-height: 1.6; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
-    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; max-width: 1400px; margin: 0 auto; }
-    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .brand-logo { width: 44px; height: 44px; background: var(--gradient-sunrise); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.2rem; }
-    .brand-name { font-size: 1.25rem; color: var(--stone-800); }
-    .brand-tagline { font-size: 0.7rem; color: var(--stone-500); }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a { text-decoration: none; color: var(--stone-600); font-weight: 500; font-size: 0.9rem; }
-    .nav-links a:hover { color: var(--primary); }
-    .mobile-menu-btn { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
-    .mobile-menu-btn span { width: 28px; height: 2px; background: var(--stone-700); }
-    @media (max-width: 768px) { .mobile-menu-btn { display: flex; } .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: white; flex-direction: column; justify-content: center; padding: 40px; box-shadow: var(--shadow-xl); transition: right 0.3s; z-index: 99; } .nav-links.active { right: 0; } }
-    .hero { padding: 60px 0 40px; text-align: center; background: linear-gradient(135deg, var(--primary-dark), var(--stone-900)); color: white; }
-    .hero-title { font-size: 3rem; margin-bottom: 20px; color: white; }
-    .hero-subtitle { font-size: 1.1rem; max-width: 700px; margin: 0 auto; opacity: 0.9; }
-    .about-section { padding: 80px 0; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .about-img { height: 400px; background-size: cover; background-position: center; border-radius: var(--radius-xl); }
-    .about-title { font-size: 2rem; margin-bottom: 20px; color: var(--stone-800); }
-    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; }
-    .team-card { text-align: center; background: white; border-radius: var(--radius-xl); padding: 30px; box-shadow: var(--shadow-md); }
-    .team-avatar { width: 120px; height: 120px; background: var(--gradient-sunrise); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem; font-weight: 700; color: white; }
-    .team-name { font-size: 1.3rem; margin-bottom: 8px; color: var(--stone-800); }
-    .team-role { color: var(--primary); font-weight: 600; font-size: 0.85rem; margin-bottom: 10px; }
-    .team-desc { font-size: 0.85rem; color: var(--stone-500); }
-    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .team-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 550px) { .team-grid { grid-template-columns: 1fr; } }
-    .footer { background: var(--stone-900); color: white; padding: 60px 0 30px; margin-top: 60px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
-    .footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; }
-    .footer-links { list-style: none; }
-    .footer-links a { color: white; text-decoration: none; opacity: 0.7; font-size: 0.9rem; }
-    .social-links { display: flex; gap: 16px; }
-    .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
-    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.6; }
-    @media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 550px) { .footer-grid { grid-template-columns: 1fr; } }
-    .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; z-index: 99; }
-    .floating-whatsapp a { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; }
-    [data-aos] { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
-    [data-aos].aos-animate { opacity: 1; transform: translateY(0); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Nepal | Rigan Roots & Routes</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="brand"><div class="brand-logo">RR</div><div><div class="brand-name">Rigan Roots & Routes</div><div class="brand-tagline">Authentic Nepal Travel</div></div></a>
-      <div class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></div>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="experiences.html">Experiences</a>
-        <a href="regions.html">Regions</a>
-        <a href="about.html">Our Story</a>
-        <a href="plan.html">Plan My Trip</a>
-        <a href="contact.html">Contact</a>
-      </div>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="regions.html">Regions</a>
+    <a href="experiences.html">Experiences</a>
+    <a href="plan.html">Plan</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<div class="container">
+    <h1>About Nepal</h1>
+
+    <p>
+        Nepal is not just a destination—it's an experience. Nestled between India and China, this Himalayan nation is a land of breathtaking landscapes, deep-rooted traditions, and warm, welcoming people. From the world's highest peaks to ancient temples and vibrant villages, Nepal offers a journey unlike anywhere else.
+    </p>
+
+    <div class="card-grid">
+        <div class="card">
+            <h3>Country Overview</h3>
+            <p>
+                Capital: Kathmandu<br>
+                Population: ~30 million<br>
+                Known for: Himalayas, heritage, and hospitality
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>People & Culture</h3>
+            <p>
+                Nepal is home to over 125 ethnic groups and 123 languages. Each community carries its own traditions, festivals, and stories—making every journey a cultural discovery.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Nature & Landscapes</h3>
+            <p>
+                From the heights of Mount Everest to serene lakes, forests, and jungles, Nepal's natural beauty is both powerful and peaceful—perfect for adventure and reflection.
+            </p>
+        </div>
     </div>
-  </nav>
 
-  <section class="hero"><div class="container"><h1 class="hero-title" data-aos="fade-up">Our Story</h1><p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Four siblings, one passion — sharing the real Nepal with the world</p></div></section>
-
-  <section class="about-section"><div class="container"><div class="about-grid"><div class="about-img" style="background-image: url('https://images.unsplash.com/photo-1541764280-5c4b79af8f17?auto=format&fit=crop&w=800&q=80')"></div><div><h2 class="about-title">Welcome to Rigan Roots & Routes</h2><p>We're Ayush, Asmita, Aryan & Sweta — four siblings who grew up exploring every corner of our beautiful country. From the highest peaks to the deepest valleys, we discovered that Nepal has so much more to offer than what most travelers experience.</p><p style="margin-top: 16px;">We created Rigan Roots & Routes to share the Nepal we know and love — a land of incredible diversity, warm hospitality, and life-changing experiences. Our mission is simple: to make travel in Nepal smoother, smarter, and more meaningful, while showcasing the true beauty of our culture and communities.</p><p style="margin-top: 16px;">Every journey we design is personal, authentic, and from the heart. When you travel with us, you're not just a customer — you're family.</p></div></div>
-
-    <h2 class="about-title" style="text-align: center; margin-top: 80px;">Meet the Family</h2><p style="text-align: center; margin-bottom: 40px;">Four siblings, four different passions, one shared love for Nepal</p>
-    <div class="team-grid">
-      <div class="team-card"><div class="team-avatar">A</div><h3 class="team-name">Ayush Karki</h3><p class="team-role">Adventure Specialist</p><p class="team-desc">Certified trekking guide with 12 years of Himalayan experience. Loves sharing hidden trails and mountain stories.</p></div>
-      <div class="team-card"><div class="team-avatar">A</div><h3 class="team-name">Asmita Karki</h3><p class="team-role">Cultural Curator</p><p class="team-desc">Anthropology graduate dedicated to preserving and sharing Nepal's living traditions and festivals.</p></div>
-      <div class="team-card"><div class="team-avatar">A</div><h3 class="team-name">Aryan Karki</h3><p class="team-role">Culinary Director</p><p class="team-desc">Passionate about Nepal's diverse culinary heritage. Creates food journeys that tell stories of regions.</p></div>
-      <div class="team-card"><div class="team-avatar">S</div><h3 class="team-name">Sweta Karki</h3><p class="team-role">Wellness Guide</p><p class="team-desc">Yoga instructor and meditation guide connecting travelers to Nepal's spiritual practices.</p></div>
+    <div class="about-extra">
+        <h2>Why Travel Nepal with Rigan</h2>
+        <p>
+            At Rigan Roots and Routes, we go beyond sightseeing. We connect you with the real Nepal—its people, culture, and everyday life. Whether it's sharing a meal in a local home, walking ancient trails, or celebrating festivals, your journey becomes meaningful, authentic, and unforgettable.
+        </p>
     </div>
-  </div></section>
+</div>
 
-  <footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-logo">Rigan Roots & Routes</div><p>Four siblings sharing the Nepal we know and love.</p></div><div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="regions.html">Regions</a></li><li><a href="plan.html">Plan My Trip</a></li></ul></div><div><h4 class="footer-title">Connect</h4><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div><p>📍 Kathmandu, Nepal<br>✉️ hello@riganroots.com<br>📞 +977 98XXXXXXXX</p></div></div><div class="footer-bottom"><p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p></div></div></footer>
-  <div class="floating-whatsapp"><a href="https://wa.me/97798XXXXXXXX?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank"><i class="fab fa-whatsapp"></i><span>Chat with us</span></a></div>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script> AOS.init({ duration: 800, once: true }); const mobileBtn = document.getElementById('mobileMenuBtn'); const navLinks = document.getElementById('navLinks'); mobileBtn?.addEventListener('click', () => navLinks.classList.toggle('active')); </script>
+<footer>
+    <p>© <span class="current-year"></span> Rigan Roots & Routes</p>
+    <div class="social-icons">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+    </div>
+</footer>
+
 <script src="main.js"></script>
 </body>
 </html>

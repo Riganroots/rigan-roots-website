@@ -1,86 +1,622 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan Your Trip | Nepal Travel Guide</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Your Journey | Rigan Roots & Routes</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+  :root {
+    --primary: #991b1b;
+    --primary-dark: #7f1d1d;
+    --gradient-sunrise: linear-gradient(135deg, #f59e0b 0%, #dc2626 50%, #7c2d12 100%);
+    --stone-50: #fafaf9;
+    --stone-100: #f5f5f4;
+    --stone-200: #e7e5e4;
+    --stone-500: #78716c;
+    --stone-600: #57534e;
+    --stone-700: #44403c;
+    --stone-800: #292524;
+    --stone-900: #1c1917;
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    --radius-xl: 28px;
+    --radius-lg: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--stone-50);
+    color: var(--stone-700);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: var(--stone-900);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Navigation */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .brand-logo {
+    width: 44px;
+    height: 44px;
+    background: var(--gradient-sunrise);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+    color: var(--stone-800);
+    font-weight: 700;
+  }
+
+  .brand-tagline {
+    font-size: 0.72rem;
+    color: var(--stone-500);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--stone-600);
+    font-weight: 500;
+    font-size: 0.92rem;
+    transition: var(--transition);
+  }
+
+  .nav-links a:hover {
+    color: var(--primary);
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .mobile-menu-btn span {
+    width: 28px;
+    height: 2px;
+    background: var(--stone-700);
+  }
+
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    padding: 60px 0 30px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--stone-900);
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    color: var(--stone-500);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Selected Experience Box */
+  .selected-box {
+    background: var(--stone-100);
+    padding: 16px 24px;
+    border-radius: var(--radius-lg);
+    margin: 30px auto;
+    max-width: 500px;
+    border-left: 4px solid var(--primary);
+  }
+
+  .selected-box strong {
+    color: var(--stone-800);
+  }
+
+  .selected-box span {
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  /* Form Box */
+  .form-box {
+    background: white;
+    padding: 32px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    margin: 20px 0;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--stone-200);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    background: white;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.1);
+  }
+
+  textarea {
+    grid-column: span 2;
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .btn-submit {
+    background: var(--primary);
+    color: white;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    width: auto;
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+
+  .btn-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  /* Info Cards */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 50px 0;
+  }
+
+  .info-card {
+    background: white;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+  }
+
+  .info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .info-card h3 {
+    margin-bottom: 12px;
+    color: var(--primary);
+  }
+
+  .info-card p {
+    color: var(--stone-600);
+    font-size: 0.95rem;
+  }
+
+  /* Alert Messages */
+  .alert {
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--stone-900);
+    color: white;
+    padding: 60px 0 30px;
+    margin-top: 50px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .footer-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.94rem;
+    transition: var(--transition);
+  }
+
+  .footer-links a:hover {
+    color: white;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: var(--transition);
+  }
+
+  .social-links a:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+    opacity: 0.65;
+  }
+
+  /* Floating WhatsApp */
+  .floating-whatsapp {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 99;
+  }
+
+  .floating-whatsapp a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: var(--shadow-xl);
+    transition: var(--transition);
+  }
+
+  .floating-whatsapp a:hover {
+    transform: scale(1.05);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background: white;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+      transition: right 0.3s ease;
+      z-index: 999;
+    }
+
+    .nav-links.active {
+      right: 0;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    textarea {
+      grid-column: span 1;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 </head>
 <body>
 
-<a href="https://wa.me/9779851234567" class="whatsapp-btn" target="_blank">💬 Chat on WhatsApp</a>
-<a href="#" class="back-to-top">↑</a>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="regions.html">Regions</a>
-    <a href="experiences.html">Experiences</a>
-    <a href="plan.html">Plan</a>
-    <a href="contact.html">Contact</a>
-</nav>
-
-<div class="container">
-    <h1>Plan Your Nepal Adventure</h1>
-    
-    <div class="card-grid">
-        <div class="card">
-            <h3>📅 Best Time to Visit</h3>
-            <p><strong>Autumn (Sept-Nov):</strong> Best weather, clear skies<br>
-            <strong>Spring (Mar-May):</strong> Flowers bloom<br>
-            <strong>Winter (Dec-Feb):</strong> Cold but clear<br>
-            <strong>Monsoon (Jun-Aug):</strong> Low season</p>
-        </div>
-        <div class="card">
-            <h3>🚗 Getting Around</h3>
-            <p>• Domestic flights<br>• Tourist buses<br>• Private jeeps<br>• Taxis & ride-sharing</p>
-        </div>
-        <div class="card">
-            <h3>💰 Budget Guide</h3>
-            <p>Backpacker: $20-30/day<br>Mid-range: $40-60/day<br>Luxury: $100+/day</p>
-        </div>
-    </div>
-    
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-section">
-        <div class="faq-item">
-            <div class="faq-question">
-                Do I need a visa for Nepal?
-                <span class="icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>Yes, most nationalities can get a visa on arrival at the airport. Tourist visas are available for 15, 30, or 90 days.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                Is it safe to trek alone?
-                <span class="icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>It's recommended to hire a licensed guide or join a group for safety, especially on high-altitude treks.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                What currency is used?
-                <span class="icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>Nepalese Rupee (NPR). ATMs available in cities. Carry cash for remote areas.</p>
-            </div>
-        </div>
-    </div>
+<!-- Floating WhatsApp -->
+<div class="floating-whatsapp">
+  <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span>Chat with us</span>
+  </a>
 </div>
 
-<footer>
-    <p>© <span class="current-year"></span> Nepal Travel Guide</p>
-    <div class="social-icons">
-        <a href="#">Facebook</a>
-        <a href="#">Instagram</a>
-        <a href="#">Twitter</a>
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="brand">
+      <div class="brand-logo">RR</div>
+      <div>
+        <div class="brand-name">Rigan Roots & Routes</div>
+        <div class="brand-tagline">Meaningful Journeys Through Nepal</div>
+      </div>
+    </a>
+
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
     </div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="experiences.html">Experiences</a>
+      <a href="regions.html">Regions</a>
+      <a href="about.html">Our Story</a>
+      <a href="plan.html">Plan</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="hero">
+    <h1>Plan Your Nepal Journey</h1>
+    <p>Tell us what you're looking for, and we'll design a meaningful, authentic experience tailored just for you.</p>
+  </div>
+
+  <div class="selected-box">
+    <strong>✨ Selected Experience:</strong>
+    <span id="experienceText">Custom Trip</span>
+  </div>
+
+  <!-- Success/Error Messages -->
+  <div id="formMessage"></div>
+
+  <!-- Form - Using Formspree (no backend needed) -->
+  <div class="form-box">
+    <form id="planForm" action="https://formspree.io/f/mbdpwkoz" method="POST">
+      <!-- Replace YOUR_FORM_ID with your actual Formspree ID -->
+      <input type="hidden" name="_subject" value="New Trip Planning Request from Rigan Roots Website">
+      <input type="hidden" name="_replyto" id="replytoEmail">
+      
+      <div class="form-grid">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" id="userEmail" placeholder="Email" required>
+        <input type="text" name="phone" placeholder="Phone / WhatsApp">
+        <input type="text" name="country" placeholder="Country">
+        <input type="date" name="travel_date">
+        <select name="duration">
+          <option value="">Trip Length</option>
+          <option>3-5 Days</option>
+          <option>7-10 Days</option>
+          <option>10-15 Days</option>
+          <option>15+ Days</option>
+        </select>
+        <select name="budget">
+          <option value="">Budget Range</option>
+          <option>$300 - $700</option>
+          <option>$700 - $1500</option>
+          <option>$1500 - $3000</option>
+          <option>$3000+</option>
+        </select>
+        <select name="style">
+          <option value="">Travel Style</option>
+          <option>Cultural & Heritage</option>
+          <option>Adventure & Trekking</option>
+          <option>Wellness & Meditation</option>
+          <option>Food & Culinary</option>
+          <option>Wildlife & Nature</option>
+          <option>Custom / Mixed</option>
+        </select>
+        <select name="group_size">
+          <option value="">Group Size</option>
+          <option>Solo Traveler</option>
+          <option>Couple</option>
+          <option>Family (2-4)</option>
+          <option>Small Group (5-8)</option>
+          <option>Large Group (9+)</option>
+        </select>
+        <textarea name="message" placeholder="Tell us about your dream Nepal trip... What experiences are you most excited about?"></textarea>
+      </div>
+      <input type="hidden" name="selected_experience" id="selectedExperience">
+      <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send Inquiry</button>
+    </form>
+  </div>
+
+  <!-- Info Cards -->
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>📅 Best Time to Visit</h3>
+      <p><strong>Autumn (Sept-Nov):</strong> Clear skies, perfect for trekking<br>
+      <strong>Spring (Mar-May):</strong> Flowers bloom, pleasant weather<br>
+      <strong>Winter (Dec-Feb):</strong> Cold but clear, fewer tourists<br>
+      <strong>Monsoon (Jun-Aug):</strong> Lush greenery, low season prices</p>
+    </div>
+
+    <div class="info-card">
+      <h3>💰 Budget Guide (per day)</h3>
+      <p><strong>Backpacker:</strong> $20-30<br>
+      <strong>Mid-range:</strong> $40-60<br>
+      <strong>Comfortable:</strong> $70-100<br>
+      <strong>Luxury:</strong> $150+</p>
+    </div>
+
+    <div class="info-card">
+      <h3>📋 Essential Tips</h3>
+      <p>✓ Visa on arrival for most nationalities<br>
+      ✓ Travel insurance recommended<br>
+      ✓ Pack layers for changing weather<br>
+      ✓ Respect local customs<br>
+      ✓ Drink bottled/filtered water</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Rigan Roots & Routes</div>
+        <p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p>
+      </div>
+
+      <div>
+        <h4 style="margin-bottom: 14px;">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="experiences.html">Experiences</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="plan.html">Plan My Trip</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="margin-bottom: 14px;">Connect</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>📍 Kathmandu, Nepal<br>✉️ riganrootsroutes@gmail.com<br>📞 +977 9843322695</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p>
+    </div>
+  </div>
 </footer>
 
-<script src="main.js"></script></body>
+<script>
+  // Mobile menu toggle
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.getElementById('navLinks');
+  
+  mobileBtn?.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Get experience from URL parameter
+  const params = new URLSearchParams(window.location.search);
+  const exp = params.get('experience');
+  
+  if(exp) {
+    document.getElementById("experienceText").innerText = decodeURIComponent(exp);
+    document.getElementById("selectedExperience").value = decodeURIComponent(exp);
+  }
+
+  // Handle form submission (for Formspree)
+  const planForm = document.getElementById('planForm');
+  const userEmail = document.getElementById('userEmail');
+  const replytoEmail = document.getElementById('replytoEmail');
+  
+  if (userEmail && replytoEmail) {
+    userEmail.addEventListener('change', function() {
+      replytoEmail.value = this.value;
+    });
+  }
+
+  // Check for URL parameters after redirect (success/error)
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('submitted') && urlParams.get('submitted') === 'true') {
+    document.getElementById('formMessage').innerHTML = '<div class="alert alert-success">✅ Thank you! Your inquiry has been sent. We\'ll reply within 24 hours.</div>';
+    // Remove the parameter from URL without refreshing
+    window.history.replaceState({}, document.title, window.location.pathname + '?experience=' + (exp || ''));
+  }
+</script>
+
+</body>
 </html>

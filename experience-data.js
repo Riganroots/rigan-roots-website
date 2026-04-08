@@ -70,7 +70,7 @@ const experienceData = {
     title: "Proposal in the Base Camp",
     badge: "💍 Signature Moment",
     subtitle: "A once-in-a-lifetime romantic proposal surrounded by the Himalayas.",
-    image: "https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://i.postimg.cc/qv4GccDP/base_camp_proposal_package.jpg",
     price: "From $2,499",
     duration: "10-14 Days",
     region: "Himalayas",

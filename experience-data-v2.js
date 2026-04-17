@@ -4,7 +4,7 @@ const experienceDataV2 = {
     heading: "Signature Experiences",
     text: "Discover deeper, more meaningful journeys designed to help travelers feel Nepal through people, culture, food, and unforgettable moments.",
     image: "images/experience-feature.jpg",
-    buttonLink: "experiences-v2.html?category=signature",
+    buttonLink: "experience-v2.html?category=signature",
     items: [
       {
         id: "live-like-a-nepali",
@@ -60,7 +60,7 @@ const experienceDataV2 = {
     heading: "Trekking & Mountain Journeys",
     text: "Explore Nepal’s most iconic trails, from short scenic hikes to unforgettable Himalayan expeditions.",
     image: "images/trekking-feature.jpg",
-    buttonLink: "experiences-v2.html?category=trekking",
+    buttonLink: "experience-v2.html?category=trekking",
     items: [
       {
         id: "everest-base-camp-trek",
@@ -112,7 +112,7 @@ const experienceDataV2 = {
     heading: "Spiritual & Heritage",
     text: "Step into Nepal’s sacred spaces, ancient cities, and living traditions that still shape daily life.",
     image: "images/spiritual-feature.jpg",
-    buttonLink: "experiences-v2.html?category=spiritual",
+    buttonLink: "experience-v2.html?category=spiritual",
     items: [
       {
         id: "boudhanath-kora-experience",
@@ -135,7 +135,7 @@ const experienceDataV2 = {
     heading: "Adventure & Adrenaline",
     text: "Feel Nepal’s wild energy through high-impact experiences in rivers, skies, trails, and mountains.",
     image: "images/adventure-feature.jpg",
-    buttonLink: "experiences-v2.html?category=adventure",
+    buttonLink: "experience-v2.html?category=adventure",
     items: [
       {
         id: "paragliding-in-pokhara",
@@ -158,7 +158,7 @@ const experienceDataV2 = {
     heading: "Hidden Gems & Offbeat Nepal",
     text: "Go beyond the usual route and discover the quieter, deeper, and less-traveled side of Nepal.",
     image: "images/hidden-feature.jpg",
-    buttonLink: "experiences-v2.html?category=hidden",
+    buttonLink: "experience-v2.html?category=hidden",
     items: [
       {
         id: "rara-lake-journey",
@@ -182,7 +182,7 @@ const experienceDataV2 = {
     heading: "Festival Experiences",
     text: "Travel through Nepal’s seasons of color, celebration, ritual, and living local energy.",
     image: "images/festival-feature.jpg",
-    buttonLink: "experiences-v2.html?category=festivals",
+    buttonLink: "experience-v2.html?category=festivals",
     items: [
       {
         id: "bisket-jatra-experience",
@@ -226,7 +226,7 @@ function renderCategoryV2(key) {
   }
 
   if (featureBtn) {
-    featureBtn.href = section.buttonLink || "experiences-v2.html";
+    featureBtn.href = section.buttonLink || "experience-v2.html";
   }
 
   if (list) {

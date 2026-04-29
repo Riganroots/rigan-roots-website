@@ -389,6 +389,102 @@ h1, h2, h3 {
   .intro-content h2 {
     font-size: 2rem;
   }
+    .why-choose {
+  padding: 90px 0;
+  background: white;
+}
+
+.why-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.why-header h2 {
+  font-size: 2.8rem;
+  margin-bottom: 12px;
+}
+
+.why-header p {
+  max-width: 650px;
+  color: #57534e;
+  font-size: 1.05rem;
+}
+
+.why-btn {
+  background: #082f2f;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.why-image {
+  border-radius: 28px;
+  overflow: hidden;
+  margin-bottom: 55px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+}
+
+.why-image img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 45px 70px;
+}
+
+.why-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.why-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  background: #f5f3ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.why-item h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.why-item p {
+  color: #57534e;
+}
+
+@media (max-width: 768px) {
+  .why-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-image img {
+    height: 280px;
+  }
+}
 }
 </style>
 </head>
@@ -480,10 +576,59 @@ This is real Nepal — lived, shared, and remembered.
         <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80">
         <h3>🌾 Village Farming Experience</h3>
         <p>Join locals in farming, rice planting, and daily life.</p>
+<section class="why-choose">
+  <div class="container">
+
+    <div class="why-header">
+      <div>
+        <h2>Why Choose Rigan Roots & Routes?</h2>
+        <p>Because we don’t just plan trips — we connect you with real people, real culture, and real Nepal.</p>
+      </div>
+      <a href="contact.html" class="why-btn">Contact Us →</a>
+    </div>
+
+    <div class="why-image">
+      <img src="images/why-rigan.jpg" alt="Experience Nepal with locals">
+    </div>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">🧭</div>
+        <div>
+          <h3>Local Guides</h3>
+          <p>Travel with people who know the stories, villages, and hidden routes.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">🏡</div>
+        <div>
+          <h3>Real Local Experiences</h3>
+          <p>Stay, eat, learn, and connect with families, hosts, and communities.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">🌿</div>
+        <div>
+          <h3>Meaningful Journeys</h3>
+          <p>Your trip supports local income, culture, skills, and community tourism.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">💬</div>
+        <div>
+          <h3>Personal Trip Support</h3>
+          <p>We help customize your Nepal experience from first message to final day.</p>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
+        
+      
 
 
 

@@ -343,12 +343,53 @@
   color: #57534e;
   font-size: 1.05rem;
 }
-   .nav-cta {
-    background: #991b1b;
-    color: white;
-    padding: 8px 18px;
-    border-radius: 999px;
-    font-weight: 600;
+
+.local-experiences {
+  padding: 80px 0;
+  background: #f5f3ef;
+}
+
+.card img {
+  transition: 0.4s;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.nav-cta {
+  background: #991b1b;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.nav-cta:hover {
+  background: #7f1d1d;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn { display: flex; }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        justify-content: center;
+        padding: 40px;
+        box-shadow: var(--shadow-xl);
+        transition: right 0.3s ease;
+    }
+
+    .nav-links.active { right: 0; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 20px; }
+}
 }
 
 .nav-cta:hover {

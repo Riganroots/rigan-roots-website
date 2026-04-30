@@ -419,5 +419,21 @@ body {
 
   .detail-main-v2 {
     padding: 24px;
+    .experience-list-v2 {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: all 0.35s ease;
+}
+
+.experience-list-v2.move-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experience-feature-card-v2 {
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.35s ease;
+}
   }
 }

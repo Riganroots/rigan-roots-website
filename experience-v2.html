@@ -60,12 +60,12 @@ const experienceGroups = {
     text: "Premium journeys created for unforgettable moments — proposals, slow village life, culture, food, and meaningful memories.",
     link: "experience-v2.html?category=signature",
     items: [
-      ["Proposal in the Base Camp", "Custom"],
-      ["Taste of Nepal", "5-8 Days"],
-      ["Live Like a Nepali", "5-7 Days"],
-      ["Women-Only Cultural Trip", "6-9 Days"],
-      ["Family Nepal Escape", "6-10 Days"],
-      ["Digital Detox Village Retreat", "5-8 Days"]
+      ["Proposal in the Base Camp", "Custom", "proposal-in-the-basecamp"],
+      ["Taste of Nepal", "5-8 Days", "taste-of-nepal"],
+      ["Live Like a Nepali", "5-7 Days", "live-like-a-nepali"],
+      ["Festival Experience", "3-6 Days", "festival-experience"],
+      ["Village Immersion", "5-7 Days", "village-immersion"],
+      ["Wellness Retreat", "7-10 Days", "wellness-retreat"]
     ]
   },
 
@@ -76,12 +76,12 @@ const experienceGroups = {
     text: "Explore Nepal’s iconic Himalayan routes, from short scenic treks to legendary base camp journeys.",
     link: "experience-v2.html?category=trekking",
     items: [
-      ["Annapurna Base Camp", "10-12 Days"],
-      ["Everest Base Camp", "12-16 Days"],
-      ["Mardi Base Camp", "7-9 Days"],
-      ["Langtang Valley Trek", "8-10 Days"],
-      ["Poon Hill Trek", "3-5 Days"],
-      ["Rara Lake Expedition", "8-10 Days"]
+      ["Annapurna Base Camp", "10-12 Days", "annapurna-base-camp"],
+      ["Everest Base Camp", "12-16 Days", "everest-base-camp"],
+      ["Mardi Base Camp", "7-9 Days", "mardi-base-camp"],
+      ["Langtang Valley Trek", "8-10 Days", "langtang-valley"],
+      ["Poon Hill Trek", "3-5 Days", "poon-hill"],
+      ["Rara Lake Expedition", "8-10 Days", "rara-lake"]
     ]
   },
 
@@ -92,12 +92,12 @@ const experienceGroups = {
     text: "Meet Nepal through people, homes, meals, traditions, villages, and everyday life.",
     link: "experience-v2.html?category=culture",
     items: [
-      ["Momo Cooking With Local Family", "3 Hours"],
-      ["Village Immersion", "5-7 Days"],
-      ["Kathmandu Heritage Walk", "1 Day"],
-      ["Bandipur Cultural Escape", "2-4 Days"],
-      ["Live Like a Nepali", "5-7 Days"],
-      ["Taste of Nepal", "5-8 Days"]
+      ["Taste of Nepal", "5-8 Days", "taste-of-nepal"],
+      ["Village Immersion", "5-7 Days", "village-immersion"],
+      ["Kathmandu Heritage Tour", "2-4 Days", "kathmandu-heritage-tour"],
+      ["Bandipur Cultural Escape", "2-4 Days", "bandipur-cultural-escape"],
+      ["Live Like a Nepali", "5-7 Days", "live-like-a-nepali"],
+      ["Festival Experience", "3-6 Days", "festival-experience"]
     ]
   },
 
@@ -108,12 +108,12 @@ const experienceGroups = {
     text: "For travelers who want action, movement, wild landscapes, rivers, forests, and unforgettable outdoor moments.",
     link: "experience-v2.html?category=adventure",
     items: [
-      ["Paragliding in Pokhara", "Half Day"],
-      ["White Water Rafting", "1-3 Days"],
-      ["Bungee Adventure", "1 Day"],
-      ["Zipline Pokhara", "Half Day"],
-      ["Jungle Safari", "2-4 Days"],
-      ["Motorbike Himalayan Ride", "5-10 Days"]
+      ["Paragliding in Pokhara", "Half Day", "paragliding-pokhara"],
+      ["White Water Rafting", "1-3 Days", "white-water-rafting"],
+      ["Bungee Adventure", "1 Day", "bungee-adventure"],
+      ["Zipline Pokhara", "Half Day", "zipline-pokhara"],
+      ["Jungle Safari", "2-4 Days", "jungle-safari"],
+      ["Motorbike Himalayan Ride", "5-10 Days", "motorbike-himalayan-ride"]
     ]
   },
 
@@ -124,12 +124,12 @@ const experienceGroups = {
     text: "Go beyond the usual route and discover quieter places, remote beauty, and stories most visitors miss.",
     link: "experience-v2.html?category=hidden",
     items: [
-      ["Upper Mustang Jeep Journey", "7-10 Days"],
-      ["Annapurna North Base Camp", "10-13 Days"],
-      ["Khopra Danda Trek", "8-10 Days"],
-      ["Rara Lake Expedition", "8-10 Days"],
-      ["Hidden Village Story Journey", "3 Days"],
-      ["Far West Nepal Escape", "Custom"]
+      ["Upper Mustang Jeep Journey", "7-10 Days", "mustang-jeep"],
+      ["Annapurna North Base Camp", "10-13 Days", "annapurna-north-base-camp"],
+      ["Khopra Danda Trek", "8-10 Days", "khopra-danda"],
+      ["Rara Lake Expedition", "8-10 Days", "rara-lake"],
+      ["Bandipur Escape", "2-3 Days", "bandipur-escape"],
+      ["Nagarkot Sunrise Retreat", "1-2 Days", "nagarkot-sunrise-retreat"]
     ]
   },
 
@@ -140,12 +140,12 @@ const experienceGroups = {
     text: "Celebrate Nepal’s living traditions with local families, food, music, rituals, and seasonal cultural moments.",
     link: "experience-v2.html?category=festivals",
     items: [
-      ["Dashain With Local Family", "1-3 Days"],
-      ["Tihar Festival Experience", "1-3 Days"],
-      ["Rice Planting Festival", "1 Day"],
-      ["Maghe Sankranti Experience", "1 Day"],
-      ["Local Wedding Experience", "Custom"],
-      ["Festival Photography Walk", "1 Day"]
+      ["Festival Experience", "3-6 Days", "festival-experience"],
+      ["Taste of Nepal", "5-8 Days", "taste-of-nepal"],
+      ["Village Immersion", "5-7 Days", "village-immersion"],
+      ["Live Like a Nepali", "5-7 Days", "live-like-a-nepali"],
+      ["Family Nepal Escape", "6-10 Days", "family-nepal-escape"],
+      ["Women-Only Cultural Trip", "6-9 Days", "women-only-cultural-trip"]
     ]
   }
 };
@@ -167,6 +167,7 @@ function renderCategory(categoryKey){
   featureHeading.textContent = data.title;
   featureText.textContent = data.text;
   featureBtn.href = data.link;
+
   featureCard.style.backgroundImage =
     `linear-gradient(rgba(10, 94, 59, 0.72), rgba(6, 74, 45, 0.88)), url('${data.image}')`;
 
@@ -174,7 +175,7 @@ function renderCategory(categoryKey){
 
   setTimeout(() => {
     list.innerHTML = data.items.map(item => `
-      <a href="experience-detail.html?experience=${item[0].toLowerCase().replaceAll(" ", "-")}" class="experience-link-v2">
+      <a href="experience-detail-v2.html?experience=${item[2]}" class="experience-link-v2">
         <span>${item[0]}</span>
         <small>${item[1]}</small>
       </a>

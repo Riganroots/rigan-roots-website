@@ -1,679 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rigan Roots & Routes | Nepal Travel Experiences</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        <style>
-:root {
-  --primary: #991b1b;
-  --primary-dark: #7f1d1d;
-  --gradient-sunrise: linear-gradient(135deg, #f59e0b 0%, #dc2626 50%, #7c2d12 100%);
-  --stone-50: #fafaf9;
-  --stone-500: #78716c;
-  --stone-600: #57534e;
-  --stone-700: #44403c;
-  --stone-800: #292524;
-  --stone-900: #1c1917;
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-  --radius-lg: 20px;
-  --transition: all 0.3s ease;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rigan Roots & Routes | Nepal Travel Experiences</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+    --green:#174d2f;
+    --green-dark:#0f3521;
+    --olive:#9fba6b;
+    --brown:#a46a3f;
+    --cream:#faf7ef;
+    --dark:#101815;
+    --text:#222;
+    --muted:#666;
+    --radius:18px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--stone-50);
-  color: var(--stone-700);
-  line-height: 1.6;
-}
-
-h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  color: var(--stone-900);
-}
-
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--text);
 }
 
-.brand-logo {
-  width: 44px;
-  height: 44px;
-  background: var(--gradient-sunrise);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 800;
+h1,h2,h3{
+    font-family:'Playfair Display',serif;
 }
 
-.brand-name {
-  font-size: 1.25rem;
-  color: var(--stone-800);
-  font-weight: 700;
+a{
+    text-decoration:none;
 }
 
-.brand-tagline {
-  font-size: 0.72rem;
-  color: var(--stone-500);
+/* NAVBAR */
+.navbar{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:20;
+    padding:22px 60px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.nav-links {
-  display: flex;
-  gap: 32px;
-  align-items: center;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:white;
+    font-weight:700;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: var(--stone-600);
-  font-weight: 500;
+.logo-box{
+    width:48px;
+    height:48px;
+    background:var(--green);
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
 }
 
-.nav-links a:hover {
-  color: var(--primary);
+.logo-text strong{
+    display:block;
+    font-size:22px;
+    line-height:1;
 }
 
-.mobile-menu-btn {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  cursor: pointer;
+.logo-text span{
+    font-family:'Playfair Display',serif;
+    font-size:16px;
 }
 
-.mobile-menu-btn span {
-  width: 28px;
-  height: 2px;
-  background: var(--stone-700);
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:38px;
 }
 
-.hero {
-  height: 85vh;
-  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('https://i.postimg.cc/4xqF2fyR/bibhash-paul-EBi-Mv-CNo-Km4-unsplash.jpg');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+.nav-links a{
+    color:white;
+    font-weight:600;
+    font-size:14px;
 }
 
-.hero-content h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  color: white;
-  margin-bottom: 1rem;
+.nav-host{
+    background:var(--green);
+    color:white!important;
+    padding:14px 25px;
+    border-radius:999px;
 }
 
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+/* HERO */
+.hero{
+    min-height:100vh;
+    background:
+    linear-gradient(90deg,rgba(0,0,0,.70),rgba(0,0,0,.35)),
+    url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    padding:120px 70px 60px;
+    color:white;
+    position:relative;
 }
 
-.hero-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
+.hero-content{
+    max-width:720px;
 }
 
-.btn {
-  display: inline-block;
-  background: var(--primary);
-  color: white;
-  padding: 14px 32px;
-  text-decoration: none;
-  border-radius: 999px;
-  font-weight: 600;
-  transition: var(--transition);
+.hero h1{
+    font-size:clamp(3rem,6vw,5.8rem);
+    line-height:1.05;
+    margin-bottom:22px;
 }
 
-.btn:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
+.hero h1 span{
+    color:var(--olive);
 }
 
-.btn.secondary {
-  background: #1f3d2b;
+.hero-line{
+    width:80px;
+    height:3px;
+    background:var(--olive);
+    margin-bottom:24px;
 }
 
-.btn.secondary:hover {
-  background: #162b1f;
+.hero p{
+    font-size:20px;
+    line-height:1.7;
+    margin-bottom:34px;
 }
 
-/* Intro image section */
-.intro-hero {
-  min-height: 420px;
-  background: url('https://i.postimg.cc/SNz97kBG/raimond-klavins-Eb-FUDEIMmk-E-unsplash.jpg') center/cover no-repeat;
+.hero-buttons{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
 }
 
-.intro-overlay {
-  min-height: 420px;
-  background: rgba(0,0,0,0.55);
-  display: flex;
-  align-items: center;
+.btn{
+    padding:16px 32px;
+    border-radius:999px;
+    color:white;
+    font-weight:700;
+    display:inline-block;
 }
 
-.intro-content {
-  text-align: center;
-  color: white;
+.btn-green{
+    background:var(--green);
 }
 
-.intro-content h2 {
-  color: white;
-  font-size: 2.6rem;
-  margin-bottom: 16px;
+.btn-brown{
+    background:var(--brown);
 }
 
-.intro-content p {
-  max-width: 760px;
-  margin: 0 auto;
-  color: rgba(255,255,255,0.9);
-  font-size: 1.05rem;
+.btn-outline{
+    border:2px solid white;
 }
 
-.highlight-text {
-  margin-top: 18px !important;
-  color: #facc15 !important;
-  font-weight: 700;
+/* DISCOVER SLIDER */
+.discover{
+    padding:70px 0 45px;
+    background:var(--cream);
+    text-align:center;
 }
 
-.section-title {
-  text-align: center;
-  font-size: 2.2rem;
-  margin: 3rem 0 1rem;
+.section-title{
+    font-size:42px;
+    margin-bottom:12px;
 }
 
-.section-subtitle {
-  text-align: center;
-  color: var(--stone-500);
-  margin-bottom: 3rem;
+.section-subtitle{
+    color:var(--muted);
+    margin-bottom:35px;
 }
 
-.local-experiences {
-  padding: 80px 0;
-  background: #f5f3ef;
+.slider-wrap{
+    position:relative;
+    overflow:hidden;
+    padding:0 60px;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 3rem 0;
+.slider{
+    display:flex;
+    gap:18px;
+    animation:slide 28s linear infinite;
 }
 
-.card {
-  background: white;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-  text-decoration: none;
-  color: inherit;
-  display: block;
+.slide-card{
+    min-width:210px;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
+.slide-card img{
+    width:210px;
+    height:170px;
+    object-fit:cover;
+    border-radius:12px;
 }
 
-.card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  transition: 0.4s;
+.slide-card p{
+    margin-top:10px;
+    font-size:13px;
+    color:#333;
 }
 
-.card:hover img {
-  transform: scale(1.05);
+@keyframes slide{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
 }
 
-.card h3 {
-  padding: 1.2rem 1.2rem 0.5rem;
+/* FEATURES */
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+    padding:45px 70px 70px;
+    background:var(--cream);
 }
 
-.card p {
-  padding: 0 1.2rem 1.2rem;
-  color: var(--stone-500);
+.feature{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    border-right:1px solid #ddd3c4;
+    padding-right:25px;
 }
 
-.footer {
-  background: var(--stone-900);
-  color: white;
-  padding: 60px 0 30px;
+.feature:last-child{
+    border-right:none;
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 40px;
+.feature-icon{
+    min-width:58px;
+    height:58px;
+    background:#dce8c8;
+    color:var(--green);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
 }
 
-.footer-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 16px;
+.feature h3{
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    margin-bottom:10px;
 }
 
-.footer p, .footer-links a {
-  color: rgba(255,255,255,0.75);
-  text-decoration: none;
+.feature p{
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.7;
 }
 
-.footer-title {
-  margin-bottom: 14px;
-  font-size: 1rem;
-  font-weight: 700;
+/* TRAVEL STORIES */
+.stories{
+    padding:70px;
+    background:#edf5eb;
+    text-align:center;
 }
 
-.footer-links {
-  list-style: none;
-  display: grid;
-  gap: 10px;
+.story-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    margin-top:40px;
 }
 
-.social-links {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 14px;
+.story-card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    text-align:left;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
-.social-links a {
-  width: 40px;
-  height: 40px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+.story-card img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
 }
 
-.social-links a:hover {
-  background: var(--primary);
+.story-content{
+    padding:22px;
 }
 
-.footer-bottom {
-  text-align: center;
-  padding-top: 30px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  font-size: 0.85rem;
+.story-tag{
+    display:inline-block;
+    background:var(--green);
+    color:white;
+    font-size:12px;
+    padding:6px 12px;
+    border-radius:999px;
+    margin-bottom:14px;
 }
 
-.floating-whatsapp {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 99;
+.story-card h3{
+    font-size:22px;
+    line-height:1.25;
+    margin-bottom:12px;
 }
 
-.floating-whatsapp a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #25D366;
-  color: white;
-  padding: 12px 22px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: var(--shadow-xl);
+.story-card p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.7;
 }
 
-@media (max-width: 768px) {
-  .mobile-menu-btn { display: flex; }
+.location{
+    margin-top:15px;
+    color:var(--green);
+    font-size:13px;
+}
 
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: white;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px;
-    box-shadow: var(--shadow-xl);
-    transition: right 0.3s ease;
-  }
+/* SIGNATURE */
+.signature{
+    padding:75px 70px;
+    background:var(--cream);
+    text-align:center;
+}
 
-  .nav-links.active { right: 0; }
+.exp-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    margin-top:40px;
+}
 
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
+.exp-card{
+    background:white;
+    border:1px solid #e5ded2;
+    border-radius:16px;
+    overflow:hidden;
+    text-align:left;
+}
 
-  .container {
-    padding: 0 20px;
-  }
+.exp-card img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
 
-  .intro-content h2 {
-    font-size: 2rem;
-  }
-    .why-choose {
-  padding: 90px 0;
-  background: white;
+.exp-card-content{
+    padding:22px;
 }
 
-.why-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 50px;
+.exp-card h3{
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    margin-bottom:10px;
 }
 
-.why-header h2 {
-  font-size: 2.8rem;
-  margin-bottom: 12px;
+.exp-card p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.7;
 }
 
-.why-header p {
-  max-width: 650px;
-  color: #57534e;
-  font-size: 1.05rem;
+/* CTA BANNER */
+.cta-banner{
+    margin:0 70px 70px;
+    background:
+    linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,.35)),
+    url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+    border-radius:18px;
+    padding:35px 45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
 }
 
-.why-btn {
-  background: #082f2f;
-  color: white;
-  padding: 14px 28px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 700;
-  white-space: nowrap;
+.cta-banner h2{
+    font-size:26px;
 }
 
-.why-image {
-  border-radius: 28px;
-  overflow: hidden;
-  margin-bottom: 55px;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+.cta-banner p{
+    color:#ddd;
+    margin-top:6px;
 }
 
-.why-image img {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-  display: block;
+/* FOOTER */
+.footer{
+    background:#071611;
+    color:white;
+    padding:55px 70px 25px;
 }
 
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 45px 70px;
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1.4fr 1fr;
+    gap:45px;
 }
 
-.why-item {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 24px;
-  align-items: flex-start;
+.footer h3{
+    font-family:'Inter',sans-serif;
+    margin-bottom:18px;
 }
 
-.why-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 18px;
-  background: #f5f3ef;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
+.footer p,.footer a{
+    color:#d0d0d0;
+    font-size:14px;
+    line-height:1.8;
 }
 
-.why-item h3 {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.4rem;
-  margin-bottom: 8px;
+.footer-links{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
 }
 
-.why-item p {
-  color: #57534e;
+.socials{
+    display:flex;
+    gap:14px;
 }
 
-@media (max-width: 768px) {
-  .why-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.socials a{
+    width:42px;
+    height:42px;
+    background:rgba(255,255,255,.12);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-  .why-grid {
-    grid-template-columns: 1fr;
-  }
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.15);
+    text-align:center;
+    margin-top:35px;
+    padding-top:18px;
+    color:#aaa;
+    font-size:13px;
+}
 
-  .why-image img {
-    height: 280px;
-  }
+/* WHATSAPP */
+.whatsapp{
+    position:fixed;
+    right:28px;
+    bottom:25px;
+    background:#22c55e;
+    color:white;
+    padding:14px 24px;
+    border-radius:999px;
+    font-weight:700;
+    z-index:50;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .navbar{
+        padding:18px 24px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding:120px 25px 60px;
+    }
+
+    .features,
+    .story-grid,
+    .exp-grid,
+    .footer-grid{
+        grid-template-columns:1fr;
+        padding-left:25px;
+        padding-right:25px;
+    }
+
+    .feature{
+        border-right:none;
+    }
+
+    .stories,
+    .signature{
+        padding:60px 25px;
+    }
+
+    .cta-banner{
+        margin:0 25px 60px;
+        flex-direction:column;
+        gap:20px;
+        align-items:flex-start;
+    }
+
+    .footer{
+        padding:50px 25px 25px;
+    }
 }
 </style>
 </head>
+
 <body>
 
 <nav class="navbar">
-    <div class="nav-container">
-        <a href="index.html" class="brand">
-            <div class="brand-logo">RR</div>
-            <div>
-                <div class="brand-name">Rigan Roots & Routes</div>
-                <div class="brand-tagline">Meaningful Journeys Through Nepal</div>
-            </div>
-        </a>
-        <div class="mobile-menu-btn" id="mobileMenuBtn">
-            <span></span><span></span><span></span>
+    <a href="index.html" class="logo">
+        <div class="logo-box"><i class="fa-solid fa-mountain-sun"></i></div>
+        <div class="logo-text">
+            <strong>Rigan</strong>
+            <span>Roots & Routes</span>
         </div>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html">Home</a>
-<a href="experiences.html">Experiences</a>
-<a href="#">Work With Us</a>
-<a href="plan.html">Plan My Trip</a>
-<a href="contact.html">Contact</a>
-            
-          
-        </div>
+    </a>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="work-with-us.html">Work With Us</a>
+        <a href="plan.html">Plan My Trip</a>
+        <a href="contact.html">Contact</a>
+        <a href="work-with-us.html" class="nav-host">Become a Host</a>
     </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-content">
-    <h1>Meet Nepal Through Its People</h1>
+    <div class="hero-content">
+        <h1>You don’t come<br>to Nepal to see.<br><span>You come to feel.</span></h1>
+        <div class="hero-line"></div>
+        <p>Live with locals. Eat real food.<br>Share real stories. Create real memories.</p>
 
-    <p>
-      Not just mountains. Not just tours.
-      This is real Nepal — lived, shared, and remembered.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="experiences.html" class="btn">Explore Experiences</a>
-      <a href="plan.html" class="btn">Plan My Trip</a>
-      <a href="#" class="btn secondary">Become a Host</a>
+        <div class="hero-buttons">
+            <a href="experiences.html" class="btn btn-green">Explore Experiences</a>
+            <a href="plan.html" class="btn btn-brown">Plan My Trip</a>
+            <a href="work-with-us.html" class="btn btn-outline">Become a Host</a>
+        </div>
     </div>
-  </div>
 </section>
 
-<section class="intro-hero">
-  <div class="intro-overlay">
-    <div class="container intro-content">
-      <h2>This Is Not a Tour. This Is Real Nepal.</h2>
+<section class="discover">
+    <h2 class="section-title">Discover Nepal</h2>
+    <p class="section-subtitle">Breathtaking places. Timeless culture. Unforgettable moments.</p>
 
-      <p>
-        Stay with locals. Share home-cooked meals. Learn traditional skills.
-        Experience Nepal through its people, culture, and everyday life.
-      </p>
+    <div class="slider-wrap">
+        <div class="slider">
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80">
+                <p>Phewa Lake, Pokhara</p>
+            </div>
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=600&q=80">
+                <p>Boudhanath, Kathmandu</p>
+            </div>
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80">
+                <p>Village Life, Nepal</p>
+            </div>
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80">
+                <p>Nagarkot Sunrise</p>
+            </div>
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1617469165786-8007eda3caa7?auto=format&fit=crop&w=600&q=80">
+                <p>Bhaktapur Durbar Square</p>
+            </div>
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1518715058720-e56f02e77f6d?auto=format&fit=crop&w=600&q=80">
+                <p>Everest Region</p>
+            </div>
 
-      <p class="highlight-text">
-        We don’t sell packages. We connect you with real people.
-      </p>
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80">
+                <p>Phewa Lake, Pokhara</p>
+            </div>
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=600&q=80">
+                <p>Boudhanath, Kathmandu</p>
+            </div>
+            <div class="slide-card">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80">
+                <p>Village Life, Nepal</p>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
-<section class="local-experiences">
-  <div class="container">
-    <h2 class="section-title">Experience Nepal Through Its People</h2>
-    <p class="section-subtitle">Not just tours — real moments with real locals.</p>
-
-    <div class="card-grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80">
-        <h3>🍜 Learn Momo Making</h3>
-        <p>Cook with locals and share real stories in their own kitchen.</p>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80">
-        <h3>🏡 Dinner with a Local Family</h3>
-        <p>Enjoy a traditional meal inside a Nepali home.</p>
-      </div>
-
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80">
-        <h3>🌾 Village Farming Experience</h3>
-        <p>Join locals in farming, rice planting, and daily life.</p>
-      </div>
+<section class="features">
+    <div class="feature">
+        <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+        <div>
+            <h3>People First</h3>
+            <p>We connect you with locals who open their homes and hearts to you.</p>
+        </div>
     </div>
-  </div>
+
+    <div class="feature">
+        <div class="feature-icon"><i class="fa-solid fa-mountain"></i></div>
+        <div>
+            <h3>Real Experiences</h3>
+            <p>Not staged. Not scripted. Every experience is authentic and immersive.</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-icon"><i class="fa-solid fa-leaf"></i></div>
+        <div>
+            <h3>Responsible Travel</h3>
+            <p>We support local communities and protect Nepal’s beauty.</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-icon"><i class="fa-solid fa-shield-heart"></i></div>
+        <div>
+            <h3>Trusted & Safe</h3>
+            <p>Curated hosts, verified experiences, and support for peace of mind.</p>
+        </div>
+    </div>
 </section>
 
-<section class="why-choose">
-  <div class="container">
-    <div class="why-header">
-      <div>
-        <h2>Why Choose Rigan Roots & Routes?</h2>
-        <p>Because we don’t just plan trips — we connect you with real people, real culture, and real Nepal.</p>
-      </div>
+<section class="stories">
+    <h2 class="section-title">Travel Stories You Can Feel</h2>
+    <p class="section-subtitle">Real journeys. Real people. Real emotions.</p>
 
-      <a href="contact.html" class="why-btn">Contact Us →</a>
+    <div class="story-grid">
+        <div class="story-card">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=700&q=80">
+            <div class="story-content">
+                <span class="story-tag">The Connection</span>
+                <h3>“I came as a guest, left as family.”</h3>
+                <p>A solo traveler from Germany shares how a Nepali family became her own.</p>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu Valley</div>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80">
+            <div class="story-content">
+                <span class="story-tag" style="background:var(--brown)">The Adventure</span>
+                <h3>“The Himalayas changed me.”</h3>
+                <p>A trek that was more than just a hike — it was a journey within.</p>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Annapurna Region</div>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=700&q=80">
+            <div class="story-content">
+                <span class="story-tag">The Moments</span>
+                <h3>“Small moments, biggest memories.”</h3>
+                <p>Laughter, stories, and simple moments that stay forever.</p>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Rural Nepal</div>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=700&q=80">
+            <div class="story-content">
+                <span class="story-tag" style="background:var(--brown)">The Culture</span>
+                <h3>“Celebrated Dashain like never before.”</h3>
+                <p>Experience festivals not as a tourist, but as part of the family.</p>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Across Nepal</div>
+            </div>
+        </div>
     </div>
-
-    <div class="why-image">
-      <img src="images/why-rigan.jpg" alt="Experience Nepal with locals">
-    </div>
-
-    <div class="why-grid">
-      <div class="why-item">
-        <div class="why-icon">🧭</div>
-        <div>
-          <h3>Local Guides</h3>
-          <p>Travel with people who know the stories, villages, and hidden routes.</p>
-        </div>
-      </div>
-
-      <div class="why-item">
-        <div class="why-icon">🏡</div>
-        <div>
-          <h3>Real Local Experiences</h3>
-          <p>Stay, eat, learn, and connect with families, hosts, and communities.</p>
-        </div>
-      </div>
-
-      <div class="why-item">
-        <div class="why-icon">🌿</div>
-        <div>
-          <h3>Meaningful Journeys</h3>
-          <p>Your trip supports local income, culture, skills, and community tourism.</p>
-        </div>
-      </div>
-
-      <div class="why-item">
-        <div class="why-icon">💬</div>
-        <div>
-          <h3>Personal Trip Support</h3>
-          <p>We help customize your Nepal experience from first message to final day.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
-        
-      
 
+<section class="signature">
+    <h2 class="section-title">Signature Experiences</h2>
+    <p class="section-subtitle">Handpicked experiences that bring you closer to the real Nepal.</p>
 
+    <div class="exp-grid">
+        <div class="exp-card">
+            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=700&q=80">
+            <div class="exp-card-content">
+                <h3>Cook with a Local Family</h3>
+                <p>Learn to cook traditional Nepali dishes in a local home and share stories over a meal.</p>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu Valley</div>
+            </div>
+        </div>
+
+        <div class="exp-card">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80">
+            <div class="exp-card-content">
+                <h3>Live Like a Nepali</h3>
+                <p>Stay with a local family in a village and experience daily life up close.</p>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Bandipur, Gorkha</div>
+            </div>
+        </div>
+
+        <div class="exp-card">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=700&q=80">
+            <div class="exp-card-content">
+                <h3>Farm & Harvest Experience</h3>
+                <p>Join locals in the fields, plant rice, and celebrate harvest the traditional way.</p>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Pokhara, Kaski</div>
+            </div>
+        </div>
+
+        <div class="exp-card">
+            <img src="https://images.unsplash.com/photo-1526392060635-5dde1f7f6d0a?auto=format&fit=crop&w=700&q=80">
+            <div class="exp-card-content">
+                <h3>Celebrate Local Festivals</h3>
+                <p>Be part of vibrant festivals like Dashain, Tihar, and Maghe Sankranti with locals.</p>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Across Nepal</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-banner">
+    <div>
+        <h2>Your story in Nepal is waiting.</h2>
+        <p>Let us help you create memories that last a lifetime.</p>
+    </div>
+    <a href="plan.html" class="btn btn-green">Plan My Trip Now</a>
+</section>
 
 <footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-logo">Rigan Roots & Routes</div>
-                <p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p>
-            </div>
-            <div>
-                <h4 class="footer-title">Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="experiences.html">Experiences</a></li>
-                    <li><a href="regions.html">Regions</a></li>
-                    <li><a href="plan.html">Plan My Trip</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="footer-title">Connect</h4>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/riganrootsandroutes/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-                <p>📍 Kathmandu, Nepal<br>✉️ riganrootsroutes@gmail.com<br>📞 +977 9843322695</p>
+    <div class="footer-grid">
+        <div>
+            <h3>Rigan Roots & Routes</h3>
+            <p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="experiences.html">Experiences</a>
+                <a href="plan.html">Plan My Trip</a>
+                <a href="work-with-us.html">Work With Us</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p>
+
+        <div>
+            <h3>Contact Us</h3>
+            <p><i class="fa-solid fa-location-dot"></i> Kathmandu, Nepal</p>
+            <p><i class="fa-solid fa-envelope"></i> riganrootsroutes@gmail.com</p>
+            <p><i class="fa-solid fa-phone"></i> +977 9843322695</p>
         </div>
+
+        <div>
+            <h3>Follow Us</h3>
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.
     </div>
 </footer>
 
-<div class="floating-whatsapp">
-    <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank">
-        <i class="fab fa-whatsapp"></i>
-        <span>Chat with us</span>
-    </a>
-</div>
+<a href="https://wa.me/9779843322695" class="whatsapp">
+    <i class="fa-brands fa-whatsapp"></i> Chat with us
+</a>
 
-<script>
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-    const navLinks = document.getElementById('navLinks');
-    mobileBtn?.addEventListener('click', () => navLinks.classList.toggle('active'));
-</script>
-<script src="main.js"></script>
 </body>
 </html>

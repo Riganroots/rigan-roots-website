@@ -3,197 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Experiences V2 | Rigan Roots & Routes</title>
- href="/rigan-roots-website/experience-detail-v2.html?experience=${item[2]}"
+  <title>Experience Detail V2 | Rigan Roots & Routes</title>
+  <link rel="stylesheet" href="experience-v2.css" />
 </head>
+
 <body>
 
-<section class="experience-showcase-v2">
-  <div class="experience-shell-v2">
+<section class="detail-page-v2">
+  <div class="detail-hero-v2" id="detailHeroV2">
+    <div class="detail-hero-overlay-v2"></div>
+    <div class="detail-hero-content-v2">
+      <p class="detail-label-v2">Rigan Experience</p>
+      <h1 id="detailTitleV2">Loading...</h1>
+      <p id="detailSubtitleV2">Please wait...</p>
+    </div>
+  </div>
 
-    <aside class="experience-sidebar-v2">
-      <p class="sidebar-label-v2">Explore Experiences</p>
+  <div class="detail-container-v2">
+    <div class="detail-grid-v2">
 
-      <button class="sidebar-item-v2 active" data-category="signature">Signature Experiences</button>
-      <button class="sidebar-item-v2" data-category="trekking">Trekking & Mountain Journeys</button>
-      <button class="sidebar-item-v2" data-category="culture">Culture & Local Life</button>
-      <button class="sidebar-item-v2" data-category="adventure">Adventure & Adrenaline</button>
-      <button class="sidebar-item-v2" data-category="hidden">Hidden Gems & Offbeat Nepal</button>
-      <button class="sidebar-item-v2" data-category="festivals">Festival & Seasonal Experiences</button>
-    </aside>
+      <div class="detail-main-v2">
+        <div class="detail-section-v2">
+          <h2>Overview</h2>
+          <p id="detailOverviewV2"></p>
+        </div>
 
-    <div class="experience-main-v2">
-      <div class="experience-breadcrumb-v2">
-        <span>Experiences</span>
-        <span>›</span>
-        <strong id="experienceTitleV2">Signature Experiences</strong>
-      </div>
+        <div class="detail-section-v2">
+          <h2>Highlights</h2>
+          <ul id="detailHighlightsV2"></ul>
+        </div>
 
-      <div class="experience-content-grid-v2">
-        <div class="experience-list-v2" id="experienceListV2"></div>
-
-        <div class="experience-feature-card-v2" id="featureCardV2">
-          <div class="feature-overlay-v2"></div>
-          <div class="feature-content-v2">
-            <span class="feature-tag-v2" id="featureTagV2">Curated Journeys</span>
-            <h3 id="featureHeadingV2">Signature Experiences</h3>
-            <p id="featureTextV2">
-              Discover deeper, more meaningful journeys designed to help travelers feel Nepal through people, culture, food, and unforgettable moments.
-            </p>
-            <a href="experience-v2.html?category=signature" class="feature-btn-v2" id="featureBtnV2">
-              View All Packages <span>→</span>
-            </a>
-          </div>
+        <div class="detail-section-v2">
+          <h2>Sample Itinerary</h2>
+          <div id="detailItineraryV2"></div>
         </div>
       </div>
-    </div>
 
+      <aside class="detail-sidebar-v2">
+        <div class="booking-card-v2">
+          <h3>Quick Info</h3>
+          <p><strong>Duration:</strong> <span id="detailDurationV2"></span></p>
+          <p><strong>Price:</strong> <span id="detailPriceV2"></span></p>
+          <p><strong>Location:</strong> <span id="detailLocationV2"></span></p>
+
+          <a href="#" class="book-btn-v2" id="whatsappBookBtn">
+            Book This Experience
+          </a>
+        </div>
+      </aside>
+
+    </div>
   </div>
 </section>
 
+<script src="experience-data-v2.js"></script>
+
 <script>
-const experienceGroups = {
-  signature: {
-    title: "Signature Experiences",
-    tag: "Curated Journeys",
-    image: "https://i.postimg.cc/qv4GccDP/base-camp-proposal-package-jpg.jpg",
-    text: "Premium journeys created for unforgettable moments — proposals, slow village life, culture, food, and meaningful memories.",
-    link: "experience-v2.html?category=signature",
-    items: [
-      ["Proposal in the Base Camp", "Custom", "proposal-in-the-basecamp"],
-      ["Taste of Nepal", "5-8 Days", "taste-of-nepal"],
-      ["Live Like a Nepali", "5-7 Days", "live-like-a-nepali"],
-      ["Festival Experience", "3-6 Days", "festival-experience"],
-      ["Village Immersion", "5-7 Days", "village-immersion"],
-      ["Wellness Retreat", "7-10 Days", "wellness-retreat"]
-    ]
-  },
+const params = new URLSearchParams(window.location.search);
+const experienceId = params.get("experience");
 
-  trekking: {
-    title: "Trekking & Mountain Journeys",
-    tag: "Himalayan Trails",
-    image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
-    text: "Explore Nepal’s iconic Himalayan routes, from short scenic treks to legendary base camp journeys.",
-    link: "experience-v2.html?category=trekking",
-    items: [
-      ["Annapurna Base Camp", "10-12 Days", "annapurna-base-camp"],
-      ["Everest Base Camp", "12-16 Days", "everest-base-camp"],
-      ["Mardi Base Camp", "7-9 Days", "mardi-base-camp"],
-      ["Langtang Valley Trek", "8-10 Days", "langtang-valley"],
-      ["Poon Hill Trek", "3-5 Days", "poon-hill"],
-      ["Rara Lake Expedition", "8-10 Days", "rara-lake"]
-    ]
-  },
+let selectedExperience = null;
 
-  culture: {
-    title: "Culture & Local Life",
-    tag: "People First",
-    image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
-    text: "Meet Nepal through people, homes, meals, traditions, villages, and everyday life.",
-    link: "experience-v2.html?category=culture",
-    items: [
-      ["Taste of Nepal", "5-8 Days", "taste-of-nepal"],
-      ["Village Immersion", "5-7 Days", "village-immersion"],
-      ["Kathmandu Heritage Tour", "2-4 Days", "kathmandu-heritage-tour"],
-      ["Bandipur Cultural Escape", "2-4 Days", "bandipur-cultural-escape"],
-      ["Live Like a Nepali", "5-7 Days", "live-like-a-nepali"],
-      ["Festival Experience", "3-6 Days", "festival-experience"]
-    ]
-  },
-
-  adventure: {
-    title: "Adventure & Adrenaline",
-    tag: "Soft Adventure",
-    image: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg",
-    text: "For travelers who want action, movement, wild landscapes, rivers, forests, and unforgettable outdoor moments.",
-    link: "experience-v2.html?category=adventure",
-    items: [
-      ["Paragliding in Pokhara", "Half Day", "paragliding-pokhara"],
-      ["White Water Rafting", "1-3 Days", "white-water-rafting"],
-      ["Bungee Adventure", "1 Day", "bungee-adventure"],
-      ["Zipline Pokhara", "Half Day", "zipline-pokhara"],
-      ["Jungle Safari", "2-4 Days", "jungle-safari"],
-      ["Motorbike Himalayan Ride", "5-10 Days", "motorbike-himalayan-ride"]
-    ]
-  },
-
-  hidden: {
-    title: "Hidden Gems & Offbeat Nepal",
-    tag: "Beyond Guidebooks",
-    image: "https://i.postimg.cc/DwncQQYz/upper-mustang-jpg.jpg",
-    text: "Go beyond the usual route and discover quieter places, remote beauty, and stories most visitors miss.",
-    link: "experience-v2.html?category=hidden",
-    items: [
-      ["Upper Mustang Jeep Journey", "7-10 Days", "mustang-jeep"],
-      ["Annapurna North Base Camp", "10-13 Days", "annapurna-north-base-camp"],
-      ["Khopra Danda Trek", "8-10 Days", "khopra-danda"],
-      ["Rara Lake Expedition", "8-10 Days", "rara-lake"],
-      ["Bandipur Escape", "2-3 Days", "bandipur-escape"],
-      ["Nagarkot Sunrise Retreat", "1-2 Days", "nagarkot-sunrise-retreat"]
-    ]
-  },
-
-  festivals: {
-    title: "Festival & Seasonal Experiences",
-    tag: "Live the Culture",
-    image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
-    text: "Celebrate Nepal’s living traditions with local families, food, music, rituals, and seasonal cultural moments.",
-    link: "experience-v2.html?category=festivals",
-    items: [
-      ["Festival Experience", "3-6 Days", "festival-experience"],
-      ["Taste of Nepal", "5-8 Days", "taste-of-nepal"],
-      ["Village Immersion", "5-7 Days", "village-immersion"],
-      ["Live Like a Nepali", "5-7 Days", "live-like-a-nepali"],
-      ["Family Nepal Escape", "6-10 Days", "family-nepal-escape"],
-      ["Women-Only Cultural Trip", "6-9 Days", "women-only-cultural-trip"]
-    ]
+for (const category in experienceDataV2) {
+  const found = experienceDataV2[category].items.find(item => item.id === experienceId);
+  if (found) {
+    selectedExperience = found;
+    break;
   }
-};
-
-const buttons = document.querySelectorAll(".sidebar-item-v2");
-const title = document.getElementById("experienceTitleV2");
-const list = document.getElementById("experienceListV2");
-const featureCard = document.getElementById("featureCardV2");
-const featureTag = document.getElementById("featureTagV2");
-const featureHeading = document.getElementById("featureHeadingV2");
-const featureText = document.getElementById("featureTextV2");
-const featureBtn = document.getElementById("featureBtnV2");
-
-function renderCategory(categoryKey){
-  const data = experienceGroups[categoryKey];
-
-  title.textContent = data.title;
-  featureTag.textContent = data.tag;
-  featureHeading.textContent = data.title;
-  featureText.textContent = data.text;
-  featureBtn.href = data.link;
-
-  featureCard.style.backgroundImage =
-    `linear-gradient(rgba(10, 94, 59, 0.72), rgba(6, 74, 45, 0.88)), url('${data.image}')`;
-
-  list.classList.remove("move-in");
-
-  setTimeout(() => {
-    list.innerHTML = data.items.map(item => `
-      <a href="experience-detail-v2.html?experience=${item[2]}" class="experience-link-v2">
-        <span>${item[0]}</span>
-        <small>${item[1]}</small>
-      </a>
-    `).join("");
-
-    list.classList.add("move-in");
-  }, 120);
 }
 
-buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    buttons.forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
-    renderCategory(button.dataset.category);
-  });
-});
+if (!selectedExperience) {
+  document.getElementById("detailTitleV2").textContent = "Experience Not Found";
+  document.getElementById("detailSubtitleV2").textContent = "Please go back and choose another experience.";
+} else {
+  document.title = selectedExperience.name + " | Rigan Roots & Routes";
 
-renderCategory("signature");
+  document.getElementById("detailHeroV2").style.backgroundImage =
+    `linear-gradient(rgba(10, 94, 59, 0.55), rgba(6, 74, 45, 0.78)), url('${selectedExperience.image || "images/experience-feature.jpg"}')`;
+
+  document.getElementById("detailTitleV2").textContent = selectedExperience.name;
+  document.getElementById("detailSubtitleV2").textContent = selectedExperience.subtitle;
+  document.getElementById("detailOverviewV2").textContent = selectedExperience.overview;
+  document.getElementById("detailDurationV2").textContent = selectedExperience.duration;
+  document.getElementById("detailPriceV2").textContent = selectedExperience.price;
+  document.getElementById("detailLocationV2").textContent = selectedExperience.location;
+
+  const highlightsList = document.getElementById("detailHighlightsV2");
+  highlightsList.innerHTML = selectedExperience.highlights.map(item => `<li>${item}</li>`).join("");
+
+  const itineraryBox = document.getElementById("detailItineraryV2");
+  itineraryBox.innerHTML = selectedExperience.itinerary.map(day => `
+    <div class="itinerary-day-v2">
+      <h4>${day.day}</h4>
+      <p>${day.text}</p>
+    </div>
+  `).join("");
+
+  const message = encodeURIComponent(
+    `Hi Rigan Roots & Routes, I am interested in ${selectedExperience.name}. Please send me details.`
+  );
+
+  document.getElementById("whatsappBookBtn").href =
+    `https://wa.me/9779843322695?text=${message}`;
+}
 </script>
 
 </body>

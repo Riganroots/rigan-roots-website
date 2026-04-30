@@ -293,6 +293,13 @@ a{
     width:100%;
     height:170px;
     object-fit:cover;
+    transition: 0.4s;
+}
+
+.story-card:hover img {
+    transform: scale(1.05);
+}
+}
 }
 
 .story-content{
@@ -514,7 +521,7 @@ a{
 
 <nav class="navbar">
     <a href="index.html" class="logo">
-        <div class="logo-box"><i class="fa-solid fa-mountain-sun"></i></div>
+        <div class="logo-box"><></i></div>
         <div class="logo-text">
             <strong>Rigan</strong>
             <span>Roots & Routes</span>
@@ -627,8 +634,49 @@ a{
 </section>
 
 <section class="stories">
-    <h2 class="section-title">Travel Stories You Can Feel</h2>
-    <p class="section-subtitle">Real journeys. Real people. Real emotions.</p>
+   <div class="story-grid">
+
+    <div class="story-card">
+        <img src="images/cultural journey.jpg">
+        <div class="story-content">
+            <span class="story-tag">The Connection</span>
+            <h3>“I came as a guest, left as family.”</h3>
+            <p>Sharing meals, laughter, and stories with a local family changed everything.</p>
+            <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu Valley</div>
+        </div>
+    </div>
+
+    <div class="story-card">
+        <img src="images/annapurna north base camp.jpg">
+        <div class="story-content">
+            <span class="story-tag" style="background:#a46a3f;">The Adventure</span>
+            <h3>“The mountains made me feel alive.”</h3>
+            <p>Walking through the Himalayas wasn’t just a trek — it was a journey within.</p>
+            <div class="location"><i class="fa-solid fa-location-dot"></i> Annapurna Region</div>
+        </div>
+    </div>
+
+    <div class="story-card">
+        <img src="images/bandipur cultural escape.jpg">
+        <div class="story-content">
+            <span class="story-tag">The Moments</span>
+            <h3>“Simple life, unforgettable memories.”</h3>
+            <p>Slow mornings, village walks, and moments that stay forever.</p>
+            <div class="location"><i class="fa-solid fa-location-dot"></i> Bandipur</div>
+        </div>
+    </div>
+
+    <div class="story-card">
+        <img src="images/chitwan jungle experience.jpg">
+        <div class="story-content">
+            <span class="story-tag" style="background:#a46a3f;">The Wild</span>
+            <h3>“Nature felt closer than ever.”</h3>
+            <p>From jungle safaris to local guides, every moment felt raw and real.</p>
+            <div class="location"><i class="fa-solid fa-location-dot"></i> Chitwan</div>
+        </div>
+    </div>
+
+</div>
 
     <div class="story-grid">
         <div class="story-card">

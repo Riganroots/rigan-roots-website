@@ -287,19 +287,23 @@ a{
     overflow:hidden;
     text-align:left;
     box-shadow:0 10px 30px rgba(0,0,0,.08);
+    transition:0.3s;
+}
+
+.story-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
 }
 
 .story-card img{
     width:100%;
-    height:170px;
+    height:200px;
     object-fit:cover;
-    transition: 0.4s;
+    transition:0.4s;
 }
 
-.story-card:hover img {
-    transform: scale(1.05);
-}
-}
+.story-card:hover img{
+    transform:scale(1.05);
 }
 
 .story-content{
@@ -490,8 +494,6 @@ a{
     .exp-grid,
     .footer-grid{
         grid-template-columns:1fr;
-        padding-left:25px;
-        padding-right:25px;
     }
 
     .feature{
@@ -521,7 +523,7 @@ a{
 
 <nav class="navbar">
     <a href="index.html" class="logo">
-        <div class="logo-box"><></i></div>
+        <div class="logo-box"><i class="fa-solid fa-mountain-sun"></i></div>
         <div class="logo-text">
             <strong>Rigan</strong>
             <span>Roots & Routes</span>
@@ -558,43 +560,15 @@ a{
 
     <div class="slider-wrap">
         <div class="slider">
-            <div class="slide-card">
-                <img src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg">
-                <p>Phewa Lake, Pokhara</p>
-            </div>
-            <div class="slide-card">
-                <img src="https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg">
-                <p>Adventure on the Top</p>
-            </div>
-            <div class="slide-card">
-                <img src="https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg">
-                <p>Festival of  Nepal</p>
-            </div>
-            <div class="slide-card">
-                <img src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg">
-                <p>Taste of Nepal</p>
-            </div>
-            <div class="slide-card">
-                <img src="https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg">
-                <p>Heritage Sites </p>
-            </div>
-            <div class="slide-card">
-                <img src="https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg">
-                <p>Everest Region</p>
-            </div>
-
-            <div class="slide-card">
-                <img src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg">
-                <p>Phewa Lake, Pokhara</p>
-            </div>
-            <div class="slide-card">
-                <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=600&q=80">
-                <p>Boudhanath, Kathmandu</p>
-            </div>
-            <div class="slide-card">
-                <img src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg">
-                <p>Village Life, Nepal</p>
-            </div>
+            <div class="slide-card"><img src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"><p>Phewa Lake, Pokhara</p></div>
+            <div class="slide-card"><img src="https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"><p>Adventure on the Top</p></div>
+            <div class="slide-card"><img src="https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"><p>Festival of Nepal</p></div>
+            <div class="slide-card"><img src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"><p>Taste of Nepal</p></div>
+            <div class="slide-card"><img src="https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"><p>Heritage Sites</p></div>
+            <div class="slide-card"><img src="https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"><p>Everest Region</p></div>
+            <div class="slide-card"><img src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"><p>Phewa Lake, Pokhara</p></div>
+            <div class="slide-card"><img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=600&q=80"><p>Boudhanath, Kathmandu</p></div>
+            <div class="slide-card"><img src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"><p>Village Life, Nepal</p></div>
         </div>
     </div>
 </section>
@@ -602,81 +576,28 @@ a{
 <section class="features">
     <div class="feature">
         <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
-        <div>
-            <h3>People First</h3>
-            <p>We connect you with locals who open their homes and hearts to you.</p>
-        </div>
+        <div><h3>People First</h3><p>We connect you with locals who open their homes and hearts to you.</p></div>
     </div>
 
     <div class="feature">
         <div class="feature-icon"><i class="fa-solid fa-mountain"></i></div>
-        <div>
-            <h3>Real Experiences</h3>
-            <p>Not staged. Not scripted. Every experience is authentic and immersive.</p>
-        </div>
+        <div><h3>Real Experiences</h3><p>Not staged. Not scripted. Every experience is authentic and immersive.</p></div>
     </div>
 
     <div class="feature">
         <div class="feature-icon"><i class="fa-solid fa-leaf"></i></div>
-        <div>
-            <h3>Responsible Travel</h3>
-            <p>We support local communities and protect Nepal’s beauty.</p>
-        </div>
+        <div><h3>Responsible Travel</h3><p>We support local communities and protect Nepal’s beauty.</p></div>
     </div>
 
     <div class="feature">
         <div class="feature-icon"><i class="fa-solid fa-shield-heart"></i></div>
-        <div>
-            <h3>Trusted & Safe</h3>
-            <p>Curated hosts, verified experiences, and support for peace of mind.</p>
-        </div>
+        <div><h3>Trusted & Safe</h3><p>Curated hosts, verified experiences, and support for peace of mind.</p></div>
     </div>
 </section>
 
 <section class="stories">
-   <div class="story-grid">
-
-    <div class="story-card">
-        <img src="images/cultural journey.jpg">
-        <div class="story-content">
-            <span class="story-tag">The Connection</span>
-            <h3>“I came as a guest, left as family.”</h3>
-            <p>Sharing meals, laughter, and stories with a local family changed everything.</p>
-            <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu Valley</div>
-        </div>
-    </div>
-
-    <div class="story-card">
-        <img src="images/annapurna north base camp.jpg">
-        <div class="story-content">
-            <span class="story-tag" style="background:#a46a3f;">The Adventure</span>
-            <h3>“The mountains made me feel alive.”</h3>
-            <p>Walking through the Himalayas wasn’t just a trek — it was a journey within.</p>
-            <div class="location"><i class="fa-solid fa-location-dot"></i> Annapurna Region</div>
-        </div>
-    </div>
-
-    <div class="story-card">
-        <img src="images/bandipur cultural escape.jpg">
-        <div class="story-content">
-            <span class="story-tag">The Moments</span>
-            <h3>“Simple life, unforgettable memories.”</h3>
-            <p>Slow mornings, village walks, and moments that stay forever.</p>
-            <div class="location"><i class="fa-solid fa-location-dot"></i> Bandipur</div>
-        </div>
-    </div>
-
-    <div class="story-card">
-        <img src="images/chitwan jungle experience.jpg">
-        <div class="story-content">
-            <span class="story-tag" style="background:#a46a3f;">The Wild</span>
-            <h3>“Nature felt closer than ever.”</h3>
-            <p>From jungle safaris to local guides, every moment felt raw and real.</p>
-            <div class="location"><i class="fa-solid fa-location-dot"></i> Chitwan</div>
-        </div>
-    </div>
-
-</div>
+    <h2 class="section-title">Travel Stories You Can Feel</h2>
+    <p class="section-subtitle">Real journeys. Real people. Real emotions.</p>
 
     <div class="story-grid">
         <div class="story-card">
@@ -740,7 +661,7 @@ a{
             <div class="exp-card-content">
                 <h3>Live Like a Nepali</h3>
                 <p>Stay with a local family in a village and experience daily life up close.</p>
-                <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu, Rolpa, Rara </div>
+                <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu, Rolpa, Rara</div>
             </div>
         </div>
 
@@ -756,7 +677,7 @@ a{
         <div class="exp-card">
             <img src="https://i.postimg.cc/fb0vtZ55/sushil-basnet-MUBA0uo-CYFU-unsplash.jpg">
             <div class="exp-card-content">
-                <h3>Celebrate Dog Festivals</h3>
+                <h3>Celebrate Local Festivals</h3>
                 <p>Be part of vibrant festivals like Dashain, Tihar, and Maghe Sankranti with locals.</p>
                 <div class="location"><i class="fa-solid fa-location-dot"></i> Across Nepal</div>
             </div>

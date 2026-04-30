@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Experience Detail V2 | Rigan Roots & Routes</title>
-  <link rel="stylesheet" href="<a href="experience-detail-v2.html?experience=${item[2]}" class="experience-link-v2">" />
+
+  <!-- CORRECT CSS LINK -->
+  <link rel="stylesheet" href="experience-v2.css" />
 </head>
 
 <body>
@@ -88,16 +90,16 @@ if (!selectedExperience) {
   document.getElementById("detailPriceV2").textContent = selectedExperience.price;
   document.getElementById("detailLocationV2").textContent = selectedExperience.location;
 
-  const highlightsList = document.getElementById("detailHighlightsV2");
-  highlightsList.innerHTML = selectedExperience.highlights.map(item => `<li>${item}</li>`).join("");
+  document.getElementById("detailHighlightsV2").innerHTML =
+    selectedExperience.highlights.map(item => `<li>${item}</li>`).join("");
 
-  const itineraryBox = document.getElementById("detailItineraryV2");
-  itineraryBox.innerHTML = selectedExperience.itinerary.map(day => `
-    <div class="itinerary-day-v2">
-      <h4>${day.day}</h4>
-      <p>${day.text}</p>
-    </div>
-  `).join("");
+  document.getElementById("detailItineraryV2").innerHTML =
+    selectedExperience.itinerary.map(day => `
+      <div class="itinerary-day-v2">
+        <h4>${day.day}</h4>
+        <p>${day.text}</p>
+      </div>
+    `).join("");
 
   const message = encodeURIComponent(
     `Hi Rigan Roots & Routes, I am interested in ${selectedExperience.name}. Please send me details.`

@@ -62,8 +62,7 @@
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const experienceId = params.get("experience");
-
+const experienceId = params.get("id") || params.get("experience");
 let selectedExperience = null;
 
 for (const category in experienceDataV2) {

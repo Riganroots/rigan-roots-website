@@ -63,22 +63,26 @@
 <script src="experience-data-v2.js"></script>
 
 <script>
-const params = new URLSearchParams(window.location.search);
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+  const experienceId = params.get("id") || params.get("experience");
 
-/* ✅ FIX: support BOTH id and experience */
-const experienceId = params.get("id") || params.get("experience");
+  if (typeof experienceDataV2 === "undefined") {
+    document.getElementById("detailTitleV2").textContent = "Data File Not Loaded";
+    document.getElementById("detailSubtitleV2").textContent = "Please check experience-data-v2.js file name and location.";
+    return;
+  }
 
-function getAllExperiencesV2() {
-  return Object.values(experienceDataV2).flatMap(section => section.items);
-}
+  const allExperiences = Object.values(experienceDataV2).flatMap(section => section.items);
+  const selectedExperience = allExperiences.find(item => item.id === experienceId);
 
-const selectedExperience = getAllExperiencesV2().find(item => item.id === experienceId);
+  if (!selectedExperience) {
+    document.getElementById("detailTitleV2").textContent = "Experience Not Found";
+    document.getElementById("detailSubtitleV2").textContent = "Please open this page from the Experiences page.";
+    document.getElementById("detailOverviewV2").textContent = "Missing or wrong experience ID in the URL.";
+    return;
+  }
 
-if (!selectedExperience) {
-  document.getElementById("detailTitleV2").textContent = "Experience Not Found";
-  document.getElementById("detailSubtitleV2").textContent = "Please go back and choose another experience.";
-  document.getElementById("detailOverviewV2").textContent = "This experience link may be incorrect or missing.";
-} else {
   document.title = selectedExperience.name + " | Rigan Roots & Routes";
 
   document.getElementById("detailHeroV2").style.backgroundImage =
@@ -108,7 +112,7 @@ if (!selectedExperience) {
 
   document.getElementById("whatsappBookBtn").href =
     `https://wa.me/9779843322695?text=${message}`;
-}
+});
 </script>
 
 </body>

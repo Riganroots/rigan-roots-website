@@ -60,59 +60,81 @@
   </div>
 </section>
 
-<script src="experience-data-v2.js"></script>
-
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   const params = new URLSearchParams(window.location.search);
   const experienceId = params.get("id") || params.get("experience");
 
-  if (typeof experienceDataV2 === "undefined") {
-    document.getElementById("detailTitleV2").textContent = "Data File Not Loaded";
-    document.getElementById("detailSubtitleV2").textContent = "Check that experience-data-v2.js is in the same folder.";
-    return;
+  const title = document.getElementById("detailTitleV2");
+  const subtitle = document.getElementById("detailSubtitleV2");
+  const overview = document.getElementById("detailOverviewV2");
+
+  try {
+    const response = await fetch("experience-data-v2.js");
+
+    if (!response.ok) {
+      throw new Error("experience-data-v2.js not found");
+    }
+
+    const jsText = await response.text();
+
+    const experienceDataV2 = new Function(
+      jsText + "\nreturn experienceDataV2;"
+    )();
+
+    const allExperiences = Object.values(experienceDataV2).flatMap(section => section.items);
+    const selectedExperience = allExperiences.find(item => item.id === experienceId);
+
+    if (!experienceId) {
+      title.textContent = "No Experience Selected";
+      subtitle.textContent = "Please open this page from the Experiences page.";
+      overview.textContent = "Missing ID in URL. Example: experience-detail-v2.html?id=live-like-a-nepali";
+      return;
+    }
+
+    if (!selectedExperience) {
+      title.textContent = "Experience Not Found";
+      subtitle.textContent = "Wrong experience ID: " + experienceId;
+      overview.textContent = "Please check that this ID exists inside experience-data-v2.js.";
+      return;
+    }
+
+    document.title = selectedExperience.name + " | Rigan Roots & Routes";
+
+    document.getElementById("detailHeroV2").style.backgroundImage =
+      `linear-gradient(rgba(10, 94, 59, 0.55), rgba(6, 74, 45, 0.78)), url('${selectedExperience.image || "images/experience-feature.jpg"}')`;
+
+    title.textContent = selectedExperience.name;
+    subtitle.textContent = selectedExperience.subtitle;
+    overview.textContent = selectedExperience.overview;
+
+    document.getElementById("detailDurationV2").textContent = selectedExperience.duration;
+    document.getElementById("detailPriceV2").textContent = selectedExperience.price;
+    document.getElementById("detailLocationV2").textContent = selectedExperience.location;
+
+    document.getElementById("detailHighlightsV2").innerHTML =
+      selectedExperience.highlights.map(item => `<li>${item}</li>`).join("");
+
+    document.getElementById("detailItineraryV2").innerHTML =
+      selectedExperience.itinerary.map(day => `
+        <div class="itinerary-day-v2">
+          <h4>${day.day}</h4>
+          <p>${day.text}</p>
+        </div>
+      `).join("");
+
+    const message = encodeURIComponent(
+      `Hi Rigan Roots & Routes, I am interested in ${selectedExperience.name}. Please send me details.`
+    );
+
+    document.getElementById("whatsappBookBtn").href =
+      `https://wa.me/9779843322695?text=${message}`;
+
+  } catch (error) {
+    title.textContent = "Data File Error";
+    subtitle.textContent = "experience-data-v2.js is not loading correctly.";
+    overview.textContent = error.message;
   }
-
-  const allExperiences = Object.values(experienceDataV2).flatMap(section => section.items);
-  const selectedExperience = allExperiences.find(item => item.id === experienceId);
-
-  if (!selectedExperience) {
-    document.getElementById("detailTitleV2").textContent = "Experience Not Found";
-    document.getElementById("detailSubtitleV2").textContent = "Missing or wrong experience ID in the URL.";
-    document.getElementById("detailOverviewV2").textContent =
-      "Open this page like: experience-detail-v2.html?id=live-like-a-nepali";
-    return;
-  }
-
-  document.title = selectedExperience.name + " | Rigan Roots & Routes";
-
-  document.getElementById("detailHeroV2").style.backgroundImage =
-    `linear-gradient(rgba(10, 94, 59, 0.55), rgba(6, 74, 45, 0.78)), url('${selectedExperience.image || "images/experience-feature.jpg"}')`;
-
-  document.getElementById("detailTitleV2").textContent = selectedExperience.name;
-  document.getElementById("detailSubtitleV2").textContent = selectedExperience.subtitle;
-  document.getElementById("detailOverviewV2").textContent = selectedExperience.overview;
-  document.getElementById("detailDurationV2").textContent = selectedExperience.duration;
-  document.getElementById("detailPriceV2").textContent = selectedExperience.price;
-  document.getElementById("detailLocationV2").textContent = selectedExperience.location;
-
-  document.getElementById("detailHighlightsV2").innerHTML =
-    selectedExperience.highlights.map(item => `<li>${item}</li>`).join("");
-
-  document.getElementById("detailItineraryV2").innerHTML =
-    selectedExperience.itinerary.map(day => `
-      <div class="itinerary-day-v2">
-        <h4>${day.day}</h4>
-        <p>${day.text}</p>
-      </div>
-    `).join("");
-
-  const message = encodeURIComponent(
-    `Hi Rigan Roots & Routes, I am interested in ${selectedExperience.name}. Please send me details.`
-  );
-
-  document.getElementById("whatsappBookBtn").href =
-    `https://wa.me/9779843322695?text=${message}`;
 });
 </script>
 

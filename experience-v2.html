@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Experiences | Rigan Roots & Routes</title>
+<link rel="stylesheet" href="experience-v2.css" />
+</head>
+
+<body>
+
+<section class="experience-page">
+  <div class="page-head">
+    <h1>Choose Your Nepal Experience</h1>
+    <p>Real homes, real food, real stories — explore Nepal your way.</p>
+  </div>
+
+  <div id="experienceList"></div>
+</section>
+
+<script src="experience-data-v2.js"></script>
+
+<script>
+const container = document.getElementById("experienceList");
+
+Object.values(window.experienceDataV2).forEach(category => {
+  const section = document.createElement("div");
+  section.className = "exp-section";
+
+  section.innerHTML = `
+    <h2>${category.title}</h2>
+    <div class="exp-row">
+      ${category.items.map(item => `
+        <a class="exp-card" href="experience-detail-v2.html?experience=${item.id}">
+          <img src="${item.image}" alt="${item.name}">
+          <div class="badge">${item.badge || "Experience"}</div>
+          <div class="exp-info">
+            <h3>${item.name}</h3>
+            <p>${item.subtitle}</p>
+            <div class="exp-meta">
+              <span>${item.duration}</span>
+              <span>${item.price}</span>
+            </div>
+          </div>
+        </a>
+      `).join("")}
+    </div>
+  `;
+
+  container.appendChild(section);
+});
+</script>
+
+</body>
+</html>

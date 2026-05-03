@@ -64,7 +64,9 @@
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const experienceId = params.get("id");
+
+/* ✅ FIX: support BOTH id and experience */
+const experienceId = params.get("id") || params.get("experience");
 
 function getAllExperiencesV2() {
   return Object.values(experienceDataV2).flatMap(section => section.items);

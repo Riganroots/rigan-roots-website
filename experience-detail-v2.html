@@ -11,6 +11,7 @@
 
 <section class="detail-page-v2">
   <div class="detail-hero-v2" id="detailHeroV2">
+    <div class="detail-hero-overlay-v2"></div>
     <div class="detail-hero-content-v2">
       <p class="detail-label-v2">Rigan Experience</p>
       <h1 id="detailTitleV2">Loading...</h1>
@@ -45,8 +46,12 @@
           <p><strong>Price:</strong> <span id="detailPriceV2"></span></p>
           <p><strong>Location:</strong> <span id="detailLocationV2"></span></p>
 
-          <a href="#" class="book-btn-v2" id="whatsappBookBtn">
+          <a href="#" class="book-btn-v2" id="whatsappBookBtn" target="_blank">
             Book This Experience
+          </a>
+
+          <a href="experience-v2.html" class="book-btn-v2" style="margin-top:12px;background:#333;">
+            Back to Experiences
           </a>
         </div>
       </aside>
@@ -59,21 +64,18 @@
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const experienceId = params.get("experience");
+const experienceId = params.get("id") || params.get("experience");
 
-let selectedExperience = null;
-
-for (const category in experienceDataV2) {
-  const found = experienceDataV2[category].items.find(item => item.id === experienceId);
-  if (found) {
-    selectedExperience = found;
-    break;
-  }
+function getAllExperiencesV2() {
+  return Object.values(experienceDataV2).flatMap(section => section.items);
 }
+
+const selectedExperience = getAllExperiencesV2().find(item => item.id === experienceId);
 
 if (!selectedExperience) {
   document.getElementById("detailTitleV2").textContent = "Experience Not Found";
   document.getElementById("detailSubtitleV2").textContent = "Please go back and choose another experience.";
+  document.getElementById("detailOverviewV2").textContent = "This experience link may be incorrect or missing.";
 } else {
   document.title = selectedExperience.name + " | Rigan Roots & Routes";
 

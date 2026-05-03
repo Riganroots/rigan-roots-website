@@ -60,7 +60,6 @@
   </div>
 </section>
 
-<script src="experience-data-v2.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {

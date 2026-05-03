@@ -4,25 +4,117 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Experience Detail | Rigan Roots & Routes</title>
+
   <link rel="stylesheet" href="experience-v2.css" />
+
+  <style>
+    body{
+      font-family: 'Inter', sans-serif;
+      background:#f7f7f7;
+      margin:0;
+    }
+
+    .detail-hero-v2{
+      height:420px;
+      display:flex;
+      align-items:flex-end;
+      padding:50px;
+      color:white;
+      background-size:cover;
+      background-position:center;
+      position:relative;
+    }
+
+    .detail-hero-overlay-v2{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.7), rgba(0,0,0,.2));
+    }
+
+    .detail-hero-content-v2{
+      position:relative;
+      z-index:2;
+    }
+
+    .detail-container-v2{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 20px;
+    }
+
+    .detail-grid-v2{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:30px;
+    }
+
+    .detail-section-v2{
+      background:white;
+      padding:25px;
+      border-radius:20px;
+      margin-bottom:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,.05);
+    }
+
+    .detail-section-v2 h2{
+      margin-bottom:15px;
+    }
+
+    .booking-card-v2{
+      background:white;
+      padding:25px;
+      border-radius:20px;
+      box-shadow:0 10px 25px rgba(0,0,0,.08);
+      position:sticky;
+      top:20px;
+    }
+
+    .book-btn-v2{
+      display:block;
+      background:#16a34a;
+      color:white;
+      text-align:center;
+      padding:14px;
+      border-radius:10px;
+      margin-top:15px;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    .back-btn{
+      display:inline-block;
+      margin-top:12px;
+      background:#333;
+    }
+
+    @media(max-width:900px){
+      .detail-grid-v2{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <section class="detail-page-v2">
+
   <div class="detail-hero-v2" id="detailHeroV2">
     <div class="detail-hero-overlay-v2"></div>
     <div class="detail-hero-content-v2">
-      <p class="detail-label-v2">Rigan Experience</p>
+      <p>Rigan Experience</p>
       <h1 id="detailTitleV2">Loading...</h1>
       <p id="detailSubtitleV2">Please wait...</p>
     </div>
   </div>
 
   <div class="detail-container-v2">
+
     <div class="detail-grid-v2">
 
-      <div class="detail-main-v2">
+      <!-- LEFT -->
+      <div>
+
         <div class="detail-section-v2">
           <h2>Overview</h2>
           <p id="detailOverviewV2"></p>
@@ -37,104 +129,103 @@
           <h2>Sample Itinerary</h2>
           <div id="detailItineraryV2"></div>
         </div>
+
       </div>
 
-      <aside class="detail-sidebar-v2">
+      <!-- RIGHT -->
+      <aside>
         <div class="booking-card-v2">
           <h3>Quick Info</h3>
+
           <p><strong>Duration:</strong> <span id="detailDurationV2"></span></p>
           <p><strong>Price:</strong> <span id="detailPriceV2"></span></p>
           <p><strong>Location:</strong> <span id="detailLocationV2"></span></p>
 
-          <a href="#" class="book-btn-v2" id="whatsappBookBtn" target="_blank">
+          <a href="#" id="whatsappBookBtn" class="book-btn-v2" target="_blank">
             Book This Experience
           </a>
 
-          <a href="experience-v2.html" class="book-btn-v2" style="margin-top:12px;background:#333;">
+          <a href="experience-v2.html" class="book-btn-v2 back-btn">
             Back to Experiences
           </a>
         </div>
       </aside>
 
     </div>
+
   </div>
+
 </section>
 
+<!-- DATA FILE -->
+<script src="experience-data-v2.js"></script>
+
 <script>
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function(){
+
   const params = new URLSearchParams(window.location.search);
-  const experienceId = params.get("id") || params.get("experience");
 
-  const title = document.getElementById("detailTitleV2");
-  const subtitle = document.getElementById("detailSubtitleV2");
-  const overview = document.getElementById("detailOverviewV2");
+  // ✅ support both ?experience= and ?id=
+  const experienceId = params.get("experience") || params.get("id");
 
-  try {
-    const response = await fetch("experience-data-v2.js");
-
-    if (!response.ok) {
-      throw new Error("experience-data-v2.js not found");
-    }
-
-    const jsText = await response.text();
-
-    const experienceDataV2 = new Function(
-      jsText + "\nreturn experienceDataV2;"
-    )();
-
-    const allExperiences = Object.values(experienceDataV2).flatMap(section => section.items);
-    const selectedExperience = allExperiences.find(item => item.id === experienceId);
-
-    if (!experienceId) {
-      title.textContent = "No Experience Selected";
-      subtitle.textContent = "Please open this page from the Experiences page.";
-      overview.textContent = "Missing ID in URL. Example: experience-detail-v2.html?id=live-like-a-nepali";
-      return;
-    }
-
-    if (!selectedExperience) {
-      title.textContent = "Experience Not Found";
-      subtitle.textContent = "Wrong experience ID: " + experienceId;
-      overview.textContent = "Please check that this ID exists inside experience-data-v2.js.";
-      return;
-    }
-
-    document.title = selectedExperience.name + " | Rigan Roots & Routes";
-
-    document.getElementById("detailHeroV2").style.backgroundImage =
-      `linear-gradient(rgba(10, 94, 59, 0.55), rgba(6, 74, 45, 0.78)), url('${selectedExperience.image || "images/experience-feature.jpg"}')`;
-
-    title.textContent = selectedExperience.name;
-    subtitle.textContent = selectedExperience.subtitle;
-    overview.textContent = selectedExperience.overview;
-
-    document.getElementById("detailDurationV2").textContent = selectedExperience.duration;
-    document.getElementById("detailPriceV2").textContent = selectedExperience.price;
-    document.getElementById("detailLocationV2").textContent = selectedExperience.location;
-
-    document.getElementById("detailHighlightsV2").innerHTML =
-      selectedExperience.highlights.map(item => `<li>${item}</li>`).join("");
-
-    document.getElementById("detailItineraryV2").innerHTML =
-      selectedExperience.itinerary.map(day => `
-        <div class="itinerary-day-v2">
-          <h4>${day.day}</h4>
-          <p>${day.text}</p>
-        </div>
-      `).join("");
-
-    const message = encodeURIComponent(
-      `Hi Rigan Roots & Routes, I am interested in ${selectedExperience.name}. Please send me details.`
-    );
-
-    document.getElementById("whatsappBookBtn").href =
-      `https://wa.me/9779843322695?text=${message}`;
-
-  } catch (error) {
-    title.textContent = "Data File Error";
-    subtitle.textContent = "experience-data-v2.js is not loading correctly.";
-    overview.textContent = error.message;
+  // ❌ DATA NOT LOADED
+  if(typeof experienceDataV2 === "undefined"){
+    document.getElementById("detailTitleV2").textContent = "Data Not Loaded";
+    document.getElementById("detailSubtitleV2").textContent = "Check experience-data-v2.js file.";
+    return;
   }
+
+  // GET ALL DATA
+  const allExperiences = Object.values(experienceDataV2)
+    .flatMap(section => section.items);
+
+  const selected = allExperiences.find(item => item.id === experienceId);
+
+  // ❌ NOT FOUND
+  if(!selected){
+    document.getElementById("detailTitleV2").textContent = "Experience Not Found";
+    document.getElementById("detailSubtitleV2").textContent =
+      "Use correct link like ?experience=live-like-a-nepali";
+
+    document.getElementById("detailOverviewV2").textContent =
+      "This page was opened without a valid experience ID.";
+
+    return;
+  }
+
+  // ✅ SET DATA
+  document.title = selected.name + " | Rigan";
+
+  document.getElementById("detailHeroV2").style.backgroundImage =
+    `url('${selected.image}')`;
+
+  document.getElementById("detailTitleV2").textContent = selected.name;
+  document.getElementById("detailSubtitleV2").textContent = selected.subtitle;
+  document.getElementById("detailOverviewV2").textContent = selected.overview;
+
+  document.getElementById("detailDurationV2").textContent = selected.duration;
+  document.getElementById("detailPriceV2").textContent = selected.price;
+  document.getElementById("detailLocationV2").textContent = selected.location;
+
+  document.getElementById("detailHighlightsV2").innerHTML =
+    selected.highlights.map(h => `<li>${h}</li>`).join("");
+
+  document.getElementById("detailItineraryV2").innerHTML =
+    selected.itinerary.map(day => `
+      <div style="margin-bottom:10px;">
+        <strong>${day.day}</strong><br>
+        ${day.text}
+      </div>
+    `).join("");
+
+  // WhatsApp link
+  const msg = encodeURIComponent(
+    `Hi, I want to book: ${selected.name}`
+  );
+
+  document.getElementById("whatsappBookBtn").href =
+    `https://wa.me/9779843322695?text=${msg}`;
+
 });
 </script>
 

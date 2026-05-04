@@ -11,12 +11,7 @@ window.experienceDataV2 = {
         price: "From $650",
         location: "Nepal",
         style: "Village & Community",
-        season: "Sep – May",
-        groupSize: "2–6 Guests",
-        difficulty: "Easy",
-        start: "Kathmandu",
-        ends: "Kathmandu",
-        altitude: "N/A",
+       groupSize: "2–6 Guests or Any group Size",
         image: "https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg",
         badge: "Top Seller",
 
@@ -183,58 +178,37 @@ window.experienceDataV2 = {
     title: "Festival of Nepal 🎉",
     items: [
       {
-        id: "festival-experience",
-        name: "Festival of Nepal",
-        subtitle: "Celebrate Nepal’s festivals with local families.",
-        overview: "Join real festivals like Dashain & Tihar with locals.",
-        duration: "Seasonal",
-        price: "Custom",
-        location: "Across Nepal",
-        style: "Festival & Culture",
-        season: "Festival Dates",
-        groupSize: "2–12 Guests",
-        difficulty: "Easy",
-        start: "Kathmandu",
-        ends: "Kathmandu",
-        altitude: "Varies",
-        image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
-        badge: "Seasonal",
+        {
+  id: "dashain-experience",
+  name: "Dashain Experience",
+  subtitle: "Celebrate Nepal’s biggest festival with a local family.",
+  overview: "Join tika, blessings, food, and family rituals.",
+  duration: "3 Days",
+  price: "Custom",
+  location: "Nepal",
+  style: "Festival",
+  season: "Dashain Only",
+  groupSize: "2–6 Guests",
+  difficulty: "Easy",
+  start: "Kathmandu",
+  ends: "Kathmandu",
+  altitude: "N/A",
+  image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
 
-        highlights: [
-          "Dashain rituals",
-          "Tihar lights",
-          "Family celebrations",
-          "Festival food"
-        ],
+  highlights: ["Tika ceremony", "Family rituals", "Festival meals"],
 
-        itinerary: [
-          { day: "Day 01", text: "Introduction to festival traditions." },
-          { day: "Day 02", text: "Join celebration and rituals." }
-        ],
+  itinerary: [
+    { day: "Day 01", text: "Arrive and prepare for festival." },
+    { day: "Day 02", text: "Receive tika and blessings." }
+  ],
 
-        includes: [
-          "Festival access",
-          "Local family experience",
-          "Guide",
-          "Meals"
-        ],
+  includes: ["Local stay", "Meals", "Guide"],
+  excludes: ["Flights", "Insurance"],
 
-        excludes: [
-          "Flights",
-          "Insurance",
-          "Personal expenses"
-        ],
+  packing: ["Traditional clothes", "Camera"],
 
-        packing: [
-          "Traditional wear (optional)",
-          "Camera",
-          "Comfortable clothes"
-        ],
-
-        goodToKnow: [
-          "Dates change yearly",
-          "Cultural sensitivity required"
-        ]
+  goodToKnow: ["Dates change yearly"]
+}
       }
     ]
   },
@@ -296,7 +270,67 @@ window.experienceDataV2 = {
           "Moderate fitness required",
           "Altitude awareness needed"
         ]
+        {
+  id: "momo-making",
+  name: "Momo Making Experience",
+  subtitle: "Learn Nepal’s favorite dish with locals.",
+  overview: "Hands-on cooking session with local family.",
+  duration: "1 Day",
+  price: "From $50",
+  location: "Kathmandu",
+  style: "Food",
+  season: "All Year",
+  groupSize: "2–10 Guests",
+  difficulty: "Easy",
+  start: "Kathmandu",
+  ends: "Kathmandu",
+  altitude: "1,400m",
+  image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
+
+  highlights: ["Make momo", "Local kitchen", "Eat together"],
+
+  itinerary: [
+    { day: "Day 01", text: "Cooking + eating session." }
+  ],
+
+  includes: ["Ingredients", "Guide"],
+  excludes: ["Transport"],
+
+  packing: ["Casual wear"],
+
+  goodToKnow: ["Short experience"]
+}
       }
     ]
   }
+  {
+  id: "everest-view-trek",
+  name: "Everest View Trek",
+  subtitle: "See Everest without going to base camp.",
+  overview: "Short trek with iconic Everest views.",
+  duration: "7 Days",
+  price: "From $750",
+  location: "Everest Region",
+  style: "Trekking",
+  season: "Mar–May / Sep–Nov",
+  groupSize: "2–8 Guests",
+  difficulty: "Moderate",
+  start: "Kathmandu",
+  ends: "Kathmandu",
+  altitude: "3,880m",
+  image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+
+  highlights: ["Everest view", "Sherpa villages"],
+
+  itinerary: [
+    { day: "Day 01", text: "Fly to Lukla." }
+  ],
+
+  includes: ["Guide", "Permits"],
+  excludes: ["Flights"],
+
+  packing: ["Warm clothes"],
+
+  goodToKnow: ["Altitude matters"]
+}
 };

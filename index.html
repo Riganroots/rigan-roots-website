@@ -38,90 +38,42 @@ a{text-decoration:none}
     left:0;
     width:100%;
     z-index:999;
-    padding:22px 50px;
+    padding:14px 55px;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    background:rgba(7,22,17,.42);
+    backdrop-filter:blur(8px);
 }
 
 .logo{
     display:flex;
     align-items:center;
-    gap:12px;
-    color:white;
-    font-weight:700;
 }
 
-.logo-box{
-    width:48px;
-    height:48px;
-    background:var(--green);
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-}
-
-.logo-text strong{
-    display:block;
-    font-size:22px;
-    line-height:1;
-}
-
-.logo-text span{
-    font-family:'Playfair Display',serif;
-    font-size:16px;
+.logo img{
+    height:66px;
+    width:auto;
+    object-fit:contain;
+    border-radius:8px;
 }
 
 .nav-links{
     display:flex;
     align-items:center;
-    gap:28px;
+    gap:34px;
 }
 
 .nav-links a{
-    color:white;
+    color:#ffffff !important;
     font-weight:700;
-    font-size:14px;
+    font-size:15px;
+    letter-spacing:.2px;
+    transition:.25s ease;
 }
 
 .nav-links a:hover{
-    color:var(--olive);
-}
-
-.nav-item{
-    position:relative;
-}
-
-.dropdown{
-    position:absolute;
-    top:100%;
-    left:0;
-    min-width:220px;
-    background:#faf7ef;
-    border-radius:12px;
-    padding:8px 0;
-    display:none;
-    border:1px solid rgba(23,77,47,.12);
-}
-
-.dropdown a{
-    display:block;
-    color:var(--green) !important;
-    padding:12px 18px;
-    font-size:13px;
-    font-weight:700;
-    white-space:nowrap;
-}
-
-.dropdown a:hover{
-    background:#efe6d6;
-    color:var(--brown) !important;
-}
-
-.nav-item:hover .dropdown{
-    display:block;
+    color:var(--olive) !important;
 }
 
 /* HERO */
@@ -134,7 +86,7 @@ a{text-decoration:none}
     background-position:center;
     display:flex;
     align-items:center;
-    padding:120px 70px 60px;
+    padding:140px 70px 60px;
     color:white;
 }
 
@@ -459,23 +411,27 @@ a{text-decoration:none}
 /* RESPONSIVE */
 @media(max-width:1100px){
     .navbar{
-        padding:18px 24px;
+        padding:16px 24px;
         flex-wrap:wrap;
+        gap:16px;
     }
 
     .nav-links{
         width:100%;
         justify-content:center;
         gap:22px;
-        margin-top:12px;
     }
 }
 
 @media(max-width:900px){
     .nav-links{display:none}
 
+    .logo img{
+        height:54px;
+    }
+
     .hero{
-        padding:120px 25px 60px;
+        padding:130px 25px 60px;
     }
 
     .features,
@@ -510,33 +466,14 @@ a{text-decoration:none}
 
 <nav class="navbar">
     <a href="index.html" class="logo">
-        <div class="logo-box"><i class="fa-solid fa-mountain-sun"></i></div>
-        <div class="logo-text">
-            <strong>Rigan</strong>
-            <span>Roots & Routes</span>
-        </div>
+        <img src="images/logo.jpg" alt="Rigan Roots & Routes Logo">
     </a>
 
     <div class="nav-links">
         <a href="index.html">Home</a>
-
-        <div class="nav-item">
-            <a href="experience-v2.html">Experiences ▾</a>
-            
-            </div>
-        </div>
-
-        <div class="nav-item">
-            <a href="global-travel.html">Global Travel ▾</a>
-           
-            </div>
-        </div>
-
-        <div class="nav-item">
-            <a href="marketplace.html">Marketplace ▾</a>
-            
-        </div>
-
+        <a href="experience-v2.html">Experiences</a>
+        <a href="global-travel.html">Global Travel</a>
+        <a href="marketplace.html">Marketplace</a>
         <a href="work-with-us.html">Work With Us</a>
         <a href="contact.html">Contact</a>
     </div>

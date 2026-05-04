@@ -9,327 +9,402 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
-  font-family:"Inter",sans-serif;
-  background:
-    linear-gradient(135deg,#174d2f,#2f6b3f,#9b6238,#f7f0e4);
-  background-size:300% 300%;
-  animation:bgMove 12s ease infinite;
-  color:#101815;
+  font-family:Inter,sans-serif;
+  background:#f7f0e4;
+  color:#132018;
 }
-
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-.wrapper{
+.page{
   min-height:100vh;
-  padding:30px;
+  padding:28px;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(159,186,107,.35), transparent 28%),
+    radial-gradient(circle at 85% 20%, rgba(164,106,63,.25), transparent 30%),
+    #f7f0e4;
 }
-
-/* NAV */
-.nav{
-  max-width:1300px;
+.top-nav{
+  max-width:1200px;
   margin:auto;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:16px 22px;
-  border-radius:26px;
-  background:rgba(255,255,255,.25);
-  backdrop-filter:blur(12px);
+  padding:16px 0;
 }
-
-.nav a{
+.top-nav a{
   text-decoration:none;
-  font-weight:800;
+  font-weight:900;
   color:#174d2f;
 }
-
-.plan-btn{
+.plan{
   background:#174d2f;
-  color:white;
-  padding:12px 22px;
+  color:white!important;
+  padding:13px 22px;
   border-radius:999px;
 }
-
-/* MAIN */
-.shell{
-  max-width:1300px;
-  margin:30px auto;
-  display:grid;
-  grid-template-columns:320px 1fr;
-  gap:26px;
+.hero{
+  max-width:900px;
+  margin:55px auto 30px;
+  text-align:center;
 }
-
-/* LEFT */
-.sidebar{
-  background:rgba(255,255,255,.35);
-  backdrop-filter:blur(18px);
-  border-radius:30px;
-  padding:26px;
-}
-
-.label{
-  font-size:13px;
+.hero span{
   letter-spacing:4px;
   text-transform:uppercase;
-  color:#174d2f;
+  color:#9b6238;
   font-weight:900;
-  margin-bottom:25px;
+  font-size:12px;
+}
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(42px,7vw,78px);
+  line-height:1;
+  margin:16px 0;
+  color:#174d2f;
+}
+.hero p{
+  color:#53645a;
+  font-size:18px;
+  line-height:1.7;
 }
 
-.tab{
-  width:100%;
-  border:none;
-  background:transparent;
-  padding:16px;
-  margin-bottom:10px;
-  border-radius:16px;
-  text-align:left;
-  font-weight:800;
-  cursor:pointer;
-  transition:.3s;
+/* MANDALA */
+.mandala-wrap{
+  max-width:900px;
+  height:520px;
+  margin:30px auto 55px;
+  position:relative;
 }
-
-.tab:hover,
-.tab.active{
-  background:#174d2f;
+.center-orb{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  background:
+    linear-gradient(135deg,#174d2f,#2f6b3f);
   color:white;
-  transform:translateX(6px);
-}
-
-/* RIGHT */
-.content{
-  background:#fffaf2;
-  border-radius:30px;
-  padding:30px;
-  display:grid;
-  grid-template-columns:1.2fr 380px;
-  gap:26px;
-}
-
-.title{
-  font-size:13px;
-  letter-spacing:4px;
-  font-weight:900;
-  color:#888;
-  margin-bottom:25px;
-}
-
-.title span{
-  color:#174d2f;
-}
-
-/* OPTIONS */
-.grid{
-  display:grid;
-  gap:18px;
-}
-
-.option{
-  display:grid;
-  grid-template-columns:80px 1fr auto;
-  gap:16px;
+  display:flex;
+  flex-direction:column;
   align-items:center;
-  padding:14px;
-  border-radius:20px;
-  background:white;
-  text-decoration:none;
-  color:#101815;
-  transition:.3s;
+  justify-content:center;
+  text-align:center;
+  box-shadow:0 30px 70px rgba(23,77,47,.28);
+  z-index:2;
 }
-
-.option:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
+.center-orb h2{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
 }
-
-.option img{
-  width:80px;
-  height:70px;
-  object-fit:cover;
-  border-radius:14px;
+.center-orb p{
+  font-size:13px;
+  max-width:140px;
+  opacity:.85;
 }
-
-.days{
-  background:#174d2f;
+.ring{
+  position:absolute;
+  inset:60px 230px;
+  border:1px dashed rgba(23,77,47,.22);
+  border-radius:50%;
+}
+.cat{
+  position:absolute;
+  width:135px;
+  height:135px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(12px);
+  box-shadow:0 18px 40px rgba(0,0,0,.09);
+  color:#174d2f;
+  font-weight:900;
+  cursor:pointer;
+  transition:.35s;
+}
+.cat:hover,
+.cat.active{
+  background:#9fba6b;
   color:white;
+  transform:scale(1.08);
+}
+.cat small{
+  display:block;
+  font-size:22px;
+  margin-bottom:5px;
+}
+.c1{left:50%;top:0;transform:translateX(-50%)}
+.c2{right:110px;top:75px}
+.c3{right:55px;top:250px}
+.c4{right:190px;bottom:0}
+.c5{left:50%;bottom:-18px;transform:translateX(-50%)}
+.c6{left:190px;bottom:0}
+.c7{left:55px;top:250px}
+.c8{left:110px;top:75px}
+
+/* CARDS */
+.result-section{
+  max-width:1200px;
+  margin:auto;
+}
+.result-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:24px;
+}
+.result-title h2{
+  font-family:"Playfair Display",serif;
+  font-size:38px;
+  color:#174d2f;
+}
+.result-title p{
+  color:#6b746d;
+}
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.card{
+  background:white;
+  border-radius:28px;
+  overflow:hidden;
+  text-decoration:none;
+  color:#132018;
+  box-shadow:0 18px 45px rgba(0,0,0,.08);
+  transition:.35s;
+}
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 26px 60px rgba(23,77,47,.15);
+}
+.card img{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+}
+.card-body{
+  padding:22px;
+}
+.card-body h3{
+  font-size:22px;
+  margin-bottom:8px;
+}
+.card-body p{
+  color:#66746b;
+  line-height:1.6;
+  font-size:14px;
+}
+.meta{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+.meta span{
+  background:#edf5eb;
+  color:#174d2f;
   padding:7px 12px;
   border-radius:999px;
   font-size:12px;
   font-weight:900;
 }
-
-/* PREVIEW */
-.preview{
-  position:relative;
-  border-radius:26px;
-  overflow:hidden;
-  min-height:500px;
-}
-
-.preview img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
-}
-
-.preview-content{
-  position:absolute;
-  bottom:0;
-  padding:26px;
+.cta{
+  max-width:1200px;
+  margin:60px auto 20px;
+  background:#174d2f;
   color:white;
+  border-radius:32px;
+  padding:34px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-
-.preview h2{
+.cta h2{
   font-family:"Playfair Display",serif;
-  font-size:36px;
+  font-size:34px;
 }
-
-.preview p{
-  margin-top:10px;
-  font-size:14px;
-}
-
-.preview a{
-  display:inline-block;
-  margin-top:16px;
+.cta a{
   background:white;
   color:#174d2f;
-  padding:12px 20px;
+  padding:14px 24px;
   border-radius:999px;
   text-decoration:none;
   font-weight:900;
 }
 
 @media(max-width:900px){
-  .shell,.content{
-    grid-template-columns:1fr;
-  }
+  .mandala-wrap{height:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .center-orb,.ring{display:none}
+  .cat{position:static;width:100%;height:95px;border-radius:24px;transform:none!important}
+  .card-grid{grid-template-columns:1fr}
+  .result-title,.cta{flex-direction:column;align-items:flex-start;gap:18px}
 }
 </style>
 </head>
 
 <body>
+<div class="page">
 
-<div class="wrapper">
+  <nav class="top-nav">
+    <a href="index.html">← Back Home</a>
+    <a href="plan.html" class="plan">Plan My Trip</a>
+  </nav>
 
-  <div class="nav">
-    <a href="index.html">← Back</a>
-    <a href="plan.html" class="plan-btn">Plan My Trip</a>
-  </div>
+  <section class="hero">
+    <span>Rigan Roots & Routes</span>
+    <h1>What kind of Nepal do you want to feel?</h1>
+    <p>Choose your travel mood. We’ll guide you into homes, kitchens, mountains, festivals, villages, and stories that feel real.</p>
+  </section>
 
-  <div class="shell">
+  <section class="mandala-wrap">
+    <div class="ring"></div>
 
-    <!-- LEFT -->
-    <div class="sidebar">
-      <div class="label">Choose Your Vibe</div>
-
-      <button class="tab active" data-cat="signature">Signature ⭐</button>
-      <button class="tab" data-cat="village">Village Life</button>
-      <button class="tab" data-cat="food">Taste Nepal</button>
-      <button class="tab" data-cat="festival">Festival 🎉</button>
-      <button class="tab" data-cat="trek">Trekking</button>
+    <div class="center-orb">
+      <h2>Nepal</h2>
+      <p>Not just visit. Feel it.</p>
     </div>
 
-    <!-- RIGHT -->
-    <div class="content">
+    <button class="cat c1 active" data-cat="signature"><small>⭐</small>Signature</button>
+    <button class="cat c2" data-cat="village"><small>🏡</small>Village Life</button>
+    <button class="cat c3" data-cat="food"><small>🍲</small>Taste Nepal</button>
+    <button class="cat c4" data-cat="festival"><small>🎉</small>Festivals</button>
+    <button class="cat c5" data-cat="culture"><small>🛕</small>Culture</button>
+    <button class="cat c6" data-cat="wellness"><small>🧘</small>Wellness</button>
+    <button class="cat c7" data-cat="trek"><small>🏔️</small>Mountains</button>
+    <button class="cat c8" data-cat="adventure"><small>🌊</small>Adventure</button>
+  </section>
 
+  <section class="result-section">
+    <div class="result-title">
       <div>
-        <div class="title">Experience › <span id="catName">Signature</span></div>
-        <div class="grid" id="list"></div>
+        <h2 id="sectionTitle">Signature Experiences</h2>
+        <p id="sectionSub">Our most emotional and meaningful Nepal journeys.</p>
       </div>
-
-      <div class="preview">
-        <img id="pimg" src="">
-        <div class="overlay"></div>
-        <div class="preview-content">
-          <h2 id="ptitle"></h2>
-          <p id="psub"></p>
-          <a id="plink">View →</a>
-        </div>
-      </div>
-
+      <p>Click any card to view details →</p>
     </div>
 
-  </div>
+    <div class="card-grid" id="cards"></div>
+  </section>
+
+  <section class="cta">
+    <div>
+      <h2>Not sure what fits you?</h2>
+      <p>Tell us your travel mood and we’ll design your Nepal experience.</p>
+    </div>
+    <a href="plan.html">Start Planning →</a>
+  </section>
+
 </div>
 
 <script>
-const data={
-  signature:[
-    ["Live Like a Nepali","Stay with locals","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
-    ["Village Immersion","Rural Nepal life","5 Days","village-immersion","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"]
-  ],
-  village:[
-    ["Farm Experience","Farming & food","2 Days","farm","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"]
-  ],
-  food:[
-    ["Taste of Nepal","Cook local food","3 Days","food","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
-  ],
-  festival:[
-    ["Festival Nepal","Dashain & Tihar","Seasonal","fest","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"]
-  ],
-  trek:[
-    ["Annapurna Base Camp","Classic trek","12 Days","abc","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"]
-  ]
+const data = {
+  signature: {
+    title: "Signature Experiences",
+    sub: "Our most emotional and meaningful Nepal journeys.",
+    items: [
+      ["Live Like a Nepali","Stay with locals, eat home-cooked food, and experience everyday life.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
+      ["Village Immersion","Farming, local meals, and community stories in rural Nepal.","5 Days","village-immersion","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Festival of Nepal","Celebrate Dashain, Tihar, and local festivals with families.","Seasonal","festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"]
+    ]
+  },
+  village: {
+    title: "Village & Community Life",
+    sub: "Slow travel built around homes, fields, food, and people.",
+    items: [
+      ["Farm & Harvest Experience","Join locals in the fields and share the harvest meal.","2 Days","farm-harvest-experience","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Digital Detox Village Retreat","Disconnect from screens and reconnect with village rhythm.","5 Days","digital-detox-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Live Like a Nepali","Simple living, deep connection, and local family warmth.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"]
+    ]
+  },
+  food: {
+    title: "Taste of Nepal",
+    sub: "Food experiences inside kitchens, homes, and local markets.",
+    items: [
+      ["Taste of Nepal","Cook with locals and understand Nepal through food.","3 Days","taste-of-nepal","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Momo Making Experience","Learn Nepal’s favorite food hands-on with a family.","1 Day","momo-making","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Kathmandu Food Walk","Taste local snacks, tea, sweets, and street food.","Half Day","kathmandu-food-walk","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
+    ]
+  },
+  festival: {
+    title: "Festival of Nepal",
+    sub: "Seasonal journeys filled with rituals, food, light, and family.",
+    items: [
+      ["Festival of Nepal","Join real festival moments with local communities.","Seasonal","festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Dashain with Local Family","Blessings, tika, food, and family rituals.","2 Days","dashain-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Rice Planting Festival","Mud, music, farming, food, and village celebration.","1 Day","rice-planting-festival","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"]
+    ]
+  },
+  culture: {
+    title: "Cultural & Heritage",
+    sub: "Temples, courtyards, artisans, old towns, and living traditions.",
+    items: [
+      ["Kathmandu Heritage Tour","Explore temples, courtyards, and living history.","2 Days","kathmandu-heritage-tour","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Bhaktapur Living Culture","Old streets, artisans, food, and traditions.","1 Day","bhaktapur-living-culture","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Lumbini Spiritual Journey","Visit the birthplace of Buddha and peaceful sites.","3 Days","lumbini-spiritual-journey","https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80"]
+    ]
+  },
+  wellness: {
+    title: "Spiritual & Wellness",
+    sub: "Quiet retreats for rest, reflection, meditation, and healing.",
+    items: [
+      ["Yoga & Meditation Retreat","Reset your body and mind in peaceful Nepal.","5 Days","yoga-meditation-retreat","https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"],
+      ["Monastery Meditation","Experience silence and spiritual calm.","2 Days","monastery-meditation","https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80"],
+      ["Pokhara Wellness Escape","Lakeside calm, yoga, nature, and soft travel.","4 Days","pokhara-wellness-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
+    ]
+  },
+  trek: {
+    title: "Trek & Mountain Journeys",
+    sub: "Mountain journeys for travelers who want Himalayan emotion.",
+    items: [
+      ["Annapurna Base Camp","Classic Himalayan base camp journey.","12 Days","annapurna-base-camp","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Everest View Trek","See Everest without the full base camp trek.","7 Days","everest-view-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Poon Hill Trek","Short trek with a famous sunrise view.","5 Days","poon-hill","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
+    ]
+  },
+  adventure: {
+    title: "Adventure & Soft Adventure",
+    sub: "Outdoor experiences for thrill, water, sky, and movement.",
+    items: [
+      ["Paragliding in Pokhara","Fly above lake and mountain views.","Half Day","paragliding-pokhara","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["White Water Rafting","Feel Nepal’s river adventure.","1 Day","white-water-rafting","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"],
+      ["Biking Trails Nepal","Ride through villages and landscapes.","2 Days","biking-trails-nepal","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"]
+    ]
+  }
 };
 
-const tabs=document.querySelectorAll(".tab");
-const list=document.getElementById("list");
-
-const pimg=document.getElementById("pimg");
-const ptitle=document.getElementById("ptitle");
-const psub=document.getElementById("psub");
-const plink=document.getElementById("plink");
-const catName=document.getElementById("catName");
+const buttons = document.querySelectorAll(".cat");
+const cards = document.getElementById("cards");
+const sectionTitle = document.getElementById("sectionTitle");
+const sectionSub = document.getElementById("sectionSub");
 
 function render(cat){
-  catName.textContent=cat;
+  sectionTitle.textContent = data[cat].title;
+  sectionSub.textContent = data[cat].sub;
 
-  const items=data[cat];
-  updatePreview(items[0]);
-
-  list.innerHTML=items.map(i=>`
-    <a class="option" href="experience-detail-v2.html?experience=${i[3]}"
-    onmouseenter='updatePreview(${JSON.stringify(i)})'>
-      <img src="${i[4]}">
-      <div>
-        <strong>${i[0]}</strong><br>
-        <small>${i[1]}</small>
+  cards.innerHTML = data[cat].items.map(item => `
+    <a class="card" href="experience-detail-v2.html?experience=${item[3]}">
+      <img src="${item[4]}" alt="${item[0]}">
+      <div class="card-body">
+        <h3>${item[0]}</h3>
+        <p>${item[1]}</p>
+        <div class="meta">
+          <span>${item[2]}</span>
+          <span>View Details</span>
+        </div>
       </div>
-      <span class="days">${i[2]}</span>
     </a>
   `).join("");
 }
 
-function updatePreview(i){
-  pimg.src=i[4];
-  ptitle.textContent=i[0];
-  psub.textContent=i[1];
-  plink.href="experience-detail-v2.html?experience="+i[3];
-}
-
-tabs.forEach(t=>{
-  t.onclick=()=>{
-    tabs.forEach(x=>x.classList.remove("active"));
-    t.classList.add("active");
-    render(t.dataset.cat);
-  }
+buttons.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    buttons.forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    render(btn.dataset.cat);
+  });
 });
 
 render("signature");
 </script>
-
 </body>
 </html>

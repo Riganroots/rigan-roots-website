@@ -97,6 +97,13 @@ body{
   height:520px;
   margin:30px auto 55px;
   position:relative;
+  border-radius:36px;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(247,240,228,.85),rgba(247,240,228,.9)),
+    url("https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg") center/cover no-repeat;
+  box-shadow:0 25px 80px rgba(23,77,47,.12);
+  transition:background .45s ease;
 }
 
 .center-orb{
@@ -149,7 +156,7 @@ body{
   height:135px;
   border:none;
   border-radius:50%;
-  background:rgba(255,255,255,.78);
+  background:rgba(255,255,255,.82);
   backdrop-filter:blur(14px);
   box-shadow:0 18px 40px rgba(0,0,0,.09);
   color:#174d2f;
@@ -311,6 +318,7 @@ body{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:14px;
+    padding:18px;
   }
 
   .center-orb,.ring{
@@ -498,11 +506,23 @@ const data = {
   }
 };
 
+const bgImages = {
+  signature: "https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg",
+  village: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+  food: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
+  festival: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
+  culture: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+  wellness: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+  trek: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+  adventure: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"
+};
+
 const buttons = document.querySelectorAll(".cat");
 const cards = document.getElementById("cards");
 const sectionTitle = document.getElementById("sectionTitle");
 const sectionSub = document.getElementById("sectionSub");
 const searchBox = document.getElementById("searchBox");
+const mandalaWrap = document.querySelector(".mandala-wrap");
 
 let currentCategory = "signature";
 
@@ -522,11 +542,17 @@ function createCards(items){
   `).join("");
 }
 
+function updateMandalaBackground(cat){
+  mandalaWrap.style.background =
+    `linear-gradient(rgba(247,240,228,.85),rgba(247,240,228,.9)), url('${bgImages[cat]}') center/cover no-repeat`;
+}
+
 function render(cat){
   currentCategory = cat;
   sectionTitle.textContent = data[cat].title;
   sectionSub.textContent = data[cat].sub;
   searchBox.value = "";
+  updateMandalaBackground(cat);
   createCards(data[cat].items);
 }
 

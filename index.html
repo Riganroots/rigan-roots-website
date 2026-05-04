@@ -100,35 +100,44 @@ a{
 }
 
 /* DROPDOWN MENU */
+/* DROPDOWN MENU - CLEAN RIGAN STYLE */
 .dropdown{
     position:absolute;
-    top:38px;
+    top:42px;
     left:0;
-    min-width:220px;
-    background:white;
-    border-radius:16px;
-    padding:10px 0;
-    box-shadow:0 25px 60px rgba(0,0,0,.2);
+    min-width:240px;
+    background:#f7f0e4; /* MATCH YOUR SITE BACKGROUND */
+    border-radius:18px;
+    padding:12px 0;
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
     opacity:0;
     visibility:hidden;
     transform:translateY(10px);
     transition:0.3s ease;
     z-index:999;
+    border:none; /* REMOVE BORDER LINE */
+}
+
+/* REMOVE ANY DEFAULT LINES */
+.nav-links a,
+.nav-item a{
+    border:none !important;
+    text-decoration:none !important;
 }
 
 /* DROPDOWN LINKS */
 .dropdown a{
     display:block;
     padding:12px 18px;
-    color:#174d2f !important;
-    font-size:13px;
-    font-weight:700;
+    color:#174d2f !important; /* YOUR GREEN */
+    font-size:14px;
+    font-weight:600;
 }
 
 /* HOVER EFFECT */
 .dropdown a:hover{
-    background:#f3f7ef;
-    color:#a46a3f !important;
+    background:#e9e1d3;
+    color:#9b6238 !important; /* YOUR BROWN */
 }
 
 /* SHOW DROPDOWN */
@@ -136,6 +145,7 @@ a{
     opacity:1;
     visibility:visible;
     transform:translateY(0);
+}
 }
 
 /* HERO */

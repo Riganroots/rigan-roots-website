@@ -173,12 +173,16 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  let selected = null;
+ let selected = null;
 
-  Object.values(window.experienceDataV2).forEach(category => {
-    category.items.forEach(item => {
-      if (item.id === experienceId) {
-        selected = item;
+Object.values(window.experienceDataV2).forEach(category => {
+  category.items.forEach(item => {
+    const id = item.id || item[3];   // 🔥 FIX HERE
+    if (id === experienceId) {
+      selected = item;
+    }
+  });
+});
       }
     });
   });

@@ -5,138 +5,225 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Experience Detail | Rigan Roots & Routes</title>
 <link rel="stylesheet" href="experience-v2.css" />
+
+<style>
+
+/* NEW PREMIUM UI */
+
+.info-bar{
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+  margin:25px 0;
+}
+
+.info-box{
+  background:#fff;
+  padding:14px 18px;
+  border-radius:12px;
+  font-size:14px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.06);
+}
+
+.dual-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.card-box{
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+.card-box h3{
+  margin-bottom:12px;
+}
+
+.card-box ul{
+  padding-left:18px;
+  line-height:1.8;
+}
+
+@media(max-width:768px){
+  .dual-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+
 </head>
 
 <body>
 
-<section class="detail-page">
+<section class="detail-page-v2">
 
-  <div class="detail-hero" id="detailHero">
-    <div class="detail-hero-content">
-      <span class="badge" id="detailBadge">Experience</span>
-      <h1 id="detailTitle">Loading...</h1>
-      <p id="detailSubtitle">Please wait...</p>
+  <!-- HERO -->
+  <div class="detail-hero-v2" id="detailHeroV2">
+    <div class="detail-hero-overlay-v2"></div>
+    <div class="detail-hero-content-v2">
+      <p class="detail-label-v2">Rigan Experience</p>
+      <h1 id="detailTitleV2">Loading...</h1>
+      <p id="detailSubtitleV2">Please wait...</p>
     </div>
   </div>
 
-  <div class="detail-container">
+  <div class="detail-container-v2">
+    <div class="detail-grid-v2">
 
-    <div class="info-bar">
-      <div class="info-item"><strong>Starts At</strong><span>Kathmandu</span></div>
-      <div class="info-item"><strong>Duration</strong><span id="topDuration"></span></div>
-      <div class="info-item"><strong>Best Season</strong><span id="topSeason"></span></div>
-      <div class="info-item"><strong>Style</strong><span id="topStyle"></span></div>
-    </div>
+      <!-- MAIN -->
+      <div class="detail-main-v2">
 
-    <div class="detail-grid">
+        <!-- INFO BAR -->
+        <div class="info-bar">
+          <div class="info-box"><strong>Duration:</strong> <span id="detailDurationV2"></span></div>
+          <div class="info-box"><strong>Group:</strong> <span id="detailGroupV2"></span></div>
+          <div class="info-box"><strong>Difficulty:</strong> <span id="detailDifficultyV2"></span></div>
+          <div class="info-box"><strong>Altitude:</strong> <span id="detailAltitudeV2"></span></div>
+        </div>
 
-      <main class="detail-main">
-        <div class="detail-section">
+        <!-- OVERVIEW -->
+        <div class="detail-section-v2">
           <h2>Overview</h2>
-          <p id="detailOverview"></p>
+          <p id="detailOverviewV2"></p>
         </div>
 
-        <div class="detail-section">
+        <!-- HIGHLIGHTS -->
+        <div class="detail-section-v2">
           <h2>Highlights</h2>
-          <ul id="detailHighlights"></ul>
+          <ul id="detailHighlightsV2"></ul>
         </div>
 
-        <div class="detail-section">
-          <h2>Detailed Itinerary</h2>
-          <div id="detailItinerary"></div>
+        <!-- ITINERARY -->
+        <div class="detail-section-v2">
+          <h2>Sample Itinerary</h2>
+          <div id="detailItineraryV2"></div>
         </div>
 
-        <div class="included-grid">
-          <div class="included">
-            <h3>Included</h3>
-            <ul>
-              <li>Local host or guide support</li>
-              <li>Curated activities</li>
-              <li>Selected meals</li>
-              <li>Trip coordination by Rigan</li>
-            </ul>
+        <!-- INCLUDED / EXCLUDED -->
+        <div class="dual-grid">
+          <div class="card-box">
+            <h3>✔ What’s Included</h3>
+            <ul id="detailIncludesV2"></ul>
           </div>
 
-          <div class="not-included">
-            <h3>Not Included</h3>
-            <ul>
-              <li>International flights</li>
-              <li>Travel insurance</li>
-              <li>Personal expenses</li>
-              <li>Extra activities not mentioned</li>
-            </ul>
+          <div class="card-box">
+            <h3>✖ What’s Not Included</h3>
+            <ul id="detailExcludesV2"></ul>
           </div>
         </div>
-      </main>
 
-      <aside class="booking-card">
-        <h3>Quick Info</h3>
-        <p><strong>Duration:</strong> <span id="detailDuration"></span></p>
-        <p><strong>Price:</strong> <span id="detailPrice"></span></p>
-        <p><strong>Location:</strong> <span id="detailLocation"></span></p>
+        <!-- PACKING -->
+        <div class="detail-section-v2">
+          <h2>Essential Packing</h2>
+          <ul id="detailPackingV2"></ul>
+        </div>
 
-        <a href="#" class="book-btn" id="whatsappBookBtn" target="_blank">Book This Experience</a>
-        <a href="experience-v2.html" class="book-btn back-btn">Back to Experiences</a>
+        <!-- GOOD TO KNOW -->
+        <div class="detail-section-v2">
+          <h2>Good to Know</h2>
+          <ul id="detailTipsV2"></ul>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="detail-sidebar-v2">
+        <div class="booking-card-v2">
+          <h3>Quick Info</h3>
+
+          <p><strong>Price:</strong> <span id="detailPriceV2"></span></p>
+          <p><strong>Location:</strong> <span id="detailLocationV2"></span></p>
+          <p><strong>Start:</strong> <span id="detailStartV2"></span></p>
+          <p><strong>End:</strong> <span id="detailEndV2"></span></p>
+
+          <a href="#" class="book-btn-v2" id="whatsappBookBtn" target="_blank">
+            Book This Experience
+          </a>
+
+        </div>
       </aside>
 
     </div>
   </div>
-
 </section>
 
 <script src="experience-data-v2.js"></script>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const experienceId = params.get("experience") || params.get("id");
+document.addEventListener("DOMContentLoaded", function () {
 
-let selectedExperience = null;
+  const params = new URLSearchParams(window.location.search);
+  const experienceId = params.get("id");
 
-Object.values(window.experienceDataV2).forEach(category => {
-  const found = category.items.find(item => item.id === experienceId);
-  if (found) selectedExperience = found;
-});
+  if (!experienceDataV2) {
+    alert("Data file not loaded!");
+    return;
+  }
 
-if (!selectedExperience) {
-  document.getElementById("detailTitle").textContent = "Experience Not Found";
-  document.getElementById("detailSubtitle").textContent = "Please open this page from the Experiences page.";
-} else {
-  document.title = selectedExperience.name + " | Rigan Roots & Routes";
+  const allExperiences = Object.values(experienceDataV2)
+    .flatMap(section => section.items);
 
-  document.getElementById("detailHero").style.backgroundImage =
-    `linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.45)), url('${selectedExperience.image}')`;
+  const selected = allExperiences.find(e => e.id === experienceId);
 
-  document.getElementById("detailBadge").textContent = selectedExperience.badge || "Experience";
-  document.getElementById("detailTitle").textContent = selectedExperience.name;
-  document.getElementById("detailSubtitle").textContent = selectedExperience.subtitle;
-  document.getElementById("detailOverview").textContent = selectedExperience.overview;
+  if (!selected) {
+    document.getElementById("detailTitleV2").textContent = "Experience Not Found";
+    return;
+  }
 
-  document.getElementById("topDuration").textContent = selectedExperience.duration;
-  document.getElementById("topSeason").textContent = selectedExperience.season;
-  document.getElementById("topStyle").textContent = selectedExperience.style;
+  // HERO
+  document.getElementById("detailHeroV2").style.backgroundImage =
+    `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('${selected.image}')`;
 
-  document.getElementById("detailDuration").textContent = selectedExperience.duration;
-  document.getElementById("detailPrice").textContent = selectedExperience.price;
-  document.getElementById("detailLocation").textContent = selectedExperience.location;
+  document.getElementById("detailTitleV2").textContent = selected.name;
+  document.getElementById("detailSubtitleV2").textContent = selected.subtitle;
 
-  document.getElementById("detailHighlights").innerHTML =
-    selectedExperience.highlights.map(item => `<li>${item}</li>`).join("");
+  // BASIC
+  document.getElementById("detailOverviewV2").textContent = selected.overview;
+  document.getElementById("detailDurationV2").textContent = selected.duration;
+  document.getElementById("detailPriceV2").textContent = selected.price;
+  document.getElementById("detailLocationV2").textContent = selected.location;
 
-  document.getElementById("detailItinerary").innerHTML =
-    selectedExperience.itinerary.map(day => `
-      <div class="itinerary-day">
-        <h4>${day.day}</h4>
-        <p>${day.text}</p>
+  // NEW DATA
+  document.getElementById("detailGroupV2").textContent = selected.groupSize || "-";
+  document.getElementById("detailDifficultyV2").textContent = selected.difficulty || "-";
+  document.getElementById("detailAltitudeV2").textContent = selected.altitude || "-";
+  document.getElementById("detailStartV2").textContent = selected.start || "-";
+  document.getElementById("detailEndV2").textContent = selected.ends || "-";
+
+  // LISTS
+  document.getElementById("detailHighlightsV2").innerHTML =
+    selected.highlights.map(i => `<li>${i}</li>`).join("");
+
+  document.getElementById("detailIncludesV2").innerHTML =
+    selected.includes.map(i => `<li>${i}</li>`).join("");
+
+  document.getElementById("detailExcludesV2").innerHTML =
+    selected.excludes.map(i => `<li>${i}</li>`).join("");
+
+  document.getElementById("detailPackingV2").innerHTML =
+    selected.packing.map(i => `<li>${i}</li>`).join("");
+
+  document.getElementById("detailTipsV2").innerHTML =
+    selected.goodToKnow.map(i => `<li>${i}</li>`).join("");
+
+  document.getElementById("detailItineraryV2").innerHTML =
+    selected.itinerary.map(d => `
+      <div class="itinerary-day-v2">
+        <h4>${d.day}</h4>
+        <p>${d.text}</p>
       </div>
     `).join("");
 
-  const message = encodeURIComponent(
-    `Hi Rigan Roots & Routes, I am interested in ${selectedExperience.name}. Please send me details.`
-  );
-
+  // WHATSAPP
+  const msg = encodeURIComponent(`Hi, I’m interested in ${selected.name}`);
   document.getElementById("whatsappBookBtn").href =
-    `https://wa.me/9779843322695?text=${message}`;
-}
+    `https://wa.me/9779843322695?text=${msg}`;
+
+});
 </script>
 
 </body>

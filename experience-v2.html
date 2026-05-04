@@ -5,50 +5,299 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Experiences | Rigan Roots & Routes</title>
 <link rel="stylesheet" href="experience-v2.css" />
+
+<style>
+.experience-page-wrap{
+  min-height:100vh;
+  background:#071827;
+  padding:40px 24px;
+}
+
+.experience-panel{
+  max-width:1320px;
+  margin:auto;
+  background:#fff;
+  border-radius:36px;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:280px 1fr;
+  min-height:620px;
+}
+
+.exp-sidebar{
+  background:linear-gradient(180deg,#eef8f3,#f8fbfa);
+  padding:34px 26px;
+  border-right:1px solid #e5e7eb;
+}
+
+.exp-sidebar-label{
+  font-size:12px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-weight:900;
+  color:#64748b;
+  margin-bottom:28px;
+}
+
+.exp-sidebar-label::after{
+  content:"";
+  display:block;
+  width:44px;
+  height:4px;
+  background:#22c55e;
+  border-radius:999px;
+  margin-top:12px;
+}
+
+.exp-tab{
+  width:100%;
+  border:none;
+  background:transparent;
+  padding:16px 15px;
+  margin-bottom:10px;
+  border-radius:14px;
+  text-align:left;
+  font-weight:800;
+  color:#64748b;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.exp-tab:hover,
+.exp-tab.active{
+  background:#fff;
+  color:#16a34a;
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
+  transform:translateX(5px);
+}
+
+.exp-main{
+  padding:42px 36px;
+}
+
+.exp-breadcrumb{
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  font-weight:900;
+  color:#94a3b8;
+  margin-bottom:30px;
+}
+
+.exp-breadcrumb span{
+  color:#16a34a;
+}
+
+.exp-options-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:0 36px;
+}
+
+.exp-option{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  padding:22px 0;
+  border-bottom:1px solid #e5e7eb;
+  text-decoration:none;
+  color:#475569;
+  transition:.3s;
+}
+
+.exp-option:hover{
+  color:#16a34a;
+  transform:translateX(5px);
+}
+
+.exp-option-title{
+  font-size:17px;
+  font-weight:900;
+}
+
+.exp-option-sub{
+  font-size:13px;
+  color:#64748b;
+  margin-top:4px;
+}
+
+.exp-option-days{
+  background:#22c55e;
+  color:white;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+@media(max-width:850px){
+  .experience-panel{
+    grid-template-columns:1fr;
+  }
+
+  .exp-options-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<section class="experience-page">
-  <div class="page-head">
-    <h1>Choose Your Nepal Experience</h1>
-    <p>Real homes, real food, real stories — explore Nepal your way.</p>
-  </div>
+<section class="experience-page-wrap">
+  <div class="experience-panel">
 
-  <div id="experienceList"></div>
+    <aside class="exp-sidebar">
+      <p class="exp-sidebar-label">Explore Experiences</p>
+
+      <button class="exp-tab active" data-category="signature">Signature Experiences ⭐</button>
+      <button class="exp-tab" data-category="village">Village & Community Life</button>
+      <button class="exp-tab" data-category="food">Taste of Nepal 🍲</button>
+      <button class="exp-tab" data-category="festival">Festival of Nepal 🎉</button>
+      <button class="exp-tab" data-category="culture">Cultural & Heritage</button>
+      <button class="exp-tab" data-category="wellness">Spiritual & Wellness</button>
+      <button class="exp-tab" data-category="trekking">Trek & Mountain Journeys</button>
+      <button class="exp-tab" data-category="adventure">Adventure & Soft Adventure</button>
+      <button class="exp-tab" data-category="easy">Easy Escapes</button>
+    </aside>
+
+    <main class="exp-main">
+      <p class="exp-breadcrumb">Experience Type › <span id="activeCategoryName">Signature Experiences ⭐</span></p>
+      <div class="exp-options-grid" id="experienceOptions"></div>
+    </main>
+
+  </div>
 </section>
 
-<script src="experience-data-v2.js"></script>
-
 <script>
-const container = document.getElementById("experienceList");
+const experienceMenu = {
+  signature: {
+    name: "Signature Experiences ⭐",
+    items: [
+      ["Live Like a Nepali", "Stay with locals and experience everyday Nepal.", "7 Days", "live-like-a-nepali"],
+      ["Village Immersion", "Farming, local meals, and community life.", "5 Days", "village-immersion"],
+      ["Women-Only Cultural Trip", "Safe cultural journey for women travelers.", "6 Days", "women-only-cultural-trip"],
+      ["Honeymoon in Nepal", "Romantic cultural and scenic journey.", "7 Days", "honeymoon-in-nepal"]
+    ]
+  },
 
-Object.values(window.experienceDataV2).forEach(category => {
-  const section = document.createElement("div");
-  section.className = "exp-section";
+  village: {
+    name: "Village & Community Life",
+    items: [
+      ["Live Like a Nepali", "Stay with local families and join daily life.", "7 Days", "live-like-a-nepali"],
+      ["Village Immersion", "Slow travel in rural Nepal.", "5 Days", "village-immersion"],
+      ["Farm & Harvest Experience", "Plant rice, harvest crops, and eat with locals.", "2 Days", "farm-harvest-experience"],
+      ["Digital Detox Village Retreat", "Disconnect and live simply in nature.", "5 Days", "digital-detox-village-retreat"]
+    ]
+  },
 
-  section.innerHTML = `
-    <h2>${category.title}</h2>
-    <div class="exp-row">
-      ${category.items.map(item => `
-        <a class="exp-card" href="experience-detail-v2.html?experience=${item.id}">
-          <img src="${item.image}" alt="${item.name}">
-          <div class="badge">${item.badge || "Experience"}</div>
-          <div class="exp-info">
-            <h3>${item.name}</h3>
-            <p>${item.subtitle}</p>
-            <div class="exp-meta">
-              <span>${item.duration}</span>
-              <span>${item.price}</span>
-            </div>
-          </div>
-        </a>
-      `).join("")}
-    </div>
-  `;
+  food: {
+    name: "Taste of Nepal 🍲",
+    items: [
+      ["Taste of Nepal", "Cook and eat with local families.", "3 Days", "taste-of-nepal"],
+      ["Momo Making Experience", "Learn Nepal’s favorite food hands-on.", "1 Day", "momo-making"],
+      ["Dal Bhat Experience", "Understand Nepal through its everyday meal.", "1 Day", "dal-bhat-experience"],
+      ["Kathmandu Food Walk", "Taste street food and local snacks.", "Half Day", "kathmandu-food-walk"]
+    ]
+  },
 
-  container.appendChild(section);
+  festival: {
+    name: "Festival of Nepal 🎉",
+    items: [
+      ["Festival of Nepal", "Join Dashain, Tihar, and local celebrations.", "Seasonal", "festival-experience"],
+      ["Dashain with Local Family", "Blessings, tika, food, and family rituals.", "2 Days", "dashain-experience"],
+      ["Tihar Lights Experience", "Celebrate lights, music, and culture.", "2 Days", "tihar-experience"],
+      ["Rice Planting Festival", "Mud, music, farming, and village celebration.", "1 Day", "rice-planting-festival"]
+    ]
+  },
+
+  culture: {
+    name: "Cultural & Heritage",
+    items: [
+      ["Kathmandu Heritage Tour", "Temples, courtyards, and living history.", "2 Days", "kathmandu-heritage-tour"],
+      ["Bhaktapur Living Culture", "Old streets, artisans, food, and traditions.", "1 Day", "bhaktapur-living-culture"],
+      ["Lumbini Spiritual Journey", "Visit the birthplace of Buddha.", "3 Days", "lumbini-spiritual-journey"],
+      ["Newari Culture Experience", "Food, heritage, and local stories.", "1 Day", "newari-culture-experience"]
+    ]
+  },
+
+  wellness: {
+    name: "Spiritual & Wellness",
+    items: [
+      ["Yoga & Meditation Retreat", "Reset your body and mind in Nepal.", "5 Days", "yoga-meditation-retreat"],
+      ["Monastery Meditation", "Experience silence and spiritual calm.", "2 Days", "monastery-meditation"],
+      ["Pokhara Wellness Escape", "Lakeside calm, yoga, and nature.", "4 Days", "pokhara-wellness-escape"],
+      ["Himalayan Healing Retreat", "Slow wellness journey in peaceful Nepal.", "7 Days", "himalayan-healing-retreat"]
+    ]
+  },
+
+  trekking: {
+    name: "Trek & Mountain Journeys",
+    items: [
+      ["Annapurna Base Camp", "Classic Himalayan base camp journey.", "12 Days", "annapurna-base-camp"],
+      ["Everest Base Camp", "Legendary trek to Everest region.", "14 Days", "everest-base-camp"],
+      ["Poon Hill Trek", "Short trek with famous sunrise view.", "5 Days", "poon-hill"],
+      ["Mardi Himal Trek", "Quiet ridge trail with mountain views.", "7 Days", "mardi-base-camp"],
+      ["Langtang Valley Trek", "Mountain valley close to Kathmandu.", "8 Days", "langtang-valley"],
+      ["Rara Lake Journey", "Remote lake adventure in western Nepal.", "8 Days", "rara-lake"]
+    ]
+  },
+
+  adventure: {
+    name: "Adventure & Soft Adventure",
+    items: [
+      ["White Water Rafting", "Nepal river adventure.", "1 Day", "white-water-rafting"],
+      ["Paragliding in Pokhara", "Fly above lake and mountain views.", "Half Day", "paragliding-pokhara"],
+      ["Biking Trails Nepal", "Ride through villages and landscapes.", "2 Days", "biking-trails-nepal"],
+      ["Motorbike Himalayan Ride", "Scenic road adventure.", "5 Days", "motorbike-himalayan-ride"],
+      ["Zipline Pokhara", "Short thrill with big views.", "Half Day", "zipline-pokhara"],
+      ["Bungee Adventure", "Take the leap in Nepal.", "1 Day", "bungee-adventure"]
+    ]
+  },
+
+  easy: {
+    name: "Easy Escapes",
+    items: [
+      ["Pokhara Experience", "Lake, mountains, cafes, and soft adventure.", "3 Days", "pokhara-experience"],
+      ["Bandipur Escape", "Hill town charm and slow travel.", "2 Days", "bandipur-escape"],
+      ["Nagarkot Sunrise Retreat", "Short escape near Kathmandu.", "1 Day", "nagarkot-sunrise-retreat"],
+      ["Chitwan Jungle Experience", "Wildlife and Tharu culture.", "3 Days", "chitwan-jungle-experience"],
+      ["Everest View Experience", "See Everest without hard trekking.", "4 Days", "everest-view-experience"],
+      ["Kathmandu Valley Soft Tour", "Culture, food, and viewpoints.", "2 Days", "kathmandu-valley-soft-tour"]
+    ]
+  }
+};
+
+const tabs = document.querySelectorAll(".exp-tab");
+const grid = document.getElementById("experienceOptions");
+const activeName = document.getElementById("activeCategoryName");
+
+function renderCategory(categoryKey){
+  const category = experienceMenu[categoryKey];
+  activeName.textContent = category.name;
+
+  grid.innerHTML = category.items.map(item => `
+    <a class="exp-option" href="experience-detail-v2.html?experience=${item[3]}">
+      <div>
+        <div class="exp-option-title">${item[0]}</div>
+        <div class="exp-option-sub">${item[1]}</div>
+      </div>
+      <span class="exp-option-days">${item[2]}</span>
+    </a>
+  `).join("");
+}
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    renderCategory(tab.dataset.category);
+  });
 });
+
+renderCategory("signature");
 </script>
 
 </body>

@@ -5,89 +5,474 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plan Your Journey | Rigan Roots & Routes</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+:root{
+  --primary:#991b1b;
+  --primary-dark:#7f1d1d;
+  --gradient-sunrise:linear-gradient(135deg,#f59e0b 0%,#dc2626 50%,#7c2d12 100%);
+  --stone-50:#fafaf9;
+  --stone-100:#f5f5f4;
+  --stone-200:#e7e5e4;
+  --stone-500:#78716c;
+  --stone-600:#57534e;
+  --stone-800:#292524;
+  --stone-900:#1c1917;
+  --shadow-md:0 4px 6px -1px rgb(0 0 0 / .1);
+  --shadow-xl:0 20px 25px -5px rgb(0 0 0 / .1);
+  --radius-xl:28px;
+  --radius-lg:20px;
+  --transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:Inter,sans-serif;
-  background:#fafaf9;
-  margin:0;
+  background:var(--stone-50);
+  color:var(--stone-700);
+  line-height:1.6;
 }
+
+h1,h2,h3{
+  font-family:"Playfair Display",serif;
+  color:var(--stone-900);
+}
+
+a{text-decoration:none}
 
 .container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px;
 }
 
-h1{
-  font-family:"Playfair Display";
-  font-size:42px;
+/* NAV */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,0,0,.05);
+}
+
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 24px;
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:inherit;
+}
+
+.brand-logo{
+  width:44px;
+  height:44px;
+  background:var(--gradient-sunrise);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:800;
+}
+
+.brand-name{
+  font-size:1.25rem;
+  color:var(--stone-800);
+  font-weight:700;
+}
+
+.brand-tagline{
+  font-size:.72rem;
+  color:var(--stone-500);
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+  align-items:center;
+}
+
+.nav-links a{
+  color:var(--stone-600);
+  font-weight:500;
+  font-size:.92rem;
+}
+
+.nav-links a:hover{color:var(--primary)}
+
+.mobile-menu-btn{
+  display:none;
+  flex-direction:column;
+  gap:6px;
+  cursor:pointer;
+}
+
+.mobile-menu-btn span{
+  width:28px;
+  height:2px;
+  background:var(--stone-700);
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:60px 0 25px;
+}
+
+.hero h1{
+  font-size:clamp(2rem,5vw,3.6rem);
+  margin-bottom:16px;
+}
+
+.hero p{
+  color:var(--stone-500);
+  max-width:650px;
+  margin:0 auto;
+}
+
+/* LAYOUT */
+.plan-layout{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:28px;
+  align-items:start;
+}
+
+.selected-box{
+  background:var(--stone-100);
+  padding:16px 24px;
+  border-radius:var(--radius-lg);
+  margin:26px 0;
+  border-left:4px solid var(--primary);
+}
+
+.selected-box span{
+  color:var(--primary);
+  font-weight:700;
+}
+
+/* FORM */
+.form-box,.preview-card,.info-card{
+  background:#fff;
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-md);
 }
 
 .form-box{
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  padding:32px;
 }
 
-.grid{
+.form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:16px;
+  gap:18px;
 }
 
 input,select,textarea{
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:10px;
   width:100%;
+  padding:14px 16px;
+  border:1px solid var(--stone-200);
+  border-radius:12px;
+  font-family:Inter,sans-serif;
+  font-size:.95rem;
+  transition:var(--transition);
+  background:#fff;
+}
+
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(153,27,27,.1);
 }
 
 textarea{
   grid-column:span 2;
+  min-height:115px;
+  resize:vertical;
 }
 
-.btn{
-  background:#991b1b;
-  color:white;
-  padding:14px;
-  border:none;
-  border-radius:999px;
-  cursor:pointer;
-  margin-top:15px;
-}
-
-/* PRICE BOX */
-.price-box{
-  background:#f3f4f6;
-  padding:20px;
-  border-radius:16px;
+.btn-row{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
   margin-top:20px;
 }
 
-.price-box h3{
-  margin-bottom:10px;
+.btn-submit,.btn-whatsapp{
+  border:none;
+  border-radius:999px;
+  padding:14px 28px;
+  font-weight:700;
+  cursor:pointer;
+  transition:var(--transition);
+  font-size:1rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
 }
 
-/* WHATSAPP */
-.whatsapp{
+.btn-submit{
+  background:var(--primary);
+  color:#fff;
+}
+
+.btn-submit:hover{
+  background:var(--primary-dark);
+  transform:translateY(-2px);
+}
+
+.btn-whatsapp{
+  background:#25D366;
+  color:#fff;
+}
+
+.btn-whatsapp:hover{
+  transform:translateY(-2px);
+}
+
+/* PREVIEW */
+.preview-card{
+  overflow:hidden;
+  position:sticky;
+  top:92px;
+}
+
+.preview-image{
+  width:100%;
+  height:235px;
+  object-fit:cover;
+}
+
+.preview-content{
+  padding:24px;
+}
+
+.preview-badge{
+  display:inline-block;
+  background:#fff3df;
+  color:var(--primary);
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.preview-content h2{
+  font-size:1.7rem;
+  margin-bottom:8px;
+}
+
+.preview-content p{
+  color:var(--stone-600);
+  font-size:.95rem;
+}
+
+.preview-meta{
+  display:grid;
+  gap:10px;
+  margin:18px 0;
+}
+
+.preview-meta div{
+  background:var(--stone-100);
+  border-radius:14px;
+  padding:12px 14px;
+  font-size:.92rem;
+}
+
+.price-box{
+  background:linear-gradient(135deg,#fff7ed,#fef2f2);
+  border:1px solid #fed7aa;
+  border-radius:18px;
+  padding:18px;
+  margin-top:16px;
+}
+
+.price-box strong{
+  display:block;
+  font-size:.9rem;
+  color:var(--stone-600);
+}
+
+.price-box span{
+  display:block;
+  font-size:1.9rem;
+  font-weight:800;
+  color:var(--primary);
+  margin-top:4px;
+}
+
+.itinerary-box{
+  margin-top:18px;
+}
+
+.itinerary-box h3{
+  font-size:1.2rem;
+  margin-bottom:12px;
+}
+
+.itinerary-day{
+  border-left:3px solid var(--primary);
+  padding:0 0 14px 14px;
+  margin-bottom:12px;
+}
+
+.itinerary-day strong{
+  color:var(--stone-900);
+}
+
+/* INFO */
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin:50px 0;
+}
+
+.info-card{
+  padding:24px;
+  transition:var(--transition);
+}
+
+.info-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-xl);
+}
+
+.info-card h3{
+  color:var(--primary);
+  margin-bottom:12px;
+}
+
+.info-card p{
+  color:var(--stone-600);
+  font-size:.95rem;
+}
+
+/* FOOTER */
+.footer{
+  background:var(--stone-900);
+  color:#fff;
+  padding:60px 0 30px;
+  margin-top:50px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1.2fr;
+  gap:40px;
+  margin-bottom:40px;
+}
+
+.footer-logo{
+  font-size:1.5rem;
+  font-weight:700;
+  margin-bottom:16px;
+}
+
+.footer-links{
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+
+.footer-links a{
+  color:rgba(255,255,255,.75);
+  font-size:.94rem;
+}
+
+.footer-links a:hover{color:#fff}
+
+.social-links{
+  display:flex;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.social-links a{
+  width:40px;
+  height:40px;
+  background:rgba(255,255,255,.1);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding-top:30px;
+  border-top:1px solid rgba(255,255,255,.1);
+  font-size:.85rem;
+  opacity:.65;
+}
+
+.floating-whatsapp{
   position:fixed;
-  bottom:20px;
-  right:20px;
+  bottom:24px;
+  right:24px;
+  z-index:99;
 }
 
-.whatsapp a{
+.floating-whatsapp a{
+  display:flex;
+  align-items:center;
+  gap:10px;
   background:#25D366;
   color:white;
-  padding:12px 18px;
+  padding:12px 22px;
   border-radius:999px;
-  text-decoration:none;
+  font-weight:600;
+  box-shadow:var(--shadow-xl);
+}
+
+@media(max-width:900px){
+  .plan-layout,.info-grid,.footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .preview-card{
+    position:static;
+  }
 }
 
 @media(max-width:768px){
-  .grid{grid-template-columns:1fr}
+  .mobile-menu-btn{display:flex}
+
+  .nav-links{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:70%;
+    height:100vh;
+    background:#fff;
+    flex-direction:column;
+    justify-content:center;
+    padding:40px;
+    box-shadow:var(--shadow-xl);
+    transition:right .3s ease;
+    z-index:999;
+  }
+
+  .nav-links.active{right:0}
+
+  .form-grid{grid-template-columns:1fr}
+
   textarea{grid-column:span 1}
 }
 </style>
@@ -95,175 +480,605 @@ textarea{
 
 <body>
 
+<div class="floating-whatsapp">
+  <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span>Chat with us</span>
+  </a>
+</div>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="brand">
+      <div class="brand-logo">RR</div>
+      <div>
+        <div class="brand-name">Rigan Roots & Routes</div>
+        <div class="brand-tagline">Meaningful Journeys Through Nepal</div>
+      </div>
+    </a>
+
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="experience-v2.html">Experiences</a>
+      <a href="global-travel.html">Global Travel</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="about.html">Our Story</a>
+      <a href="plan.html">Plan</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
 <div class="container">
+  <div class="hero">
+    <h1>Plan Your Nepal Journey</h1>
+    <p>Choose an experience, see an instant preview, get an estimated price, and send your inquiry directly to Rigan.</p>
+  </div>
 
-<h1>Plan Your Nepal Journey</h1>
+  <div class="selected-box">
+    <strong>✨ Selected Experience:</strong>
+    <span id="experienceText">Custom Trip</span>
+  </div>
 
-<div class="form-box">
+  <div class="plan-layout">
+    <div class="form-box">
+      <form id="planForm">
+        <div class="form-grid">
+          <input type="text" id="name" name="name" placeholder="Full Name" required>
+          <input type="email" id="email" name="email" placeholder="Email" required>
+          <input type="text" id="phone" name="phone" placeholder="Phone / WhatsApp">
+          <input type="text" id="country" name="country" placeholder="Country">
 
-<form id="planForm">
+          <select id="experience" name="experience">
+            <option value="">Select Experience</option>
 
-<div class="grid">
+            <optgroup label="⭐ Signature Experiences">
+              <option value="live-like-a-nepali">Live Like a Nepali</option>
+              <option value="village-immersion">Village Immersion Experience</option>
+              <option value="rice-planting-festival">Rice Planting Festival Experience</option>
+              <option value="women-only-cultural-trip">Women-Only Cultural Trip</option>
+              <option value="himalayan-proposal-experience">Himalayan Proposal Experience</option>
+            </optgroup>
 
-<input type="text" id="name" placeholder="Full Name" required>
-<input type="email" id="email" placeholder="Email" required>
+            <optgroup label="🏔 Trekking & Mountains">
+              <option value="annapurna-base-camp">Annapurna Base Camp Trek</option>
+              <option value="everest-base-camp">Everest Base Camp Trek</option>
+              <option value="everest-view-trek">Everest View Trek</option>
+              <option value="poon-hill">Poon Hill Trek</option>
+              <option value="mardi-base-camp">Mardi Himal Trek</option>
+              <option value="langtang-valley">Langtang Valley Trek</option>
+              <option value="rara-lake">Rara Lake Trek</option>
+              <option value="upper-mustang-jeep-tour">Upper Mustang Jeep Tour</option>
+            </optgroup>
 
-<input type="text" id="phone" placeholder="WhatsApp Number">
+            <optgroup label="🛕 Culture & Heritage">
+              <option value="kathmandu-heritage-tour">Kathmandu Heritage Tour</option>
+              <option value="bhaktapur-living-culture">Bhaktapur Cultural Experience</option>
+              <option value="patan-artisan-walk">Patan Artisan Walk</option>
+              <option value="lumbini-spiritual-journey">Lumbini Spiritual Journey</option>
+              <option value="boudhanath-kora-experience">Boudhanath Kora Experience</option>
+              <option value="pashupatinath-evening-aarti">Pashupatinath Evening Aarti</option>
+            </optgroup>
 
-<select id="experience">
-<option value="">Select Experience</option>
+            <optgroup label="🍲 Food Experiences">
+              <option value="taste-of-nepal">Taste of Nepal</option>
+              <option value="momo-making">Momo Making Experience</option>
+              <option value="dal-bhat-family-meal">Dal Bhat Family Meal</option>
+              <option value="kathmandu-food-walk">Kathmandu Food Walk</option>
+              <option value="market-to-kitchen-experience">Local Market + Cooking Experience</option>
+            </optgroup>
 
-<!-- SIGNATURE -->
-<optgroup label="⭐ Signature Experiences">
-<option>Live Like a Nepali</option>
-<option>Village Immersion Experience</option>
-<option>Rice Planting Festival Experience</option>
-<option>Women Only Cultural Trek</option>
-<option>Himalayan Proposal Experience</option>
-</optgroup>
+            <optgroup label="🎉 Festivals">
+              <option value="dashain-experience">Dashain Experience</option>
+              <option value="tihar-festival-experience">Tihar Festival Experience</option>
+              <option value="holi-festival">Holi Festival Experience</option>
+              <option value="indra-jatra">Indra Jatra Experience</option>
+              <option value="bisket-jatra">Bisket Jatra Experience</option>
+            </optgroup>
 
-<!-- TREKKING -->
-<optgroup label="🏔 Trekking & Mountains">
-<option>Annapurna Base Camp Trek</option>
-<option>Everest Base Camp Trek</option>
-<option>Everest View Trek</option>
-<option>Poon Hill Trek</option>
-<option>Mardi Himal Trek</option>
-<option>Langtang Valley Trek</option>
-<option>Khopra Danda Trek</option>
-<option>Rara Lake Trek</option>
-<option>Upper Mustang Jeep Tour</option>
-</optgroup>
+            <optgroup label="🌊 Adventure">
+              <option value="paragliding-pokhara">Paragliding in Pokhara</option>
+              <option value="white-water-rafting">White Water Rafting</option>
+              <option value="bungee-adventure">Bungee Jumping</option>
+              <option value="zipline-pokhara">Zipline Adventure</option>
+              <option value="biking-trails-nepal">Mountain Biking Trails</option>
+            </optgroup>
 
-<!-- CULTURE -->
-<optgroup label="🛕 Culture & Heritage">
-<option>Kathmandu Heritage Tour</option>
-<option>Bhaktapur Cultural Experience</option>
-<option>Patan Heritage Walk</option>
-<option>Lumbini Spiritual Journey</option>
-<option>Monastery Stay Experience</option>
-</optgroup>
+            <optgroup label="🧘 Wellness">
+              <option value="yoga-meditation-retreat">Yoga & Meditation Retreat</option>
+              <option value="pokhara-wellness-escape">Pokhara Wellness Escape</option>
+              <option value="spiritual-kathmandu-retreat">Spiritual Kathmandu Retreat</option>
+            </optgroup>
 
-<!-- FOOD -->
-<optgroup label="🍲 Food Experiences">
-<option>Momo Making Experience</option>
-<option>Dal Bhat Cooking Class</option>
-<option>Kathmandu Food Walk</option>
-<option>Local Market + Cooking Experience</option>
-</optgroup>
+            <optgroup label="✨ Custom">
+              <option value="custom-trip">Custom Trip / I will decide later</option>
+            </optgroup>
+          </select>
 
-<!-- FESTIVAL -->
-<optgroup label="🎉 Festivals">
-<option>Dashain Experience</option>
-<option>Tihar Festival Experience</option>
-<option>Holi Festival Experience</option>
-<option>Indra Jatra Experience</option>
-<option>Chhath Festival Experience</option>
-</optgroup>
+          <input type="date" id="travelDate" name="travel_date">
 
-<!-- ADVENTURE -->
-<optgroup label="🌊 Adventure">
-<option>Paragliding in Pokhara</option>
-<option>White Water Rafting</option>
-<option>Bungee Jumping</option>
-<option>Zipline Adventure</option>
-<option>Himalayan Motorbike Tour</option>
-<option>Mountain Biking Trails</option>
-</optgroup>
+          <select id="duration" name="duration">
+            <option value="">Trip Length</option>
+            <option value="3">3 Days</option>
+            <option value="5">5 Days</option>
+            <option value="7">7 Days</option>
+            <option value="10">10 Days</option>
+            <option value="14">14 Days</option>
+            <option value="custom">Custom</option>
+          </select>
 
-<!-- WELLNESS -->
-<optgroup label="🧘 Wellness">
-<option>Yoga & Meditation Retreat</option>
-<option>Pokhara Wellness Escape</option>
-<option>Spiritual Healing Retreat</option>
-</optgroup>
+          <select id="groupSize" name="group_size">
+            <option value="">Group Size</option>
+            <option value="1">Solo Traveler</option>
+            <option value="2">Couple</option>
+            <option value="4">Family / 4 Guests</option>
+            <option value="8">Small Group / 8 Guests</option>
+            <option value="12">Large Group / 12 Guests</option>
+          </select>
 
-<!-- CUSTOM -->
-<optgroup label="✨ Custom">
-<option>Custom Trip (I will decide later)</option>
-</optgroup>
+          <select id="style" name="style">
+            <option value="1">Budget</option>
+            <option value="1.35" selected>Comfort</option>
+            <option value="1.8">Premium</option>
+            <option value="2.4">Luxury</option>
+          </select>
 
-</select>
+          <select id="budget" name="budget">
+            <option value="">Budget Range</option>
+            <option>$300 - $700</option>
+            <option>$700 - $1500</option>
+            <option>$1500 - $3000</option>
+            <option>$3000+</option>
+          </select>
 
-<select id="style">
-<option value="">Travel Style</option>
-<option value="1">Budget</option>
-<option value="1.5">Comfort</option>
-<option value="2">Luxury</option>
-</select>
+          <textarea id="message" name="message" placeholder="Tell us your dream Nepal trip..."></textarea>
+        </div>
 
-<textarea id="message" placeholder="Tell us your dream trip..."></textarea>
+        <div class="btn-row">
+          <button type="submit" class="btn-submit">
+            <i class="fas fa-paper-plane"></i> Send via WhatsApp
+          </button>
 
+          <button type="button" class="btn-whatsapp" onclick="sendWhatsApp()">
+            <i class="fab fa-whatsapp"></i> Quick WhatsApp
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <aside class="preview-card">
+      <img id="previewImage" class="preview-image" src="https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg" alt="Experience Preview">
+
+      <div class="preview-content">
+        <span class="preview-badge" id="previewBadge">Selected Journey</span>
+        <h2 id="previewTitle">Custom Nepal Journey</h2>
+        <p id="previewDesc">Choose an experience to preview the itinerary, price estimate, and trip style.</p>
+
+        <div class="preview-meta">
+          <div><strong>Duration:</strong> <span id="previewDuration">Flexible</span></div>
+          <div><strong>Best For:</strong> <span id="previewBestFor">Couples, families, and culture seekers</span></div>
+          <div><strong>Style:</strong> <span id="previewStyle">Custom / Mixed</span></div>
+        </div>
+
+        <div class="price-box">
+          <strong>Estimated Total</strong>
+          <span id="estimatedPrice">$0</span>
+          <small id="priceNote">Select trip length and group size.</small>
+        </div>
+
+        <div class="itinerary-box">
+          <h3>Sample Itinerary</h3>
+          <div id="itineraryPreview"></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>📅 Best Time to Visit</h3>
+      <p><strong>Autumn:</strong> Sept-Nov<br><strong>Spring:</strong> Mar-May<br><strong>Winter:</strong> Fewer tourists<br><strong>Monsoon:</strong> Green landscapes</p>
+    </div>
+
+    <div class="info-card">
+      <h3>💰 Price Guidance</h3>
+      <p>Estimates are flexible and depend on hotel level, transport, season, group size, and customization.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>📋 Essential Tips</h3>
+      <p>Travel insurance is recommended. Pack layers, respect local customs, and drink filtered or bottled water.</p>
+    </div>
+  </div>
 </div>
 
-<div class="price-box">
-<h3>Estimated Price</h3>
-<p id="price">Select options to see estimate</p>
-</div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Rigan Roots & Routes</div>
+        <p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p>
+      </div>
 
-<button class="btn">Submit Inquiry</button>
+      <div>
+        <h4 style="margin-bottom:14px;">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="experience-v2.html">Experiences</a></li>
+          <li><a href="global-travel.html">Global Travel</a></li>
+          <li><a href="marketplace.html">Marketplace</a></li>
+          <li><a href="plan.html">Plan My Trip</a></li>
+        </ul>
+      </div>
 
-</form>
+      <div>
+        <h4 style="margin-bottom:14px;">Connect</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>📍 Kathmandu, Nepal<br>✉️ riganrootsroutes@gmail.com<br>📞 +977 9843322695</p>
+      </div>
+    </div>
 
-</div>
-
-</div>
-
-<!-- WhatsApp -->
-<div class="whatsapp">
-<a id="waBtn" href="#" target="_blank">Chat on WhatsApp</a>
-</div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p>
+    </div>
+  </div>
+</footer>
 
 <script>
+const mobileBtn = document.getElementById("mobileMenuBtn");
+const navLinks = document.getElementById("navLinks");
 
-// AUTO GET EXPERIENCE FROM URL
+mobileBtn?.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+const experienceData = {
+  "live-like-a-nepali": {
+    title: "Live Like a Nepali",
+    desc: "Stay with locals, share meals, and experience everyday Nepali life from the inside.",
+    image: "https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg",
+    basePerDay: 95,
+    defaultDays: 7,
+    bestFor: "Culture seekers, families, slow travelers",
+    style: "Village & Community",
+    badge: "Signature",
+    itinerary: [
+      ["Day 1", "Arrival and host family welcome."],
+      ["Day 2", "Cooking, farming, and village activities."],
+      ["Day 3+", "Flexible cultural immersion and local life."]
+    ]
+  },
+  "village-immersion": {
+    title: "Village Immersion Experience",
+    desc: "A deeper rural Nepal journey with farming, community stories, local meals, and slow travel.",
+    image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+    basePerDay: 85,
+    defaultDays: 5,
+    bestFor: "Meaningful travelers, volunteers, families",
+    style: "Community Life",
+    badge: "Authentic",
+    itinerary: [
+      ["Day 1", "Travel to village and meet hosts."],
+      ["Day 2", "Join farming, food, and daily routines."],
+      ["Day 3+", "Community walks and storytelling."]
+    ]
+  },
+  "rice-planting-festival": {
+    title: "Rice Planting Festival Experience",
+    desc: "Mud, music, farming, food, laughter, and village celebration during rice planting season.",
+    image: "https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg",
+    basePerDay: 70,
+    defaultDays: 1,
+    bestFor: "Festival lovers, photographers, culture travelers",
+    style: "Seasonal / Farming",
+    badge: "Seasonal",
+    itinerary: [
+      ["Morning", "Travel to village and festival briefing."],
+      ["Afternoon", "Join rice planting, music, and food."],
+      ["Evening", "Return or optional homestay."]
+    ]
+  },
+  "women-only-cultural-trip": {
+    title: "Women-Only Cultural Trip",
+    desc: "A safe, meaningful cultural journey designed for women travelers.",
+    image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+    basePerDay: 110,
+    defaultDays: 6,
+    bestFor: "Women travelers, friends, solo women",
+    style: "Cultural / Safe Travel",
+    badge: "Women Friendly",
+    itinerary: [
+      ["Day 1", "Welcome and orientation."],
+      ["Day 2", "Heritage walk and local women-led experiences."],
+      ["Day 3+", "Village stay, food, and cultural connection."]
+    ]
+  },
+  "annapurna-base-camp": {
+    title: "Annapurna Base Camp Trek",
+    desc: "Classic Himalayan trek through villages, forests, and the Annapurna sanctuary.",
+    image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+    basePerDay: 105,
+    defaultDays: 12,
+    bestFor: "Trekkers, mountain lovers",
+    style: "Trekking",
+    badge: "Popular Trek",
+    itinerary: [
+      ["Day 1", "Arrival and trek preparation."],
+      ["Day 2", "Travel to Pokhara."],
+      ["Days 3-10", "Trek through villages to base camp."],
+      ["Final Day", "Return and departure."]
+    ]
+  },
+  "everest-base-camp": {
+    title: "Everest Base Camp Trek",
+    desc: "The legendary journey to the foot of Mount Everest.",
+    image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+    basePerDay: 145,
+    defaultDays: 14,
+    bestFor: "Experienced trekkers, adventure travelers",
+    style: "High-altitude Trekking",
+    badge: "Legendary",
+    itinerary: [
+      ["Day 1", "Arrival and briefing."],
+      ["Day 2", "Fly to Lukla and trek begins."],
+      ["Days 3-12", "Namche, monasteries, base camp, and return."],
+      ["Final Day", "Departure."]
+    ]
+  },
+  "everest-view-trek": {
+    title: "Everest View Trek",
+    desc: "See Everest without committing to the full base camp trek.",
+    image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+    basePerDay: 125,
+    defaultDays: 7,
+    bestFor: "Short-stay travelers, moderate trekkers",
+    style: "Soft Trekking",
+    badge: "Everest View",
+    itinerary: [
+      ["Day 1", "Fly to Lukla."],
+      ["Day 2", "Trek to Namche."],
+      ["Day 3+", "Everest view points and return."]
+    ]
+  },
+  "poon-hill": {
+    title: "Poon Hill Trek",
+    desc: "Short sunrise trek with beautiful Himalayan views.",
+    image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+    basePerDay: 85,
+    defaultDays: 5,
+    bestFor: "Beginners, families, short travelers",
+    style: "Easy Trekking",
+    badge: "Easy Trek",
+    itinerary: [
+      ["Day 1", "Drive to Pokhara."],
+      ["Day 2", "Start trek."],
+      ["Day 3", "Sunrise at Poon Hill."]
+    ]
+  },
+  "mardi-base-camp": {
+    title: "Mardi Himal Trek",
+    desc: "A scenic ridge trek with dramatic mountain views.",
+    image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+    basePerDay: 90,
+    defaultDays: 7,
+    bestFor: "Short trek lovers, photographers",
+    style: "Scenic Trekking",
+    badge: "Hidden Trail",
+    itinerary: [
+      ["Day 1", "Drive to Pokhara."],
+      ["Day 2", "Begin forest trail."],
+      ["Day 3+", "Ridge views and Mardi base camp route."]
+    ]
+  },
+  "langtang-valley": {
+    title: "Langtang Valley Trek",
+    desc: "Mountain valleys, Tamang culture, and peaks close to Kathmandu.",
+    image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+    basePerDay: 95,
+    defaultDays: 8,
+    bestFor: "Culture + trekking travelers",
+    style: "Mountain Valley Trek",
+    badge: "Near Kathmandu",
+    itinerary: [
+      ["Day 1", "Drive to trailhead."],
+      ["Day 2+", "Trek through valley and villages."],
+      ["Final Day", "Return Kathmandu."]
+    ]
+  },
+  "rara-lake": {
+    title: "Rara Lake Trek",
+    desc: "Remote blue lake journey in western Nepal.",
+    image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+    basePerDay: 125,
+    defaultDays: 10,
+    bestFor: "Offbeat travelers, nature lovers",
+    style: "Remote Nature",
+    badge: "Hidden Gem",
+    itinerary: [
+      ["Day 1", "Flight/drive toward Rara region."],
+      ["Day 2+", "Explore lake, villages, and viewpoints."]
+    ]
+  },
+  "kathmandu-heritage-tour": {
+    title: "Kathmandu Heritage Tour",
+    desc: "Temples, courtyards, local stories, and living history.",
+    image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+    basePerDay: 65,
+    defaultDays: 2,
+    bestFor: "Culture lovers, first-time visitors",
+    style: "Heritage",
+    badge: "Classic",
+    itinerary: [
+      ["Day 1", "Kathmandu Durbar Square, local alleys, and food."],
+      ["Day 2", "Boudha, Pashupati, and Patan/Bhaktapur."]
+    ]
+  },
+  "taste-of-nepal": {
+    title: "Taste of Nepal",
+    desc: "Cook, taste, and explore Nepali food culture with local families.",
+    image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
+    basePerDay: 75,
+    defaultDays: 3,
+    bestFor: "Food lovers, culture travelers",
+    style: "Food & Culinary",
+    badge: "Food Favorite",
+    itinerary: [
+      ["Day 1", "Local market visit."],
+      ["Day 2", "Cooking class and meal sharing."],
+      ["Day 3", "Food walk or village meal."]
+    ]
+  },
+  "momo-making": {
+    title: "Momo Making Experience",
+    desc: "Learn Nepal’s favorite dish with locals.",
+    image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
+    basePerDay: 50,
+    defaultDays: 1,
+    bestFor: "Food lovers, short-stay travelers",
+    style: "Cooking Experience",
+    badge: "Half/Full Day",
+    itinerary: [
+      ["Session", "Prepare ingredients, fold momo, cook, and eat together."]
+    ]
+  },
+  "custom-trip": {
+    title: "Custom Nepal Journey",
+    desc: "Tell us your travel mood and we’ll design the best journey for you.",
+    image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+    basePerDay: 80,
+    defaultDays: 7,
+    bestFor: "Undecided travelers",
+    style: "Custom",
+    badge: "Flexible",
+    itinerary: [
+      ["Step 1", "Tell us your travel style."],
+      ["Step 2", "We design your route, hotels, and experiences."],
+      ["Step 3", "You confirm and travel deeper."]
+    ]
+  }
+};
+
 const params = new URLSearchParams(window.location.search);
-const exp = params.get("experience");
+const expFromUrl = params.get("experience");
 
-if(exp){
-  document.getElementById("experience").value = decodeURIComponent(exp);
+const experienceSelect = document.getElementById("experience");
+const experienceText = document.getElementById("experienceText");
+const durationSelect = document.getElementById("duration");
+const groupSizeSelect = document.getElementById("groupSize");
+const styleSelect = document.getElementById("style");
+
+function getSelectedExperience(){
+  const id = experienceSelect.value || "custom-trip";
+  return experienceData[id] || experienceData["custom-trip"];
 }
 
-// PRICE CALCULATOR
-function calculatePrice(){
-  const days = document.getElementById("days").value || 0;
-  const group = document.getElementById("group").value || 1;
-  const style = document.getElementById("style").value || 1;
-
-  if(days > 0){
-    let base = 50; // base per day
-    let total = days * base * group * style;
-
-    document.getElementById("price").innerText = 
-      "$" + total + " (approx)";
+function setDurationFromExperience(exp){
+  if(!durationSelect.value || durationSelect.value === "custom"){
+    const days = String(exp.defaultDays || 7);
+    const option = [...durationSelect.options].find(opt => opt.value === days);
+    if(option) durationSelect.value = days;
   }
 }
 
-document.querySelectorAll("#days,#group,#style").forEach(el=>{
-  el.addEventListener("input",calculatePrice);
-});
+function updatePreview(){
+  const exp = getSelectedExperience();
 
-// WHATSAPP AUTO MESSAGE
-document.getElementById("planForm").addEventListener("submit",function(e){
-  e.preventDefault();
+  experienceText.textContent = exp.title;
+  document.getElementById("previewImage").src = exp.image;
+  document.getElementById("previewTitle").textContent = exp.title;
+  document.getElementById("previewDesc").textContent = exp.desc;
+  document.getElementById("previewBadge").textContent = exp.badge || "Selected Journey";
+  document.getElementById("previewDuration").textContent = (durationSelect.value && durationSelect.value !== "custom") ? durationSelect.value + " Days" : exp.defaultDays + " Days";
+  document.getElementById("previewBestFor").textContent = exp.bestFor;
+  document.getElementById("previewStyle").textContent = exp.style;
 
-  const name = document.getElementById("name").value;
-  const exp = document.getElementById("experience").value;
-  const days = document.getElementById("days").value;
-  const group = document.getElementById("group").value;
+  document.getElementById("itineraryPreview").innerHTML = exp.itinerary.map(day => `
+    <div class="itinerary-day">
+      <strong>${day[0]}</strong>
+      <p>${day[1]}</p>
+    </div>
+  `).join("");
 
-  const message = encodeURIComponent(
-`Hi Rigan, I want to plan a trip.
+  calculatePrice();
+}
+
+function calculatePrice(){
+  const exp = getSelectedExperience();
+  const days = durationSelect.value && durationSelect.value !== "custom" ? Number(durationSelect.value) : exp.defaultDays;
+  const guests = groupSizeSelect.value ? Number(groupSizeSelect.value) : 2;
+  const styleMultiplier = Number(styleSelect.value || 1.35);
+
+  const total = Math.round(exp.basePerDay * days * guests * styleMultiplier);
+  document.getElementById("estimatedPrice").textContent = "$" + total;
+  document.getElementById("priceNote").textContent = `Approx estimate for ${guests} guest(s), ${days} day(s). Final quote may vary.`;
+}
+
+function sendWhatsApp(){
+  const exp = getSelectedExperience();
+  const name = document.getElementById("name").value || "Not provided";
+  const email = document.getElementById("email").value || "Not provided";
+  const phone = document.getElementById("phone").value || "Not provided";
+  const country = document.getElementById("country").value || "Not provided";
+  const date = document.getElementById("travelDate").value || "Flexible";
+  const days = durationSelect.value || exp.defaultDays;
+  const guests = groupSizeSelect.value || "Not selected";
+  const styleText = styleSelect.options[styleSelect.selectedIndex]?.text || "Comfort";
+  const budget = document.getElementById("budget").value || "Not selected";
+  const note = document.getElementById("message").value || "No extra note";
+  const price = document.getElementById("estimatedPrice").textContent;
+
+  const msg = encodeURIComponent(
+`Hi Rigan Roots & Routes, I want to plan a Nepal trip.
 
 Name: ${name}
-Experience: ${exp}
-Days: ${days}
-Group: ${group}`
+Email: ${email}
+Phone: ${phone}
+Country: ${country}
+
+Experience: ${exp.title}
+Travel Date: ${date}
+Duration: ${days} days
+Guests: ${guests}
+Travel Style: ${styleText}
+Budget: ${budget}
+Estimated Price: ${price}
+
+Message:
+${note}`
   );
 
-  window.open(`https://wa.me/9779843322695?text=${message}`);
+  window.open(`https://wa.me/9779843322695?text=${msg}`, "_blank");
+}
+
+experienceSelect.addEventListener("change", () => {
+  const exp = getSelectedExperience();
+  setDurationFromExperience(exp);
+  updatePreview();
 });
 
+[durationSelect, groupSizeSelect, styleSelect].forEach(el => {
+  el.addEventListener("change", updatePreview);
+});
+
+document.getElementById("planForm").addEventListener("submit", e => {
+  e.preventDefault();
+  sendWhatsApp();
+});
+
+if(expFromUrl && experienceData[expFromUrl]){
+  experienceSelect.value = expFromUrl;
+}
+
+setDurationFromExperience(getSelectedExperience());
+updatePreview();
 </script>
 
 </body>

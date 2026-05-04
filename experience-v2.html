@@ -466,7 +466,7 @@ function render(cat){
   sectionSub.textContent = data[cat].sub;
 
   cards.innerHTML = data[cat].items.map(item => `
-    <a class="card" href="experience-detail-v2.html?experience=${item[3]}">
+    <a class="card" href="experience-detail-v2.html?id=${item[3]}">
       <img src="${item[4]}" alt="${item[0]}">
       <div class="card-body">
         <h3>${item[0]}</h3>

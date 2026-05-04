@@ -7,12 +7,70 @@
 <link rel="stylesheet" href="experience-v2.css" />
 
 <style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#071827;
+}
+
 .experience-page-wrap{
   min-height:100vh;
   background:#071827;
-  padding:40px 24px;
+  padding:24px;
 }
 
+/* TOP NAV */
+.rigan-top-nav{
+  max-width:1320px;
+  margin:0 auto 24px;
+  padding:16px 24px;
+  border-radius:22px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+.back-link{
+  color:white;
+  font-weight:900;
+  text-decoration:none;
+  background:rgba(255,255,255,.12);
+  padding:11px 18px;
+  border-radius:999px;
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+  align-items:center;
+}
+
+.nav-links a{
+  color:#e2e8f0;
+  text-decoration:none;
+  font-weight:800;
+  font-size:15px;
+}
+
+.nav-links a:hover{
+  color:white;
+}
+
+.plan-btn{
+  background:#16a34a;
+  color:white;
+  text-decoration:none;
+  padding:13px 24px;
+  border-radius:999px;
+  font-weight:900;
+  box-shadow:0 12px 28px rgba(22,163,74,.35);
+}
+
+/* PANEL */
 .experience-panel{
   max-width:1320px;
   margin:auto;
@@ -20,8 +78,9 @@
   border-radius:36px;
   overflow:hidden;
   display:grid;
-  grid-template-columns:280px 1fr;
-  min-height:620px;
+  grid-template-columns:300px 1fr;
+  min-height:650px;
+  box-shadow:0 35px 90px rgba(0,0,0,.35);
 }
 
 .exp-sidebar{
@@ -91,7 +150,7 @@
 .exp-options-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:0 36px;
+  gap:24px;
 }
 
 .exp-option{
@@ -110,7 +169,6 @@
   overflow:hidden;
 }
 
-/* subtle glow overlay */
 .exp-option::before{
   content:"";
   position:absolute;
@@ -120,133 +178,40 @@
   transition:.35s;
 }
 
-/* hover */
 .exp-option:hover{
-  transform:translateY(-5px) scale(1.01);
+  transform:translateY(-5px);
   border-color:#bbf7d0;
   box-shadow:0 18px 45px rgba(22,163,74,.18);
 }
 
-/* glow on hover */
 .exp-option:hover::before{
   opacity:1;
 }
 
-/* arrow appears */
-.exp-option::after{
-  content:"Explore →";
-  position:absolute;
-  right:20px;
-  bottom:14px;
-  font-size:13px;
-  font-weight:800;
-  color:#16a34a;
-  opacity:0;
-  transform:translateX(-6px);
-  transition:.3s;
-}
-
-.exp-option:hover::after{
-  opacity:1;
-  transform:translateX(0);
-}
-
-.exp-option:hover{
-  color:#16a34a;
-  transform:translateX(5px);
-}
-
 .exp-option-title{
-  font-size:17px;
+  position:relative;
+  font-size:18px;
   font-weight:900;
+  margin-bottom:6px;
 }
 
 .exp-option-sub{
+  position:relative;
   font-size:13px;
   color:#64748b;
   margin-top:4px;
+  line-height:1.5;
 }
 
 .exp-option-days{
-  background:#22c55e;
+  position:relative;
+  background:linear-gradient(135deg,#16a34a,#22c55e);
   color:white;
-  padding:7px 12px;
+  padding:8px 13px;
   border-radius:999px;
   font-size:12px;
   font-weight:900;
   white-space:nowrap;
-}
-
-@media(max-width:850px){
-  .experience-panel{
-    grid-template-columns:1fr;
-  }
-
-  .exp-options-grid{
-    grid-template-columns:1fr;
-  }
-}
-  .rigan-top-nav{
-  max-width:1320px;
-  margin:0 auto 22px;
-  padding:18px 24px;
-  border-radius:24px;
-  background:rgba(255,255,255,.10);
-  backdrop-filter:blur(14px);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  border:1px solid rgba(255,255,255,.18);
-}
-
-.back-link{
-  color:white;
-  font-weight:900;
-  text-decoration:none;
-  background:rgba(255,255,255,.12);
-  padding:12px 18px;
-  border-radius:999px;
-}
-
-.nav-links{
-  display:flex;
-  gap:28px;
-  align-items:center;
-}
-
-.nav-links a{
-  color:white;
-  text-decoration:none;
-  font-weight:800;
-  font-size:15px;
-  position:relative;
-}
-
-.nav-links a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-8px;
-  width:0;
-  height:3px;
-  background:#22c55e;
-  border-radius:999px;
-  transition:.3s;
-}
-
-.nav-links a:hover::after{
-  width:100%;
-}
-
-.plan-btn{
-  background:#16a34a;
-  color:white;
-  text-decoration:none;
-  padding:13px 22px;
-  border-radius:999px;
-  font-weight:900;
-  box-shadow:0 12px 28px rgba(22,163,74,.3);
 }
 
 @media(max-width:850px){
@@ -259,6 +224,14 @@
     flex-wrap:wrap;
     gap:16px;
   }
+
+  .experience-panel{
+    grid-template-columns:1fr;
+  }
+
+  .exp-options-grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -266,6 +239,20 @@
 <body>
 
 <section class="experience-page-wrap">
+
+  <nav class="rigan-top-nav">
+    <a href="index.html" class="back-link">← Back</a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#">Global Travel</a>
+      <a href="#">Marketplace</a>
+      <a href="work-with-us.html">Work With Us</a>
+    </div>
+
+    <a href="plan.html" class="plan-btn">Plan My Trip</a>
+  </nav>
+
   <div class="experience-panel">
 
     <aside class="exp-sidebar">
@@ -418,18 +405,6 @@ tabs.forEach(tab => {
 
 renderCategory("signature");
 </script>
-  <nav class="rigan-top-nav">
-  <a href="index.html" class="back-link">← Back</a>
-
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="global-travel.html">Global Travel</a>
-    <a href="marketplace.html">Marketplace</a>
-    <a href="work-with-us.html">Work With Us</a>
-  </div>
-
-  <a href="plan.html" class="plan-btn">Plan My Trip</a>
-</nav>
 
 </body>
 </html>

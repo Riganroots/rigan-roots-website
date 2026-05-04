@@ -160,20 +160,35 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f3ee;color:#07182
 <script src="experience-data-v2.js"></script>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const experienceId = params.get("experience") || params.get("id");
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+  const experienceId = params.get("id") || params.get("experience");
 
-let selected = null;
+  console.log("Experience ID:", experienceId);
+  console.log("Data file:", window.experienceDataV2);
 
-Object.values(window.experienceDataV2 || {}).forEach(category => {
-  const found = category.items.find(item => item.id === experienceId);
-  if(found) selected = found;
-});
+  if (!window.experienceDataV2) {
+    document.getElementById("title").textContent = "Data File Not Loaded";
+    document.getElementById("subtitle").textContent = "Check experience-data-v2.js file name and location.";
+    return;
+  }
 
-if(!selected){
-  document.getElementById("title").textContent = "Experience Not Found";
-  document.getElementById("subtitle").textContent = "Please open this page from the Experiences page.";
-} else {
+  let selected = null;
+
+  Object.values(window.experienceDataV2).forEach(category => {
+    category.items.forEach(item => {
+      if (item.id === experienceId) {
+        selected = item;
+      }
+    });
+  });
+
+  if (!selected) {
+    document.getElementById("title").textContent = "Experience Not Found";
+    document.getElementById("subtitle").textContent = "Wrong or missing ID in URL.";
+    return;
+  }
+
   document.title = selected.name + " | Rigan Roots & Routes";
 
   document.getElementById("hero").style.backgroundImage =
@@ -183,12 +198,13 @@ if(!selected){
   document.getElementById("title").textContent = selected.name;
   document.getElementById("subtitle").textContent = selected.subtitle;
   document.getElementById("overview").textContent = selected.overview;
+
   document.getElementById("durationTop").textContent = selected.duration || "-";
   document.getElementById("groupSize").textContent = selected.groupSize || "-";
   document.getElementById("difficulty").textContent = selected.difficulty || "-";
   document.getElementById("season").textContent = selected.season || "-";
   document.getElementById("price").textContent = selected.price || "Custom";
-  
+
   document.getElementById("highlights").innerHTML =
     (selected.highlights || []).map(x => `<li>${x}</li>`).join("");
 
@@ -211,22 +227,6 @@ if(!selected){
 
   document.getElementById("goodToKnow").innerHTML =
     (selected.goodToKnow || []).map(x => `<li>${x}</li>`).join("");
-}
-
-document.getElementById("inquiryForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const email = document.getElementById("email").value;
-  const method = document.getElementById("contactMethod").value;
-  const msg = document.getElementById("message").value;
-
-  const text = encodeURIComponent(
-    `Hi Rigan Roots & Routes,%0A%0AI am interested in: ${selected ? selected.name : "Experience"}%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0AContact Method: ${method}%0AMessage: ${msg}`
-  );
-
-  window.open(`https://wa.me/9779843322695?text=${text}`, "_blank");
 });
 </script>
 

@@ -12,297 +12,209 @@
 
 body{
   font-family:"Inter",sans-serif;
-  background:#061711;
-  color:white;
+  background:
+    linear-gradient(135deg,#174d2f,#2f6b3f,#9b6238,#f7f0e4);
+  background-size:300% 300%;
+  animation:bgMove 12s ease infinite;
+  color:#101815;
 }
 
-.experience-wrap{
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.wrapper{
   min-height:100vh;
-  padding:28px;
-  background:
-    radial-gradient(circle at 15% 10%, rgba(34,197,94,.18), transparent 30%),
-    linear-gradient(135deg,#061711,#071827 65%,#101815);
+  padding:30px;
 }
 
 /* NAV */
-.rigan-nav{
-  max-width:1320px;
-  margin:0 auto 28px;
+.nav{
+  max-width:1300px;
+  margin:auto;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:16px 18px;
-  border-radius:28px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(16px);
+  align-items:center;
+  padding:16px 22px;
+  border-radius:26px;
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(12px);
 }
 
-.back-btn{
-  background:rgba(255,255,255,.12);
-  padding:13px 20px;
-  border-radius:999px;
-  color:white;
-  text-decoration:none;
-  font-weight:900;
-}
-
-.nav-center{
-  display:flex;
-  gap:28px;
-}
-
-.nav-center a{
-  color:#dbe7df;
+.nav a{
   text-decoration:none;
   font-weight:800;
-}
-
-.plan-btn{
-  background:#16a34a;
-  color:white;
-  text-decoration:none;
-  padding:14px 26px;
-  border-radius:999px;
-  font-weight:900;
-  box-shadow:0 16px 35px rgba(22,163,74,.35);
-}
-
-/* MAIN */
-.exp-shell{
-  max-width:1320px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:360px 1fr;
-  gap:26px;
-}
-
-/* LEFT CATEGORY PANEL */
-.category-panel{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:34px;
-  padding:28px;
-  backdrop-filter:blur(18px);
-  min-height:720px;
-}
-
-.label{
-  font-size:12px;
-  letter-spacing:5px;
-  text-transform:uppercase;
-  color:#9fba6b;
-  font-weight:900;
-  margin-bottom:28px;
-}
-
-.category-btn{
-  width:100%;
-  border:none;
-  background:transparent;
-  color:#cfd8d2;
-  padding:18px 18px;
-  border-radius:20px;
-  text-align:left;
-  font-size:15px;
-  font-weight:850;
-  margin-bottom:10px;
-  cursor:pointer;
-  transition:.35s;
-}
-
-.category-btn:hover,
-.category-btn.active{
-  background:linear-gradient(135deg,rgba(22,163,74,.95),rgba(159,186,107,.8));
-  color:white;
-  transform:translateX(8px);
-  box-shadow:0 18px 40px rgba(22,163,74,.25);
-}
-
-/* RIGHT CONTENT */
-.exp-content{
-  background:#fffaf2;
-  color:#101815;
-  border-radius:34px;
-  padding:34px;
-  min-height:720px;
-  display:grid;
-  grid-template-columns:1.2fr 360px;
-  gap:28px;
-  box-shadow:0 28px 80px rgba(0,0,0,.28);
-}
-
-.breadcrumb{
-  font-size:12px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  color:#8a968f;
-  font-weight:900;
-  margin-bottom:28px;
-}
-
-.breadcrumb span{
   color:#174d2f;
 }
 
-.option-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:16px;
-}
-
-.exp-option{
-  display:grid;
-  grid-template-columns:90px 1fr auto;
-  gap:18px;
-  align-items:center;
-  padding:14px;
-  border-radius:24px;
-  background:white;
-  border:1px solid rgba(23,77,47,.10);
-  text-decoration:none;
-  color:#101815;
-  transition:.35s;
-  position:relative;
-  overflow:hidden;
-}
-
-.exp-option:hover{
-  transform:translateY(-5px);
-  box-shadow:0 18px 42px rgba(23,77,47,.14);
-  border-color:rgba(22,163,74,.35);
-}
-
-.exp-option img{
-  width:90px;
-  height:78px;
-  object-fit:cover;
-  border-radius:18px;
-}
-
-.exp-title{
-  font-size:19px;
-  font-weight:900;
-  margin-bottom:6px;
-}
-
-.exp-sub{
-  font-size:13px;
-  color:#647067;
-  line-height:1.5;
-}
-
-.exp-days{
+.plan-btn{
   background:#174d2f;
   color:white;
-  padding:9px 14px;
+  padding:12px 22px;
+  border-radius:999px;
+}
+
+/* MAIN */
+.shell{
+  max-width:1300px;
+  margin:30px auto;
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:26px;
+}
+
+/* LEFT */
+.sidebar{
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(18px);
+  border-radius:30px;
+  padding:26px;
+}
+
+.label{
+  font-size:13px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:#174d2f;
+  font-weight:900;
+  margin-bottom:25px;
+}
+
+.tab{
+  width:100%;
+  border:none;
+  background:transparent;
+  padding:16px;
+  margin-bottom:10px;
+  border-radius:16px;
+  text-align:left;
+  font-weight:800;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.tab:hover,
+.tab.active{
+  background:#174d2f;
+  color:white;
+  transform:translateX(6px);
+}
+
+/* RIGHT */
+.content{
+  background:#fffaf2;
+  border-radius:30px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:1.2fr 380px;
+  gap:26px;
+}
+
+.title{
+  font-size:13px;
+  letter-spacing:4px;
+  font-weight:900;
+  color:#888;
+  margin-bottom:25px;
+}
+
+.title span{
+  color:#174d2f;
+}
+
+/* OPTIONS */
+.grid{
+  display:grid;
+  gap:18px;
+}
+
+.option{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  gap:16px;
+  align-items:center;
+  padding:14px;
+  border-radius:20px;
+  background:white;
+  text-decoration:none;
+  color:#101815;
+  transition:.3s;
+}
+
+.option:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.option img{
+  width:80px;
+  height:70px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.days{
+  background:#174d2f;
+  color:white;
+  padding:7px 12px;
   border-radius:999px;
   font-size:12px;
   font-weight:900;
 }
 
-/* FEATURE PREVIEW */
-.preview-card{
-  border-radius:30px;
-  overflow:hidden;
+/* PREVIEW */
+.preview{
   position:relative;
-  min-height:560px;
-  background:#174d2f;
+  border-radius:26px;
+  overflow:hidden;
+  min-height:500px;
 }
 
-.preview-card img{
-  position:absolute;
-  inset:0;
+.preview img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.preview-card::after{
-  content:"";
+.overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.86),rgba(0,0,0,.25),transparent);
+  background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
 }
 
 .preview-content{
   position:absolute;
   bottom:0;
-  z-index:2;
+  padding:26px;
   color:white;
-  padding:28px;
 }
 
-.preview-badge{
-  display:inline-block;
-  background:rgba(255,255,255,.16);
-  border:1px solid rgba(255,255,255,.22);
-  padding:8px 14px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  margin-bottom:16px;
-}
-
-.preview-content h2{
+.preview h2{
   font-family:"Playfair Display",serif;
-  font-size:38px;
-  line-height:1.05;
-  margin-bottom:12px;
+  font-size:36px;
 }
 
-.preview-content p{
-  color:rgba(255,255,255,.82);
-  line-height:1.7;
+.preview p{
+  margin-top:10px;
   font-size:14px;
 }
 
-.preview-link{
+.preview a{
   display:inline-block;
-  margin-top:20px;
+  margin-top:16px;
   background:white;
   color:#174d2f;
-  padding:14px 22px;
+  padding:12px 20px;
   border-radius:999px;
   text-decoration:none;
   font-weight:900;
 }
 
-@media(max-width:1000px){
-  .exp-shell,
-  .exp-content{
+@media(max-width:900px){
+  .shell,.content{
     grid-template-columns:1fr;
-  }
-
-  .category-panel{
-    min-height:auto;
-  }
-
-  .preview-card{
-    min-height:380px;
-  }
-
-  .nav-center{
-    flex-wrap:wrap;
-    gap:14px;
-  }
-}
-
-@media(max-width:650px){
-  .exp-option{
-    grid-template-columns:1fr;
-  }
-
-  .exp-option img{
-    width:100%;
-    height:160px;
-  }
-
-  .rigan-nav{
-    flex-direction:column;
-    align-items:flex-start;
   }
 }
 </style>
@@ -310,178 +222,113 @@ body{
 
 <body>
 
-<section class="experience-wrap">
+<div class="wrapper">
 
-  <nav class="rigan-nav">
-    <a href="index.html" class="back-btn">← Back</a>
+  <div class="nav">
+    <a href="index.html">← Back</a>
+    <a href="plan.html" class="plan-btn">Plan My Trip</a>
+  </div>
 
-    <div class="nav-center">
-      <a href="index.html">Home</a>
-      <a href="#">Global Travel</a>
-      <a href="#">Marketplace</a>
-      <a href="work-with-us.html">Work With Us</a>
+  <div class="shell">
+
+    <!-- LEFT -->
+    <div class="sidebar">
+      <div class="label">Choose Your Vibe</div>
+
+      <button class="tab active" data-cat="signature">Signature ⭐</button>
+      <button class="tab" data-cat="village">Village Life</button>
+      <button class="tab" data-cat="food">Taste Nepal</button>
+      <button class="tab" data-cat="festival">Festival 🎉</button>
+      <button class="tab" data-cat="trek">Trekking</button>
     </div>
 
-    <a href="plan.html" class="plan-btn">Plan My Trip</a>
-  </nav>
+    <!-- RIGHT -->
+    <div class="content">
 
-  <div class="exp-shell">
-
-    <aside class="category-panel">
-      <p class="label">Choose Your Vibe</p>
-
-      <button class="category-btn active" data-category="signature">Signature Experiences ⭐</button>
-      <button class="category-btn" data-category="village">Village & Community Life</button>
-      <button class="category-btn" data-category="food">Taste of Nepal 🍲</button>
-      <button class="category-btn" data-category="festival">Festival of Nepal 🎉</button>
-      <button class="category-btn" data-category="culture">Cultural & Heritage</button>
-      <button class="category-btn" data-category="wellness">Spiritual & Wellness</button>
-      <button class="category-btn" data-category="trekking">Trek & Mountain Journeys</button>
-      <button class="category-btn" data-category="adventure">Adventure & Soft Adventure</button>
-      <button class="category-btn" data-category="easy">Easy Escapes</button>
-    </aside>
-
-    <main class="exp-content">
       <div>
-        <p class="breadcrumb">Experience Type › <span id="activeCategoryName">Signature Experiences ⭐</span></p>
-        <div class="option-grid" id="experienceOptions"></div>
+        <div class="title">Experience › <span id="catName">Signature</span></div>
+        <div class="grid" id="list"></div>
       </div>
 
-      <div class="preview-card">
-        <img id="previewImage" src="https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg" alt="">
+      <div class="preview">
+        <img id="pimg" src="">
+        <div class="overlay"></div>
         <div class="preview-content">
-          <span class="preview-badge" id="previewBadge">Top Pick</span>
-          <h2 id="previewTitle">Live Nepal, Don’t Just Visit</h2>
-          <p id="previewText">Choose experiences built around real people, local homes, culture, food, and everyday life.</p>
-          <a href="experience-detail-v2.html?experience=live-like-a-nepali" id="previewLink" class="preview-link">View Experience →</a>
+          <h2 id="ptitle"></h2>
+          <p id="psub"></p>
+          <a id="plink">View →</a>
         </div>
       </div>
-    </main>
+
+    </div>
 
   </div>
-</section>
+</div>
 
 <script>
-const experienceMenu = {
-  signature: {
-    name: "Signature Experiences ⭐",
-    items: [
-      ["Live Like a Nepali", "Stay with locals and experience everyday Nepal.", "7 Days", "live-like-a-nepali", "https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
-      ["Village Immersion", "Farming, local meals, and community life.", "5 Days", "village-immersion", "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-      ["Women-Only Cultural Trip", "Safe cultural journey for women travelers.", "6 Days", "women-only-cultural-trip", "https://i.postimg.cc/8CnBV2kM/womem-only-cultural-trip-jpg.jpg"],
-      ["Honeymoon in Nepal", "Romantic cultural and scenic journey.", "7 Days", "honeymoon-in-nepal", "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
-    ]
-  },
-
-  village: {
-    name: "Village & Community Life",
-    items: [
-      ["Farm & Harvest Experience", "Plant rice, harvest crops, and eat with locals.", "2 Days", "farm-harvest-experience", "https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-      ["Digital Detox Village Retreat", "Disconnect and live simply in nature.", "5 Days", "digital-detox-village-retreat", "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"]
-    ]
-  },
-
-  food: {
-    name: "Taste of Nepal 🍲",
-    items: [
-      ["Taste of Nepal", "Cook and eat with local families.", "3 Days", "taste-of-nepal", "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-      ["Momo Making Experience", "Learn Nepal’s favorite food hands-on.", "1 Day", "momo-making", "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
-    ]
-  },
-
-  festival: {
-    name: "Festival of Nepal 🎉",
-    items: [
-      ["Festival of Nepal", "Join Dashain, Tihar, and local celebrations.", "Seasonal", "festival-experience", "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-      ["Rice Planting Festival", "Mud, music, farming, and village celebration.", "1 Day", "rice-planting-festival", "https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"]
-    ]
-  },
-
-  culture: {
-    name: "Cultural & Heritage",
-    items: [
-      ["Kathmandu Heritage Tour", "Temples, courtyards, and living history.", "2 Days", "kathmandu-heritage-tour", "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-      ["Bhaktapur Living Culture", "Old streets, artisans, food, and traditions.", "1 Day", "bhaktapur-living-culture", "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"]
-    ]
-  },
-
-  wellness: {
-    name: "Spiritual & Wellness",
-    items: [
-      ["Yoga & Meditation Retreat", "Reset your body and mind in Nepal.", "5 Days", "yoga-meditation-retreat", "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"],
-      ["Monastery Meditation", "Experience silence and spiritual calm.", "2 Days", "monastery-meditation", "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80"]
-    ]
-  },
-
-  trekking: {
-    name: "Trek & Mountain Journeys",
-    items: [
-      ["Annapurna Base Camp", "Classic Himalayan base camp journey.", "12 Days", "annapurna-base-camp", "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-      ["Everest Base Camp", "Legendary trek to Everest region.", "14 Days", "everest-base-camp", "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-      ["Poon Hill Trek", "Short trek with famous sunrise view.", "5 Days", "poon-hill", "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
-    ]
-  },
-
-  adventure: {
-    name: "Adventure & Soft Adventure",
-    items: [
-      ["Paragliding in Pokhara", "Fly above lake and mountain views.", "Half Day", "paragliding-pokhara", "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
-      ["White Water Rafting", "Nepal river adventure.", "1 Day", "white-water-rafting", "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"]
-    ]
-  },
-
-  easy: {
-    name: "Easy Escapes",
-    items: [
-      ["Pokhara Experience", "Lake, mountains, cafes, and soft adventure.", "3 Days", "pokhara-experience", "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-      ["Bandipur Escape", "Hill town charm and slow travel.", "2 Days", "bandipur-escape", "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80"]
-    ]
-  }
+const data={
+  signature:[
+    ["Live Like a Nepali","Stay with locals","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
+    ["Village Immersion","Rural Nepal life","5 Days","village-immersion","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"]
+  ],
+  village:[
+    ["Farm Experience","Farming & food","2 Days","farm","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"]
+  ],
+  food:[
+    ["Taste of Nepal","Cook local food","3 Days","food","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
+  ],
+  festival:[
+    ["Festival Nepal","Dashain & Tihar","Seasonal","fest","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"]
+  ],
+  trek:[
+    ["Annapurna Base Camp","Classic trek","12 Days","abc","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"]
+  ]
 };
 
-const tabs = document.querySelectorAll(".category-btn");
-const grid = document.getElementById("experienceOptions");
-const activeName = document.getElementById("activeCategoryName");
+const tabs=document.querySelectorAll(".tab");
+const list=document.getElementById("list");
 
-const previewImage = document.getElementById("previewImage");
-const previewTitle = document.getElementById("previewTitle");
-const previewText = document.getElementById("previewText");
-const previewLink = document.getElementById("previewLink");
+const pimg=document.getElementById("pimg");
+const ptitle=document.getElementById("ptitle");
+const psub=document.getElementById("psub");
+const plink=document.getElementById("plink");
+const catName=document.getElementById("catName");
 
-function updatePreview(item){
-  previewImage.src = item[4];
-  previewTitle.textContent = item[0];
-  previewText.textContent = item[1];
-  previewLink.href = `experience-detail-v2.html?experience=${item[3]}`;
-}
+function render(cat){
+  catName.textContent=cat;
 
-function renderCategory(categoryKey){
-  const category = experienceMenu[categoryKey];
-  activeName.textContent = category.name;
-  updatePreview(category.items[0]);
+  const items=data[cat];
+  updatePreview(items[0]);
 
-  grid.innerHTML = category.items.map(item => `
-    <a class="exp-option" href="experience-detail-v2.html?experience=${item[3]}"
-       onmouseenter='updatePreview(${JSON.stringify(item)})'>
-      <img src="${item[4]}" alt="${item[0]}">
+  list.innerHTML=items.map(i=>`
+    <a class="option" href="experience-detail-v2.html?experience=${i[3]}"
+    onmouseenter='updatePreview(${JSON.stringify(i)})'>
+      <img src="${i[4]}">
       <div>
-        <div class="exp-title">${item[0]}</div>
-        <div class="exp-sub">${item[1]}</div>
+        <strong>${i[0]}</strong><br>
+        <small>${i[1]}</small>
       </div>
-      <span class="exp-days">${item[2]}</span>
+      <span class="days">${i[2]}</span>
     </a>
   `).join("");
 }
 
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-    renderCategory(tab.dataset.category);
-  });
+function updatePreview(i){
+  pimg.src=i[4];
+  ptitle.textContent=i[0];
+  psub.textContent=i[1];
+  plink.href="experience-detail-v2.html?experience="+i[3];
+}
+
+tabs.forEach(t=>{
+  t.onclick=()=>{
+    tabs.forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    render(t.dataset.cat);
+  }
 });
 
-renderCategory("signature");
+render("signature");
 </script>
 
 </body>

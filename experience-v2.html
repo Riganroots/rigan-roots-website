@@ -186,6 +186,80 @@
     grid-template-columns:1fr;
   }
 }
+  .rigan-top-nav{
+  max-width:1320px;
+  margin:0 auto 22px;
+  padding:18px 24px;
+  border-radius:24px;
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(14px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  border:1px solid rgba(255,255,255,.18);
+}
+
+.back-link{
+  color:white;
+  font-weight:900;
+  text-decoration:none;
+  background:rgba(255,255,255,.12);
+  padding:12px 18px;
+  border-radius:999px;
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+  align-items:center;
+}
+
+.nav-links a{
+  color:white;
+  text-decoration:none;
+  font-weight:800;
+  font-size:15px;
+  position:relative;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width:0;
+  height:3px;
+  background:#22c55e;
+  border-radius:999px;
+  transition:.3s;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+.plan-btn{
+  background:#16a34a;
+  color:white;
+  text-decoration:none;
+  padding:13px 22px;
+  border-radius:999px;
+  font-weight:900;
+  box-shadow:0 12px 28px rgba(22,163,74,.3);
+}
+
+@media(max-width:850px){
+  .rigan-top-nav{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav-links{
+    flex-wrap:wrap;
+    gap:16px;
+  }
+}
 </style>
 </head>
 
@@ -344,6 +418,18 @@ tabs.forEach(tab => {
 
 renderCategory("signature");
 </script>
+  <nav class="rigan-top-nav">
+  <a href="index.html" class="back-link">← Back</a>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="global-travel.html">Global Travel</a>
+    <a href="marketplace.html">Marketplace</a>
+    <a href="work-with-us.html">Work With Us</a>
+  </div>
+
+  <a href="plan.html" class="plan-btn">Plan My Trip</a>
+</nav>
 
 </body>
 </html>

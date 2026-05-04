@@ -3,285 +3,210 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experiences | Rigan Roots & Routes</title>
+<title>Plan Your Journey | Rigan Roots & Routes</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --primary:#991b1b;
-  --gradient:linear-gradient(135deg,#f59e0b,#dc2626,#7c2d12);
-  --stone-50:#fafaf9;
-  --stone-200:#e7e5e4;
-  --stone-600:#57534e;
-  --stone-900:#1c1917;
-  --radius-xl:28px;
-  --radius-lg:20px;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-
 body{
-  font-family:'Inter',sans-serif;
-  background:var(--stone-50);
-  color:var(--stone-600);
+  font-family:Inter,sans-serif;
+  background:#fafaf9;
+  margin:0;
 }
 
-/* NAV */
-.navbar{
-  position:sticky;top:0;background:white;
-  z-index:1000;
-  border-bottom:1px solid rgba(0,0,0,.05);
-}
-
-.nav-container{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  padding:16px;
-}
-
-.brand{
-  display:flex;
-  gap:10px;
-  text-decoration:none;
-}
-
-.brand-logo{
-  width:40px;height:40px;
-  background:var(--gradient);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  color:white;font-weight:800;
-}
-
-.brand-name{font-weight:700;color:var(--stone-900)}
-
-.nav-links{
-  display:flex;gap:20px;
-}
-
-.nav-links a{
-  text-decoration:none;
-  color:var(--stone-600);
-}
-
-/* HERO */
-.hero{
-  text-align:center;
-  padding:60px 20px 20px;
-}
-
-.hero h1{
-  font-family:'Playfair Display';
-  font-size:clamp(36px,6vw,60px);
-  color:var(--stone-900);
-}
-
-.hero p{
-  max-width:600px;
-  margin:auto;
-}
-
-/* MANDALA */
-.mandala{
-  position:relative;
-  height:500px;
-  margin:40px auto;
-  max-width:700px;
-}
-
-.center{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:180px;height:180px;
-  border-radius:50%;
-  background:var(--gradient);
-  color:white;
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;
-  text-align:center;
-}
-
-.cat{
-  position:absolute;
-  width:110px;height:110px;
-  border-radius:50%;
-  background:white;
-  border:none;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
-}
-
-.cat.active{
-  background:var(--primary);
-  color:white;
-}
-
-.c1{top:0;left:50%;transform:translateX(-50%)}
-.c2{right:0;top:120px}
-.c3{right:0;bottom:120px}
-.c4{bottom:0;left:50%;transform:translateX(-50%)}
-.c5{left:0;bottom:120px}
-.c6{left:0;top:120px}
-
-/* CARDS */
 .container{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
   padding:20px;
 }
 
+h1{
+  font-family:"Playfair Display";
+  font-size:42px;
+}
+
+.form-box{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
 }
 
-.card{
-  background:white;
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
-  text-decoration:none;
-  color:inherit;
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-6px);
-}
-
-.card img{
+input,select,textarea{
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
   width:100%;
-  height:200px;
-  object-fit:cover;
 }
 
-.card-body{
-  padding:16px;
+textarea{
+  grid-column:span 2;
 }
 
-.card-body h3{
-  font-size:18px;
-  color:var(--stone-900);
-}
-
-.meta{
-  margin-top:10px;
-  display:flex;
-  gap:8px;
-}
-
-.meta span{
-  background:#f3f4f6;
-  padding:6px 10px;
+.btn{
+  background:#991b1b;
+  color:white;
+  padding:14px;
+  border:none;
   border-radius:999px;
-  font-size:12px;
+  cursor:pointer;
+  margin-top:15px;
 }
 
-/* MOBILE */
+/* PRICE BOX */
+.price-box{
+  background:#f3f4f6;
+  padding:20px;
+  border-radius:16px;
+  margin-top:20px;
+}
+
+.price-box h3{
+  margin-bottom:10px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+}
+
+.whatsapp a{
+  background:#25D366;
+  color:white;
+  padding:12px 18px;
+  border-radius:999px;
+  text-decoration:none;
+}
+
 @media(max-width:768px){
-  .mandala{display:none}
+  .grid{grid-template-columns:1fr}
+  textarea{grid-column:span 1}
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="brand">
-      <div class="brand-logo">RR</div>
-      <div class="brand-name">Rigan</div>
-    </a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="plan.html">Plan</a>
-    </div>
-  </div>
-</nav>
+<div class="container">
 
-<!-- HERO -->
-<section class="hero">
-  <h1>Choose Your Nepal Experience</h1>
-  <p>Pick your travel mood. We’ll take you deeper.</p>
-</section>
+<h1>Plan Your Nepal Journey</h1>
 
-<!-- MANDALA -->
-<div class="mandala">
-  <div class="center">
-    <h2>Nepal</h2>
-    <small>Feel it</small>
-  </div>
+<div class="form-box">
 
-  <button class="cat c1 active" data="signature">⭐</button>
-  <button class="cat c2" data="village">🏡</button>
-  <button class="cat c3" data="food">🍲</button>
-  <button class="cat c4" data="festival">🎉</button>
-  <button class="cat c5" data="trek">🏔️</button>
-  <button class="cat c6" data="adventure">🌊</button>
+<form id="planForm">
+
+<div class="grid">
+
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email" required>
+
+<input type="text" id="phone" placeholder="WhatsApp Number">
+
+<select id="experience">
+<option value="">Select Experience</option>
+<option>Live Like a Nepali</option>
+<option>Annapurna Base Camp</option>
+<option>Everest View Trek</option>
+<option>Momo Cooking Experience</option>
+</select>
+
+<input type="number" id="days" placeholder="Number of Days">
+
+<select id="group">
+<option value="">Group Size</option>
+<option value="1">Solo</option>
+<option value="2">Couple</option>
+<option value="4">Family</option>
+<option value="8">Group</option>
+</select>
+
+<select id="style">
+<option value="">Travel Style</option>
+<option value="1">Budget</option>
+<option value="1.5">Comfort</option>
+<option value="2">Luxury</option>
+</select>
+
+<textarea id="message" placeholder="Tell us your dream trip..."></textarea>
+
 </div>
 
-<!-- RESULTS -->
-<div class="container">
-  <div class="grid" id="grid"></div>
+<div class="price-box">
+<h3>Estimated Price</h3>
+<p id="price">Select options to see estimate</p>
+</div>
+
+<button class="btn">Submit Inquiry</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- WhatsApp -->
+<div class="whatsapp">
+<a id="waBtn" href="#" target="_blank">Chat on WhatsApp</a>
 </div>
 
 <script>
-const data = {
-  signature:[
-    ["Live Like a Nepali","7 Days","live","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
-    ["Village Immersion","5 Days","village","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"]
-  ],
-  village:[
-    ["Farm Experience","2 Days","farm","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"]
-  ],
-  food:[
-    ["Momo Making","1 Day","momo","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
-  ],
-  festival:[
-    ["Dashain","3 Days","dashain","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"]
-  ],
-  trek:[
-    ["Annapurna Base Camp","12 Days","abc","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"]
-  ],
-  adventure:[
-    ["Paragliding","Half Day","para","https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"]
-  ]
-};
 
-const grid=document.getElementById("grid");
-const buttons=document.querySelectorAll(".cat");
+// AUTO GET EXPERIENCE FROM URL
+const params = new URLSearchParams(window.location.search);
+const exp = params.get("experience");
 
-function render(cat){
-  grid.innerHTML=data[cat].map(item=>`
-    <a class="card" href="plan.html?experience=${item[0]}">
-      <img src="${item[3]}">
-      <div class="card-body">
-        <h3>${item[0]}</h3>
-        <div class="meta">
-          <span>${item[1]}</span>
-          <span>View</span>
-        </div>
-      </div>
-    </a>
-  `).join("");
+if(exp){
+  document.getElementById("experience").value = decodeURIComponent(exp);
 }
 
-buttons.forEach(btn=>{
-  btn.onclick=()=>{
-    buttons.forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    render(btn.dataset);
+// PRICE CALCULATOR
+function calculatePrice(){
+  const days = document.getElementById("days").value || 0;
+  const group = document.getElementById("group").value || 1;
+  const style = document.getElementById("style").value || 1;
+
+  if(days > 0){
+    let base = 50; // base per day
+    let total = days * base * group * style;
+
+    document.getElementById("price").innerText = 
+      "$" + total + " (approx)";
   }
+}
+
+document.querySelectorAll("#days,#group,#style").forEach(el=>{
+  el.addEventListener("input",calculatePrice);
 });
 
-render("signature");
+// WHATSAPP AUTO MESSAGE
+document.getElementById("planForm").addEventListener("submit",function(e){
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const exp = document.getElementById("experience").value;
+  const days = document.getElementById("days").value;
+  const group = document.getElementById("group").value;
+
+  const message = encodeURIComponent(
+`Hi Rigan, I want to plan a trip.
+
+Name: ${name}
+Experience: ${exp}
+Days: ${days}
+Group: ${group}`
+  );
+
+  window.open(`https://wa.me/9779843322695?text=${message}`);
+});
+
 </script>
 
 </body>

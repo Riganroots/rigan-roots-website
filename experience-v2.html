@@ -98,12 +98,57 @@
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:18px;
-  padding:22px 0;
-  border-bottom:1px solid #e5e7eb;
+  gap:20px;
+  padding:22px;
+  border-radius:20px;
+  background:linear-gradient(180deg,#ffffff,#f9fbfc);
+  border:1px solid #e6edf2;
   text-decoration:none;
-  color:#475569;
+  color:#1e293b;
+  transition:.35s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+/* subtle glow overlay */
+.exp-option::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(22,163,74,.12),transparent 60%);
+  opacity:0;
+  transition:.35s;
+}
+
+/* hover */
+.exp-option:hover{
+  transform:translateY(-5px) scale(1.01);
+  border-color:#bbf7d0;
+  box-shadow:0 18px 45px rgba(22,163,74,.18);
+}
+
+/* glow on hover */
+.exp-option:hover::before{
+  opacity:1;
+}
+
+/* arrow appears */
+.exp-option::after{
+  content:"Explore →";
+  position:absolute;
+  right:20px;
+  bottom:14px;
+  font-size:13px;
+  font-weight:800;
+  color:#16a34a;
+  opacity:0;
+  transform:translateX(-6px);
   transition:.3s;
+}
+
+.exp-option:hover::after{
+  opacity:1;
+  transform:translateX(0);
 }
 
 .exp-option:hover{

@@ -26,7 +26,6 @@ body{
     #f7f0e4;
 }
 
-/* NAV */
 .top-nav{
   max-width:1200px;
   margin:auto;
@@ -49,7 +48,6 @@ body{
   border-radius:999px;
 }
 
-/* HERO */
 .hero{
   max-width:900px;
   margin:55px auto 30px;
@@ -78,7 +76,22 @@ body{
   line-height:1.7;
 }
 
-/* MANDALA */
+.search-box{
+  max-width:800px;
+  margin:25px auto 0;
+}
+
+.search-box input{
+  width:100%;
+  padding:16px 24px;
+  border:none;
+  border-radius:999px;
+  background:white;
+  box-shadow:0 15px 40px rgba(0,0,0,.08);
+  font-size:15px;
+  outline:none;
+}
+
 .mandala-wrap{
   max-width:900px;
   height:520px;
@@ -171,7 +184,6 @@ body{
 .c7{left:55px;top:250px}
 .c8{left:110px;top:75px}
 
-/* RESULT */
 .result-section{
   max-width:1200px;
   margin:auto;
@@ -196,7 +208,7 @@ body{
 
 .card-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:24px;
   transition:.3s;
 }
@@ -249,6 +261,7 @@ body{
   display:flex;
   gap:10px;
   margin-top:18px;
+  flex-wrap:wrap;
 }
 
 .meta span{
@@ -260,7 +273,6 @@ body{
   font-weight:900;
 }
 
-/* CTA */
 .cta{
   max-width:1200px;
   margin:70px auto 20px;
@@ -313,10 +325,6 @@ body{
     transform:none!important;
   }
 
-  .card-grid{
-    grid-template-columns:1fr;
-  }
-
   .result-title,.cta{
     flex-direction:column;
     align-items:flex-start;
@@ -329,54 +337,57 @@ body{
 <body>
 <div class="page">
 
-  <nav class="top-nav">
-    <a href="index.html">← Back Home</a>
-    <a href="plan.html" class="plan">Plan My Trip</a>
-  </nav>
+<nav class="top-nav">
+  <a href="index.html">← Back Home</a>
+  <a href="plan.html" class="plan">Plan My Trip</a>
+</nav>
 
-  <section class="hero">
-    <span>Rigan Roots & Routes</span>
-    <h1>What kind of Nepal do you want to feel?</h1>
-    <p>Choose your travel mood. We’ll guide you into homes, kitchens, mountains, festivals, villages, and stories that feel real.</p>
-  </section>
+<section class="hero">
+  <span>Rigan Roots & Routes</span>
+  <h1>What kind of Nepal do you want to feel?</h1>
+  <p>Choose your travel mood. We’ll guide you into homes, kitchens, mountains, festivals, villages, and stories that feel real.</p>
+</section>
 
-  <section class="mandala-wrap">
-    <div class="ring"></div>
+<div class="search-box">
+  <input type="text" id="searchBox" placeholder="Search experiences...">
+</div>
 
-    <div class="center-orb">
-      <h2>Nepal</h2>
-      <p>Not just visit. Feel it.</p>
-    </div>
+<section class="mandala-wrap">
+  <div class="ring"></div>
+  <div class="center-orb">
+    <h2>Nepal</h2>
+    <p>Not just visit. Feel it.</p>
+  </div>
 
-    <button class="cat c1 active" data-cat="signature"><small>⭐</small>Signature</button>
-    <button class="cat c2" data-cat="village"><small>🏡</small>Village Life</button>
-    <button class="cat c3" data-cat="food"><small>🍲</small>Taste Nepal</button>
-    <button class="cat c4" data-cat="festival"><small>🎉</small>Festivals</button>
-    <button class="cat c5" data-cat="culture"><small>🛕</small>Culture</button>
-    <button class="cat c6" data-cat="wellness"><small>🧘</small>Wellness</button>
-    <button class="cat c7" data-cat="trek"><small>🏔️</small>Mountains</button>
-    <button class="cat c8" data-cat="adventure"><small>🌊</small>Adventure</button>
-  </section>
+  <button class="cat c1 active" data-cat="signature"><small>⭐</small>Signature</button>
+  <button class="cat c2" data-cat="village"><small>🏡</small>Village Life</button>
+  <button class="cat c3" data-cat="food"><small>🍲</small>Taste Nepal</button>
+  <button class="cat c4" data-cat="festival"><small>🎉</small>Festivals</button>
+  <button class="cat c5" data-cat="culture"><small>🛕</small>Culture</button>
+  <button class="cat c6" data-cat="wellness"><small>🧘</small>Wellness</button>
+  <button class="cat c7" data-cat="trek"><small>🏔️</small>Mountains</button>
+  <button class="cat c8" data-cat="adventure"><small>🌊</small>Adventure</button>
+</section>
 
-  <section class="result-section">
-    <div class="result-title">
-      <div>
-        <h2 id="sectionTitle">Signature Experiences</h2>
-        <p id="sectionSub">Our most emotional and meaningful Nepal journeys.</p>
-      </div>
-      <p>Click any card to view details →</p>
-    </div>
-
-    <div class="card-grid" id="cards"></div>
-  </section>
-
-  <section class="cta">
+<section class="result-section">
+  <div class="result-title">
     <div>
-      <h2>Not sure what fits you?</h2>
-      <p>Tell us your travel mood and we’ll design your Nepal experience.</p>
+      <h2 id="sectionTitle">Signature Experiences</h2>
+      <p id="sectionSub">Our most emotional and meaningful Nepal journeys.</p>
     </div>
-    <a href="plan.html">Start Planning →</a>
-  </section>
+    <p>Click any card to view details →</p>
+  </div>
+
+  <div class="card-grid" id="cards"></div>
+</section>
+
+<section class="cta">
+  <div>
+    <h2>Not sure what fits you?</h2>
+    <p>Tell us your travel mood and we’ll design your Nepal experience.</p>
+  </div>
+  <a href="plan.html">Start Planning →</a>
+</section>
 
 </div>
 
@@ -388,70 +399,101 @@ const data = {
     items: [
       ["Live Like a Nepali","Stay with locals, eat home-cooked food, and experience everyday life.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
       ["Village Immersion","Farming, local meals, and community stories in rural Nepal.","5 Days","village-immersion","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-      ["Festival of Nepal","Celebrate Dashain, Tihar, and local festivals with families.","Seasonal","festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"]
+      ["Festival Experience","Celebrate Nepal’s living traditions with local families.","Seasonal","festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Taste of Nepal","Cook with locals and discover Nepal through food.","3 Days","taste-of-nepal","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Digital Detox Village Retreat","Disconnect from screens and reconnect with village rhythm.","5 Days","digital-detox-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Women-Only Cultural Trip","A safe and meaningful cultural journey for women.","6 Days","women-only-cultural-trip","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"]
     ]
   },
+
   village: {
     title: "Village & Community Life",
     sub: "Slow travel built around homes, fields, food, and people.",
     items: [
+      ["Live Like a Nepali","Simple living, deep connection, and local family warmth.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
+      ["Village Immersion","Farming, local meals, and community stories in rural Nepal.","5 Days","village-immersion","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
       ["Farm & Harvest Experience","Join locals in the fields and share the harvest meal.","2 Days","farm-harvest-experience","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-      ["Digital Detox Village Retreat","Disconnect from screens and reconnect with village rhythm.","5 Days","digital-detox-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-      ["Live Like a Nepali","Simple living, deep connection, and local family warmth.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"]
+      ["Rice Planting Experience","Mud, music, food, and village celebration.","1 Day","rice-planting-festival","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Bandipur Cultural Escape","Slow heritage town stay with local culture and views.","2 Days","bandipur-cultural-escape","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Hidden Village Story Journey","Meet families and discover stories beyond guidebooks.","3 Days","hidden-village-story-journey","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"]
     ]
   },
+
   food: {
     title: "Taste of Nepal",
     sub: "Food experiences inside kitchens, homes, and local markets.",
     items: [
       ["Taste of Nepal","Cook with locals and understand Nepal through food.","3 Days","taste-of-nepal","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
       ["Momo Making Experience","Learn Nepal’s favorite food hands-on with a family.","1 Day","momo-making","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-      ["Kathmandu Food Walk","Taste local snacks, tea, sweets, and street food.","Half Day","kathmandu-food-walk","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
+      ["Kathmandu Food Walk","Taste local snacks, tea, sweets, and street food.","Half Day","kathmandu-food-walk","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Dal Bhat Family Meal","Share Nepal’s everyday meal inside a local home.","Half Day","dal-bhat-family-meal","https://i.postimg.cc/3rqzzrVM/shelby-murphy-figueroa-u5o-M1k6pl-Pg-unsplash.jpg"],
+      ["Newari Food Experience","Explore rich Newari flavors, snacks, and stories.","1 Day","newari-food-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Market to Kitchen Experience","Shop ingredients, cook, and eat with a local family.","1 Day","market-to-kitchen-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
     ]
   },
+
   festival: {
     title: "Festival of Nepal",
     sub: "Seasonal journeys filled with rituals, food, light, and family.",
     items: [
-      ["Festival of Nepal","Join real festival moments with local communities.","Seasonal","festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-      ["Dashain with Local Family","Blessings, tika, food, and family rituals.","2 Days","dashain-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Dashain Experience","Blessings, tika, food, and family rituals.","3 Days","dashain-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Tihar Festival","Lights, flowers, music, worship, and family warmth.","3 Days","tihar-festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Holi Festival","Colors, music, and celebration across Nepal.","1 Day","holi-festival","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Indra Jatra","Kathmandu’s masked dances and living goddess.","1 Day","indra-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Bisket Jatra","Bhaktapur’s powerful chariot festival.","1 Day","bisket-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
       ["Rice Planting Festival","Mud, music, farming, food, and village celebration.","1 Day","rice-planting-festival","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"]
     ]
   },
+
   culture: {
     title: "Cultural & Heritage",
     sub: "Temples, courtyards, artisans, old towns, and living traditions.",
     items: [
       ["Kathmandu Heritage Tour","Explore temples, courtyards, and living history.","2 Days","kathmandu-heritage-tour","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
       ["Bhaktapur Living Culture","Old streets, artisans, food, and traditions.","1 Day","bhaktapur-living-culture","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-      ["Lumbini Spiritual Journey","Visit the birthplace of Buddha and peaceful sites.","3 Days","lumbini-spiritual-journey","https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80"]
+      ["Patan Artisan Walk","Meet makers, metal artists, and craft families.","1 Day","patan-artisan-walk","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Lumbini Spiritual Journey","Visit the birthplace of Buddha and peaceful sites.","3 Days","lumbini-spiritual-journey","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Boudhanath Kora Experience","Walk around the stupa and feel its spiritual rhythm.","Half Day","boudhanath-kora-experience","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Pashupatinath Evening Aarti","Experience the sacred evening ritual by the river.","Half Day","pashupatinath-evening-aarti","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"]
     ]
   },
+
   wellness: {
     title: "Spiritual & Wellness",
     sub: "Quiet retreats for rest, reflection, meditation, and healing.",
     items: [
       ["Yoga & Meditation Retreat","Reset your body and mind in peaceful Nepal.","5 Days","yoga-meditation-retreat","https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"],
-      ["Monastery Meditation","Experience silence and spiritual calm.","2 Days","monastery-meditation","https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80"],
-      ["Pokhara Wellness Escape","Lakeside calm, yoga, nature, and soft travel.","4 Days","pokhara-wellness-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
+      ["Monastery Meditation","Experience silence and spiritual calm.","2 Days","monastery-meditation","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Pokhara Wellness Escape","Lakeside calm, yoga, nature, and soft travel.","4 Days","pokhara-wellness-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Digital Detox Village Retreat","Slow down in a village away from screens.","5 Days","digital-detox-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Spiritual Kathmandu Retreat","Temples, meditation, and sacred valley energy.","3 Days","spiritual-kathmandu-retreat","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Himalayan Healing Escape","Nature, quiet time, and wellness-focused local travel.","6 Days","himalayan-healing-escape","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"]
     ]
   },
+
   trek: {
     title: "Trek & Mountain Journeys",
     sub: "Mountain journeys for travelers who want Himalayan emotion.",
     items: [
-      ["Annapurna Base Camp","Classic Himalayan base camp journey.","12 Days","annapurna-base-camp","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-      ["Everest View Trek","See Everest without the full base camp trek.","7 Days","everest-view-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-      ["Poon Hill Trek","Short trek with a famous sunrise view.","5 Days","poon-hill","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
+      ["Annapurna Base Camp","Classic Himalayan base camp journey.","10-12 Days","annapurna-base-camp","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Everest Base Camp","The legendary trek to the foot of Everest.","12-16 Days","everest-base-camp","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Mardi Himal Trek","Short scenic ridge trek with dramatic views.","7-9 Days","mardi-base-camp","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Langtang Valley Trek","Mountain valleys, culture, and peaks near Kathmandu.","8-10 Days","langtang-valley","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Poon Hill Trek","Easy sunrise trek with big Himalayan views.","3-5 Days","poon-hill","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Rara Lake Expedition","Remote lake journey in western Nepal.","8-10 Days","rara-lake","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
     ]
   },
+
   adventure: {
     title: "Adventure & Soft Adventure",
     sub: "Outdoor experiences for thrill, water, sky, and movement.",
     items: [
-      ["Paragliding in Pokhara","Fly above lake and mountain views.","Half Day","paragliding-pokhara","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
-      ["White Water Rafting","Feel Nepal’s river adventure.","1 Day","white-water-rafting","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"],
-      ["Biking Trails Nepal","Ride through villages and landscapes.","2 Days","biking-trails-nepal","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"]
+      ["Paragliding in Pokhara","Fly above lake and mountain views.","Half Day","paragliding-pokhara","https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"],
+      ["White Water Rafting","Feel Nepal’s river adventure.","1 Day","white-water-rafting","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Biking Trails Nepal","Ride through villages and landscapes.","2 Days","biking-trails-nepal","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Bungee Adventure","Take the leap into Nepal’s wild side.","1 Day","bungee-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Zipline Pokhara","Speed through the sky with mountain views.","Half Day","zipline-pokhara","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Jungle Safari","Wildlife, jungle, and local culture in Chitwan.","2 Days","jungle-safari","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
     ]
   }
 };
@@ -460,12 +502,12 @@ const buttons = document.querySelectorAll(".cat");
 const cards = document.getElementById("cards");
 const sectionTitle = document.getElementById("sectionTitle");
 const sectionSub = document.getElementById("sectionSub");
+const searchBox = document.getElementById("searchBox");
 
-function render(cat){
-  sectionTitle.textContent = data[cat].title;
-  sectionSub.textContent = data[cat].sub;
+let currentCategory = "signature";
 
-  cards.innerHTML = data[cat].items.map(item => `
+function createCards(items){
+  cards.innerHTML = items.map(item => `
     <a class="card" href="experience-detail-v2.html?experience=${item[3]}">
       <img src="${item[4]}" alt="${item[0]}">
       <div class="card-body">
@@ -479,6 +521,13 @@ function render(cat){
     </a>
   `).join("");
 }
+
+function render(cat){
+  currentCategory = cat;
+  sectionTitle.textContent = data[cat].title;
+  sectionSub.textContent = data[cat].sub;
+  searchBox.value = "";
+  createCards(data[cat].items);
 }
 
 buttons.forEach(btn=>{
@@ -487,6 +536,14 @@ buttons.forEach(btn=>{
     btn.classList.add("active");
     render(btn.dataset.cat);
   });
+});
+
+searchBox.addEventListener("input",()=>{
+  const term = searchBox.value.toLowerCase();
+  const filtered = data[currentCategory].items.filter(item =>
+    item[0].toLowerCase().includes(term) || item[1].toLowerCase().includes(term)
+  );
+  createCards(filtered);
 });
 
 render("signature");

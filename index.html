@@ -11,11 +11,9 @@
 <style>
 :root{
     --green:#174d2f;
-    --green-dark:#0f3521;
     --olive:#9fba6b;
     --brown:#a46a3f;
     --cream:#faf7ef;
-    --dark:#101815;
     --text:#222;
     --muted:#666;
 }
@@ -37,65 +35,63 @@ a{text-decoration:none}
     top:0;
     left:0;
     width:100%;
+    height:96px;
     z-index:999;
     padding:14px 55px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    background:rgba(7,22,17,.42);
-    backdrop-filter:blur(8px);
-}
-
-.logo{
-    display:flex;
-    align-items:center;
+    background:rgba(7,22,17,0.55);
+    backdrop-filter:blur(10px);
 }
 
 .logo img{
-    height:78px;
-    border-radius:12px; /* softer */
-}
+    height:70px;
+    width:auto;
+    object-fit:contain;
+    border-radius:12px;
 }
 
 .nav-links{
     display:flex;
     align-items:center;
-    gap:40px;
+    gap:32px;
 }
 
 .nav-links a{
     color:#ffffff !important;
-    font-weight:600;
     font-size:15px;
-    letter-spacing:0.4px;
-    transition:.25s ease;
+    font-weight:700;
+    letter-spacing:.3px;
+    white-space:nowrap;
 }
 
 .nav-links a:hover{
-    color:#9fba6b;
-}
+    color:var(--olive) !important;
 }
 
 /* HERO */
 .hero{
     min-height:100vh;
     background:
-    linear-gradient(90deg,rgba(0,0,0,.70),rgba(0,0,0,.35)),
-    url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80');
+    linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.35)),
+    url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80");
     background-size:cover;
     background-position:center;
+    background-repeat:no-repeat;
     display:flex;
     align-items:center;
-    padding:140px 70px 60px;
+    padding:150px 70px 70px;
     color:white;
 }
 
-.hero-content{max-width:720px}
+.hero-content{max-width:760px}
 
 .hero h1{
     font-size:clamp(3rem,6vw,5.8rem);
     line-height:1.05;
     margin-bottom:22px;
+    color:white;
 }
 
 .hero h1 span{color:var(--olive)}
@@ -111,6 +107,7 @@ a{text-decoration:none}
     font-size:20px;
     line-height:1.7;
     margin-bottom:34px;
+    color:white;
 }
 
 .hero-buttons{
@@ -411,9 +408,10 @@ a{text-decoration:none}
 /* RESPONSIVE */
 @media(max-width:1100px){
     .navbar{
-        padding:16px 24px;
+        height:auto;
+        padding:14px 24px;
         flex-wrap:wrap;
-        gap:16px;
+        gap:14px;
     }
 
     .nav-links{
@@ -427,7 +425,7 @@ a{text-decoration:none}
     .nav-links{display:none}
 
     .logo img{
-        height:54px;
+        height:56px;
     }
 
     .hero{
@@ -457,81 +455,7 @@ a{text-decoration:none}
 
     .footer{
         padding:50px 25px 25px;
-    } /* FINAL HERO + NAV FIX */
-
-.navbar{
-    position:absolute !important;
-    top:0;
-    left:0;
-    width:100%;
-    height:92px;
-    z-index:999;
-    padding:14px 50px !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    background:rgba(7,22,17,0.58) !important;
-    backdrop-filter:blur(10px);
-}
-
-.logo img{
-    height:68px !important;
-    width:auto !important;
-    object-fit:contain !important;
-    border-radius:12px;
-}
-
-.nav-links{
-    display:flex !important;
-    align-items:center !important;
-    gap:28px !important;
-}
-
-.nav-links a{
-    color:#ffffff !important;
-    font-size:15px !important;
-    font-weight:700 !important;
-    text-decoration:none !important;
-    white-space:nowrap;
-}
-
-.nav-links a:hover{
-    color:#9fba6b !important;
-}
-
-/* HERO MUST START FROM TOP */
-.hero{
-    min-height:100vh !important;
-    width:100% !important;
-    background:
-        linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.35)),
-        url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80") !important;
-    background-size:cover !important;
-    background-position:center !important;
-    background-repeat:no-repeat !important;
-    display:flex !important;
-    align-items:center !important;
-    padding:150px 70px 70px !important;
-    color:white !important;
-}
-
-/* FIX BIG TEXT POSITION */
-.hero-content{
-    max-width:760px !important;
-    margin-top:40px;
-}
-
-.hero h1{
-    color:white !important;
-}
-
-.hero h1 span{
-    color:#9fba6b !important;
-}
-
-.hero p{
-    color:white !important;
-}
+    }
 }
 </style>
 </head>
@@ -540,8 +464,8 @@ a{text-decoration:none}
 
 <nav class="navbar">
     <a href="index.html" class="logo">
-    <img src="https://i.postimg.cc/G2m13ZZh/logo.jpg" alt="Rigan Roots & Routes Logo">
-</a>
+        <img src="https://i.postimg.cc/G2m13ZZh/logo.jpg" alt="Rigan Roots & Routes Logo">
+    </a>
 
     <div class="nav-links">
         <a href="index.html">Home</a>

@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Travel | Rigan Roots & Routes</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body{margin:0;font-family:Inter,sans-serif;background:#f7f0e4;color:#1f2937}
+a{text-decoration:none;color:inherit}
+h1,h2,h3{font-family:"Playfair Display",serif}
+
+.hero{
+  min-height:80vh;
+  background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.35)),
+  url("https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg") center/cover;
+  color:white;
+  display:flex;
+  align-items:center;
+  padding:0 8%;
+}
+
+.hero h1{font-size:clamp(42px,7vw,82px);line-height:1;margin-bottom:18px}
+.hero p{font-size:20px;max-width:680px;color:#eee}
+
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  background:#174d2f;
+  color:white;
+  padding:15px 30px;
+  border-radius:999px;
+  font-weight:800;
+}
+
+.section{padding:80px 8%}
+.center{text-align:center}
+.subtitle{color:#666;max-width:700px;margin:0 auto 40px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+
+.card{
+  background:white;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 15px 40px rgba(0,0,0,.08);
+  transition:.3s;
+}
+
+.card:hover{transform:translateY(-8px)}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.card-content{padding:24px}
+.card h3{font-size:28px;margin:0 0 10px}
+.card p{color:#666;font-size:15px}
+
+.price{
+  margin-top:16px;
+  font-weight:800;
+  color:#174d2f;
+  font-size:20px;
+}
+
+.tag{
+  display:inline-block;
+  background:#edf5eb;
+  color:#174d2f;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.why{
+  background:#101815;
+  color:white;
+}
+
+.why p{color:#ccc}
+
+.why-box{
+  background:rgba(255,255,255,.08);
+  padding:26px;
+  border-radius:22px;
+}
+
+.cta{
+  background:linear-gradient(rgba(16,24,21,.8),rgba(16,24,21,.8)),
+  url("https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg") center/cover;
+  color:white;
+  text-align:center;
+}
+
+footer{
+  background:#071611;
+  color:#ccc;
+  text-align:center;
+  padding:32px;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+  <div>
+    <h1>Travel Beyond Nepal</h1>
+    <p>Curated international holidays for Nepali travelers — simple planning, trusted support, and memorable experiences.</p>
+    <a href="#packages" class="btn">Explore Global Packages</a>
+  </div>
+</section>
+
+<section class="section center" id="packages">
+  <h2>Global Travel Packages</h2>
+  <p class="subtitle">Start with our featured Thailand escape. More destinations will be added soon.</p>
+
+  <div class="grid">
+
+    <a href="global-thailand.html" class="card">
+      <img src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg">
+      <div class="card-content">
+        <span class="tag">Featured</span>
+        <h3>Thailand Escape 🇹🇭</h3>
+        <p>4N/5D Pattaya + Bangkok package with Coral Island, Wat Arun, Dinner Cruise, and Safari World.</p>
+        <div class="price">From NPR 65,000</div>
+      </div>
+    </a>
+
+    <div class="card">
+      <img src="https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg">
+      <div class="card-content">
+        <span class="tag">Coming Soon</span>
+        <h3>Dubai Holiday 🇦🇪</h3>
+        <p>Desert safari, city tour, shopping, and family-friendly experiences.</p>
+        <div class="price">Launching Soon</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.pexels.com/photos/2474689/pexels-photo-2474689.jpeg">
+      <div class="card-content">
+        <span class="tag">Coming Soon</span>
+        <h3>Bali Escape 🇮🇩</h3>
+        <p>Beach stays, temples, rice terraces, waterfalls, and honeymoon-friendly plans.</p>
+        <div class="price">Launching Soon</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section why">
+  <div class="center">
+    <h2>Why Travel With Rigan?</h2>
+    <p class="subtitle">We make international travel easier for Nepali travelers.</p>
+  </div>
+
+  <div class="grid">
+    <div class="why-box"><h3>Trusted Planning</h3><p>Clear itinerary, hotel, transfer, and tour details before booking.</p></div>
+    <div class="why-box"><h3>Simple Communication</h3><p>WhatsApp support for fast questions and coordination.</p></div>
+    <div class="why-box"><h3>Handpicked Packages</h3><p>Packages selected for value, comfort, and experience quality.</p></div>
+  </div>
+</section>
+
+<section class="section cta">
+  <h2>Ready to plan your next international trip?</h2>
+  <p>Message us with your preferred destination and travel date.</p>
+  <a href="https://wa.me/9779843322695?text=Hi%20Rigan%2C%20I%20want%20to%20plan%20an%20international%20trip." class="btn">Talk on WhatsApp</a>
+</section>
+
+<footer>
+  © 2026 Rigan Roots & Routes. Global travel made simple.
+</footer>
+
+</body>
+</html>

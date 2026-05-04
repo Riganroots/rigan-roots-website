@@ -8,96 +8,322 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Inter,sans-serif;background:#f7f0e4;color:#1f2937}
+:root{
+  --green:#174d2f;
+  --gold:#c89b52;
+  --cream:#f7f0e4;
+  --dark:#101815;
+  --muted:#666;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:var(--cream);
+  color:#1f2937;
+  overflow-x:hidden;
+}
+
 a{text-decoration:none;color:inherit}
 h1,h2,h3{font-family:"Playfair Display",serif}
 
+/* MANDALA EFFECT */
+.mandala{
+  position:fixed;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  border:1px solid rgba(200,155,82,.25);
+  right:-130px;
+  top:120px;
+  z-index:-1;
+  animation:spin 45s linear infinite;
+}
+
+.mandala::before,
+.mandala::after{
+  content:"";
+  position:absolute;
+  inset:35px;
+  border-radius:50%;
+  border:1px dashed rgba(23,77,47,.25);
+}
+
+.mandala::after{
+  inset:75px;
+  border-style:solid;
+}
+
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* HERO */
 .hero{
-  min-height:80vh;
-  background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.35)),
+  min-height:90vh;
+  background:
+  linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.35)),
   url("https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg") center/cover;
   color:white;
   display:flex;
   align-items:center;
   padding:0 8%;
+  position:relative;
+  overflow:hidden;
 }
 
-.hero h1{font-size:clamp(42px,7vw,82px);line-height:1;margin-bottom:18px}
-.hero p{font-size:20px;max-width:680px;color:#eee}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  right:8%;
+  bottom:-160px;
+  animation:spin 55s linear infinite;
+}
+
+.hero-content{
+  max-width:760px;
+  position:relative;
+  z-index:2;
+}
+
+.hero-badge{
+  display:inline-block;
+  padding:8px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:22px;
+}
+
+.hero h1{
+  font-size:clamp(44px,7vw,86px);
+  line-height:.98;
+  margin-bottom:22px;
+}
+
+.hero p{
+  font-size:20px;
+  max-width:680px;
+  color:#eee;
+}
 
 .btn{
   display:inline-block;
   margin-top:25px;
-  background:#174d2f;
+  background:var(--green);
   color:white;
   padding:15px 30px;
   border-radius:999px;
   font-weight:800;
+  transition:.3s;
 }
 
-.section{padding:80px 8%}
-.center{text-align:center}
-.subtitle{color:#666;max-width:700px;margin:0 auto 40px}
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 40px rgba(0,0,0,.22);
+}
 
+.btn-gold{
+  background:var(--gold);
+  color:#111;
+  margin-left:10px;
+}
+
+/* GENERAL */
+.section{
+  padding:85px 8%;
+  position:relative;
+}
+
+.center{text-align:center}
+
+.subtitle{
+  color:var(--muted);
+  max-width:700px;
+  margin:0 auto 40px;
+}
+
+.section h2{
+  font-size:clamp(34px,5vw,56px);
+  margin-bottom:14px;
+}
+
+/* PLANNER */
+.planner{
+  margin-top:-80px;
+  position:relative;
+  z-index:5;
+}
+
+.planner-box{
+  max-width:1120px;
+  margin:auto;
+  background:white;
+  border-radius:32px;
+  padding:34px;
+  box-shadow:0 25px 70px rgba(0,0,0,.16);
+  border:1px solid rgba(23,77,47,.12);
+}
+
+.planner-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
+  margin-top:25px;
+}
+
+.input{
+  width:100%;
+  padding:15px;
+  border-radius:16px;
+  border:1px solid #ddd;
+  font-size:15px;
+  background:#fffaf2;
+}
+
+.planner button{
+  border:none;
+  cursor:pointer;
+  margin-top:0;
+}
+
+/* CARDS */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:26px;
+  gap:28px;
 }
 
 .card{
   background:white;
-  border-radius:24px;
+  border-radius:28px;
   overflow:hidden;
-  box-shadow:0 15px 40px rgba(0,0,0,.08);
-  transition:.3s;
+  box-shadow:0 18px 45px rgba(0,0,0,.09);
+  transition:.35s;
+  position:relative;
 }
 
-.card:hover{transform:translateY(-8px)}
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.card-img-wrap{
+  overflow:hidden;
+  height:235px;
+}
 
 .card img{
   width:100%;
-  height:220px;
+  height:100%;
   object-fit:cover;
+  transition:.6s ease;
 }
 
-.card-content{padding:24px}
-.card h3{font-size:28px;margin:0 0 10px}
-.card p{color:#666;font-size:15px}
+.card:hover img{
+  transform:scale(1.1);
+}
+
+.card-content{
+  padding:26px;
+}
+
+.card h3{
+  font-size:30px;
+  margin:0 0 10px;
+}
+
+.card p{
+  color:#666;
+  font-size:15px;
+}
 
 .price{
   margin-top:16px;
   font-weight:800;
-  color:#174d2f;
+  color:var(--green);
   font-size:20px;
 }
 
 .tag{
   display:inline-block;
   background:#edf5eb;
-  color:#174d2f;
-  padding:6px 12px;
+  color:var(--green);
+  padding:7px 13px;
   border-radius:999px;
   font-size:12px;
   font-weight:800;
   margin-bottom:12px;
 }
 
+/* PHOTO STRIP */
+.photo-strip{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:18px;
+  margin-top:45px;
+}
+
+.photo-strip img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:26px;
+  box-shadow:0 18px 45px rgba(0,0,0,.12);
+}
+
+.photo-strip img:first-child{
+  height:540px;
+  grid-row:span 2;
+}
+
+/* WHY */
 .why{
-  background:#101815;
+  background:var(--dark);
   color:white;
+  overflow:hidden;
+}
+
+.why::before{
+  content:"";
+  position:absolute;
+  width:520px;
+  height:520px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;
+  left:-170px;
+  top:60px;
 }
 
 .why p{color:#ccc}
 
 .why-box{
   background:rgba(255,255,255,.08);
-  padding:26px;
-  border-radius:22px;
+  padding:28px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.12);
+  transition:.3s;
 }
 
+.why-box:hover{
+  transform:translateY(-6px);
+  background:rgba(255,255,255,.12);
+}
+
+/* CTA */
 .cta{
-  background:linear-gradient(rgba(16,24,21,.8),rgba(16,24,21,.8)),
+  background:
+  linear-gradient(rgba(16,24,21,.82),rgba(16,24,21,.82)),
   url("https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg") center/cover;
   color:white;
   text-align:center;
@@ -109,16 +335,94 @@ footer{
   text-align:center;
   padding:32px;
 }
+
+@media(max-width:950px){
+  .planner-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .photo-strip{
+    grid-template-columns:1fr;
+  }
+
+  .photo-strip img,
+  .photo-strip img:first-child{
+    height:260px;
+  }
+}
+
+@media(max-width:600px){
+  .planner-grid{
+    grid-template-columns:1fr;
+  }
+
+  .btn-gold{
+    margin-left:0;
+  }
+}
 </style>
 </head>
 
 <body>
 
+<div class="mandala"></div>
+
 <section class="hero">
-  <div>
+  <div class="hero-content">
+    <span class="hero-badge">Global Travel by Rigan</span>
     <h1>Travel Beyond Nepal</h1>
     <p>Curated international holidays for Nepali travelers — simple planning, trusted support, and memorable experiences.</p>
-    <a href="#packages" class="btn">Explore Global Packages</a>
+    <a href="#planner" class="btn">Customize My Holiday</a>
+    <a href="#packages" class="btn btn-gold">Explore Packages</a>
+  </div>
+</section>
+
+<section class="planner" id="planner">
+  <div class="planner-box center">
+    <h2>Plan Your Holiday</h2>
+    <p class="subtitle">Choose your destination, people, days, hotel type, and budget. We’ll prepare the best option for you.</p>
+
+    <div class="planner-grid">
+      <select id="destination" class="input">
+        <option value="Thailand">Thailand</option>
+        <option value="Dubai">Dubai</option>
+        <option value="Bali">Bali</option>
+        <option value="Japan">Japan</option>
+        <option value="Europe">Europe</option>
+      </select>
+
+      <select id="people" class="input">
+        <option value="1 Person">1 Person</option>
+        <option value="2 People">2 People</option>
+        <option value="Family">Family</option>
+        <option value="Group">Group</option>
+      </select>
+
+      <select id="days" class="input">
+        <option value="4N/5D">4N/5D</option>
+        <option value="5N/6D">5N/6D</option>
+        <option value="6N/7D">6N/7D</option>
+        <option value="Custom Days">Custom Days</option>
+      </select>
+
+      <select id="hotel" class="input">
+        <option value="3 Star">3 Star</option>
+        <option value="4 Star">4 Star</option>
+        <option value="5 Star">5 Star</option>
+        <option value="Budget Hotel">Budget Hotel</option>
+      </select>
+
+      <select id="budget" class="input">
+        <option value="Budget">Budget</option>
+        <option value="Standard">Standard</option>
+        <option value="Premium">Premium</option>
+        <option value="Luxury">Luxury</option>
+      </select>
+    </div>
+
+    <button onclick="sendWhatsApp()" class="btn">
+      Send My Holiday Request →
+    </button>
   </div>
 </section>
 
@@ -129,7 +433,9 @@ footer{
   <div class="grid">
 
     <a href="global-thailand.html" class="card">
-      <img src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg">
+      <div class="card-img-wrap">
+        <img src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg">
+      </div>
       <div class="card-content">
         <span class="tag">Featured</span>
         <h3>Thailand Escape 🇹🇭</h3>
@@ -139,7 +445,9 @@ footer{
     </a>
 
     <div class="card">
-      <img src="https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg">
+      <div class="card-img-wrap">
+        <img src="https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg">
+      </div>
       <div class="card-content">
         <span class="tag">Coming Soon</span>
         <h3>Dubai Holiday 🇦🇪</h3>
@@ -149,7 +457,9 @@ footer{
     </div>
 
     <div class="card">
-      <img src="https://images.pexels.com/photos/2474689/pexels-photo-2474689.jpeg">
+      <div class="card-img-wrap">
+        <img src="https://images.pexels.com/photos/2474689/pexels-photo-2474689.jpeg">
+      </div>
       <div class="card-content">
         <span class="tag">Coming Soon</span>
         <h3>Bali Escape 🇮🇩</h3>
@@ -158,6 +468,14 @@ footer{
       </div>
     </div>
 
+  </div>
+
+  <div class="photo-strip">
+    <img src="https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg">
+    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg">
+    <img src="https://images.pexels.com/photos/2474689/pexels-photo-2474689.jpeg">
+    <img src="https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg">
+    <img src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg">
   </div>
 </section>
 
@@ -168,9 +486,18 @@ footer{
   </div>
 
   <div class="grid">
-    <div class="why-box"><h3>Trusted Planning</h3><p>Clear itinerary, hotel, transfer, and tour details before booking.</p></div>
-    <div class="why-box"><h3>Simple Communication</h3><p>WhatsApp support for fast questions and coordination.</p></div>
-    <div class="why-box"><h3>Handpicked Packages</h3><p>Packages selected for value, comfort, and experience quality.</p></div>
+    <div class="why-box">
+      <h3>Trusted Planning</h3>
+      <p>Clear itinerary, hotel, transfer, and tour details before booking.</p>
+    </div>
+    <div class="why-box">
+      <h3>Simple Communication</h3>
+      <p>WhatsApp support for fast questions and coordination.</p>
+    </div>
+    <div class="why-box">
+      <h3>Handpicked Packages</h3>
+      <p>Packages selected for value, comfort, and experience quality.</p>
+    </div>
   </div>
 </section>
 
@@ -183,6 +510,22 @@ footer{
 <footer>
   © 2026 Rigan Roots & Routes. Global travel made simple.
 </footer>
+
+<script>
+function sendWhatsApp(){
+  const destination = document.getElementById("destination").value;
+  const people = document.getElementById("people").value;
+  const days = document.getElementById("days").value;
+  const hotel = document.getElementById("hotel").value;
+  const budget = document.getElementById("budget").value;
+
+  const message = encodeURIComponent(
+    `Hi Rigan, I want to plan an international holiday:\n\nDestination: ${destination}\nTravelers: ${people}\nDuration: ${days}\nHotel: ${hotel}\nBudget Type: ${budget}\n\nPlease send me package details.`
+  );
+
+  window.open(`https://wa.me/9779843322695?text=${message}`, "_blank");
+}
+</script>
 
 </body>
 </html>

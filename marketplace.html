@@ -5,398 +5,555 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marketplace | Rigan Roots & Routes</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root{
   --green:#174d2f;
+  --green-dark:#0f3522;
+  --sage:#9fba6b;
   --gold:#c89b52;
   --cream:#f7f0e4;
+  --sand:#efe3cf;
   --dark:#101815;
-  --muted:#667085;
+  --muted:#64748b;
+  --text:#132018;
+  --white:#ffffff;
+  --shadow:0 24px 70px rgba(19,32,24,.13);
 }
 
-*{box-sizing:border-box}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:var(--cream);
-  color:#1f2937;
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(159,186,107,.28), transparent 28%),
+    radial-gradient(circle at 92% 18%, rgba(154,106,66,.22), transparent 30%),
+    var(--cream);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at center, rgba(23,77,47,.045) 1px, transparent 1px),
+    linear-gradient(rgba(23,77,47,.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,77,47,.026) 1px, transparent 1px);
+  background-size:34px 34px,48px 48px,48px 48px;
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,.65), transparent 75%);
+  z-index:-3;
+}
+
+body::after{
+  content:"ॐ";
+  position:fixed;
+  right:-80px;
+  top:140px;
+  width:420px;
+  height:420px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-family:"Playfair Display",serif;
+  font-size:92px;
+  color:rgba(23,77,47,.045);
+  border:2px solid rgba(23,77,47,.045);
+  box-shadow:
+    inset 0 0 0 22px rgba(159,186,107,.035),
+    inset 0 0 0 42px rgba(154,106,66,.025),
+    inset 0 0 0 64px rgba(23,77,47,.025);
+  pointer-events:none;
+  z-index:-2;
 }
 
 a{text-decoration:none;color:inherit}
-h1,h2,h3{font-family:"Playfair Display",serif}
+h1,h2,h3{font-family:"Playfair Display",serif;color:var(--green-dark)}
+
+.top-nav{
+  position:absolute;
+  top:24px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1180px,calc(100% - 40px));
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:14px 16px 14px 20px;
+  border-radius:999px;
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(18px);
+  color:white;
+}
+
+.brand{display:flex;align-items:center;gap:11px;color:white;font-weight:900}
+.brand-mark{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--sage),#f5d88f);color:var(--green-dark);box-shadow:0 10px 25px rgba(0,0,0,.18)}
+.brand small{display:block;font-size:11px;color:rgba(255,255,255,.74);margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:18px}
+.nav-links a{color:rgba(255,255,255,.88);font-weight:800;font-size:13px}
+.nav-cta{background:white;color:var(--green)!important;padding:11px 16px;border-radius:999px}
+.mobile-menu-btn{display:none;color:white;font-size:24px;cursor:pointer}
 
 .hero{
-  min-height:75vh;
+  min-height:86vh;
+  background:
+    linear-gradient(90deg,rgba(7,20,13,.84),rgba(7,20,13,.52),rgba(7,20,13,.22)),
+    url("https://images.pexels.com/photos/6044266/pexels-photo-6044266.jpeg") center/cover;
+  color:white;
   display:flex;
   align-items:center;
-  padding:0 8%;
-  color:white;
-  background:
-  linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.35)),
-  url("https://images.pexels.com/photos/6044266/pexels-photo-6044266.jpeg") center/cover;
+  padding:145px 8% 110px;
   position:relative;
   overflow:hidden;
 }
+.hero::before{content:"";position:absolute;right:8%;bottom:-170px;width:500px;height:500px;border-radius:50%;background:repeating-conic-gradient(from 0deg, rgba(255,255,255,.09) 0 8deg, transparent 8deg 16deg),radial-gradient(circle, transparent 0 34%, rgba(255,255,255,.10) 35% 36%, transparent 37% 49%, rgba(255,255,255,.08) 50% 51%, transparent 52% 100%);animation:spin 60s linear infinite}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:190px;background:linear-gradient(to bottom,transparent,var(--cream))}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.hero-content{max-width:850px;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 17px;border-radius:999px;background:linear-gradient(135deg,var(--sage),#e9d28b);color:var(--green-dark);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:24px}
+.hero h1{color:white;font-size:clamp(46px,7vw,88px);line-height:.98;margin-bottom:22px;text-shadow:0 18px 45px rgba(0,0,0,.35)}
+.hero p{font-size:20px;max-width:720px;color:rgba(255,255,255,.90);line-height:1.75}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 
-.hero::after{
-  content:"";
-  position:absolute;
-  width:380px;
-  height:380px;
-  border:1px solid rgba(255,255,255,.22);
-  border-radius:50%;
-  right:-100px;
-  bottom:-120px;
-  animation:spin 45s linear infinite;
-}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--green);color:white;padding:15px 27px;border-radius:999px;font-weight:900;border:none;cursor:pointer;transition:.3s;box-shadow:0 16px 34px rgba(23,77,47,.25)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.22)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#f5d88f);color:#111}
 
-@keyframes spin{
-  from{transform:rotate(0)}
-  to{transform:rotate(360deg)}
-}
+.market-tools{margin-top:-90px;position:relative;z-index:5;padding:0 8% 40px}
+.tool-box{max-width:1180px;margin:auto;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-radius:34px;padding:28px;box-shadow:var(--shadow);border:1px solid rgba(23,77,47,.10)}
+.tool-top{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;margin-bottom:22px}
+.section-label{display:inline-flex;align-items:center;gap:8px;background:rgba(23,77,47,.08);color:var(--green);border:1px solid rgba(23,77,47,.12);padding:9px 16px;border-radius:999px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.tool-top h2{font-size:36px;margin-bottom:6px}
+.tool-top p{color:var(--muted);line-height:1.7}
+.search-row{display:grid;grid-template-columns:1.3fr .7fr .7fr;gap:14px;margin-bottom:20px}
+.input{width:100%;padding:15px;border-radius:16px;border:1px solid #e5e7eb;font-size:15px;background:#fffaf2;font-weight:700;outline:none}
+.input:focus{border-color:var(--sage);box-shadow:0 0 0 4px rgba(159,186,107,.18)}
+.filter-box{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.filter-box button{padding:12px 18px;border:none;border-radius:999px;background:#edf5eb;color:var(--green);font-weight:900;cursor:pointer;transition:.25s;border:1px solid rgba(23,77,47,.08)}
+.filter-box button.active,.filter-box button:hover{background:var(--green);color:white;transform:translateY(-2px)}
 
-.hero-content{
-  max-width:760px;
-  position:relative;
-  z-index:2;
-}
+.section{padding:72px 8%;position:relative}
+.center{text-align:center}
+.section-head{text-align:center;margin-bottom:40px}
+.section-head h2{font-size:clamp(34px,5vw,56px);margin-bottom:12px;line-height:1.08}
+.section-head p{color:var(--muted);max-width:760px;margin:0 auto;line-height:1.8}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1080px;margin:0 auto 50px}
+.stat-card{background:rgba(255,255,255,.9);border:1px solid rgba(23,77,47,.08);box-shadow:0 18px 45px rgba(19,32,24,.08);border-radius:26px;padding:22px;text-align:center}
+.stat-card strong{display:block;font-size:28px;color:var(--green);font-weight:900}
+.stat-card span{font-size:13px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
 
-.hero-badge{
-  display:inline-block;
-  background:rgba(255,255,255,.16);
-  border:1px solid rgba(255,255,255,.25);
-  padding:8px 16px;
-  border-radius:999px;
-  font-weight:800;
-  font-size:13px;
-  margin-bottom:20px;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:28px}
+.card{background:white;border-radius:34px;overflow:hidden;box-shadow:0 18px 45px rgba(19,32,24,.09);transition:.35s ease;position:relative;border:1px solid rgba(23,77,47,.08)}
+.card::after{content:"";position:absolute;inset:12px;border:1px solid rgba(23,77,47,.08);border-radius:26px;pointer-events:none;z-index:2}
+.card:hover{transform:translateY(-10px);box-shadow:var(--shadow)}
+.img-wrap{height:235px;overflow:hidden;position:relative;background:#e6ded0}
+.img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,20,13,.45),transparent)}
+.card img,.card video{width:100%;height:100%;object-fit:cover;transition:.55s;display:block}
+.card:hover img,.card:hover video{transform:scale(1.1)}
+.video-badge{position:absolute;left:17px;bottom:17px;z-index:3;background:rgba(255,255,255,.9);color:var(--green);padding:8px 11px;border-radius:999px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;box-shadow:0 12px 25px rgba(0,0,0,.14)}
+.mandala-dot{position:absolute;right:17px;bottom:17px;z-index:3;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.86);display:grid;place-items:center;color:var(--green);font-size:18px;box-shadow:0 12px 25px rgba(0,0,0,.14)}
+.content{padding:26px;position:relative;z-index:3}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px}
+.tag{display:inline-block;background:#edf5eb;color:var(--green);padding:7px 13px;border-radius:999px;font-size:12px;font-weight:900;text-transform:capitalize}
+.tag.gold{background:#fff4d8;color:#7c4a03}.tag.hot{background:#fee2e2;color:#991b1b}.tag.vendor-tag{background:#e0f2fe;color:#075985}
+.content h3{font-size:28px;margin:0 0 10px;color:var(--green-dark);line-height:1.12}
+.content p{color:var(--muted);font-size:15px;line-height:1.75}
+.price{color:var(--green);font-weight:900;font-size:20px;margin-top:15px}
+.vendor{font-size:13px;color:#777;margin-top:8px;line-height:1.5}
+.card-actions{display:flex;gap:10px;margin-top:18px}
+.small-btn{flex:1;text-align:center;padding:12px;border-radius:14px;font-weight:900;font-size:13px;background:var(--green);color:white;border:none;cursor:pointer}
+.small-btn.outline{background:#f5f5f5;color:#111}
+.no-result{grid-column:1/-1;text-align:center;background:white;border-radius:28px;padding:36px;color:var(--muted);box-shadow:0 18px 45px rgba(19,32,24,.08)}
 
-.hero h1{
-  font-size:clamp(44px,7vw,82px);
-  line-height:1;
-  margin:0 0 20px;
-}
+.vendor-video-section{padding:20px 8% 84px}
+.video-showcase{max-width:1180px;margin:auto;background:rgba(255,255,255,.92);border:1px solid rgba(23,77,47,.08);box-shadow:var(--shadow);border-radius:34px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.video-panel{position:relative;min-height:340px;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,rgba(23,77,47,.2),rgba(200,155,82,.18)),url("https://images.pexels.com/photos/6044266/pexels-photo-6044266.jpeg") center/cover}
+.video-panel::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,20,13,.55),transparent)}
+.play-circle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:82px;height:82px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.88);color:var(--green);font-size:28px;box-shadow:0 20px 50px rgba(0,0,0,.22)}
+.video-copy h2{font-size:42px;margin-bottom:12px}.video-copy p{color:var(--muted);line-height:1.85;margin-bottom:16px}.video-copy ul{list-style:none;display:grid;gap:10px;color:var(--muted);font-weight:700}.video-copy li::before{content:"✓ ";color:var(--green);font-weight:900}
 
-.hero p{
-  font-size:19px;
-  color:#eee;
-  max-width:650px;
-}
+.vendor-cta{background:linear-gradient(90deg,rgba(16,24,21,.92),rgba(16,24,21,.72)),url("https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg") center/cover;color:white;padding:94px 8%;text-align:center;position:relative;overflow:hidden}
+.vendor-cta::before{content:"";position:absolute;left:-160px;top:40px;width:430px;height:430px;border-radius:50%;border:1px solid rgba(255,255,255,.10);box-shadow:inset 0 0 0 35px rgba(255,255,255,.035),inset 0 0 0 70px rgba(255,255,255,.025)}
+.vendor-cta h2{color:white;font-size:clamp(36px,5vw,60px);margin-bottom:14px;position:relative;z-index:2}
+.vendor-cta p{color:#ddd;max-width:720px;margin:0 auto 10px;line-height:1.8;position:relative;z-index:2}
+.vendor-cta .btn{position:relative;z-index:2}
+.trust-section{padding:80px 8%}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1120px;margin:35px auto 0}
+.trust-box{background:rgba(255,255,255,.9);border:1px solid rgba(23,77,47,.08);border-radius:28px;padding:25px;box-shadow:0 18px 45px rgba(19,32,24,.08);text-align:left}
+.trust-box i{font-size:24px;color:var(--green);margin-bottom:14px}.trust-box h3{font-size:25px;margin-bottom:8px}.trust-box p{color:var(--muted);line-height:1.75;font-size:14.5px}
+footer{background:#071611;color:#ccc;text-align:center;padding:34px;line-height:1.7}.hidden{display:none!important}
 
-.btn{
-  display:inline-block;
-  background:var(--green);
-  color:white;
-  padding:15px 28px;
-  border-radius:999px;
-  font-weight:800;
-  margin-top:22px;
-  transition:.3s;
-}
-
-.btn:hover{
-  transform:translateY(-3px);
-}
-
-.btn-gold{
-  background:var(--gold);
-  color:#111;
-  margin-left:10px;
-}
-
-.filter-wrap{
-  margin-top:-45px;
-  position:relative;
-  z-index:5;
-  padding:0 8%;
-}
-
-.filter-box{
-  background:white;
-  padding:24px;
-  border-radius:28px;
-  box-shadow:0 22px 60px rgba(0,0,0,.14);
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.filter-box button{
-  padding:12px 18px;
-  border:none;
-  border-radius:999px;
-  background:#edf5eb;
-  color:var(--green);
-  font-weight:800;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.filter-box button.active,
-.filter-box button:hover{
-  background:var(--green);
-  color:white;
-}
-
-.section{
-  padding:80px 8%;
-}
-
-.section-head{
-  text-align:center;
-  margin-bottom:40px;
-}
-
-.section-head h2{
-  font-size:clamp(34px,5vw,56px);
-  margin-bottom:12px;
-}
-
-.section-head p{
-  color:var(--muted);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-  gap:28px;
-}
-
-.card{
-  background:white;
-  border-radius:28px;
-  overflow:hidden;
-  box-shadow:0 18px 45px rgba(0,0,0,.09);
-  transition:.35s ease;
-}
-
-.card:hover{
-  transform:translateY(-10px);
-}
-
-.img-wrap{
-  height:235px;
-  overflow:hidden;
-}
-
-.card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:.55s;
-}
-
-.card:hover img{
-  transform:scale(1.1);
-}
-
-.content{
-  padding:24px;
-}
-
-.tag{
-  display:inline-block;
-  background:#edf5eb;
-  color:var(--green);
-  padding:7px 13px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:12px;
-  text-transform:capitalize;
-}
-
-.content h3{
-  font-size:26px;
-  margin:0 0 10px;
-}
-
-.content p{
-  color:#666;
-  font-size:15px;
-}
-
-.price{
-  color:var(--green);
-  font-weight:900;
-  font-size:18px;
-  margin-top:15px;
-}
-
-.vendor{
-  font-size:13px;
-  color:#777;
-  margin-top:8px;
-}
-
-.card-actions{
-  display:flex;
-  gap:10px;
-  margin-top:18px;
-}
-
-.small-btn{
-  flex:1;
-  text-align:center;
-  padding:12px;
-  border-radius:14px;
-  font-weight:800;
-  font-size:13px;
-  background:var(--green);
-  color:white;
-}
-
-.small-btn.outline{
-  background:#f5f5f5;
-  color:#111;
-}
-
-.vendor-cta{
-  background:
-  linear-gradient(90deg,rgba(16,24,21,.9),rgba(16,24,21,.7)),
-  url("https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg") center/cover;
-  color:white;
-  padding:90px 8%;
-  text-align:center;
-}
-
-.vendor-cta h2{
-  font-size:clamp(36px,5vw,60px);
-  margin-bottom:14px;
-}
-
-.vendor-cta p{
-  color:#ddd;
-  max-width:650px;
-  margin:auto;
-}
-
-footer{
-  background:#071611;
-  color:#ccc;
-  text-align:center;
-  padding:32px;
-}
-
-@media(max-width:700px){
-  .btn-gold{
-    margin-left:0;
-  }
-
-  .hero{
-    min-height:80vh;
-  }
-}
+@media(max-width:1050px){.search-row,.trust-grid,.stats-grid,.video-showcase{grid-template-columns:1fr 1fr}.tool-top{grid-template-columns:1fr}}
+@media(max-width:820px){.mobile-menu-btn{display:block}.nav-links{position:fixed;top:0;right:-100%;width:78%;height:100vh;background:white;flex-direction:column;justify-content:center;padding:40px;box-shadow:var(--shadow);transition:.3s;z-index:999}.nav-links.active{right:0}.nav-links a{color:var(--green);font-size:17px}.nav-cta{background:var(--green);color:white!important}.video-showcase{grid-template-columns:1fr}}
+@media(max-width:600px){body::after{display:none}.top-nav{top:14px;width:calc(100% - 24px);border-radius:24px}.brand small{display:none}.brand span:last-child{font-size:13px}.hero{padding:135px 6% 100px;min-height:82vh}.hero h1{font-size:42px}.hero p{font-size:16px}.hero-actions .btn{width:auto}.market-tools{padding:0 6% 30px}.tool-box{padding:22px;border-radius:26px}.search-row,.trust-grid,.stats-grid{grid-template-columns:1fr}.section,.trust-section,.vendor-video-section{padding-left:6%;padding-right:6%}.btn{width:100%}.card-actions{flex-direction:column}.video-copy h2{font-size:32px}}
 </style>
 </head>
 
 <body>
 
+<nav class="top-nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark"><i class="fa-solid fa-mountain-sun"></i></span>
+    <span>Rigan Roots & Routes<small>Meaningful Journeys Through Nepal</small></span>
+  </a>
+  <div class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></div>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="experience-v2.html">Experiences</a>
+    <a href="regions.html">Regions</a>
+    <a href="global.html">Global Travel</a>
+    <a href="marketplace.html">Marketplace</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
 <section class="hero">
   <div class="hero-content">
-    <span class="hero-badge">Made in Nepal Marketplace</span>
-    <h1>Buy Local. Travel Deeper.</h1>
-    <p>Discover Nepali experiences, organic coffee, hemp products, handmade crafts, and local goods from real makers and hosts.</p>
-    <a href="#marketplace" class="btn">Explore Marketplace</a>
-    <a href="vendor-upload.html" class="btn btn-gold">Become a Vendor</a>
+    <span class="hero-badge"><i class="fa-solid fa-store"></i> Made in Nepal Marketplace</span>
+    <h1>Local People. Local Listings. Real Nepal.</h1>
+    <p>Discover and list Nepali products, rentals, stays, vehicles, hotels, homes, local services, and cultural experiences — all connected through Rigan.</p>
+    <div class="hero-actions">
+      <a href="#marketplace" class="btn">Explore Marketplace</a>
+      <a href="vendor-upload.html" class="btn btn-gold">Become a Vendor</a>
+    </div>
   </div>
 </section>
 
-<div class="filter-wrap">
-  <div class="filter-box">
-    <button class="active" onclick="filterItems('all', this)">All</button>
-    <button onclick="filterItems('experience', this)">Experiences</button>
-    <button onclick="filterItems('coffee', this)">Coffee</button>
-    <button onclick="filterItems('hemp', this)">Hemp Products</button>
-    <button onclick="filterItems('handicraft', this)">Handicraft</button>
-    <button onclick="filterItems('food', this)">Local Food</button>
+<section class="market-tools">
+  <div class="tool-box">
+    <div class="tool-top">
+      <div>
+        <div class="section-label"><i class="fa-solid fa-filter"></i> Marketplace Tools</div>
+        <h2>Find Local Listings</h2>
+        <p>Search, filter, and sort products, vehicles, rooms, houses, hotels, local services, experiences, and vendor-submitted listings.</p>
+      </div>
+      <a href="vendor-upload.html" class="btn btn-gold"><i class="fa-solid fa-upload"></i> Submit Product</a>
+    </div>
+
+    <div class="search-row">
+      <input type="search" id="searchInput" class="input" placeholder="Search guides, cars, coffee, hotel, homestay, hemp bag...">
+      <select id="sortSelect" class="input">
+        <option value="featured">Sort: Featured First</option>
+        <option value="name">Sort: Name A-Z</option>
+        <option value="low">Sort: Price Low to High</option>
+        <option value="high">Sort: Price High to Low</option>
+      </select>
+      <select id="vendorSelect" class="input">
+        <option value="all">All Vendors</option>
+        <option value="local">Local Makers</option>
+        <option value="rigan">Rigan Curated</option>
+        <option value="community">Community Hosts</option>
+      </select>
+    </div>
+
+    <div class="filter-box">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="guide">Guides</button>
+      <button data-filter="experience">Experiences</button>
+      <button data-filter="coffee">Coffee</button>
+      <button data-filter="hemp">Hemp Products</button>
+      <button data-filter="handicraft">Handicraft</button>
+      <button data-filter="food">Local Food</button>
+      <button data-filter="wellness">Wellness</button>
+      <button data-filter="vehicle">Vehicles</button>
+      <button data-filter="stay">Stays / Houses</button>
+      <button data-filter="hotel">Hotels</button>
+      <button data-filter="service">Local Services</button>
+    </div>
   </div>
-</div>
+</section>
 
 <section class="section" id="marketplace">
   <div class="section-head">
-    <h2>Marketplace</h2>
-    <p>Support Nepali makers, local hosts, and community-based products.</p>
+    <div class="section-label"><i class="fa-solid fa-basket-shopping"></i> Rigan Marketplace</div>
+    <h2>Everything Local, One Trusted Space</h2>
+    <p>From coffee beans and hemp bags to cars for rent, homes, hotels, guides, local services, and experiences — every inquiry goes directly to Rigan WhatsApp for confirmation.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><strong id="totalCount">0</strong><span>Total Items</span></div>
+    <div class="stat-card"><strong>10+</strong><span>Categories</span></div>
+    <div class="stat-card"><strong>Verified</strong><span>Guides & Vendors</span></div>
+    <div class="stat-card"><strong>Video</strong><span>Product Stories</span></div>
   </div>
 
   <div class="grid" id="grid"></div>
 </section>
 
+<section class="vendor-video-section">
+  <div class="video-showcase">
+    <div class="video-panel">
+      <div class="play-circle"><i class="fa-solid fa-play"></i></div>
+    </div>
+    <div class="video-copy">
+      <div class="section-label"><i class="fa-solid fa-video"></i> Vendor Videos</div>
+      <h2>Let Products Tell Their Story</h2>
+      <p>Short videos make the marketplace feel more real. Vendors can show how products are made, who makes them, how travelers can use them, and why they matter.</p>
+      <ul>
+        <li>Product-making clips for coffee, hemp, handicrafts, and food</li>
+        <li>Host introduction videos for guides and local experiences</li>
+        <li>Vehicle, hotel, homestay, and service preview videos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="trust-section center">
+  <div class="section-label"><i class="fa-solid fa-hands-holding-circle"></i> Why Marketplace</div>
+  <h2>More Than Shopping</h2>
+  <p class="subtitle" style="color:var(--muted);max-width:760px;margin:0 auto;line-height:1.8">This marketplace is part of Rigan’s mission: connect travelers with local people, local assets, village skills, homes, transport, food stories, handmade products, and meaningful income opportunities.</p>
+
+  <div class="trust-grid">
+    <div class="trust-box"><i class="fa-solid fa-seedling"></i><h3>Local Income</h3><p>Promote products and experiences that support Nepali makers, farmers, guides, and hosts.</p></div>
+    <div class="trust-box"><i class="fa-solid fa-mug-hot"></i><h3>Story-Based Products</h3><p>Not just items — coffee, hemp, crafts, homes, vehicles, and services with people and place behind them.</p></div>
+    <div class="trust-box"><i class="fa-brands fa-whatsapp"></i><h3>Simple Inquiry</h3><p>Buyers can inquire through WhatsApp, and Rigan can confirm price, delivery, stock, and vendor details.</p></div>
+  </div>
+</section>
+
 <section class="vendor-cta">
-  <h2>Sell Made in Nepal Products</h2>
-  <p>Do you sell coffee, hemp clothing, handicrafts, local food products, or cultural experiences? Join Rigan Marketplace.</p>
-  <a href="vendor-upload.html" class="btn btn-gold">Submit Your Product</a>
+  <h2>List Anything Local</h2>
+  <p>Do you have a car for rent, house, room, hotel, coffee beans, hemp clothing, handicrafts, local food, wellness items, guide service, photography, or cultural experience? List it on Rigan Marketplace.</p>
+  <a href="vendor-upload.html" class="btn btn-gold"><i class="fa-solid fa-store"></i> Submit Your Listing</a>
 </section>
 
 <footer>
-  © 2026 Rigan Roots & Routes. Made in Nepal Marketplace.
+  © 2026 Rigan Roots & Routes. Made in Nepal Marketplace.<br>
+  Kathmandu, Nepal · riganrootsroutes@gmail.com · +977 9843322695
 </footer>
 
 <script src="marketplace-data.js"></script>
 
 <script>
+const WHATSAPP_NUMBER = "9779843322695";
 let currentFilter = "all";
+let currentSearch = "";
 
-const defaultData = typeof marketplaceData !== "undefined" ? marketplaceData : [];
+const fallbackData = [
+  {name:"Suman Tamang - Trekking Guide",category:"guide",description:"Licensed trekking and cultural guide for Annapurna, Mardi, Pokhara, and village immersion journeys.",price:"From NPR 3,000 / day",priceNumber:3000,vendor:"Verified Guide",vendorType:"community",location:"Pokhara / Annapurna",image:"https://images.pexels.com/photos/1076081/pexels-photo-1076081.jpeg",video:"",phone:"9779843322695",languages:"English, Nepali, Basic Japanese",rating:"4.9",guideType:"Trekking + Culture",available:"Available This Week",verified:true,featured:true},
+  {name:"Maya Gurung - Local Culture Host",category:"guide",description:"Friendly local host for food walks, village stories, momo cooking, women-led experiences, and family-friendly culture walks.",price:"From NPR 2,500 / day",priceNumber:2500,vendor:"Verified Host",vendorType:"community",location:"Kathmandu / Bandipur",image:"https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg",video:"",phone:"9779843322695",languages:"English, Nepali",rating:"4.8",guideType:"Culture + Food",available:"Available on Request",verified:true,featured:true},
+  {name:"Organic Nepal Coffee",category:"coffee",description:"Fresh Nepali coffee from local growers, perfect for travelers who want to take Nepal home.",price:"NPR 850",priceNumber:850,vendor:"Rigan Curated",vendorType:"rigan",location:"Nepal",image:"https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg",video:"",featured:true},
+  {name:"Hemp Travel Bag",category:"hemp",description:"Eco-friendly handmade hemp bag crafted by Nepali makers for everyday use and travel.",price:"NPR 2,200",priceNumber:2200,vendor:"Local Maker",vendorType:"local",location:"Kathmandu",image:"https://images.pexels.com/photos/5705490/pexels-photo-5705490.jpeg",video:"",featured:true},
+  {name:"Momo Making Experience",category:"experience",description:"Join a local family and learn to make momo with stories, laughter, and Nepali hospitality.",price:"From NPR 2,500",priceNumber:2500,vendor:"Community Host",vendorType:"community",location:"Kathmandu",image:"https://images.pexels.com/photos/5409010/pexels-photo-5409010.jpeg",video:"",featured:true},
+  {name:"Private Car Rental - Kathmandu",category:"vehicle",description:"Comfortable private car available for full-day city tour, airport pickup, and short-distance travel.",price:"From NPR 5,500 / day",priceNumber:5500,vendor:"Local Vehicle Owner",vendorType:"local",location:"Kathmandu",image:"https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg",video:"",featured:true},
+  {name:"Village Homestay Room",category:"stay",description:"Simple local room with family meals, village life, and authentic community connection.",price:"From NPR 1,800 / night",priceNumber:1800,vendor:"Community Host",vendorType:"community",location:"Bandipur",image:"https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",video:"",featured:true},
+  {name:"Boutique Hotel Listing",category:"hotel",description:"Small hotel or guesthouse listing for travelers looking for clean, local, and trusted accommodation.",price:"Price on request",priceNumber:999999,vendor:"Hotel Partner",vendorType:"local",location:"Pokhara",image:"https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg",video:"",featured:false},
+  {name:"Local Photographer",category:"service",description:"Book a local photographer for travel memories, proposal shoots, family photos, and content creation.",price:"From NPR 8,000",priceNumber:8000,vendor:"Local Service Provider",vendorType:"local",location:"Kathmandu / Pokhara",image:"https://images.pexels.com/photos/274973/pexels-photo-274973.jpeg",video:"",featured:false},
+  {name:"Handmade Singing Bowl",category:"handicraft",description:"Traditional sound bowl for meditation, gifting, wellness spaces, and spiritual travel memories.",price:"NPR 3,500",priceNumber:3500,vendor:"Local Artisan",vendorType:"local",location:"Patan",image:"https://images.pexels.com/photos/6044266/pexels-photo-6044266.jpeg",video:"",featured:false},
+  {name:"Nepali Pickle Set",category:"food",description:"Local achar set with spicy, tangy, and traditional Nepali flavors packed for gifting.",price:"NPR 650",priceNumber:650,vendor:"Local Food Maker",vendorType:"local",location:"Bhaktapur",image:"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",video:"",featured:false},
+  {name:"Himalayan Herbal Tea",category:"wellness",description:"Soothing herbal tea inspired by Himalayan wellness, village ingredients, and slow living.",price:"NPR 750",priceNumber:750,vendor:"Rigan Curated",vendorType:"rigan",location:"Nepal",image:"https://images.pexels.com/photos/1417945/pexels-photo-1417945.jpeg",video:"",featured:false}
+];
+
+const defaultData = (typeof marketplaceData !== "undefined" && Array.isArray(marketplaceData) && marketplaceData.length) ? marketplaceData : fallbackData;
+
+function normalizeProduct(item){
+  return {
+    name:item.name || "Untitled Product",
+    category:item.category || "handicraft",
+    description:item.description || "Made in Nepal product or local experience.",
+    price:item.price || "Price on request",
+    priceNumber:Number(item.priceNumber || String(item.price || "").replace(/[^0-9]/g, "") || 999999),
+    vendor:item.vendor || "Rigan Marketplace",
+    vendorType:item.vendorType || "local",
+    location:item.location || "Nepal",
+    image:item.image || "https://images.pexels.com/photos/6044266/pexels-photo-6044266.jpeg",
+    video:item.video || "",
+    phone:item.phone || WHATSAPP_NUMBER,
+    languages:item.languages || "",
+    rating:item.rating || "",
+    guideType:item.guideType || "",
+    available:item.available || "",
+    verified:Boolean(item.verified),
+    featured:Boolean(item.featured)
+  };
+}
+
+function getVendorProducts(){
+  try{
+    const raw = localStorage.getItem("vendorProducts");
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  }catch(error){
+    console.warn("vendorProducts in localStorage is not valid JSON.", error);
+    return [];
+  }
+}
 
 function getAllProducts(){
-  const vendorProducts = JSON.parse(localStorage.getItem("vendorProducts")) || [];
-  return [...defaultData, ...vendorProducts];
+  return [...defaultData, ...getVendorProducts()].map(normalizeProduct);
+}
+
+function categoryLabel(category){
+  const icons = {guide:"Guide",experience:"Experience",coffee:"Coffee",hemp:"Hemp",handicraft:"Handicraft",food:"Food",wellness:"Wellness",vehicle:"Vehicle",stay:"Stay",hotel:"Hotel",service:"Service"};
+  return icons[category] || category || "Listing";
+}
+
+function escapeHtml(value){
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/\"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function safeForOnclick(value){
+  return String(value).replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/\n/g," ");
+}
+
+function getSavedListings(){
+  try{
+    const saved = JSON.parse(localStorage.getItem("savedRiganListings"));
+    return Array.isArray(saved) ? saved : [];
+  }catch(error){
+    return [];
+  }
+}
+
+function toggleSaveListing(name){
+  const saved = getSavedListings();
+  const exists = saved.includes(name);
+  const updated = exists ? saved.filter(item => item !== name) : [...saved, name];
+  localStorage.setItem("savedRiganListings", JSON.stringify(updated));
+  renderItems();
+}
+
+function buildInquiryMessage(item){
+  const lines = [
+    "Hi Rigan, I am interested in this local listing:",
+    "",
+    `Listing: ${item.name}`,
+    `Category: ${item.category}`,
+    `Price: ${item.price}`,
+    `Vendor: ${item.vendor}`,
+    `Location: ${item.location}`
+  ];
+
+  if(item.rating) lines.push(`Rating: ${item.rating}`);
+  if(item.languages) lines.push(`Languages: ${item.languages}`);
+  if(item.guideType) lines.push(`Guide Type: ${item.guideType}`);
+  if(item.available) lines.push(`Availability: ${item.available}`);
+
+  lines.push("");
+  lines.push("Please send me details, availability, and booking options.");
+  return lines.join("\n");
 }
 
 function renderItems(){
   const grid = document.getElementById("grid");
   const allProducts = getAllProducts();
+  const vendorFilter = document.getElementById("vendorSelect").value;
+  const sortValue = document.getElementById("sortSelect").value;
 
-  const filtered = allProducts.filter(item => {
-    return currentFilter === "all" || item.category === currentFilter;
+  let filtered = allProducts.filter(item => {
+    const matchesCategory = currentFilter === "all" || item.category === currentFilter;
+    const haystack = `${item.name} ${item.description} ${item.vendor} ${item.location} ${item.category}`.toLowerCase();
+    const matchesSearch = !currentSearch || haystack.includes(currentSearch.toLowerCase());
+    const matchesVendor = vendorFilter === "all" || item.vendorType === vendorFilter;
+    return matchesCategory && matchesSearch && matchesVendor;
   });
 
+  if(sortValue === "name") filtered.sort((a,b) => a.name.localeCompare(b.name));
+  if(sortValue === "low") filtered.sort((a,b) => a.priceNumber - b.priceNumber);
+  if(sortValue === "high") filtered.sort((a,b) => b.priceNumber - a.priceNumber);
+  if(sortValue === "featured") filtered.sort((a,b) => Number(b.featured) - Number(a.featured));
+
+  document.getElementById("totalCount").textContent = allProducts.length;
+
   if(filtered.length === 0){
-    grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#666;">No items found in this category yet.</p>`;
+    grid.innerHTML = `<div class="no-result"><strong>No items found.</strong><br>Try another category, vendor type, or search keyword.</div>`;
     return;
   }
 
-  grid.innerHTML = filtered.map(item => `
-    <div class="card">
-      <div class="img-wrap">
-        <img src="${item.image}" alt="${item.name}">
-      </div>
+  grid.innerHTML = filtered.map(item => {
+    const inquiryText = encodeURIComponent(buildInquiryMessage(item));
+    const safeName = escapeHtml(item.name);
+    const safeCategory = escapeHtml(item.category);
+    const safeDescription = escapeHtml(item.description);
+    const safePrice = escapeHtml(item.price);
+    const safeVendor = escapeHtml(item.vendor);
+    const safeVendorType = escapeHtml(item.vendorType);
+    const safeLocation = escapeHtml(item.location);
+    const safeLanguages = escapeHtml(item.languages);
+    const safeRating = escapeHtml(item.rating);
+    const safeGuideType = escapeHtml(item.guideType);
+    const safeAvailable = escapeHtml(item.available);
+    const safePhone = String(item.phone || WHATSAPP_NUMBER).replace(/[^0-9]/g, "");
+    const isSaved = getSavedListings().includes(item.name);
+    const mediaHtml = item.video
+      ? `<video src="${escapeHtml(item.video)}" autoplay muted loop playsinline></video><span class="video-badge"><i class="fa-solid fa-play"></i> Video</span>`
+      : `<img src="${escapeHtml(item.image)}" alt="${safeName}">`;
 
-      <div class="content">
-        <span class="tag">${item.category}</span>
-        <h3>${item.name}</h3>
-        <p>${item.description}</p>
-        <div class="price">${item.price}</div>
-        ${item.vendor ? `<div class="vendor">Vendor: ${item.vendor} ${item.location ? "• " + item.location : ""}</div>` : ""}
-
-        <div class="card-actions">
-          <a class="small-btn" href="https://wa.me/9779843322695?text=${encodeURIComponent(`Hi Rigan, I am interested in ${item.name}. Please send me details.`)}">Inquire</a>
-          <a class="small-btn outline" href="vendor-upload.html">Sell Similar</a>
+    return `
+      <div class="card">
+        <div class="img-wrap">
+          ${mediaHtml}
+          <span class="mandala-dot">✦</span>
+        </div>
+        <div class="content">
+          <div class="tag-row">
+            <span class="tag">${categoryLabel(safeCategory)}</span>
+            ${item.featured ? `<span class="tag hot">Featured</span>` : ``}
+            ${item.verified ? `<span class="tag vendor-tag">Verified</span>` : `<span class="tag vendor-tag">${safeVendorType}</span>`}
+            ${safeAvailable ? `<span class="tag gold">${safeAvailable}</span>` : ``}
+          </div>
+          <h3>${safeName}</h3>
+          <p>${safeDescription}</p>
+          ${item.category === "guide" ? `<div class="vendor" style="margin-bottom:10px">Rating: ${safeRating || "New"} ${safeLanguages ? " • Languages: " + safeLanguages : ""} ${safeGuideType ? " • Type: " + safeGuideType : ""}</div>` : ``}
+          <div class="price">${safePrice}</div>
+          <div class="vendor">Vendor: ${safeVendor} ${safeLocation ? "• " + safeLocation : ""}</div>
+          <div class="card-actions">
+            <a class="small-btn" target="_blank" rel="noopener" href="https://wa.me/${safePhone}?text=${inquiryText}"><i class="fa-brands fa-whatsapp"></i> Inquire</a>
+            <button type="button" class="small-btn outline" onclick="toggleSaveListing('${safeForOnclick(item.name)}')">${isSaved ? "Saved" : "Save"}</button>
+          </div>
         </div>
       </div>
-    </div>
-  `).join("");
+    `;
+  }).join("");
 }
 
-function filterItems(category, btn){
+function setFilter(category, btn){
   currentFilter = category;
-
-  document.querySelectorAll(".filter-box button").forEach(button => {
-    button.classList.remove("active");
-  });
-
+  document.querySelectorAll(".filter-box button").forEach(button => button.classList.remove("active"));
   btn.classList.add("active");
   renderItems();
 }
 
+function runMarketplaceTests(){
+  console.assert(typeof normalizeProduct === "function", "normalizeProduct should exist");
+  console.assert(normalizeProduct({name:"Test"}).name === "Test", "normalizeProduct should preserve product name");
+  console.assert(Array.isArray(getAllProducts()), "getAllProducts should return an array");
+  console.assert(categoryLabel("coffee") === "Coffee", "categoryLabel should return readable category name");
+  console.assert(escapeHtml("<test>") === "&lt;test&gt;", "escapeHtml should escape HTML tags");
+  console.assert(buildInquiryMessage(normalizeProduct({name:"Guide", category:"guide"})).includes("Listing: Guide"), "buildInquiryMessage should include listing name");
+  console.assert(safeForOnclick("Ram's Car").includes("\\'"), "safeForOnclick should escape single quotes");
+}
+
+document.querySelectorAll(".filter-box button").forEach(button => {
+  button.addEventListener("click", () => setFilter(button.dataset.filter, button));
+});
+
+document.getElementById("searchInput").addEventListener("input", e => {
+  currentSearch = e.target.value;
+  renderItems();
+});
+
+document.getElementById("sortSelect").addEventListener("change", renderItems);
+document.getElementById("vendorSelect").addEventListener("change", renderItems);
+
+const mobileBtn = document.getElementById("mobileMenuBtn");
+const navLinks = document.getElementById("navLinks");
+mobileBtn?.addEventListener("click", () => navLinks.classList.toggle("active"));
+document.querySelectorAll(".nav-links a").forEach(link => link.addEventListener("click", () => navLinks.classList.remove("active")));
+
+runMarketplaceTests();
 renderItems();
 </script>
-
 </body>
 </html>

@@ -104,9 +104,7 @@ body{
   text-transform:uppercase;
 }
 
-.info-box span{
-  font-weight:900;
-}
+.info-box span{font-weight:900}
 
 .main-grid{
   display:grid;
@@ -123,9 +121,7 @@ body{
   border:1px solid rgba(23,77,47,.08);
 }
 
-.section{
-  margin-bottom:38px;
-}
+.section{margin-bottom:38px}
 
 .section h2{
   font-family:"Playfair Display",serif;
@@ -140,9 +136,7 @@ body{
   color:#475467;
 }
 
-.section ul{
-  padding-left:20px;
-}
+.section ul{padding-left:20px}
 
 .premium-note{
   background:#edf5eb;
@@ -198,6 +192,35 @@ body{
   font-weight:900;
 }
 
+.review-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+
+.review{
+  background:#f8faf7;
+  border:1px solid rgba(23,77,47,.1);
+  padding:20px;
+  border-radius:20px;
+}
+
+.stars{
+  color:#f59e0b;
+  font-size:18px;
+  margin-bottom:10px;
+  letter-spacing:2px;
+}
+
+.review p{
+  font-style:italic;
+  margin-bottom:12px;
+}
+
+.review strong{
+  color:#174d2f;
+}
+
 .booking-card{
   position:sticky;
   top:25px;
@@ -237,9 +260,31 @@ body{
   font-weight:900;
 }
 
+.availability-box{
+  background:#edf5eb;
+  padding:20px;
+  border-radius:22px;
+  margin-bottom:20px;
+}
+
+.availability-box h3{
+  color:#174d2f;
+  margin-bottom:14px;
+}
+
+.availability-box label{
+  display:block;
+  font-size:13px;
+  font-weight:900;
+  color:#174d2f;
+  margin:12px 0 6px;
+}
+
 .form input,
 .form textarea,
-.form select{
+.form select,
+.availability-box input,
+.availability-box select{
   width:100%;
   padding:15px;
   margin-bottom:12px;
@@ -250,9 +295,7 @@ body{
   outline:none;
 }
 
-.form textarea{
-  height:100px;
-}
+.form textarea{height:100px}
 
 .inquiry-btn{
   width:100%;
@@ -312,13 +355,9 @@ body{
     grid-template-columns:1fr;
   }
 
-  .hero-inner h1{
-    font-size:38px;
-  }
+  .hero-inner h1{font-size:38px}
 
-  .booking-card{
-    position:static;
-  }
+  .booking-card{position:static}
 }
 </style>
 </head>
@@ -408,6 +447,30 @@ body{
       </section>
 
       <section class="section">
+        <h2>Traveler Reviews</h2>
+
+        <div class="review-grid">
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"This was not just a trip. I felt like I was part of a Nepali family."</p>
+            <strong>— Emma, Germany</strong>
+          </div>
+
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"The most authentic experience I’ve had in Asia. Everything felt real and personal."</p>
+            <strong>— Daniel, Australia</strong>
+          </div>
+
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Amazing hosts, beautiful moments, and a completely different side of Nepal."</p>
+            <strong>— Sophie, UK</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
         <h2>Why Book With Rigan?</h2>
         <ul>
           <li>Locally designed Nepal experiences</li>
@@ -441,16 +504,36 @@ body{
         <p>WhatsApp Confirmation</p>
       </div>
 
+      <div class="availability-box">
+        <h3>Check Availability</h3>
+
+        <label>Select Date</label>
+        <input type="date" id="travelDate">
+
+        <label>Number of Travelers</label>
+        <input type="number" id="travelers" min="1" placeholder="e.g. 2">
+
+        <label>Trip Type</label>
+        <select id="tripType">
+          <option>Private Trip</option>
+          <option>Group Joining</option>
+          <option>Family Trip</option>
+          <option>Custom Trip</option>
+        </select>
+      </div>
+
       <form class="form" id="inquiryForm">
         <input type="text" id="name" placeholder="Full Name *" required>
         <input type="tel" id="phone" placeholder="+977 984-1234567" required>
         <input type="email" id="email" placeholder="Email Address (Optional)">
+
         <select id="contactMethod">
           <option>WhatsApp</option>
           <option>Email</option>
           <option>Phone Call</option>
         </select>
-        <textarea id="message" placeholder="Tell us your travel date, group size, and interests"></textarea>
+
+        <textarea id="message" placeholder="Tell us your interests, preferred budget, or special requests"></textarea>
         <button type="submit" class="inquiry-btn">Inquiry Now →</button>
       </form>
 
@@ -558,14 +641,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const contactMethod = document.getElementById("contactMethod").value;
     const message = document.getElementById("message").value;
 
+    const date = document.getElementById("travelDate").value;
+    const travelers = document.getElementById("travelers").value;
+    const tripType = document.getElementById("tripType").value;
+
     const whatsappText = encodeURIComponent(
 `Hi Rigan Roots & Routes,
 
 I am interested in: ${selected.name}
+
 Name: ${name}
 Phone: ${phone}
 Email: ${email}
+
+Travel Date: ${date}
+Travelers: ${travelers}
+Trip Type: ${tripType}
+
 Preferred Contact: ${contactMethod}
+
 Message: ${message}`
     );
 

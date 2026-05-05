@@ -1,61 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Experience Detail | Rigan Roots & Routes</title>
-<link rel="stylesheet" href="experience-v2.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f3ee;color:#071827}
-.detail-hero{min-height:460px;background-size:cover;background-position:center;display:flex;align-items:end;color:white}
-.hero-inner{max-width:1200px;width:100%;margin:auto;padding:70px 25px}
-.hero-inner span{background:#16a34a;padding:8px 14px;border-radius:999px;font-weight:900;font-size:12px}
-.hero-inner h1{font-size:56px;margin:18px 0 10px}
-.hero-inner p{font-size:18px;max-width:720px;line-height:1.7}
+*{margin:0;padding:0;box-sizing:border-box}
 
-.container{max-width:1200px;margin:-55px auto 80px;padding:0 25px;position:relative;z-index:3}
-.info-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;background:white;padding:24px;border-radius:26px;box-shadow:0 20px 55px rgba(0,0,0,.08);margin-bottom:30px}
-.info-box strong{display:block;color:#174d2f;margin-bottom:6px}
-.info-box span{font-weight:900}
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:#f7f0e4;
+  color:#132018;
+}
 
-.main-grid{display:grid;grid-template-columns:1fr 360px;gap:30px}
-.content-card,.booking-card{background:white;border-radius:28px;padding:32px;box-shadow:0 20px 55px rgba(0,0,0,.08)}
-.section{margin-bottom:36px}
-.section h2{font-size:28px;margin-bottom:16px;color:#071827}
-.section p,.section li{line-height:1.8;color:#475467}
-.section ul{padding-left:20px}
+.detail-hero{
+  min-height:560px;
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:end;
+  color:white;
+}
 
-.day{background:#f8fafc;border-left:4px solid #16a34a;padding:16px 18px;border-radius:14px;margin-bottom:12px}
-.day h4{color:#174d2f;margin-bottom:6px}
+.hero-inner{
+  max-width:1200px;
+  width:100%;
+  margin:auto;
+  padding:100px 25px 85px;
+}
 
-.two-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.included,.excluded{padding:24px;border-radius:22px}
+.hero-inner span{
+  background:#9fba6b;
+  padding:9px 16px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+
+.hero-inner h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(42px,7vw,78px);
+  line-height:1.05;
+  margin:20px 0 14px;
+}
+
+.hero-inner p{
+  font-size:18px;
+  max-width:760px;
+  line-height:1.7;
+  color:rgba(255,255,255,.9);
+}
+
+.hero-badges{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:24px;
+}
+
+.hero-badges small{
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.25);
+  padding:10px 16px;
+  border-radius:999px;
+  font-weight:800;
+}
+
+.container{
+  max-width:1200px;
+  margin:-65px auto 80px;
+  padding:0 25px;
+  position:relative;
+  z-index:3;
+}
+
+.info-bar{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  background:white;
+  padding:24px;
+  border-radius:28px;
+  box-shadow:0 22px 60px rgba(0,0,0,.1);
+  margin-bottom:30px;
+}
+
+.info-box{
+  background:#f8faf7;
+  border-radius:20px;
+  padding:18px;
+}
+
+.info-box strong{
+  display:block;
+  color:#174d2f;
+  margin-bottom:6px;
+  font-size:13px;
+  text-transform:uppercase;
+}
+
+.info-box span{
+  font-weight:900;
+}
+
+.main-grid{
+  display:grid;
+  grid-template-columns:1fr 370px;
+  gap:30px;
+}
+
+.content-card,
+.booking-card{
+  background:white;
+  border-radius:30px;
+  padding:34px;
+  box-shadow:0 22px 60px rgba(0,0,0,.08);
+  border:1px solid rgba(23,77,47,.08);
+}
+
+.section{
+  margin-bottom:38px;
+}
+
+.section h2{
+  font-family:"Playfair Display",serif;
+  font-size:31px;
+  margin-bottom:16px;
+  color:#174d2f;
+}
+
+.section p,
+.section li{
+  line-height:1.85;
+  color:#475467;
+}
+
+.section ul{
+  padding-left:20px;
+}
+
+.premium-note{
+  background:#edf5eb;
+  border-left:5px solid #174d2f;
+  padding:22px;
+  border-radius:20px;
+  color:#475467;
+}
+
+.day{
+  background:#f8fafc;
+  border-left:4px solid #9fba6b;
+  padding:17px 20px;
+  border-radius:16px;
+  margin-bottom:13px;
+}
+
+.day h4{
+  color:#174d2f;
+  margin-bottom:6px;
+}
+
+.two-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.included,
+.excluded{
+  padding:24px;
+  border-radius:24px;
+}
+
 .included{background:#e9fbf0}
 .excluded{background:#fff0f0}
-.included li,.excluded li{list-style:none;margin-bottom:10px}
-.included li::before{content:"✓ ";color:#16a34a;font-weight:900}
-.excluded li::before{content:"× ";color:#dc2626;font-weight:900}
 
-.booking-card{position:sticky;top:25px}
-.price-label{color:#64748b;font-weight:800}
-.price{font-size:36px;font-weight:900;margin:8px 0;color:#071827}
-.mini-list{margin:18px 0}
-.mini-list p{margin:10px 0;color:#475467}
-.mini-list p::before{content:"✓ ";color:#16a34a;font-weight:900}
-
-.form input,.form textarea,.form select{
-  width:100%;padding:15px;margin-bottom:12px;border-radius:14px;border:1px solid #e5e7eb;background:#f8fafc;font-weight:700
+.included li,
+.excluded li{
+  list-style:none;
+  margin-bottom:10px;
 }
-.form textarea{height:90px}
-.inquiry-btn{width:100%;border:none;background:#071827;color:white;padding:16px;border-radius:14px;font-weight:900;font-size:16px;cursor:pointer}
-.custom-btn{display:block;text-align:center;margin-top:12px;border:2px solid #071827;color:#071827;padding:14px;border-radius:14px;text-decoration:none;font-weight:900}
 
-.back{display:inline-block;margin-top:20px;color:#174d2f;font-weight:900;text-decoration:none}
+.included li::before{
+  content:"✓ ";
+  color:#16a34a;
+  font-weight:900;
+}
+
+.excluded li::before{
+  content:"× ";
+  color:#dc2626;
+  font-weight:900;
+}
+
+.booking-card{
+  position:sticky;
+  top:25px;
+}
+
+.price-label{
+  color:#64748b;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:.8px;
+}
+
+.price{
+  font-size:38px;
+  font-weight:900;
+  margin:8px 0;
+  color:#174d2f;
+}
+
+.mini-list{
+  margin:20px 0;
+  background:#f8faf7;
+  padding:18px;
+  border-radius:18px;
+}
+
+.mini-list p{
+  margin:10px 0;
+  color:#475467;
+  font-weight:700;
+}
+
+.mini-list p::before{
+  content:"✓ ";
+  color:#16a34a;
+  font-weight:900;
+}
+
+.form input,
+.form textarea,
+.form select{
+  width:100%;
+  padding:15px;
+  margin-bottom:12px;
+  border-radius:14px;
+  border:1px solid #e5e7eb;
+  background:#f8fafc;
+  font-weight:700;
+  outline:none;
+}
+
+.form textarea{
+  height:100px;
+}
+
+.inquiry-btn{
+  width:100%;
+  border:none;
+  background:#174d2f;
+  color:white;
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 14px 30px rgba(23,77,47,.25);
+}
+
+.custom-btn{
+  display:block;
+  text-align:center;
+  margin-top:12px;
+  border:2px solid #174d2f;
+  color:#174d2f;
+  padding:14px;
+  border-radius:16px;
+  text-decoration:none;
+  font-weight:900;
+}
+
+.trust-box{
+  background:#edf5eb;
+  border-radius:22px;
+  padding:22px;
+  margin-top:20px;
+}
+
+.trust-box h3{
+  color:#174d2f;
+  margin-bottom:10px;
+}
+
+.trust-box p{
+  color:#475467;
+  line-height:1.7;
+  font-size:14px;
+}
+
+.back{
+  display:inline-block;
+  margin-top:20px;
+  color:#174d2f;
+  font-weight:900;
+  text-decoration:none;
+}
 
 @media(max-width:900px){
-  .info-bar,.main-grid,.two-grid{grid-template-columns:1fr}
-  .hero-inner h1{font-size:38px}
+  .info-bar,
+  .main-grid,
+  .two-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-inner h1{
+    font-size:38px;
+  }
+
+  .booking-card{
+    position:static;
+  }
 }
 </style>
 </head>
@@ -67,16 +330,22 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f3ee;color:#07182
     <span id="badge">Rigan Experience</span>
     <h1 id="title">Loading...</h1>
     <p id="subtitle">Please wait...</p>
+
+    <div class="hero-badges">
+      <small>Private / Small Group</small>
+      <small>Local Host Support</small>
+      <small>Customizable Journey</small>
+    </div>
   </div>
 </section>
 
 <div class="container">
 
   <div class="info-bar">
-    <div class="info-box"><strong>Duration</strong><span id="durationTop"></span></div>
-    <div class="info-box"><strong>Group Size</strong><span id="groupSize"></span></div>
-    <div class="info-box"><strong>Difficulty</strong><span id="difficulty"></span></div>
-    <div class="info-box"><strong>Best Season</strong><span id="season"></span></div>
+    <div class="info-box"><strong>Duration</strong><span id="durationTop">-</span></div>
+    <div class="info-box"><strong>Group Size</strong><span id="groupSize">Flexible</span></div>
+    <div class="info-box"><strong>Difficulty</strong><span id="difficulty">Flexible</span></div>
+    <div class="info-box"><strong>Best Season</strong><span id="season">All Year</span></div>
   </div>
 
   <div class="main-grid">
@@ -86,6 +355,22 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f3ee;color:#07182
       <section class="section">
         <h2>Overview</h2>
         <p id="overview"></p>
+      </section>
+
+      <section class="section">
+        <div class="premium-note">
+          This experience is designed to help travelers feel Nepal through people, culture, food, nature, and real local connection — not just sightseeing.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Who This Is For</h2>
+        <ul id="bestFor"></ul>
+      </section>
+
+      <section class="section">
+        <h2>Experience Style</h2>
+        <p id="style"></p>
       </section>
 
       <section class="section">
@@ -122,19 +407,38 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f3ee;color:#07182
         <ul id="goodToKnow"></ul>
       </section>
 
+      <section class="section">
+        <h2>Why Book With Rigan?</h2>
+        <ul>
+          <li>Locally designed Nepal experiences</li>
+          <li>Direct support before and during the journey</li>
+          <li>Flexible customization based on your travel style</li>
+          <li>Meaningful connection with local people and communities</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Cancellation & Payment</h2>
+        <p>
+          Final pricing and payment details are confirmed after checking availability.
+          A small advance may be required to secure guides, hosts, transport, or accommodation.
+        </p>
+      </section>
+
       <a href="experience-v2.html" class="back">← Back to Experiences</a>
 
     </main>
 
     <aside class="booking-card">
       <p class="price-label">Tentative Cost</p>
-      <div class="price" id="price"></div>
+      <div class="price" id="price">Custom</div>
       <p class="price-label">Per Pax</p>
 
       <div class="mini-list">
         <p>Flexible Customization</p>
         <p>No Hidden Charges</p>
         <p>Local Support Included</p>
+        <p>WhatsApp Confirmation</p>
       </div>
 
       <form class="form" id="inquiryForm">
@@ -142,7 +446,6 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f3ee;color:#07182
         <input type="tel" id="phone" placeholder="+977 984-1234567" required>
         <input type="email" id="email" placeholder="Email Address (Optional)">
         <select id="contactMethod">
-          <option>How can we contact you?</option>
           <option>WhatsApp</option>
           <option>Email</option>
           <option>Phone Call</option>
@@ -152,6 +455,14 @@ body{margin:0;font-family:Inter,Arial,sans-serif;background:#f6f3ee;color:#07182
       </form>
 
       <a href="plan.html" class="custom-btn">Customize Itinerary</a>
+
+      <div class="trust-box">
+        <h3>Need help choosing?</h3>
+        <p>
+          Message us on WhatsApp and we’ll suggest the best route, season,
+          budget, and itinerary based on your travel style.
+        </p>
+      </div>
     </aside>
 
   </div>
@@ -164,26 +475,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
   const experienceId = params.get("id") || params.get("experience");
 
-  console.log("Experience ID:", experienceId);
-  console.log("Data file:", window.experienceDataV2);
-
   if (!window.experienceDataV2) {
     document.getElementById("title").textContent = "Data File Not Loaded";
     document.getElementById("subtitle").textContent = "Check experience-data-v2.js file name and location.";
     return;
   }
 
- let selected = null;
+  let selected = null;
 
-Object.values(window.experienceDataV2).forEach(category => {
-  category.items.forEach(item => {
-    const id = item.id || item[3];   // 🔥 FIX HERE
-    if (id === experienceId) {
-      selected = item;
-    }
-  });
-});
-      }
+  Object.values(window.experienceDataV2).forEach(category => {
+    category.items.forEach(item => {
+      const id = item.id || item[3];
+      if (id === experienceId) selected = item;
     });
   });
 
@@ -196,18 +499,28 @@ Object.values(window.experienceDataV2).forEach(category => {
   document.title = selected.name + " | Rigan Roots & Routes";
 
   document.getElementById("hero").style.backgroundImage =
-    `linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.45)), url('${selected.image}')`;
+    `linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.42)), url('${selected.image || "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1600&q=80"}')`;
 
   document.getElementById("badge").textContent = selected.badge || "Rigan Experience";
-  document.getElementById("title").textContent = selected.name;
-  document.getElementById("subtitle").textContent = selected.subtitle;
-  document.getElementById("overview").textContent = selected.overview;
+  document.getElementById("title").textContent = selected.name || "Experience";
+  document.getElementById("subtitle").textContent = selected.subtitle || "";
+  document.getElementById("overview").textContent = selected.overview || selected.description || "";
 
   document.getElementById("durationTop").textContent = selected.duration || "-";
-  document.getElementById("groupSize").textContent = selected.groupSize || "-";
-  document.getElementById("difficulty").textContent = selected.difficulty || "-";
-  document.getElementById("season").textContent = selected.season || "-";
+  document.getElementById("groupSize").textContent = selected.groupSize || "Flexible";
+  document.getElementById("difficulty").textContent = selected.difficulty || "Flexible";
+  document.getElementById("season").textContent = selected.season || "All Year";
   document.getElementById("price").textContent = selected.price || "Custom";
+
+  document.getElementById("style").textContent =
+    selected.style || "Custom Nepal experience designed around your interests.";
+
+  document.getElementById("bestFor").innerHTML =
+    (selected.bestFor || [
+      "Travelers who want authentic local connection",
+      "Couples, families, solo travelers, and small groups",
+      "People who want Nepal beyond normal sightseeing"
+    ]).map(x => `<li>${x}</li>`).join("");
 
   document.getElementById("highlights").innerHTML =
     (selected.highlights || []).map(x => `<li>${x}</li>`).join("");
@@ -221,16 +534,43 @@ Object.values(window.experienceDataV2).forEach(category => {
     `).join("");
 
   document.getElementById("includes").innerHTML =
-    (selected.includes || []).map(x => `<li>${x}</li>`).join("");
+    (selected.includes || ["Local coordination", "Experience support", "Basic itinerary guidance"])
+    .map(x => `<li>${x}</li>`).join("");
 
   document.getElementById("excludes").innerHTML =
-    (selected.excludes || []).map(x => `<li>${x}</li>`).join("");
+    (selected.excludes || ["International flights", "Travel insurance", "Personal expenses"])
+    .map(x => `<li>${x}</li>`).join("");
 
   document.getElementById("packing").innerHTML =
-    (selected.packing || []).map(x => `<li>${x}</li>`).join("");
+    (selected.packing || ["Comfortable clothes", "Walking shoes", "Water bottle", "Camera"])
+    .map(x => `<li>${x}</li>`).join("");
 
   document.getElementById("goodToKnow").innerHTML =
-    (selected.goodToKnow || []).map(x => `<li>${x}</li>`).join("");
+    (selected.goodToKnow || ["Final route can be customized", "Price depends on season and group size"])
+    .map(x => `<li>${x}</li>`).join("");
+
+  document.getElementById("inquiryForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const contactMethod = document.getElementById("contactMethod").value;
+    const message = document.getElementById("message").value;
+
+    const whatsappText = encodeURIComponent(
+`Hi Rigan Roots & Routes,
+
+I am interested in: ${selected.name}
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Preferred Contact: ${contactMethod}
+Message: ${message}`
+    );
+
+    window.open(`https://wa.me/9779843322695?text=${whatsappText}`, "_blank");
+  });
 });
 </script>
 

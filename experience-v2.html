@@ -6,50 +6,93 @@
 <title>Experiences | Rigan Roots & Routes</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+:root{
+  --green:#174d2f;
+  --olive:#9fba6b;
+  --brown:#a46a3f;
+  --cream:#f7f0e4;
+  --dark:#071611;
+  --muted:#6b746d;
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:Inter,sans-serif;
-  background:#f7f0e4;
+  background:var(--cream);
   color:#132018;
   overflow-x:hidden;
 }
 
+a{text-decoration:none}
+
+h1,h2,h3{
+  font-family:"Playfair Display",serif;
+}
+
+/* NAVBAR */
+.navbar{
+  position:sticky;
+  top:0;
+  width:100%;
+  z-index:999;
+  padding:14px 55px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(7,22,17,.92);
+  backdrop-filter:blur(10px);
+}
+
+.logo img{
+  height:64px;
+  width:auto;
+  object-fit:contain;
+  border-radius:12px;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:26px;
+}
+
+.nav-links a{
+  color:#fff;
+  font-size:14px;
+  font-weight:800;
+  white-space:nowrap;
+  transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:var(--olive);
+}
+
+.menu-btn{
+  display:none;
+  color:white;
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* PAGE */
 .page{
   min-height:100vh;
   padding:28px;
   background:
     radial-gradient(circle at 20% 10%, rgba(159,186,107,.35), transparent 28%),
     radial-gradient(circle at 85% 20%, rgba(164,106,63,.25), transparent 30%),
-    #f7f0e4;
+    var(--cream);
 }
 
-.top-nav{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 0;
-}
-
-.top-nav a{
-  text-decoration:none;
-  font-weight:900;
-  color:#174d2f;
-}
-
-.plan{
-  background:#174d2f;
-  color:white!important;
-  padding:13px 22px;
-  border-radius:999px;
-}
-
+/* HERO */
 .hero{
-  max-width:900px;
+  max-width:920px;
   margin:55px auto 30px;
   text-align:center;
 }
@@ -57,17 +100,16 @@ body{
 .hero span{
   letter-spacing:4px;
   text-transform:uppercase;
-  color:#9b6238;
+  color:var(--brown);
   font-weight:900;
   font-size:12px;
 }
 
 .hero h1{
-  font-family:"Playfair Display",serif;
   font-size:clamp(42px,7vw,78px);
   line-height:1;
   margin:16px 0;
-  color:#174d2f;
+  color:var(--green);
 }
 
 .hero p{
@@ -76,6 +118,7 @@ body{
   line-height:1.7;
 }
 
+/* SEARCH */
 .search-box{
   max-width:800px;
   margin:25px auto 0;
@@ -92,6 +135,7 @@ body{
   outline:none;
 }
 
+/* MANDALA */
 .mandala-wrap{
   max-width:900px;
   height:520px;
@@ -114,7 +158,7 @@ body{
   width:210px;
   height:210px;
   border-radius:50%;
-  background:linear-gradient(135deg,#174d2f,#2f6b3f);
+  background:linear-gradient(135deg,var(--green),#2f6b3f);
   color:white;
   display:flex;
   flex-direction:column;
@@ -133,8 +177,8 @@ body{
 }
 
 .center-orb h2{
-  font-family:"Playfair Display",serif;
   font-size:42px;
+  color:white;
 }
 
 .center-orb p{
@@ -159,7 +203,7 @@ body{
   background:rgba(255,255,255,.82);
   backdrop-filter:blur(14px);
   box-shadow:0 18px 40px rgba(0,0,0,.09);
-  color:#174d2f;
+  color:var(--green);
   font-weight:900;
   cursor:pointer;
   transition:all .4s ease;
@@ -171,7 +215,7 @@ body{
 }
 
 .cat.active{
-  background:#9fba6b;
+  background:var(--olive);
   color:white;
   box-shadow:0 20px 60px rgba(159,186,107,.5);
 }
@@ -191,6 +235,7 @@ body{
 .c7{left:55px;top:250px}
 .c8{left:110px;top:75px}
 
+/* RESULT */
 .result-section{
   max-width:1200px;
   margin:auto;
@@ -204,20 +249,18 @@ body{
 }
 
 .result-title h2{
-  font-family:"Playfair Display",serif;
   font-size:38px;
-  color:#174d2f;
+  color:var(--green);
 }
 
 .result-title p{
-  color:#6b746d;
+  color:var(--muted);
 }
 
 .card-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:24px;
-  transition:.3s;
 }
 
 .card{
@@ -252,8 +295,10 @@ body{
 }
 
 .card-body h3{
+  font-family:Inter,sans-serif;
   font-size:22px;
   margin-bottom:8px;
+  color:#132018;
 }
 
 .card-body p{
@@ -261,7 +306,7 @@ body{
   line-height:1.6;
   font-size:14px;
   font-style:italic;
-  opacity:.85;
+  opacity:.9;
 }
 
 .meta{
@@ -273,17 +318,18 @@ body{
 
 .meta span{
   background:linear-gradient(135deg,#edf5eb,#dcebd8);
-  color:#174d2f;
+  color:var(--green);
   padding:7px 12px;
   border-radius:999px;
   font-size:12px;
   font-weight:900;
 }
 
+/* CTA */
 .cta{
   max-width:1200px;
   margin:70px auto 20px;
-  background:linear-gradient(135deg,#174d2f,#2f6b3f);
+  background:linear-gradient(135deg,var(--green),#2f6b3f);
   color:white;
   border-radius:32px;
   padding:40px;
@@ -294,13 +340,17 @@ body{
 }
 
 .cta h2{
-  font-family:"Playfair Display",serif;
   font-size:34px;
+  color:white;
+}
+
+.cta p{
+  color:rgba(255,255,255,.82);
 }
 
 .cta a{
   background:white;
-  color:#174d2f;
+  color:var(--green);
   padding:16px 28px;
   border-radius:999px;
   text-decoration:none;
@@ -312,7 +362,106 @@ body{
   transform:scale(1.08);
 }
 
+/* FOOTER */
+.footer{
+  background:var(--dark);
+  color:white;
+  padding:60px 70px 25px;
+  margin-top:70px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1.4fr 1fr;
+  gap:45px;
+}
+
+.footer h3{
+  font-family:Inter,sans-serif;
+  margin-bottom:18px;
+}
+
+.footer p,.footer a{
+  color:#d0d0d0;
+  font-size:14px;
+  line-height:1.8;
+}
+
+.footer-links{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.socials{
+  display:flex;
+  gap:14px;
+}
+
+.socials a{
+  width:42px;
+  height:42px;
+  background:rgba(255,255,255,.12);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.15);
+  text-align:center;
+  margin-top:35px;
+  padding-top:18px;
+  color:#aaa;
+  font-size:13px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  right:28px;
+  bottom:25px;
+  background:#22c55e;
+  color:white;
+  padding:14px 24px;
+  border-radius:999px;
+  font-weight:800;
+  z-index:50;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .navbar{
+    padding:14px 24px;
+  }
+
+  .nav-links{
+    gap:18px;
+  }
+}
+
 @media(max-width:900px){
+  .menu-btn{display:block}
+
+  .nav-links{
+    position:absolute;
+    top:92px;
+    left:0;
+    width:100%;
+    background:rgba(7,22,17,.96);
+    flex-direction:column;
+    padding:24px;
+    display:none;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .logo img{height:56px}
+
   .mandala-wrap{
     height:auto;
     display:grid;
@@ -338,17 +487,42 @@ body{
     align-items:flex-start;
     gap:18px;
   }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .footer{
+    padding:55px 25px 25px;
+  }
 }
 </style>
 </head>
 
 <body>
-<div class="page">
 
-<nav class="top-nav">
-  <a href="index.html">← Back Home</a>
-  <a href="plan.html" class="plan">Plan My Trip</a>
+<nav class="navbar">
+  <a href="index.html" class="logo">
+    <img src="https://i.postimg.cc/G2m13ZZh/logo.jpg" alt="Rigan Roots & Routes Logo">
+  </a>
+
+  <div class="menu-btn" id="menuBtn">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="experience-v2.html" class="active">Experiences</a>
+    <a href="regions.html">Regions</a>
+    <a href="global-travel.html">Global Travel</a>
+    <a href="marketplace.html">Marketplace</a>
+    <a href="work-with-us.html">Work With Us</a>
+    <a href="about.html">Our Story</a>
+    <a href="contact.html">Contact</a>
+  </div>
 </nav>
+
+<div class="page">
 
 <section class="hero">
   <span>Rigan Roots & Routes</span>
@@ -362,6 +536,7 @@ body{
 
 <section class="mandala-wrap">
   <div class="ring"></div>
+
   <div class="center-orb">
     <h2>Nepal</h2>
     <p>Not just visit. Feel it.</p>
@@ -398,6 +573,54 @@ body{
 </section>
 
 </div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h3>Rigan Roots & Routes</h3>
+      <p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="experience-v2.html">Experiences</a>
+        <a href="regions.html">Regions</a>
+        <a href="global-travel.html">Global Travel</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="plan.html">Plan My Trip</a>
+        <a href="work-with-us.html">Work With Us</a>
+        <a href="about.html">Our Story</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+
+    <div>
+      <h3>Contact Us</h3>
+      <p><i class="fa-solid fa-location-dot"></i> Baniyatar, Kathmandu, Nepal</p>
+      <p><i class="fa-solid fa-envelope"></i> riganrootsroutes@gmail.com</p>
+      <p><i class="fa-solid fa-phone"></i> +977 9843322695</p>
+    </div>
+
+    <div>
+      <h3>Follow Us</h3>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.
+  </div>
+</footer>
+
+<a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots%20%26%20Routes,%20I%20want%20to%20plan%20a%20Nepal%20trip." class="whatsapp" target="_blank">
+  <i class="fa-brands fa-whatsapp"></i> Chat with us
+</a>
 
 <script>
 const data = {
@@ -523,8 +746,14 @@ const sectionTitle = document.getElementById("sectionTitle");
 const sectionSub = document.getElementById("sectionSub");
 const searchBox = document.getElementById("searchBox");
 const mandalaWrap = document.querySelector(".mandala-wrap");
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
 
 let currentCategory = "signature";
+
+menuBtn.addEventListener("click",()=>{
+  navLinks.classList.toggle("active");
+});
 
 function createCards(items){
   cards.innerHTML = items.map(item => `

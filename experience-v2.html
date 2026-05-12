@@ -106,7 +106,7 @@ h1,h2,h3{
 }
 
 .hero h1{
-  font-size:clamp(42px,7vw,78px);
+  font-size:clamp(48px,7vw,92px);
   line-height:1;
   margin:16px 0;
   color:var(--green);
@@ -116,6 +116,22 @@ h1,h2,h3{
   color:#53645a;
   font-size:18px;
   line-height:1.7;
+}
+
+
+/* INTRO STORY LINE */
+.intro-line{
+  max-width:850px;
+  margin:0 auto 45px;
+  text-align:center;
+}
+
+.intro-line p{
+  font-size:20px;
+  line-height:1.9;
+  color:#425046;
+  font-family:"Playfair Display",serif;
+  font-style:italic;
 }
 
 /* SEARCH */
@@ -277,6 +293,7 @@ h1,h2,h3{
 .card:hover{
   transform:translateY(-10px) scale(1.02);
   box-shadow:0 35px 90px rgba(23,77,47,.18);
+  border:1px solid rgba(159,186,107,.25);
 }
 
 .card img{
@@ -305,8 +322,8 @@ h1,h2,h3{
   color:#66746b;
   line-height:1.6;
   font-size:14px;
-  font-style:italic;
-  opacity:.9;
+  opacity:.92;
+  font-weight:500;
 }
 
 .meta{
@@ -514,7 +531,7 @@ h1,h2,h3{
     <a href="index.html">Home</a>
     <a href="experience-v2.html" class="active">Experiences</a>
     <a href="regions.html">Regions</a>
-    <a href="global-travel.html">Global Travel</a>
+    <a href="guides.html">Local Guides</a>
     <a href="marketplace.html">Marketplace</a>
     <a href="work-with-us.html">Work With Us</a>
     <a href="about.html">Our Story</a>
@@ -528,6 +545,10 @@ h1,h2,h3{
   <span>Rigan Roots & Routes</span>
   <h1>What kind of Nepal do you want to feel?</h1>
   <p>Choose your travel mood. We’ll guide you into homes, kitchens, mountains, festivals, villages, and stories that feel real.</p>
+</section>
+
+<section class="intro-line">
+  <p>Nepal is not just mountains. It is kitchen smoke, monastery bells, tea with strangers, festivals in old alleys, and stories shared beside the fire.</p>
 </section>
 
 <div class="search-box">
@@ -586,7 +607,8 @@ h1,h2,h3{
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="experience-v2.html">Experiences</a>
-        <a href="global-travel.html">Global Travel</a>
+        <a href="regions.html">Regions</a>
+        <a href="guides.html">Local Guides</a>
         <a href="marketplace.html">Marketplace</a>
         <a href="plan.html">Plan My Trip</a>
         <a href="work-with-us.html">Work With Us</a>
@@ -624,450 +646,254 @@ h1,h2,h3{
 <script>
 const data = {
   signature: {
-  title: "Signature Experiences",
-  sub: "Luxury, emotional, and deeply authentic journeys across Nepal.",
-  items: [
-
-    ["Live Like a Nepali","Share meals, laughter, and everyday moments with a local family.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
-
-    ["Honeymoon in the Himalayas","Romantic mountain escapes, lakeside dinners, and unforgettable moments.","6 Days","honeymoon-himalayas","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Breakfast at Everest Base Camp","Fly into the Himalayas and enjoy breakfast surrounded by the world’s highest peaks.","1 Day","breakfast-everest-base-camp","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Basecamp Proposal Experience","A once-in-a-lifetime Himalayan proposal journey with photography and luxury touches.","Custom","basecamp-proposal","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Women Guided Himalayan Trek","Trek Nepal with experienced female guides in a safe and empowering environment.","8 Days","women-guided-himalayan-trek","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Nomad Work & Travel Nepal","Remote work-friendly cafes, mountain escapes, co-working stays, and cultural journeys.,"nomad-work-travel-nepal","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Photographer Journey Nepal","Capture hidden Nepal with local photographers and cinematic locations.","7 Days","photographer-journey-nepal","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Helicopter to Hidden Monastery","A luxury helicopter escape to remote Himalayan monasteries and spiritual landscapes.","1 Day","helicopter-hidden-monastery","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Fire & Folk Music Nights","Traditional music, bonfire storytelling, local food, and Himalayan nights.","2 Days","fire-folk-music-nights","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Sunrise Above the Clouds","Private sunrise experience with panoramic Himalayan mountain views.","1 Day","sunrise-above-clouds","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Silent Himalaya Retreat","No noise. No rush. Just mountains, stars, peace, and slow travel.","12 Days","silent-himalaya-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Digital Detox Village Retreat","Disconnect from screens and reconnect with real life and nature.","12 Days","digital-detox-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Women-Only Cultural Journey","Safe, meaningful, and deeply immersive travel experience for women.","6 , 7  Days","women-only-cultural-journey","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"]
-
-  ]
-},
-
- village: {
-  title: "Village & Community Life",
-  sub: "Slow travel built around homes, fields, food, fires, and real human connection.",
-  items: [
-
-    ["Live Like a Nepali","Simple living, deep connection, and local family warmth.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
-
-    ["Village Immersion","Farming, local meals, and community stories in rural Nepal.","5 Days","village-immersion","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Farm & Harvest Experience","Join local farmers in the fields and celebrate the harvest together.","2 Days","farm-harvest-experience","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-
-    ["Rice Planting Experience","Mud, music, food, laughter, and traditional village celebration.","1 Day","rice-planting-festival","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-
-    ["Bandipur Cultural Escape","Slow heritage town stay with local culture, architecture, and views.","2 Days","bandipur-cultural-escape","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Hidden Village Story Journey","Meet families and discover stories beyond guidebooks.","3 Days","hidden-village-story-journey","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Village Bonfire Nights","Traditional music, local food, storytelling, and fire under the stars.","2 Days","village-bonfire-nights","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Tea & Stories in the Hills","Slow mornings with local tea and unforgettable conversations.","2 Days","tea-stories-hills","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Grandmother Cooking Experience","Cook authentic Nepali meals with local grandmothers using firewood kitchens.","1 Day","grandmother-cooking-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Mountain Farmer Experience","Wake up early and experience everyday life in Himalayan farms.","2 Days","mountain-farmer-experience","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-
-    ["Village Sunrise Experience","Watch the sunrise above peaceful Himalayan villages.","2 Days","village-sunrise-experience","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Stone House Village Stay","Stay inside traditional stone houses surrounded by nature.","2 Days","stone-house-village-stay","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Local Family Homestay","Eat, sleep, and live together with a Nepali family.","3 Days","local-family-homestay","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Organic Farming Retreat","Experience sustainable farming and fresh local food.","3 Days","organic-farming-retreat","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-
-    ["Village Music & Dance Night","Enjoy local folk dance, music, and celebration with villagers.","Evening","village-music-dance-night","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Traditional Nepali Wedding Experience","Celebrate and experience the joy of a real Nepali wedding.","Seasonal","traditional-nepali-wedding","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Women Farmers Experience","Spend meaningful time with hardworking women farmers in the hills.","2 Days","women-farmers-experience","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-
-    ["Village Camping Under Stars","Camp beside peaceful villages under clear Himalayan skies.","2 Days","village-camping-under-stars","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Remote Mountain Village Retreat","Disconnect from busy life in quiet mountain villages.","5 Days","remote-mountain-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Slow Living Village Journey","Experience peaceful village life through slow meaningful travel.","5 Days","slow-living-village-journey","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"]
-
-  ]
-},
-
-  food: {
-  title: "Taste of Nepal",
-  sub: "Food journeys through local kitchens, family homes, tea shops, markets, and ethnic traditions.",
-  items: [
-
-    ["Taste of Nepal","Cook with locals and understand Nepal through food and stories.","3 Days","taste-of-nepal","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Momo Making Experience","Learn Nepal’s favorite dumplings hands-on with a local family.","1 Day","momo-making","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Kathmandu Food Walk","Taste local snacks, tea, sweets, and hidden street food.","Half Day","kathmandu-food-walk","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Dal Bhat Family Meal","Share Nepal’s everyday meal inside a warm local home.","Half Day","dal-bhat-family-meal","https://i.postimg.cc/3rqzzrVM/shelby-murphy-figueroa-u5o-M1k6pl-Pg-unsplash.jpg"],
-
-    ["Newari Food Experience","Discover rich Newari flavors, traditional snacks, and local culture.","1 Day","newari-food-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Tharu Food & Culture Experience","Taste fish, ghongi, dhikri, and authentic Tharu village cuisine.","1 Day","tharu-food-culture-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Tamang Food Experience","Experience traditional Tamang meals, local drinks, and mountain culture.","1 Day","tamang-food-experience","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Sherpa Kitchen Experience","Warm Himalayan meals, butter tea, potatoes, and Sherpa hospitality.","1 Day","sherpa-kitchen-experience","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Gurung Family Dinner","Traditional Gurung food, local stories, and village warmth.","Evening","gurung-family-dinner","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Thakali Food Experience","Taste Nepal’s famous Thakali cuisine and mountain flavors.","1 Day","thakali-food-experience","https://i.postimg.cc/3rqzzrVM/shelby-murphy-figueroa-u5o-M1k6pl-Pg-unsplash.jpg"],
-
-    ["Limbu Food Experience","Discover eastern Nepal flavors, kinema dishes, and local traditions.","1 Day","limbu-food-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Tea & Sel Roti Morning","Traditional Nepali breakfast with tea, sel roti, and local sweets.","Morning","tea-selroti-morning","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Street Food After Dark","Explore Kathmandu’s late-night food culture and hidden local spots.","Night Tour","street-food-after-dark","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Firewood Cooking Experience","Cook traditional meals using authentic woodfire village kitchens.","Half Day","firewood-cooking-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Village Cooking With Ama","Cook side-by-side with local mothers using traditional recipes.","1 Day","village-cooking-with-ama","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Market to Kitchen Experience","Shop ingredients, cook together, and enjoy local meals.","1 Day","market-to-kitchen-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Hidden Cafes of Kathmandu","Discover artistic cafes, rooftops, coffee culture, and local desserts.","Half Day","hidden-cafes-kathmandu","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Local Brewery Experience","Taste traditional raksi, tongba, and homemade local drinks.","Evening","local-brewery-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Organic Farm to Table Journey","Eat fresh organic meals directly from local farms.","2 Days","organic-farm-table-journey","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-
-    ["Himalayan Tea Ceremony","Slow tea experience with stories, mountains, and local traditions.","Half Day","himalayan-tea-ceremony","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
-
-  ]
-},
-
-  festival: {
-  title: "Festivals of Nepal",
-  sub: "Celebrate Nepal through rituals, jatras, music, colors, food, dance, and living traditions.",
-  items: [
-
-    ["Dashain Experience","Blessings, tika, bamboo swings, food, and family traditions across Nepal.","3 Days","dashain-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Tihar Festival","Lights, flowers, candles, music, worship, and family warmth.","3 Days","tihar-festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Holi Festival","Colors, music, dance, laughter, and celebration across Nepal.","1 Day","holi-festival","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Indra Jatra","Masked dances, living goddess traditions, and Kathmandu celebrations.","1 Day","indra-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Bisket Jatra","Bhaktapur’s energetic chariot pulling and traditional celebration.","1 Day","bisket-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Rato Machindranath Jatra","Ancient chariot festival celebrated through Patan’s old streets.","1 Day","rato-machindranath-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Seto Machindranath Jatra","Historic Kathmandu chariot festival filled with rituals and devotion.","1 Day","seto-machindranath-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Ghode Jatra Festival","Kathmandu’s historic horse festival filled with energy and tradition.","1 Day","ghode-jatra-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Gai Jatra Festival","Colorful Newari festival filled with humor, remembrance, and street performances.","1 Day","gai-jatra-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Kumari Jatra Experience","Witness Nepal’s living goddess traditions and sacred celebrations.","1 Day","kumari-jatra-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Lakhe Dance Festival","Experience Nepal’s famous Lakhe masked street dances and music.","1 Day","lakhe-dance-festival","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Bode Jatra Festival","Traditional tongue-piercing ritual and powerful Newari culture.","1 Day","bode-jatra-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Sikali Jatra","Rare Newari masked dance festival celebrated in Khokana.","1 Day","sikali-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Pulukisi Jatra","Traditional elephant spirit dance celebrated during Indra Jatra.","1 Day","pulukisi-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Bhoto Jatra Experience","Historic ceremony marking the end of Machindranath Jatra.","1 Day","bhoto-jatra-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Yenya Festival Kathmandu","Ancient Kathmandu celebration filled with lights, dances, and rituals.","3 Days","yenya-festival-kathmandu","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Navadurga Dance Festival","Traditional masked deity dances performed in Bhaktapur villages.","1 Day","navadurga-dance-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Khadga Jatra","Historic sword procession festival celebrated with rituals and music.","1 Day","khadga-jatra","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Devi Pyakhan Festival","Traditional masked dance performance with ancient Newari roots.","1 Day","devi-pyakhan-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Rice Planting Festival","Mud, music, farming, food, and joyful village celebration.","1 Day","rice-planting-festival","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
-
-    ["Losar Festival","Celebrate Himalayan New Year with Sherpa, Tamang, and Tibetan communities.","2 Days","losar-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Tiji Festival Mustang","Rare Himalayan Buddhist festival in the ancient kingdom of Mustang.","Seasonal","tiji-festival-mustang","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Maghe Sankranti Experience","Traditional winter festival with sesame sweets, yam, and family gatherings.","1 Day","maghe-sankranti-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Chhath Festival Experience","Sacred sunrise worship beside rivers with music and devotion.","1 Day","chhath-festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Teej Festival Experience","Women dressed in red celebrating dance, music, and devotion.","1 Day","teej-festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Buddha Jayanti Celebration","Peaceful Buddhist ceremonies, prayer flags, and monastery rituals.","1 Day","buddha-jayanti-celebration","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Janai Purnima Festival","Sacred thread rituals, family gatherings, and spiritual traditions.","1 Day","janai-purnima-festival","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Mani Rimdu Festival","Sacred Sherpa monastery festival with masked Himalayan dances.","Seasonal","mani-rimdu-festival","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Village Festival With Locals","Celebrate authentic local festivals inside remote villages.","Seasonal","village-festival-with-locals","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
-
-    ["Festival Photography Journey","Capture Nepal’s most colorful festivals with local photographers.","5 Days","festival-photography-journey","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Festival Food Experience","Taste festive Nepali dishes, sweets, and local celebration meals.","2 Days","festival-food-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
-
-  ]
-},
- culture: {
-  title: "Cultural & Heritage",
-  sub: "Temples, courtyards, artisans, old towns, spirituality, and living traditions.",
-  items: [
-
-    ["Kathmandu Heritage Tour","Explore temples, courtyards, and centuries of living history.","2 Days","kathmandu-heritage-tour","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Bhaktapur Living Culture","Ancient streets, pottery, food, artisans, and timeless traditions.","1 Day","bhaktapur-living-culture","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Patan Artisan Walk","Meet metal artists, woodcarvers, and traditional craft families.","1 Day","patan-artisan-walk","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Lumbini Spiritual Journey","Visit the birthplace of Buddha and peaceful spiritual sites.","3 Days","lumbini-spiritual-journey","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Boudhanath Kora Experience","Walk around the stupa and experience Buddhist spiritual rhythm.","Half Day","boudhanath-kora-experience","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Pashupatinath Evening Aarti","Witness sacred fire rituals beside the holy Bagmati River.","Half Day","pashupatinath-evening-aarti","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Ancient Kathmandu Alley Walk","Explore hidden alleys, courtyards, temples, and untold stories.","Half Day","ancient-kathmandu-alley-walk","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Kirtipur Heritage Experience","Traditional Newari town filled with history, culture, and local food.","1 Day","kirtipur-heritage-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Traditional Music & Dance Night","Experience live Nepali folk music, instruments, and cultural dance.","Evening","traditional-music-dance-night","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Pottery & Handicraft Workshop","Learn pottery, wood carving, and handmade crafts from artisans.","Half Day","pottery-handicraft-workshop","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Prayer Flag & Monastery Journey","Travel through peaceful monasteries and Himalayan Buddhist culture.","3 Days","prayer-flag-monastery-journey","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Swayambhunath Sunrise Walk","Watch sunrise over Kathmandu from Nepal’s iconic monkey temple.","Half Day","swayambhunath-sunrise-walk","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Local Artisan Home Visit","Meet local families preserving traditional arts and craftsmanship.","Half Day","artisan-home-visit","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Newari Cultural Experience","Discover rich Newari traditions, architecture, rituals, and cuisine.","1 Day","newari-cultural-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Sherpa Buddhist Culture Journey","Experience monasteries, prayer ceremonies, and Sherpa traditions.","3 Days","sherpa-buddhist-culture-journey","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Mustang Cultural Journey","Explore ancient Himalayan kingdoms, caves, and Tibetan-influenced culture.","5 Days","mustang-cultural-journey","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Living Goddess Kumari Experience","Learn about Nepal’s unique Kumari living goddess tradition.","Half Day","living-goddess-kumari-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Temple Bells & Morning Rituals","Experience peaceful morning worship and temple traditions.","Morning","temple-bells-morning-rituals","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Cultural Photography Journey","Capture Nepal’s architecture, rituals, people, and heritage life.","5 Days","cultural-photography-journey","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
-
-    ["Hidden Courtyards of Kathmandu","Discover secret courtyards, shrines, and ancient urban culture.","Half Day","hidden-courtyards-kathmandu","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"]
-
-  ]
-},
-
-  wellness: {
-  title: "Spiritual & Wellness",
-  sub: "Quiet retreats for healing, meditation, yoga, mindfulness, and inner peace.",
-  items: [
-
-    ["Yoga & Meditation Retreat","Reset your body and mind in peaceful Himalayan surroundings.","5 Days","yoga-meditation-retreat","https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"],
-
-    ["Monastery Meditation","Experience silence, mindfulness, and spiritual calm in monasteries.","2 Days","monastery-meditation","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Pokhara Wellness Escape","Lakeside calm, yoga, mountain air, and slow travel.","4 Days","pokhara-wellness-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Digital Detox Village Retreat","Disconnect from screens and reconnect with nature and yourself.","5 Days","digital-detox-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Spiritual Kathmandu Retreat","Temples, meditation, sacred rituals, and valley spirituality.","3 Days","spiritual-kathmandu-retreat","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Himalayan Healing Escape","Nature, mountain silence, healing energy, and peaceful travel.","6 Days","himalayan-healing-escape","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Mountain Sunrise Meditation","Meditate with sunrise views above the Himalayas.","2 Days","mountain-sunrise-meditation","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Forest Healing Retreat","Slow healing walks, forest air, and mindful relaxation.","4 Days","forest-healing-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Ayurvedic Nepal Escape","Traditional healing therapies, herbal treatments, and wellness.","5 Days","ayurvedic-nepal-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Himalayan Spa Retreat","Luxury spa retreat with mountain scenery and relaxation.","3 Days","himalayan-spa-retreat","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Sound Healing Experience","Relax with Tibetan singing bowls and healing sound therapy.","Half Day","sound-healing-experience","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Silent Himalaya Retreat","No noise, no rush — only mountains, stars, and peace.","5 Days","silent-himalaya-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
-
-    ["Temple Bells Morning Retreat","Begin the day with temple rituals, meditation, and calm mornings.","Morning","temple-bells-morning-retreat","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Breathwork & Mindfulness Journey","Guided breathing, mindfulness, and emotional healing sessions.","3 Days","breathwork-mindfulness-journey","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Lakeside Yoga Morning","Peaceful sunrise yoga beside Pokhara’s lakes and mountains.","Half Day","lakeside-yoga-morning","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Sacred Monastery Stay","Live inside a monastery and experience spiritual daily life.","3 Days","sacred-monastery-stay","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Healing Tea & Herbal Journey","Traditional Himalayan herbs, teas, and natural wellness practices.","2 Days","healing-tea-herbal-journey","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
-
-    ["Moonlight Meditation Retreat","Night meditation sessions beneath Himalayan skies and stars.","2 Days","moonlight-meditation-retreat","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Women’s Wellness Escape","A peaceful healing retreat designed especially for women.","4 Days","womens-wellness-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Luxury Wellness & Nature Retreat","Boutique wellness experience with spa, yoga, and Himalayan nature.","5 Days","luxury-wellness-nature-retreat","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
-
-  ]
-},
-
- trek: {
-  title: "Trek & Mountain Journeys",
-  sub: "Epic Himalayan adventures, hidden trails, mountain culture, and unforgettable journeys across Nepal.",
-  items: [
-
-    ["Everest Base Camp Trek","The legendary Himalayan journey to the foot of Mount Everest.","12-16 Days","everest-base-camp","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Everest View Trek","Short Everest region trek with breathtaking Himalayan scenery.","5-7 Days","everest-view-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Gokyo Lakes Trek","Turquoise glacial lakes, Sherpa villages, and Everest panoramas.","10-14 Days","gokyo-lakes-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Three Passes Trek","One of Nepal’s most adventurous Everest region trekking routes.","16-20 Days","three-passes-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Annapurna Base Camp Trek","Classic Himalayan base camp journey through villages and forests.","10-12 Days","annapurna-base-camp","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Annapurna Circuit Trek","Nepal’s iconic long-distance trekking experience.","14-18 Days","annapurna-circuit-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Mardi Himal Trek","Short scenic ridge trek with dramatic mountain views.","7-9 Days","mardi-base-camp","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Khopra Danda Trek","Peaceful alternative Annapurna trek with panoramic views.","7-9 Days","khopra-danda-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Mohare Danda Eco Trek","Community-based eco trek with authentic village experiences.","5-7 Days","mohare-danda-eco-trek","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Poon Hill Trek","Easy sunrise trek with spectacular Himalayan scenery.","3-5 Days","poon-hill","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Tilicho Lake Trek","Journey to one of the world’s highest alpine lakes.","10-12 Days","tilicho-lake-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Nar Phu Valley Trek","Hidden Himalayan valleys with Tibetan-influenced culture.","12-15 Days","nar-phu-valley-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Upper Mustang Trek","Explore Nepal’s ancient forbidden Himalayan kingdom.","12-14 Days","upper-mustang-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Upper Dolpo Trek","Remote landscapes, monasteries, and untouched Himalayan culture.","18-24 Days","upper-dolpo-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Langtang Valley Trek","Mountain valleys, Tamang culture, and peaks near Kathmandu.","8-10 Days","langtang-valley","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Gosaikunda Lake Trek","Sacred alpine lakes and spiritual Himalayan landscapes.","7-9 Days","gosaikunda-lake-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Helambu Trek","Beautiful short trek through forests, monasteries, and villages.","5-7 Days","helambu-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Manaslu Circuit Trek","Remote mountain villages and dramatic Himalayan scenery.","14-18 Days","manaslu-circuit-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Tsum Valley Trek","Sacred Himalayan valley with ancient monasteries and culture.","12-16 Days","tsum-valley-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Kanchenjunga Base Camp Trek","Wild eastern Himalayan trek beneath the world’s third-highest mountain.","18-22 Days","kanchenjunga-base-camp-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Makalu Base Camp Trek","Remote and challenging trek to Nepal’s fifth-highest mountain.","18-22 Days","makalu-base-camp-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Dhaulagiri Circuit Trek","One of Nepal’s toughest and most rewarding mountain adventures.","16-20 Days","dhaulagiri-circuit-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Rara Lake Trek","Remote western Nepal trek to the country’s most beautiful lake.","8-10 Days","rara-lake","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Api Base Camp Trek","Hidden far-western Himalayan trekking experience.","10-14 Days","api-base-camp-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Ruby Valley Trek","Authentic trekking route through Tamang and Gurung villages.","7-10 Days","ruby-valley-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Pikey Peak Trek","One of the best sunrise views over Everest.","5-7 Days","pikey-peak-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Ama Yangri Trek","Short Helambu ridge trek with panoramic Himalayan views.","2-3 Days","ama-yangri-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-    ["Kapuche Glacier Lake Trek","Short hidden trek to Nepal’s low-altitude glacier lake.","4-5 Days","kapuche-glacier-lake-trek","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Kori Himal Trek","Beautiful hidden trail with Gurung villages and Himalayan views.","5-7 Days","kori-himal-trek","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]                                    // ADD THESE MORE INSIDE trek.items
-
-["Thorong La Pass Trek","Cross the legendary Thorong La Pass at 5,416m in the Annapurna Circuit.","14-18 Days","thorong-la-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-["Larke Pass Trek","Adventure through Manaslu and cross the dramatic Larke La Pass.","14-18 Days","larke-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-["Cho La Pass Trek","Epic Everest region trek crossing the famous Cho La high pass.","14-17 Days","cho-la-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-["Renjo La Pass Trek","Beautiful Everest panorama trek through the peaceful Renjo La Pass.","12-15 Days","renjo-la-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-["Kongma La Pass Trek","High-altitude Everest adventure crossing the challenging Kongma La Pass.","15-18 Days","kongma-la-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-["Everest Three Passes Trek","Cross Kongma La, Cho La, and Renjo La in one legendary journey.","18-21 Days","everest-three-passes-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-["Mesokanto La Pass Trek","Remote adventure route connecting Tilicho Lake and Jomsom.","12-15 Days","mesokanto-la-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-["Teri La Pass Trek","Wild Dolpo expedition crossing one of Nepal’s most remote passes.","18-24 Days","teri-la-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-["Sele La Pass Trek","Beautiful Kanchenjunga region trek crossing peaceful alpine passes.","16-20 Days","sele-la-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-["French Pass Trek","Dhaulagiri circuit adventure crossing the dramatic French Pass.","16-20 Days","french-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-["Amphu Lapcha Pass Trek","Technical Himalayan adventure between Everest and Makalu regions.","18-22 Days","amphu-lapcha-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-["Ganja La Pass Trek","Exciting Langtang route crossing the high Ganja La Pass.","12-15 Days","ganja-la-pass-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-["Lauribina La Pass Trek","Sacred alpine route connecting Langtang and Helambu regions.","8-10 Days","lauribina-la-pass-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
-
-["Numa La & Baga La Trek","Remote Dolpo trekking route crossing high Himalayan passes.","18-22 Days","numa-baga-la-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-["High Passes of Nepal Expedition","Ultimate multi-pass Himalayan trekking adventure across Nepal.","25 Days","high-passes-nepal-expedition","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"]                                                                           
+    title: "Signature Experiences",
+    sub: "Luxury, emotional, and deeply authentic journeys across Nepal.",
+    items: [
+      ["Live Like a Nepali","Share meals, laughter, and everyday moments with a local family.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
+      ["Honeymoon in the Himalayas","Romantic mountain escapes, lakeside dinners, and unforgettable moments.","6 Days","honeymoon-himalayas","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Breakfast at Everest Base Camp","Fly into the Himalayas and enjoy breakfast surrounded by the world’s highest peaks.","1 Day","breakfast-everest-base-camp","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Basecamp Proposal Experience","A once-in-a-lifetime Himalayan proposal journey with photography and luxury touches.","Custom","basecamp-proposal","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Marriage in Mustang","Celebrate your wedding in the mystical landscapes of Upper Mustang at high altitude.","Custom","marriage-in-mustang","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Women Guided Himalayan Trek","Trek Nepal with experienced female guides in a safe and empowering environment.","8 Days","women-guided-himalayan-trek","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Nomad Work & Travel Nepal","Remote work-friendly cafes, mountain escapes, co-working stays, and cultural journeys.","14 Days","nomad-work-travel-nepal","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Photographer Journey Nepal","Capture hidden Nepal with local photographers and cinematic locations.","7 Days","photographer-journey-nepal","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Helicopter to Hidden Monastery","A luxury helicopter escape to remote Himalayan monasteries and spiritual landscapes.","1 Day","helicopter-hidden-monastery","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Fire & Folk Music Nights","Traditional music, bonfire storytelling, local food, and Himalayan nights.","2 Days","fire-folk-music-nights","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Sunrise Above the Clouds","Private sunrise experience with panoramic Himalayan mountain views.","1 Day","sunrise-above-clouds","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Silent Himalaya Retreat","No noise. No rush. Just mountains, stars, peace, and slow travel.","12 Days","silent-himalaya-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Digital Detox Village Retreat","Disconnect from screens and reconnect with real life and nature.","12 Days","digital-detox-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Women-Only Cultural Journey","Safe, meaningful, and deeply immersive travel experience for women.","6-7 Days","women-only-cultural-journey","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"]
     ]
   },
 
- adventure: {
-  title: "Adventure & Soft Adventure",
-  sub: "Sky, rivers, cliffs, jungles, mountains, speed, adrenaline, and unforgettable outdoor experiences.",
-  items: [
+  village: {
+    title: "Village & Community Life",
+    sub: "Slow travel built around homes, fields, food, fires, and real human connection.",
+    items: [
+      ["Live Like a Nepali","Simple living, deep connection, and local family warmth.","7 Days","live-like-a-nepali","https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg"],
+      ["Village Immersion","Farming, local meals, and community stories in rural Nepal.","5 Days","village-immersion","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Farm & Harvest Experience","Join local farmers in the fields and celebrate the harvest together.","2 Days","farm-harvest-experience","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Rice Planting Experience","Mud, music, food, laughter, and traditional village celebration.","1 Day","rice-planting-festival","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Bandipur Cultural Escape","Slow heritage town stay with local culture, architecture, and views.","2 Days","bandipur-cultural-escape","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Hidden Village Story Journey","Meet families and discover stories beyond guidebooks.","3 Days","hidden-village-story-journey","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Village Bonfire Nights","Traditional music, local food, storytelling, and fire under the stars.","2 Days","village-bonfire-nights","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Tea & Stories in the Hills","Slow mornings with local tea and unforgettable conversations.","2 Days","tea-stories-hills","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Grandmother Cooking Experience","Cook authentic Nepali meals with local grandmothers using firewood kitchens.","1 Day","grandmother-cooking-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Mountain Farmer Experience","Wake up early and experience everyday life in Himalayan farms.","2 Days","mountain-farmer-experience","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Village Sunrise Experience","Watch the sunrise above peaceful Himalayan villages.","2 Days","village-sunrise-experience","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Stone House Village Stay","Stay inside traditional stone houses surrounded by nature.","2 Days","stone-house-village-stay","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Local Family Homestay","Eat, sleep, and live together with a Nepali family.","3 Days","local-family-homestay","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Organic Farming Retreat","Experience sustainable farming and fresh local food.","3 Days","organic-farming-retreat","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Village Music & Dance Night","Enjoy local folk dance, music, and celebration with villagers.","Evening","village-music-dance-night","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Traditional Nepali Wedding Experience","Celebrate and experience the joy of a real Nepali wedding.","Seasonal","traditional-nepali-wedding","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Women Farmers Experience","Spend meaningful time with hardworking women farmers in the hills.","2 Days","women-farmers-experience","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Village Camping Under Stars","Camp beside peaceful villages under clear Himalayan skies.","2 Days","village-camping-under-stars","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Remote Mountain Village Retreat","Disconnect from busy life in quiet mountain villages.","5 Days","remote-mountain-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Slow Living Village Journey","Experience peaceful village life through slow meaningful travel.","5 Days","slow-living-village-journey","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"]
+    ]
+  },
 
-    ["Paragliding in Pokhara","Fly above lakes, hills, and Himalayan mountain scenery.","Half Day","paragliding-pokhara","https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"],
+  food: {
+    title: "Taste of Nepal",
+    sub: "Food journeys through local kitchens, family homes, tea shops, markets, and ethnic traditions.",
+    items: [
+      ["Taste of Nepal","Cook with locals and understand Nepal through food and stories.","3 Days","taste-of-nepal","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Momo Making Experience","Learn Nepal’s favorite dumplings hands-on with a local family.","1 Day","momo-making","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Kathmandu Food Walk","Taste local snacks, tea, sweets, and hidden street food.","Half Day","kathmandu-food-walk","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Dal Bhat Family Meal","Share Nepal’s everyday meal inside a warm local home.","Half Day","dal-bhat-family-meal","https://i.postimg.cc/3rqzzrVM/shelby-murphy-figueroa-u5o-M1k6pl-Pg-unsplash.jpg"],
+      ["Newari Food Experience","Discover rich Newari flavors, traditional snacks, and local culture.","1 Day","newari-food-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Tharu Food & Culture Experience","Taste fish, ghongi, dhikri, and authentic Tharu village cuisine.","1 Day","tharu-food-culture-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Tamang Food Experience","Experience traditional Tamang meals, local drinks, and mountain culture.","1 Day","tamang-food-experience","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Sherpa Kitchen Experience","Warm Himalayan meals, butter tea, potatoes, and Sherpa hospitality.","1 Day","sherpa-kitchen-experience","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Gurung Family Dinner","Traditional Gurung food, local stories, and village warmth.","Evening","gurung-family-dinner","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Thakali Food Experience","Taste Nepal’s famous Thakali cuisine and mountain flavors.","1 Day","thakali-food-experience","https://i.postimg.cc/3rqzzrVM/shelby-murphy-figueroa-u5o-M1k6pl-Pg-unsplash.jpg"],
+      ["Limbu Food Experience","Discover eastern Nepal flavors, kinema dishes, and local traditions.","1 Day","limbu-food-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Tea & Sel Roti Morning","Traditional Nepali breakfast with tea, sel roti, and local sweets.","Morning","tea-selroti-morning","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Street Food After Dark","Explore Kathmandu’s late-night food culture and hidden local spots.","Night Tour","street-food-after-dark","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Firewood Cooking Experience","Cook traditional meals using authentic woodfire village kitchens.","Half Day","firewood-cooking-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Village Cooking With Ama","Cook side-by-side with local mothers using traditional recipes.","1 Day","village-cooking-with-ama","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Market to Kitchen Experience","Shop ingredients, cook together, and enjoy local meals.","1 Day","market-to-kitchen-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Hidden Cafes of Kathmandu","Discover artistic cafes, rooftops, coffee culture, and local desserts.","Half Day","hidden-cafes-kathmandu","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Local Brewery Experience","Taste traditional raksi, tongba, and homemade local drinks.","Evening","local-brewery-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Organic Farm to Table Journey","Eat fresh organic meals directly from local farms.","2 Days","organic-farm-table-journey","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Himalayan Tea Ceremony","Slow tea experience with stories, mountains, and local traditions.","Half Day","himalayan-tea-ceremony","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
+    ]
+  },
 
-    ["White Water Rafting","Experience Nepal’s wild rivers, rapids, and adventure energy.","1 Day","white-water-rafting","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+  festival: {
+    title: "Festivals of Nepal",
+    sub: "Celebrate Nepal through rituals, jatras, music, colors, food, dance, and living traditions.",
+    items: [
+      ["Dashain Experience","Blessings, tika, bamboo swings, food, and family traditions across Nepal.","3 Days","dashain-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Tihar Festival","Lights, flowers, candles, music, worship, and family warmth.","3 Days","tihar-festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Holi Festival","Colors, music, dance, laughter, and celebration across Nepal.","1 Day","holi-festival","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Indra Jatra","Masked dances, living goddess traditions, and Kathmandu celebrations.","1 Day","indra-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Bisket Jatra","Bhaktapur’s energetic chariot pulling and traditional celebration.","1 Day","bisket-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Rato Machindranath Jatra","Ancient chariot festival celebrated through Patan’s old streets.","1 Day","rato-machindranath-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Seto Machindranath Jatra","Historic Kathmandu chariot festival filled with rituals and devotion.","1 Day","seto-machindranath-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Ghode Jatra Festival","Kathmandu’s historic horse festival filled with energy and tradition.","1 Day","ghode-jatra-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Gai Jatra Festival","Colorful Newari festival filled with humor, remembrance, and street performances.","1 Day","gai-jatra-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Kumari Jatra Experience","Witness Nepal’s living goddess traditions and sacred celebrations.","1 Day","kumari-jatra-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Lakhe Dance Festival","Experience Nepal’s famous Lakhe masked street dances and music.","1 Day","lakhe-dance-festival","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Bode Jatra Festival","Traditional tongue-piercing ritual and powerful Newari culture.","1 Day","bode-jatra-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Sikali Jatra","Rare Newari masked dance festival celebrated in Khokana.","1 Day","sikali-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Pulukisi Jatra","Traditional elephant spirit dance celebrated during Indra Jatra.","1 Day","pulukisi-jatra","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Bhoto Jatra Experience","Historic ceremony marking the end of Machindranath Jatra.","1 Day","bhoto-jatra-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Yenya Festival Kathmandu","Ancient Kathmandu celebration filled with lights, dances, and rituals.","3 Days","yenya-festival-kathmandu","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Navadurga Dance Festival","Traditional masked deity dances performed in Bhaktapur villages.","1 Day","navadurga-dance-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Khadga Jatra","Historic sword procession festival celebrated with rituals and music.","1 Day","khadga-jatra","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Devi Pyakhan Festival","Traditional masked dance performance with ancient Newari roots.","1 Day","devi-pyakhan-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Rice Planting Festival","Mud, music, farming, food, and joyful village celebration.","1 Day","rice-planting-festival","https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"],
+      ["Losar Festival","Celebrate Himalayan New Year with Sherpa, Tamang, and Tibetan communities.","2 Days","losar-festival","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Tiji Festival Mustang","Rare Himalayan Buddhist festival in the ancient kingdom of Mustang.","Seasonal","tiji-festival-mustang","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Maghe Sankranti Experience","Traditional winter festival with sesame sweets, yam, and family gatherings.","1 Day","maghe-sankranti-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Chhath Festival Experience","Sacred sunrise worship beside rivers with music and devotion.","1 Day","chhath-festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Teej Festival Experience","Women dressed in red celebrating dance, music, and devotion.","1 Day","teej-festival-experience","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Buddha Jayanti Celebration","Peaceful Buddhist ceremonies, prayer flags, and monastery rituals.","1 Day","buddha-jayanti-celebration","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Janai Purnima Festival","Sacred thread rituals, family gatherings, and spiritual traditions.","1 Day","janai-purnima-festival","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Mani Rimdu Festival","Sacred Sherpa monastery festival with masked Himalayan dances.","Seasonal","mani-rimdu-festival","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Village Festival With Locals","Celebrate authentic local festivals inside remote villages.","Seasonal","village-festival-with-locals","https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"],
+      ["Festival Photography Journey","Capture Nepal’s most colorful festivals with local photographers.","5 Days","festival-photography-journey","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Festival Food Experience","Taste festive Nepali dishes, sweets, and local celebration meals.","2 Days","festival-food-experience","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"]
+    ]
+  },
 
-    ["Biking Trails Nepal","Ride through villages, forests, hills, and scenic landscapes.","2 Days","biking-trails-nepal","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+  culture: {
+    title: "Cultural & Heritage",
+    sub: "Temples, courtyards, artisans, old towns, spirituality, and living traditions.",
+    items: [
+      ["Kathmandu Heritage Tour","Explore temples, courtyards, and centuries of living history.","2 Days","kathmandu-heritage-tour","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Bhaktapur Living Culture","Ancient streets, pottery, food, artisans, and timeless traditions.","1 Day","bhaktapur-living-culture","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Patan Artisan Walk","Meet metal artists, woodcarvers, and traditional craft families.","1 Day","patan-artisan-walk","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Lumbini Spiritual Journey","Visit the birthplace of Buddha and peaceful spiritual sites.","3 Days","lumbini-spiritual-journey","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Boudhanath Kora Experience","Walk around the stupa and experience Buddhist spiritual rhythm.","Half Day","boudhanath-kora-experience","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Pashupatinath Evening Aarti","Witness sacred fire rituals beside the holy Bagmati River.","Half Day","pashupatinath-evening-aarti","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Ancient Kathmandu Alley Walk","Explore hidden alleys, courtyards, temples, and untold stories.","Half Day","ancient-kathmandu-alley-walk","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Kirtipur Heritage Experience","Traditional Newari town filled with history, culture, and local food.","1 Day","kirtipur-heritage-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Traditional Music & Dance Night","Experience live Nepali folk music, instruments, and cultural dance.","Evening","traditional-music-dance-night","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Pottery & Handicraft Workshop","Learn pottery, wood carving, and handmade crafts from artisans.","Half Day","pottery-handicraft-workshop","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Prayer Flag & Monastery Journey","Travel through peaceful monasteries and Himalayan Buddhist culture.","3 Days","prayer-flag-monastery-journey","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Swayambhunath Sunrise Walk","Watch sunrise over Kathmandu from Nepal’s iconic monkey temple.","Half Day","swayambhunath-sunrise-walk","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Local Artisan Home Visit","Meet local families preserving traditional arts and craftsmanship.","Half Day","artisan-home-visit","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Newari Cultural Experience","Discover rich Newari traditions, architecture, rituals, and cuisine.","1 Day","newari-cultural-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Sherpa Buddhist Culture Journey","Experience monasteries, prayer ceremonies, and Sherpa traditions.","3 Days","sherpa-buddhist-culture-journey","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Mustang Cultural Journey","Explore ancient Himalayan kingdoms, caves, and Tibetan-influenced culture.","5 Days","mustang-cultural-journey","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Living Goddess Kumari Experience","Learn about Nepal’s unique Kumari living goddess tradition.","Half Day","living-goddess-kumari-experience","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Temple Bells & Morning Rituals","Experience peaceful morning worship and temple traditions.","Morning","temple-bells-morning-rituals","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Cultural Photography Journey","Capture Nepal’s architecture, rituals, people, and heritage life.","5 Days","cultural-photography-journey","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"],
+      ["Hidden Courtyards of Kathmandu","Discover secret courtyards, shrines, and ancient urban culture.","Half Day","hidden-courtyards-kathmandu","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"]
+    ]
+  },
 
-    ["Bungee Adventure","Take the leap into Nepal’s thrilling canyon landscapes.","1 Day","bungee-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+  wellness: {
+    title: "Spiritual & Wellness",
+    sub: "Quiet retreats for healing, meditation, yoga, mindfulness, and inner peace.",
+    items: [
+      ["Yoga & Meditation Retreat","Reset your body and mind in peaceful Himalayan surroundings.","5 Days","yoga-meditation-retreat","https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"],
+      ["Monastery Meditation","Experience silence, mindfulness, and spiritual calm in monasteries.","2 Days","monastery-meditation","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Pokhara Wellness Escape","Lakeside calm, yoga, mountain air, and slow travel.","4 Days","pokhara-wellness-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Digital Detox Village Retreat","Disconnect from screens and reconnect with nature and yourself.","5 Days","digital-detox-village-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Spiritual Kathmandu Retreat","Temples, meditation, sacred rituals, and valley spirituality.","3 Days","spiritual-kathmandu-retreat","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Himalayan Healing Escape","Nature, mountain silence, healing energy, and peaceful travel.","6 Days","himalayan-healing-escape","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Mountain Sunrise Meditation","Meditate with sunrise views above the Himalayas.","2 Days","mountain-sunrise-meditation","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Forest Healing Retreat","Slow healing walks, forest air, and mindful relaxation.","4 Days","forest-healing-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Ayurvedic Nepal Escape","Traditional healing therapies, herbal treatments, and wellness.","5 Days","ayurvedic-nepal-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Himalayan Spa Retreat","Luxury spa retreat with mountain scenery and relaxation.","3 Days","himalayan-spa-retreat","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Sound Healing Experience","Relax with Tibetan singing bowls and healing sound therapy.","Half Day","sound-healing-experience","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Silent Himalaya Retreat","No noise, no rush — only mountains, stars, and peace.","5 Days","silent-himalaya-retreat","https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"],
+      ["Temple Bells Morning Retreat","Begin the day with temple rituals, meditation, and calm mornings.","Morning","temple-bells-morning-retreat","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Breathwork & Mindfulness Journey","Guided breathing, mindfulness, and emotional healing sessions.","3 Days","breathwork-mindfulness-journey","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Lakeside Yoga Morning","Peaceful sunrise yoga beside Pokhara’s lakes and mountains.","Half Day","lakeside-yoga-morning","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Sacred Monastery Stay","Live inside a monastery and experience spiritual daily life.","3 Days","sacred-monastery-stay","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Healing Tea & Herbal Journey","Traditional Himalayan herbs, teas, and natural wellness practices.","2 Days","healing-tea-herbal-journey","https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"],
+      ["Moonlight Meditation Retreat","Night meditation sessions beneath Himalayan skies and stars.","2 Days","moonlight-meditation-retreat","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Women’s Wellness Escape","A peaceful healing retreat designed especially for women.","4 Days","womens-wellness-escape","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Luxury Wellness & Nature Retreat","Boutique wellness experience with spa, yoga, and Himalayan nature.","5 Days","luxury-wellness-nature-retreat","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"]
+    ]
+  },
 
-    ["Zipline Pokhara","Fly at high speed above forests, valleys, and mountain views.","Half Day","zipline-pokhara","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+  trek: {
+    title: "Trek & Mountain Journeys",
+    sub: "Epic Himalayan adventures, hidden trails, mountain culture, high passes, and unforgettable journeys across Nepal.",
+    items: [
+      ["Everest Base Camp Trek","The legendary Himalayan journey to the foot of Mount Everest.","12-16 Days","everest-base-camp","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Everest View Trek","Short Everest region trek with breathtaking Himalayan scenery.","5-7 Days","everest-view-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Gokyo Lakes Trek","Turquoise glacial lakes, Sherpa villages, and Everest panoramas.","10-14 Days","gokyo-lakes-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Three Passes Trek","One of Nepal’s most adventurous Everest region trekking routes.","16-20 Days","three-passes-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Annapurna Base Camp Trek","Classic Himalayan base camp journey through villages and forests.","10-12 Days","annapurna-base-camp","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Annapurna Circuit Trek","Nepal’s iconic long-distance trekking experience.","14-18 Days","annapurna-circuit-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Thorong La Pass Trek","Cross the legendary Thorong La Pass at 5,416m in the Annapurna Circuit.","14-18 Days","thorong-la-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Mardi Himal Trek","Short scenic ridge trek with dramatic mountain views.","7-9 Days","mardi-base-camp","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Khopra Danda Trek","Peaceful alternative Annapurna trek with panoramic views.","7-9 Days","khopra-danda-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Mohare Danda Eco Trek","Community-based eco trek with authentic village experiences.","5-7 Days","mohare-danda-eco-trek","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Poon Hill Trek","Easy sunrise trek with spectacular Himalayan scenery.","3-5 Days","poon-hill","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Tilicho Lake Trek","Journey to one of the world’s highest alpine lakes.","10-12 Days","tilicho-lake-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Mesokanto La Pass Trek","Remote adventure route connecting Tilicho Lake and Jomsom.","12-15 Days","mesokanto-la-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Nar Phu Valley Trek","Hidden Himalayan valleys with Tibetan-influenced culture.","12-15 Days","nar-phu-valley-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Upper Mustang Trek","Explore Nepal’s ancient forbidden Himalayan kingdom.","12-14 Days","upper-mustang-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Upper Dolpo Trek","Remote landscapes, monasteries, and untouched Himalayan culture.","18-24 Days","upper-dolpo-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Teri La Pass Trek","Wild Dolpo expedition crossing one of Nepal’s most remote passes.","18-24 Days","teri-la-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Numa La & Baga La Trek","Remote Dolpo trekking route crossing high Himalayan passes.","18-22 Days","numa-baga-la-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Langtang Valley Trek","Mountain valleys, Tamang culture, and peaks near Kathmandu.","8-10 Days","langtang-valley","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Gosaikunda Lake Trek","Sacred alpine lakes and spiritual Himalayan landscapes.","7-9 Days","gosaikunda-lake-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Helambu Trek","Beautiful short trek through forests, monasteries, and villages.","5-7 Days","helambu-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Ganja La Pass Trek","Exciting Langtang route crossing the high Ganja La Pass.","12-15 Days","ganja-la-pass-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Lauribina La Pass Trek","Sacred alpine route connecting Langtang and Helambu regions.","8-10 Days","lauribina-la-pass-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Manaslu Circuit Trek","Remote mountain villages and dramatic Himalayan scenery.","14-18 Days","manaslu-circuit-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Larke Pass Trek","Adventure through Manaslu and cross the dramatic Larke La Pass.","14-18 Days","larke-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Tsum Valley Trek","Sacred Himalayan valley with ancient monasteries and culture.","12-16 Days","tsum-valley-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Kanchenjunga Base Camp Trek","Wild eastern Himalayan trek beneath the world’s third-highest mountain.","18-22 Days","kanchenjunga-base-camp-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Sele La Pass Trek","Beautiful Kanchenjunga region trek crossing peaceful alpine passes.","16-20 Days","sele-la-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Makalu Base Camp Trek","Remote and challenging trek to Nepal’s fifth-highest mountain.","18-22 Days","makalu-base-camp-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Amphu Lapcha Pass Trek","Technical Himalayan adventure between Everest and Makalu regions.","18-22 Days","amphu-lapcha-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Cho La Pass Trek","Epic Everest region trek crossing the famous Cho La high pass.","14-17 Days","cho-la-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Renjo La Pass Trek","Beautiful Everest panorama trek through the peaceful Renjo La Pass.","12-15 Days","renjo-la-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Kongma La Pass Trek","High-altitude Everest adventure crossing the challenging Kongma La Pass.","15-18 Days","kongma-la-pass-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Everest Three Passes Trek","Cross Kongma La, Cho La, and Renjo La in one legendary journey.","18-21 Days","everest-three-passes-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Dhaulagiri Circuit Trek","One of Nepal’s toughest and most rewarding mountain adventures.","16-20 Days","dhaulagiri-circuit-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["French Pass Trek","Dhaulagiri circuit adventure crossing the dramatic French Pass.","16-20 Days","french-pass-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Rara Lake Trek","Remote western Nepal trek to the country’s most beautiful lake.","8-10 Days","rara-lake","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Api Base Camp Trek","Hidden far-western Himalayan trekking experience.","10-14 Days","api-base-camp-trek","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Ruby Valley Trek","Authentic trekking route through Tamang and Gurung villages.","7-10 Days","ruby-valley-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Pikey Peak Trek","One of the best sunrise views over Everest.","5-7 Days","pikey-peak-trek","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Ama Yangri Trek","Short Helambu ridge trek with panoramic Himalayan views.","2-3 Days","ama-yangri-trek","https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"],
+      ["Kapuche Glacier Lake Trek","Short hidden trek to Nepal’s low-altitude glacier lake.","4-5 Days","kapuche-glacier-lake-trek","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Kori Himal Trek","Beautiful hidden trail with Gurung villages and Himalayan views.","5-7 Days","kori-himal-trek","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["High Passes of Nepal Expedition","Ultimate multi-pass Himalayan trekking adventure across Nepal.","25 Days","high-passes-nepal-expedition","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"]
+    ]
+  },
 
-    ["Jungle Safari","Wildlife, jungle activities, and local Tharu culture in Chitwan.","2 Days","jungle-safari","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Hot Air Balloon Pokhara","Float peacefully above Pokhara’s lakes and Himalayas.","Half Day","hot-air-balloon-pokhara","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Helicopter Everest Tour","Luxury helicopter experience with breathtaking Everest views.","1 Day","helicopter-everest-tour","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Motorbike Himalayan Ride","Ride through Nepal’s mountain roads, villages, and landscapes.","5 Days","motorbike-himalayan-ride","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
-
-    ["ATV Jungle Adventure","Off-road ATV adventure through forests, rivers, and trails.","1 Day","atv-jungle-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
-
-    ["Canyoning Adventure","Climb, jump, swim, and rappel through waterfalls and canyons.","1 Day","canyoning-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
-
-    ["Kayaking in Nepal Rivers","Adventure through peaceful and wild Himalayan rivers.","2 Days","kayaking-nepal-rivers","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
-
-    ["Rock Climbing Experience","Outdoor climbing adventure on Nepal’s natural rock walls.","1 Day","rock-climbing-experience","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
-
-    ["Ultralight Flight Pokhara","Open-air scenic flight with Himalayan and lake views.","Half Day","ultralight-flight-pokhara","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Skydiving Everest","The ultimate Himalayan adrenaline jump near Everest.","1 Day","skydiving-everest","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Cliff Camping Experience","Sleep hanging beside cliffs with epic mountain scenery.","2 Days","cliff-camping-experience","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Jungle Canoeing Experience","Peaceful canoe rides through jungle rivers and wildlife zones.","Half Day","jungle-canoeing-experience","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Camping & Bonfire Adventure","Mountain camping with bonfires, music, and stars.","2 Days","camping-bonfire-adventure","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Mountain Jeep Adventure","Off-road jeep rides through remote Himalayan trails.","3 Days","mountain-jeep-adventure","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["River Tubing Adventure","Fun river floating experience through scenic landscapes.","Half Day","river-tubing-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
-
-    ["Night Jungle Adventure","Explore jungle sounds, wildlife, and nature after dark.","Night","night-jungle-adventure","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
-
-    ["Ice Climbing Expedition","Frozen waterfall climbing adventure in the Himalayas.","5 Days","ice-climbing-expedition","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
-
-    ["Mountain Survival Experience","Learn outdoor survival skills in Nepal’s wilderness.","3 Days","mountain-survival-experience","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
-
-    ["Adventure Photography Journey","Capture Nepal’s wild landscapes and outdoor experiences.","5 Days","adventure-photography-journey","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"]
-
-  ]
-},
+  adventure: {
+    title: "Adventure & Soft Adventure",
+    sub: "Sky, rivers, cliffs, jungles, mountains, speed, adrenaline, and unforgettable outdoor experiences.",
+    items: [
+      ["Paragliding in Pokhara","Fly above lakes, hills, and Himalayan mountain scenery.","Half Day","paragliding-pokhara","https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"],
+      ["White Water Rafting","Experience Nepal’s wild rivers, rapids, and adventure energy.","1 Day","white-water-rafting","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Biking Trails Nepal","Ride through villages, forests, hills, and scenic landscapes.","2 Days","biking-trails-nepal","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Bungee Adventure","Take the leap into Nepal’s thrilling canyon landscapes.","1 Day","bungee-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Zipline Pokhara","Fly at high speed above forests, valleys, and mountain views.","Half Day","zipline-pokhara","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Jungle Safari","Wildlife, jungle activities, and local Tharu culture in Chitwan.","2 Days","jungle-safari","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Hot Air Balloon Pokhara","Float peacefully above Pokhara’s lakes and Himalayas.","Half Day","hot-air-balloon-pokhara","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Helicopter Everest Tour","Luxury helicopter experience with breathtaking Everest views.","1 Day","helicopter-everest-tour","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Motorbike Himalayan Ride","Ride through Nepal’s mountain roads, villages, and landscapes.","5 Days","motorbike-himalayan-ride","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["ATV Jungle Adventure","Off-road ATV adventure through forests, rivers, and trails.","1 Day","atv-jungle-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Canyoning Adventure","Climb, jump, swim, and rappel through waterfalls and canyons.","1 Day","canyoning-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Kayaking in Nepal Rivers","Adventure through peaceful and wild Himalayan rivers.","2 Days","kayaking-nepal-rivers","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Rock Climbing Experience","Outdoor climbing adventure on Nepal’s natural rock walls.","1 Day","rock-climbing-experience","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Ultralight Flight Pokhara","Open-air scenic flight with Himalayan and lake views.","Half Day","ultralight-flight-pokhara","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Skydiving Everest","The ultimate Himalayan adrenaline jump near Everest.","1 Day","skydiving-everest","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Cliff Camping Experience","Sleep hanging beside cliffs with epic mountain scenery.","2 Days","cliff-camping-experience","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Jungle Canoeing Experience","Peaceful canoe rides through jungle rivers and wildlife zones.","Half Day","jungle-canoeing-experience","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Camping & Bonfire Adventure","Mountain camping with bonfires, music, and stars.","2 Days","camping-bonfire-adventure","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Mountain Jeep Adventure","Off-road jeep rides through remote Himalayan trails.","3 Days","mountain-jeep-adventure","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["River Tubing Adventure","Fun river floating experience through scenic landscapes.","Half Day","river-tubing-adventure","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"],
+      ["Night Jungle Adventure","Explore jungle sounds, wildlife, and nature after dark.","Night","night-jungle-adventure","https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"],
+      ["Ice Climbing Expedition","Frozen waterfall climbing adventure in the Himalayas.","5 Days","ice-climbing-expedition","https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"],
+      ["Mountain Survival Experience","Learn outdoor survival skills in Nepal’s wilderness.","3 Days","mountain-survival-experience","https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg"],
+      ["Adventure Photography Journey","Capture Nepal’s wild landscapes and outdoor experiences.","5 Days","adventure-photography-journey","https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"]
+    ]
+  }
+};
 
 const bgImages = {
   signature: "https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg",
@@ -1091,11 +917,16 @@ const navLinks = document.getElementById("navLinks");
 
 let currentCategory = "signature";
 
-menuBtn.addEventListener("click",()=>{
+menuBtn.addEventListener("click", () => {
   navLinks.classList.toggle("active");
 });
 
 function createCards(items){
+  if(!items.length){
+    cards.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#6b746d;font-weight:800;">No experiences found. Try another keyword.</p>`;
+    return;
+  }
+
   cards.innerHTML = items.map(item => `
     <a class="card" href="experience-detail-v2.html?experience=${item[3]}">
       <img src="${item[4]}" alt="${item[0]}">
@@ -1104,6 +935,7 @@ function createCards(items){
         <p>${item[1]}</p>
         <div class="meta">
           <span>${item[2]}</span>
+          <span>${currentCategory.toUpperCase()}</span>
           <span>View Details</span>
         </div>
       </div>
@@ -1125,18 +957,20 @@ function render(cat){
   createCards(data[cat].items);
 }
 
-buttons.forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    buttons.forEach(b=>b.classList.remove("active"));
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    buttons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     render(btn.dataset.cat);
   });
 });
 
-searchBox.addEventListener("input",()=>{
-  const term = searchBox.value.toLowerCase();
+searchBox.addEventListener("input", () => {
+  const term = searchBox.value.toLowerCase().trim();
   const filtered = data[currentCategory].items.filter(item =>
-    item[0].toLowerCase().includes(term) || item[1].toLowerCase().includes(term)
+    item[0].toLowerCase().includes(term) ||
+    item[1].toLowerCase().includes(term) ||
+    item[2].toLowerCase().includes(term)
   );
   createCards(filtered);
 });

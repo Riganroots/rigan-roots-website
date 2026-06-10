@@ -133,6 +133,89 @@ a{text-decoration:none}
 .btn-brown{background:var(--brown)}
 .btn-outline{border:2px solid white}
 
+/* RIGAN PHILOSOPHY */
+.rigan-philosophy{
+  padding:100px 70px;
+  background:#fffaf2;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.rigan-philosophy::before{
+  content:"✺";
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:260px;
+  color:rgba(159,186,107,.12);
+  z-index:0;
+}
+
+.rigan-philosophy > *{
+  position:relative;
+  z-index:1;
+}
+
+.mandala-icon{
+  font-size:58px;
+  color:var(--olive);
+  margin-bottom:18px;
+}
+
+.rigan-philosophy h2{
+  font-size:clamp(34px,5vw,52px);
+  color:var(--green);
+  margin-bottom:18px;
+}
+
+.rigan-philosophy p{
+  max-width:820px;
+  margin:0 auto;
+  color:var(--muted);
+  line-height:1.9;
+  font-size:16px;
+}
+
+.philosophy-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  margin-top:50px;
+}
+
+.philosophy-card{
+  background:white;
+  padding:35px 28px;
+  border-radius:26px;
+  box-shadow:0 18px 45px rgba(0,0,0,.07);
+  border:1px solid rgba(23,77,47,.08);
+  transition:.35s;
+}
+
+.philosophy-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 28px 65px rgba(23,77,47,.14);
+}
+
+.philosophy-card i{
+  font-size:34px;
+  color:var(--brown);
+  margin-bottom:20px;
+}
+
+.philosophy-card h3{
+  font-size:23px;
+  color:var(--green);
+  margin-bottom:10px;
+}
+
+.philosophy-card p{
+  font-size:14px;
+  line-height:1.7;
+}
+
 /* DISCOVER */
 .discover{
   padding:80px 0 50px;
@@ -159,10 +242,13 @@ a{text-decoration:none}
 .slider{
   display:flex;
   gap:18px;
-  animation:slide 32s linear infinite;
+  animation:slide 55s linear infinite;
+  will-change:transform;
 }
 
-.slide-card{min-width:230px}
+.slide-card{
+  min-width:230px;
+}
 
 .slide-card img{
   width:230px;
@@ -182,6 +268,45 @@ a{text-decoration:none}
 @keyframes slide{
   0%{transform:translateX(0)}
   100%{transform:translateX(-50%)}
+}
+
+/* MOBILE DISCOVER FIX */
+@media(max-width:700px){
+  .discover{
+    padding:55px 0 35px;
+  }
+
+  .slider-wrap{
+    padding:0 16px;
+    overflow-x:auto;
+  }
+
+  .slider{
+    animation:none;
+    gap:14px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding-bottom:10px;
+  }
+
+  .slide-card{
+    min-width:190px;
+    scroll-snap-align:start;
+  }
+
+  .slide-card img{
+    width:190px;
+    height:135px;
+    border-radius:16px;
+  }
+
+  .slide-card p{
+    font-size:12px;
+  }
+
+  .desktop-duplicate{
+    display:none;
+  }
 }
 
 /* WHY RIGAN */
@@ -473,6 +598,7 @@ a{text-decoration:none}
   .features,
   .story-grid,
   .exp-grid{grid-template-columns:repeat(2,1fr)}
+  .philosophy-grid{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:900px){
@@ -498,14 +624,16 @@ a{text-decoration:none}
   .story-grid,
   .exp-grid,
   .region-grid,
-  .footer-grid{
+  .footer-grid,
+  .philosophy-grid{
     grid-template-columns:1fr;
   }
 
   .stories,
   .signature,
   .region-preview,
-  .why-rigan{
+  .why-rigan,
+  .rigan-philosophy{
     padding:65px 25px;
   }
 
@@ -557,31 +685,117 @@ a{text-decoration:none}
   </div>
 </section>
 
+<section class="rigan-philosophy">
+  <div class="mandala-icon">✺</div>
+  <h2>Travel Beyond Destinations</h2>
+  <p>
+    At Rigan Roots & Routes, we believe travel is more than ticking places off a list.
+    It is sharing stories with local families, celebrating festivals together,
+    walking ancient trails, and discovering the spirit of Nepal.
+  </p>
+
+  <div class="philosophy-grid">
+    <div class="philosophy-card">
+      <i class="fa-solid fa-house"></i>
+      <h3>Local Connections</h3>
+      <p>Meet the people, homes, and communities that make Nepal truly special.</p>
+    </div>
+
+    <div class="philosophy-card">
+      <i class="fa-solid fa-mountain-sun"></i>
+      <h3>Authentic Adventures</h3>
+      <p>Explore beyond the usual tourist routes with journeys rooted in real experiences.</p>
+    </div>
+
+    <div class="philosophy-card">
+      <i class="fa-solid fa-seedling"></i>
+      <h3>Responsible Travel</h3>
+      <p>Support local communities, small hosts, and sustainable tourism across Nepal.</p>
+    </div>
+  </div>
+</section>
+
 <section class="discover">
   <h2 class="section-title">Discover Nepal</h2>
   <p class="section-subtitle">Breathtaking places. Timeless culture. Unforgettable moments.</p>
 
   <div class="slider-wrap">
     <div class="slider">
-      <div class="slide-card"><img src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"><p>Phewa Lake, Pokhara</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"><p>Adventure on the Top</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"><p>Festival of Nepal</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"><p>Taste of Nepal</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"><p>Heritage Sites</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"><p>Everest Region</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"><p>Village Life, Nepal</p></div>
 
-      <div class="slide-card"><img src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"><p>Phewa Lake, Pokhara</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"><p>Adventure on the Top</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"><p>Festival of Nepal</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"><p>Taste of Nepal</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"><p>Heritage Sites</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"><p>Everest Region</p></div>
-      <div class="slide-card"><img src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"><p>Village Life, Nepal</p></div>
+      <div class="slide-card">
+        <img loading="lazy" src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg" alt="Phewa Lake, Pokhara">
+        <p>Phewa Lake, Pokhara</p>
+      </div>
+
+      <div class="slide-card">
+        <img loading="lazy" src="https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg" alt="Adventure in Nepal">
+        <p>Adventure on the Top</p>
+      </div>
+
+      <div class="slide-card">
+        <img loading="lazy" src="https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg" alt="Festival of Nepal">
+        <p>Festival of Nepal</p>
+      </div>
+
+      <div class="slide-card">
+        <img loading="lazy" src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg" alt="Taste of Nepal">
+        <p>Taste of Nepal</p>
+      </div>
+
+      <div class="slide-card">
+        <img loading="lazy" src="https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg" alt="Heritage Sites in Nepal">
+        <p>Heritage Sites</p>
+      </div>
+
+      <div class="slide-card">
+        <img loading="lazy" src="https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg" alt="Everest Region">
+        <p>Everest Region</p>
+      </div>
+
+      <div class="slide-card">
+        <img loading="lazy" src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg" alt="Village Life in Nepal">
+        <p>Village Life, Nepal</p>
+      </div>
+
+      <!-- Desktop duplicate only -->
+      <div class="slide-card desktop-duplicate">
+        <img loading="lazy" src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg" alt="Phewa Lake, Pokhara">
+        <p>Phewa Lake, Pokhara</p>
+      </div>
+
+      <div class="slide-card desktop-duplicate">
+        <img loading="lazy" src="https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg" alt="Adventure in Nepal">
+        <p>Adventure on the Top</p>
+      </div>
+
+      <div class="slide-card desktop-duplicate">
+        <img loading="lazy" src="https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg" alt="Festival of Nepal">
+        <p>Festival of Nepal</p>
+      </div>
+
+      <div class="slide-card desktop-duplicate">
+        <img loading="lazy" src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg" alt="Taste of Nepal">
+        <p>Taste of Nepal</p>
+      </div>
+
+      <div class="slide-card desktop-duplicate">
+        <img loading="lazy" src="https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg" alt="Heritage Sites in Nepal">
+        <p>Heritage Sites</p>
+      </div>
+
+      <div class="slide-card desktop-duplicate">
+        <img loading="lazy" src="https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg" alt="Everest Region">
+        <p>Everest Region</p>
+      </div>
+
+      <div class="slide-card desktop-duplicate">
+        <img loading="lazy" src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg" alt="Village Life in Nepal">
+        <p>Village Life, Nepal</p>
+      </div>
+
     </div>
   </div>
 </section>
-
 <section class="why-rigan">
   <h2 class="section-title">Why Choose Rigan?</h2>
   <p class="section-subtitle">
@@ -804,7 +1018,7 @@ a{text-decoration:none}
       <div class="socials">
         <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        
       </div>
     </div>
   </div>

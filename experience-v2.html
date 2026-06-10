@@ -16,6 +16,7 @@
   --cream:#f7f0e4;
   --dark:#071611;
   --muted:#6b746d;
+  --gold:#d4af37;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -150,6 +151,46 @@ h1,h2,h3{
   font-size:15px;
   outline:none;
 }
+.experience-controls{
+  max-width:1000px;
+  margin:25px auto 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.experience-controls .search-box{
+  margin:0;
+  flex:1;
+  min-width:280px;
+}
+
+.currency-switch{
+  background:white;
+  border-radius:999px;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.currency-switch label{
+  color:var(--green);
+  font-weight:900;
+  font-size:13px;
+}
+
+.currency-switch select{
+  border:none;
+  outline:none;
+  background:transparent;
+  color:var(--brown);
+  font-weight:900;
+}
+
 
 /* MANDALA */
 .mandala-wrap{
@@ -341,6 +382,65 @@ h1,h2,h3{
   font-size:12px;
   font-weight:900;
 }
+.card-footer{
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid rgba(23,77,47,.10);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.price-box small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.card-price{
+  color:var(--green);
+  font-size:22px;
+  font-weight:900;
+}
+
+.view-btn{
+  background:var(--green);
+  color:white;
+  border-radius:999px;
+  padding:10px 15px;
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.show-more-wrap{
+  text-align:center;
+  margin-top:34px;
+}
+
+.show-more-btn{
+  border:none;
+  background:var(--green);
+  color:white;
+  padding:15px 28px;
+  border-radius:999px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 15px 40px rgba(23,77,47,.18);
+  transition:.3s;
+}
+
+.show-more-btn:hover{
+  transform:translateY(-3px);
+}
+
+.show-more-btn.hidden{
+  display:none;
+}
+
 
 /* CTA */
 .cta{
@@ -505,6 +605,15 @@ h1,h2,h3{
     gap:18px;
   }
 
+  .experience-controls{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .currency-switch{
+    justify-content:space-between;
+  }
+
   .footer-grid{
     grid-template-columns:1fr;
   }
@@ -548,11 +657,26 @@ h1,h2,h3{
 </section>
 
 <section class="intro-line">
-  <p>Nepal is not just mountains. It is kitchen smoke, monastery bells, tea with strangers, festivals in old alleys, and stories shared beside the fire.</p>
+  <p>Choose a path and discover Nepal through people, culture, food, mountains, festivals, villages, and stories.</p>
 </section>
 
-<div class="search-box">
-  <input type="text" id="searchBox" placeholder="Search experiences...">
+<div class="experience-controls">
+  <div class="search-box">
+    <input type="text" id="searchBox" placeholder="Search experiences by name, style, or duration...">
+  </div>
+
+  <div class="currency-switch">
+    <label for="currencySelect">Currency</label>
+    <select id="currencySelect">
+      <option value="USD">USD $</option>
+      <option value="NPR">NPR रू</option>
+      <option value="GBP">GBP £</option>
+      <option value="AUD">AUD A$</option>
+      <option value="EUR">EUR €</option>
+      <option value="INR">INR ₹</option>
+      <option value="JPY">JPY ¥</option>
+    </select>
+  </div>
 </div>
 
 <section class="mandala-wrap">
@@ -579,10 +703,14 @@ h1,h2,h3{
       <h2 id="sectionTitle">Signature Experiences</h2>
       <p id="sectionSub">Our most emotional and meaningful Nepal journeys.</p>
     </div>
-    <p>Click any card to view details →</p>
+    <p>Choose a category, compare prices, then view details →</p>
   </div>
 
   <div class="card-grid" id="cards"></div>
+
+  <div class="show-more-wrap">
+    <button id="showMoreBtn" class="show-more-btn">Show More Experiences</button>
+  </div>
 </section>
 
 <section class="cta">
@@ -911,36 +1039,117 @@ const cards = document.getElementById("cards");
 const sectionTitle = document.getElementById("sectionTitle");
 const sectionSub = document.getElementById("sectionSub");
 const searchBox = document.getElementById("searchBox");
+const currencySelect = document.getElementById("currencySelect");
+const showMoreBtn = document.getElementById("showMoreBtn");
 const mandalaWrap = document.querySelector(".mandala-wrap");
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
 let currentCategory = "signature";
+let currentItems = [];
+let visibleCount = 12;
+let currentCurrency = "USD";
+
+const currencyRates = {
+  USD:{rate:1,symbol:"$"},
+  NPR:{rate:133,symbol:"रू"},
+  GBP:{rate:.79,symbol:"£"},
+  AUD:{rate:1.52,symbol:"A$"},
+  EUR:{rate:.92,symbol:"€"},
+  INR:{rate:83,symbol:"₹"},
+  JPY:{rate:157,symbol:"¥"}
+};
+
+const basePrices = {
+  signature:899,
+  village:299,
+  food:79,
+  festival:149,
+  culture:99,
+  wellness:399,
+  trek:699,
+  adventure:99
+};
+
+const specialPrices = {
+  "everest-base-camp":1499,
+  "annapurna-base-camp":1299,
+  "poon-hill":699,
+  "rara-lake":1599,
+  "upper-mustang-trek":1899,
+  "helicopter-everest-tour":1299,
+  "breakfast-everest-base-camp":1399,
+  "honeymoon-himalayas":1199,
+  "live-like-a-nepali":799,
+  "taste-of-nepal":299,
+  "paragliding-pokhara":120,
+  "white-water-rafting":95,
+  "jungle-safari":399
+};
+
+function getUsdPrice(item){
+  const slug = item[3];
+  if(specialPrices[slug]) return specialPrices[slug];
+  const duration = String(item[2]).toLowerCase();
+  const base = basePrices[currentCategory] || 199;
+  if(duration.includes("half") || duration.includes("morning") || duration.includes("evening") || duration.includes("night")) return Math.max(49, Math.round(base * .45));
+  if(duration.includes("1 day")) return Math.max(79, Math.round(base * .7));
+  if(duration.includes("custom")) return base + 600;
+  return base;
+}
+
+function formatPrice(usd){
+  const c = currencyRates[currentCurrency];
+  const value = Math.round(usd * c.rate);
+  return c.symbol + value.toLocaleString();
+}
 
 menuBtn.addEventListener("click", () => {
   navLinks.classList.toggle("active");
 });
 
-function createCards(items){
+function createCards(items, reset = false){
+  if(reset){
+    currentItems = items;
+    visibleCount = 12;
+  }
+
   if(!items.length){
     cards.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#6b746d;font-weight:800;">No experiences found. Try another keyword.</p>`;
+    showMoreBtn.classList.add("hidden");
     return;
   }
 
-  cards.innerHTML = items.map(item => `
+  const visibleItems = currentItems.slice(0, visibleCount);
+
+  cards.innerHTML = visibleItems.map(item => {
+    const price = formatPrice(getUsdPrice(item));
+    return `
     <a class="card" href="experience-detail-v2.html?experience=${item[3]}">
-      <img src="${item[4]}" alt="${item[0]}">
+      <img loading="lazy" src="${item[4]}" alt="${item[0]}">
       <div class="card-body">
         <h3>${item[0]}</h3>
         <p>${item[1]}</p>
         <div class="meta">
           <span>${item[2]}</span>
           <span>${currentCategory.toUpperCase()}</span>
-          <span>View Details</span>
+        </div>
+        <div class="card-footer">
+          <div class="price-box">
+            <small>FROM</small>
+            <div class="card-price">${price}</div>
+          </div>
+          <span class="view-btn">View Trip →</span>
         </div>
       </div>
     </a>
-  `).join("");
+  `}).join("");
+
+  if(currentItems.length > visibleCount){
+    showMoreBtn.classList.remove("hidden");
+  }else{
+    showMoreBtn.classList.add("hidden");
+  }
 }
 
 function updateMandalaBackground(cat){
@@ -954,7 +1163,7 @@ function render(cat){
   sectionSub.textContent = data[cat].sub;
   searchBox.value = "";
   updateMandalaBackground(cat);
-  createCards(data[cat].items);
+  createCards(data[cat].items, true);
 }
 
 buttons.forEach(btn => {
@@ -972,7 +1181,17 @@ searchBox.addEventListener("input", () => {
     item[1].toLowerCase().includes(term) ||
     item[2].toLowerCase().includes(term)
   );
-  createCards(filtered);
+  createCards(filtered, true);
+});
+
+showMoreBtn.addEventListener("click", () => {
+  visibleCount += 12;
+  createCards(currentItems);
+});
+
+currencySelect.addEventListener("change", () => {
+  currentCurrency = currencySelect.value;
+  createCards(currentItems);
 });
 
 render("signature");

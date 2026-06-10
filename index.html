@@ -17,6 +17,7 @@
   --cream:#faf7ef;
   --text:#222;
   --muted:#666;
+  --gold:#d4af37;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -270,45 +271,6 @@ a{text-decoration:none}
   100%{transform:translateX(-50%)}
 }
 
-/* MOBILE DISCOVER FIX */
-@media(max-width:700px){
-  .discover{
-    padding:55px 0 35px;
-  }
-
-  .slider-wrap{
-    padding:0 16px;
-    overflow-x:auto;
-  }
-
-  .slider{
-    animation:none;
-    gap:14px;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    padding-bottom:10px;
-  }
-
-  .slide-card{
-    min-width:190px;
-    scroll-snap-align:start;
-  }
-
-  .slide-card img{
-    width:190px;
-    height:135px;
-    border-radius:16px;
-  }
-
-  .slide-card p{
-    font-size:12px;
-  }
-
-  .desktop-duplicate{
-    display:none;
-  }
-}
-
 /* WHY RIGAN */
 .why-rigan{
   padding:80px 70px;
@@ -447,6 +409,71 @@ a{text-decoration:none}
   margin-top:40px;
 }
 
+/* MANDALA DIVIDER */
+.mandala-divider{
+  text-align:center;
+  font-size:30px;
+  color:var(--gold);
+  padding:38px 0;
+  opacity:.85;
+}
+
+/* HOSTS */
+.hosts{
+  padding:85px 70px;
+  background:#fffaf2;
+  text-align:center;
+}
+
+.host-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:26px;
+  margin-top:40px;
+}
+
+.host-card{
+  background:white;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(0,0,0,.08);
+  text-align:left;
+  transition:.35s;
+}
+
+.host-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 28px 65px rgba(23,77,47,.16);
+}
+
+.host-card img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.host-content{
+  padding:24px;
+}
+
+.host-content span{
+  color:var(--brown);
+  font-weight:800;
+  font-size:13px;
+}
+
+.host-content h3{
+  font-size:24px;
+  color:var(--green);
+  margin:8px 0;
+}
+
+.host-content p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
 /* REGIONS PREVIEW */
 .region-preview{
   padding:80px 70px;
@@ -497,6 +524,46 @@ a{text-decoration:none}
 .region-card p{
   color:rgba(255,255,255,.85);
   font-size:14px;
+}
+
+/* REVIEWS */
+.reviews{
+  padding:85px 70px;
+  background:#edf5eb;
+  text-align:center;
+}
+
+.review-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:26px;
+  margin-top:40px;
+}
+
+.review-card{
+  background:white;
+  padding:30px;
+  border-radius:26px;
+  box-shadow:0 18px 45px rgba(0,0,0,.08);
+  text-align:left;
+}
+
+.review-stars{
+  color:var(--gold);
+  font-size:18px;
+  margin-bottom:16px;
+}
+
+.review-card p{
+  color:var(--muted);
+  line-height:1.8;
+  font-size:15px;
+}
+
+.review-card h4{
+  margin-top:18px;
+  color:var(--green);
+  font-family:'Inter',sans-serif;
 }
 
 /* CTA */
@@ -625,7 +692,9 @@ a{text-decoration:none}
   .exp-grid,
   .region-grid,
   .footer-grid,
-  .philosophy-grid{
+  .philosophy-grid,
+  .host-grid,
+  .review-grid{
     grid-template-columns:1fr;
   }
 
@@ -633,7 +702,9 @@ a{text-decoration:none}
   .signature,
   .region-preview,
   .why-rigan,
-  .rigan-philosophy{
+  .rigan-philosophy,
+  .hosts,
+  .reviews{
     padding:65px 25px;
   }
 
@@ -645,6 +716,49 @@ a{text-decoration:none}
   }
 
   .footer{padding:55px 25px 25px}
+}
+
+/* MOBILE DISCOVER FIX */
+@media(max-width:700px){
+  .discover{
+    padding:55px 0 35px;
+  }
+
+  .slider-wrap{
+    padding:0 18px;
+    overflow-x:auto;
+  }
+
+  .slider{
+    animation:none;
+    gap:16px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding-bottom:14px;
+  }
+
+  .slide-card{
+    min-width:82vw;
+    max-width:82vw;
+    scroll-snap-align:center;
+  }
+
+  .slide-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    object-position:center;
+    border-radius:22px;
+  }
+
+  .slide-card p{
+    font-size:14px;
+    margin-top:10px;
+  }
+
+  .desktop-duplicate{
+    display:none;
+  }
 }
 </style>
 </head>
@@ -721,7 +835,6 @@ a{text-decoration:none}
 
   <div class="slider-wrap">
     <div class="slider">
-
       <div class="slide-card">
         <img loading="lazy" src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg" alt="Phewa Lake, Pokhara">
         <p>Phewa Lake, Pokhara</p>
@@ -757,7 +870,6 @@ a{text-decoration:none}
         <p>Village Life, Nepal</p>
       </div>
 
-      <!-- Desktop duplicate only -->
       <div class="slide-card desktop-duplicate">
         <img loading="lazy" src="https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg" alt="Phewa Lake, Pokhara">
         <p>Phewa Lake, Pokhara</p>
@@ -792,12 +904,12 @@ a{text-decoration:none}
         <img loading="lazy" src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg" alt="Village Life in Nepal">
         <p>Village Life, Nepal</p>
       </div>
-
     </div>
   </div>
 </section>
+
 <section class="why-rigan">
-  <h2 class="section-title">Why Choose Rigan?</h2>
+  <h2 class="section-title">Why Travel With Rigan?</h2>
   <p class="section-subtitle">
     Travel deeper. Connect genuinely. Experience Nepal through local eyes.
   </p>
@@ -865,7 +977,7 @@ a{text-decoration:none}
 
   <div class="story-grid">
     <div class="story-card">
-      <img src="https://i.postimg.cc/RqrfKnFJ/julie-pittevils-u-Lr9ZOFU4GM-unsplash.jpg">
+      <img src="https://i.postimg.cc/RqrfKnFJ/julie-pittevils-u-Lr9ZOFU4GM-unsplash.jpg" alt="Traveler story in Nepal">
       <div class="story-content">
         <span class="story-tag">The Connection</span>
         <h3>“I came as a guest, left as family.”</h3>
@@ -875,7 +987,7 @@ a{text-decoration:none}
     </div>
 
     <div class="story-card">
-      <img src="https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg">
+      <img src="https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg" alt="Annapurna travel story">
       <div class="story-content">
         <span class="story-tag" style="background:var(--brown)">The Adventure</span>
         <h3>“The Himalayas changed me.”</h3>
@@ -885,7 +997,7 @@ a{text-decoration:none}
     </div>
 
     <div class="story-card">
-      <img src="https://i.postimg.cc/Xq2N6RRs/sanjeev-shakya-t-CKtz-Yih-Gkw-unsplash.jpg">
+      <img src="https://i.postimg.cc/Xq2N6RRs/sanjeev-shakya-t-CKtz-Yih-Gkw-unsplash.jpg" alt="Rural Nepal travel">
       <div class="story-content">
         <span class="story-tag">The Moments</span>
         <h3>“Small moments, biggest memories.”</h3>
@@ -895,7 +1007,7 @@ a{text-decoration:none}
     </div>
 
     <div class="story-card">
-      <img src="https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg">
+      <img src="https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg" alt="Cultural journey Nepal">
       <div class="story-content">
         <span class="story-tag" style="background:var(--brown)">The Culture</span>
         <h3>“Celebrated festival like never before.”</h3>
@@ -912,7 +1024,7 @@ a{text-decoration:none}
 
   <div class="exp-grid">
     <div class="exp-card">
-      <img src="https://i.postimg.cc/3rqzzrVM/shelby-murphy-figueroa-u5o-M1k6pl-Pg-unsplash.jpg">
+      <img src="https://i.postimg.cc/3rqzzrVM/shelby-murphy-figueroa-u5o-M1k6pl-Pg-unsplash.jpg" alt="Cook with a local family">
       <div class="exp-card-content">
         <h3>Cook with a Local Family</h3>
         <p>Learn to cook traditional Nepali dishes in a local home and share stories over a meal.</p>
@@ -921,7 +1033,7 @@ a{text-decoration:none}
     </div>
 
     <div class="exp-card">
-      <img src="https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg">
+      <img src="https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg" alt="Live like a Nepali">
       <div class="exp-card-content">
         <h3>Live Like a Nepali</h3>
         <p>Stay with a local family in a village and experience daily life up close.</p>
@@ -930,7 +1042,7 @@ a{text-decoration:none}
     </div>
 
     <div class="exp-card">
-      <img src="https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg">
+      <img src="https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg" alt="Farm and harvest experience">
       <div class="exp-card-content">
         <h3>Farm & Harvest Experience</h3>
         <p>Join locals in the fields, plant rice, and celebrate harvest the traditional way.</p>
@@ -939,11 +1051,49 @@ a{text-decoration:none}
     </div>
 
     <div class="exp-card">
-      <img src="https://i.postimg.cc/fb0vtZ55/sushil-basnet-MUBA0uo-CYFU-unsplash.jpg">
+      <img src="https://i.postimg.cc/fb0vtZ55/sushil-basnet-MUBA0uo-CYFU-unsplash.jpg" alt="Festival experience Nepal">
       <div class="exp-card-content">
         <h3>Celebrate Local Festivals</h3>
         <p>Be part of vibrant festivals like Dashain, Tihar, and local jatras with locals.</p>
         <div class="location"><i class="fa-solid fa-location-dot"></i> Across Nepal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mandala-divider">✺ ✧ ✺</div>
+
+<section class="hosts">
+  <h2 class="section-title">Meet Your Local Hosts</h2>
+  <p class="section-subtitle">
+    The heart of Rigan is the people who welcome you into their homes, villages, and stories.
+  </p>
+
+  <div class="host-grid">
+    <div class="host-card">
+      <img src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg" alt="Local host in Nepal">
+      <div class="host-content">
+        <span>Bandipur / Village Life</span>
+        <h3>Maya Gurung</h3>
+        <p>Sharing village life, local food, family stories, and the warmth of Nepali hospitality.</p>
+      </div>
+    </div>
+
+    <div class="host-card">
+      <img src="https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg" alt="Mountain host in Nepal">
+      <div class="host-content">
+        <span>Mustang / Mountain Culture</span>
+        <h3>Tashi Lama</h3>
+        <p>Introducing travelers to ancient trails, monasteries, Tibetan culture, and mountain life.</p>
+      </div>
+    </div>
+
+    <div class="host-card">
+      <img src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg" alt="Food host in Nepal">
+      <div class="host-content">
+        <span>Kathmandu / Food & Culture</span>
+        <h3>Sita Shrestha</h3>
+        <p>Welcoming guests into the kitchen to cook, eat, laugh, and experience Nepal through food.</p>
       </div>
     </div>
   </div>
@@ -974,6 +1124,35 @@ a{text-decoration:none}
         <p>Remote blue lake, forests, and hidden Nepal.</p>
       </div>
     </a>
+  </div>
+</section>
+
+<div class="mandala-divider">✺ ✧ ✺</div>
+
+<section class="reviews">
+  <h2 class="section-title">Reflections From The Road</h2>
+  <p class="section-subtitle">
+    Not just reviews — memories carried home by travelers.
+  </p>
+
+  <div class="review-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>“I came for the mountains, but I left remembering the people. Rigan made Nepal feel personal.”</p>
+      <h4>— Sarah, Australia</h4>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>“The village stay was the most meaningful part of our trip. We felt like family, not tourists.”</p>
+      <h4>— James & Emily, UK</h4>
+    </div>
+
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>“Everything felt calm, authentic, and beautifully arranged. This was more than travel.”</p>
+      <h4>— Mina, Japan</h4>
+    </div>
   </div>
 </section>
 
@@ -1018,7 +1197,6 @@ a{text-decoration:none}
       <div class="socials">
         <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        
       </div>
     </div>
   </div>

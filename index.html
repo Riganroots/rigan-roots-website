@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rigan Roots & Routes | Nepal Travel Experiences</title>
+<meta name="description" content="Rigan Roots & Routes creates authentic Nepal travel experiences through local culture, hidden destinations, food, village life, wellness, and meaningful journeys.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -127,10 +128,7 @@ a{text-decoration:none}
   transition:.3s;
 }
 
-.btn:hover{
-  transform:translateY(-3px);
-}
-
+.btn:hover{transform:translateY(-3px)}
 .btn-green{background:var(--green)}
 .btn-brown{background:var(--brown)}
 .btn-outline{border:2px solid white}
@@ -184,6 +182,13 @@ a{text-decoration:none}
 @keyframes slide{
   0%{transform:translateX(0)}
   100%{transform:translateX(-50%)}
+}
+
+/* WHY RIGAN */
+.why-rigan{
+  padding:80px 70px;
+  background:#fffaf2;
+  text-align:center;
 }
 
 /* FEATURES */
@@ -463,19 +468,11 @@ a{text-decoration:none}
 
 /* RESPONSIVE */
 @media(max-width:1100px){
-  .navbar{
-    padding:14px 24px;
-  }
-
-  .nav-links{
-    gap:18px;
-  }
-
+  .navbar{padding:14px 24px}
+  .nav-links{gap:18px}
   .features,
   .story-grid,
-  .exp-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+  .exp-grid{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:900px){
@@ -492,15 +489,10 @@ a{text-decoration:none}
     display:none;
   }
 
-  .nav-links.active{
-    display:flex;
-  }
-
+  .nav-links.active{display:flex}
   .logo img{height:56px}
 
-  .hero{
-    padding:140px 25px 70px;
-  }
+  .hero{padding:140px 25px 70px}
 
   .features,
   .story-grid,
@@ -512,7 +504,8 @@ a{text-decoration:none}
 
   .stories,
   .signature,
-  .region-preview{
+  .region-preview,
+  .why-rigan{
     padding:65px 25px;
   }
 
@@ -523,9 +516,7 @@ a{text-decoration:none}
     align-items:flex-start;
   }
 
-  .footer{
-    padding:55px 25px 25px;
-  }
+  .footer{padding:55px 25px 25px}
 }
 </style>
 </head>
@@ -587,6 +578,47 @@ a{text-decoration:none}
       <div class="slide-card"><img src="https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"><p>Heritage Sites</p></div>
       <div class="slide-card"><img src="https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"><p>Everest Region</p></div>
       <div class="slide-card"><img src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"><p>Village Life, Nepal</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="why-rigan">
+  <h2 class="section-title">Why Choose Rigan?</h2>
+  <p class="section-subtitle">
+    Travel deeper. Connect genuinely. Experience Nepal through local eyes.
+  </p>
+
+  <div class="story-grid">
+    <div class="story-card">
+      <div class="story-content">
+        <span class="story-tag">🤝 Local Experts</span>
+        <h3>Travel With People Who Know Nepal</h3>
+        <p>We know hidden trails, family-run stays, authentic food experiences, and stories most travelers never discover.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-content">
+        <span class="story-tag" style="background:var(--brown)">🏡 Authentic Experiences</span>
+        <h3>Beyond Traditional Tourism</h3>
+        <p>Stay with local families, celebrate festivals, learn traditions, and experience Nepal in a meaningful way.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-content">
+        <span class="story-tag">🌱 Responsible Travel</span>
+        <h3>Support Local Communities</h3>
+        <p>Every experience is designed to benefit local hosts, communities, guides, and small businesses.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-content">
+        <span class="story-tag" style="background:var(--brown)">🏔 Hidden Nepal</span>
+        <h3>Discover Places Others Miss</h3>
+        <p>Explore Rara Lake, Phoksundo, Khaptad, Tsum Valley, Mustang, and lesser-known gems.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -770,8 +802,8 @@ a{text-decoration:none}
     <div>
       <h3>Follow Us</h3>
       <div class="socials">
-        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-facebook-f"></i>https://www.facebook.com/profile.php?id=61573338796274</a>
+        <a href="#"><i class="fa-brands fa-instagram"></i>https://www.instagram.com/riganrootsandroutes/</a>
         <a href="#"><i class="fa-brands fa-youtube"></i></a>
       </div>
     </div>

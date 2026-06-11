@@ -411,7 +411,7 @@ window.experienceDataV2 = {
     ]
   },
 
-  food: {
+   food: {
     title: "Taste Nepal 🍲",
     sub: "Food journeys through local kitchens, family homes, markets, and ethnic traditions.",
     items: [
@@ -425,6 +425,50 @@ window.experienceDataV2 = {
         location: "Kathmandu",
         style: "Food Walk",
         image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"
+      }),
+      exp({
+        id: "newari-food-experience",
+        name: "Newari Food Experience",
+        subtitle: "Discover Newari flavors, traditional snacks, and local culture.",
+        overview: "Taste authentic Newari dishes while learning about Kathmandu Valley’s rich food heritage.",
+        duration: "1 Day",
+        price: "From US$95",
+        location: "Kathmandu / Patan / Bhaktapur",
+        style: "Ethnic Food Experience",
+        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
+      }),
+      exp({
+        id: "tharu-food-culture",
+        name: "Tharu Food & Culture",
+        subtitle: "Taste Tharu cuisine and experience Terai village culture.",
+        overview: "Enjoy Tharu food, local village life, cultural stories, and traditional hospitality.",
+        duration: "2 Days",
+        price: "From US$180",
+        location: "Chitwan / Terai",
+        style: "Food & Culture",
+        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
+      }),
+      exp({
+        id: "tamang-food-experience",
+        name: "Tamang Food Experience",
+        subtitle: "Experience mountain food, local drinks, and Tamang hospitality.",
+        overview: "A warm cultural food experience with Tamang families, mountain flavors, and local traditions.",
+        duration: "1 Day",
+        price: "From US$110",
+        location: "Kathmandu Valley / Nearby Hills",
+        style: "Ethnic Food Experience",
+        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"
+      }),
+      exp({
+        id: "sherpa-kitchen-experience",
+        name: "Sherpa Kitchen Experience",
+        subtitle: "Taste Himalayan meals, butter tea, and Sherpa hospitality.",
+        overview: "Discover Sherpa food culture through warm meals, mountain stories, and traditional kitchen experiences.",
+        duration: "1 Day",
+        price: "From US$120",
+        location: "Everest Region / Kathmandu",
+        style: "Himalayan Food Experience",
+        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"
       })
     ]
   },
@@ -442,6 +486,50 @@ window.experienceDataV2 = {
         price: "From US$220",
         location: "Kathmandu Valley",
         style: "Culture & Heritage",
+        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
+      }),
+      exp({
+        id: "bhaktapur-living-heritage",
+        name: "Bhaktapur Living Heritage",
+        subtitle: "Walk ancient streets, pottery squares, temples, and local homes.",
+        overview: "Experience Bhaktapur beyond sightseeing through artisans, food, courtyards, and living Newari culture.",
+        duration: "1 Day",
+        price: "From US$120",
+        location: "Bhaktapur",
+        style: "Living Heritage",
+        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
+      }),
+      exp({
+        id: "patan-artisan-walk",
+        name: "Patan Artisan Walk",
+        subtitle: "Meet metal artists, woodcarvers, and traditional craft families.",
+        overview: "Explore Patan’s old lanes, courtyards, and artisan communities preserving Nepal’s handmade traditions.",
+        duration: "1 Day",
+        price: "From US$115",
+        location: "Patan / Lalitpur",
+        style: "Artisan & Heritage Walk",
+        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
+      }),
+      exp({
+        id: "lumbini-spiritual-journey",
+        name: "Lumbini Spiritual Journey",
+        subtitle: "Visit the birthplace of Buddha and peaceful monastery zones.",
+        overview: "A spiritual journey through Lumbini’s sacred sites, monasteries, meditation spaces, and peaceful gardens.",
+        duration: "3 Days",
+        price: "From US$350",
+        location: "Lumbini",
+        style: "Spiritual Heritage",
+        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
+      }),
+      exp({
+        id: "devghat-spiritual-journey",
+        name: "Devghat Spiritual Journey",
+        subtitle: "Experience sacred rivers, temples, sadhus, and peaceful rituals.",
+        overview: "A spiritual escape to Devghat Dham, where rivers, rituals, temples, and quiet reflection meet.",
+        duration: "2 Days",
+        price: "From US$220",
+        location: "Devghat Dham",
+        style: "Spiritual Culture",
         image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
       })
     ]
@@ -461,6 +549,39 @@ window.experienceDataV2 = {
         location: "Pokhara / Kathmandu Valley",
         style: "Yoga & Meditation",
         image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"
+      }),
+      exp({
+        id: "monastery-meditation-experience",
+        name: "Monastery Meditation Experience",
+        subtitle: "Experience silence, mindfulness, and monastery life.",
+        overview: "Spend quiet time in or around a monastery with meditation, simple routines, and spiritual reflection.",
+        duration: "2 Days",
+        price: "From US$190",
+        location: "Kathmandu Valley / Monastery Area",
+        style: "Meditation Experience",
+        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
+      }),
+      exp({
+        id: "sound-healing-journey",
+        name: "Sound Healing Journey",
+        subtitle: "Relax with singing bowls, healing vibrations, and calm space.",
+        overview: "A gentle healing session using sound, vibration, breathing, and peaceful guidance.",
+        duration: "Half Day",
+        price: "From US$80",
+        location: "Kathmandu / Pokhara",
+        style: "Healing Experience",
+        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
+      }),
+      exp({
+        id: "devghat-yoga-with-guru",
+        name: "Devghat Yoga with Guru",
+        subtitle: "Practice yoga and reflection in a sacred riverside setting.",
+        overview: "A spiritual wellness experience in Devghat with yoga, calm walks, river rituals, and guidance from local spiritual teachers.",
+        duration: "3 Days",
+        price: "From US$320",
+        location: "Devghat Dham",
+        style: "Spiritual Yoga",
+        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"
       })
     ]
   },
@@ -479,6 +600,50 @@ window.experienceDataV2 = {
         location: "Kathmandu / Local Communities",
         style: "Festival Experience",
         image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"
+      }),
+      exp({
+        id: "tihar-experience",
+        name: "Tihar Experience",
+        subtitle: "Lights, flowers, candles, music, worship, and family warmth.",
+        overview: "Join local families during Tihar and experience lights, rangoli, worship, sweets, and celebration.",
+        duration: "3 Days",
+        price: "From US$280",
+        location: "Kathmandu / Local Communities",
+        style: "Festival Experience",
+        image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"
+      }),
+      exp({
+        id: "holi-festival-experience",
+        name: "Holi Festival Experience",
+        subtitle: "Celebrate colors, music, laughter, and spring energy.",
+        overview: "Enjoy Holi in a safe and guided way with local context, colors, food, and celebration.",
+        duration: "1 Day",
+        price: "From US$95",
+        location: "Kathmandu / Pokhara",
+        style: "Color Festival",
+        image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"
+      }),
+      exp({
+        id: "indra-jatra-experience",
+        name: "Indra Jatra Experience",
+        subtitle: "Masked dances, living goddess traditions, and Kathmandu celebrations.",
+        overview: "Witness one of Kathmandu’s most important Newari festivals with local guidance and storytelling.",
+        duration: "1 Day",
+        price: "From US$120",
+        location: "Kathmandu",
+        style: "Cultural Festival",
+        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
+      }),
+      exp({
+        id: "newari-festival-experience",
+        name: "Newari Festival Experience",
+        subtitle: "Experience jatras, rituals, food, music, and living Newari culture.",
+        overview: "Join selected Newari festivals with local hosts and understand the stories behind the celebration.",
+        duration: "1–2 Days",
+        price: "From US$160",
+        location: "Kathmandu Valley",
+        style: "Newari Festival",
+        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
       })
     ]
   },
@@ -487,6 +652,17 @@ window.experienceDataV2 = {
     title: "Adventure Activities 🌊",
     sub: "Sky, rivers, mountains, speed, adrenaline, and outdoor experiences.",
     items: [
+      exp({
+        id: "everest-helicopter-tour",
+        name: "Everest Helicopter Tour",
+        subtitle: "A luxury helicopter flight with breathtaking Everest views.",
+        overview: "Fly into the Everest region by helicopter and enjoy one of Nepal’s most spectacular aerial experiences.",
+        duration: "1 Day",
+        price: "From US$1350",
+        location: "Everest Region",
+        style: "Helicopter Adventure",
+        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"
+      }),
       exp({
         id: "paragliding-pokhara",
         name: "Paragliding in Pokhara",
@@ -497,6 +673,50 @@ window.experienceDataV2 = {
         location: "Pokhara",
         style: "Adventure",
         image: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"
+      }),
+      exp({
+        id: "bungee-jump-nepal",
+        name: "Bungee Jump Nepal",
+        subtitle: "Take the leap into Nepal’s dramatic canyon landscapes.",
+        overview: "A thrilling adventure for adrenaline seekers with professional safety support and dramatic natural scenery.",
+        duration: "1 Day",
+        price: "From US$110",
+        location: "Nepal",
+        style: "Adrenaline Adventure",
+        image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"
+      }),
+      exp({
+        id: "hot-air-balloon-pokhara",
+        name: "Hot Air Balloon Experience",
+        subtitle: "Float above Pokhara with lake and mountain views.",
+        overview: "A calm and scenic adventure above Pokhara’s valley, lakes, hills, and mountain skyline.",
+        duration: "Half Day",
+        price: "From US$150",
+        location: "Pokhara",
+        style: "Soft Adventure",
+        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"
+      }),
+      exp({
+        id: "trishuli-river-rafting",
+        name: "Trishuli River Rafting",
+        subtitle: "Experience Nepal’s river rapids, scenery, and outdoor energy.",
+        overview: "A fun and accessible white-water rafting experience suitable for beginners and adventure lovers.",
+        duration: "1 Day",
+        price: "From US$85",
+        location: "Trishuli River",
+        style: "River Adventure",
+        image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"
+      }),
+      exp({
+        id: "mountain-cycling-adventure",
+        name: "Mountain Cycling Adventure",
+        subtitle: "Ride through villages, hills, trails, and scenic landscapes.",
+        overview: "A guided cycling experience through Nepal’s hills, rural roads, viewpoints, and local communities.",
+        duration: "1–2 Days",
+        price: "From US$130",
+        location: "Kathmandu Valley / Pokhara",
+        style: "Cycling Adventure",
+        image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"
       })
     ]
   }

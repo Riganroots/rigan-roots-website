@@ -557,56 +557,65 @@ window.experienceDataV2 = {
   ]
 },
 
-  wellness: {
-    title: "Wellness & Spirituality 🧘",
-    sub: "Quiet retreats for yoga, meditation, healing, and inner peace.",
-    items: [
-      exp({
-        id: "yoga-meditation-retreat",
-        name: "Yoga & Meditation Retreat",
-        subtitle: "Reset your body and mind in peaceful surroundings.",
-        overview: "A peaceful wellness journey with yoga, meditation, mindful walking, and slow travel.",
-        duration: "5 Days",
-        price: "From US$480",
-        location: "Pokhara / Kathmandu Valley",
-        style: "Yoga & Meditation",
-        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"
-      }),
-      exp({
-        id: "monastery-meditation-experience",
-        name: "Monastery Meditation Experience",
-        subtitle: "Experience silence, mindfulness, and monastery life.",
-        overview: "Spend quiet time in or around a monastery with meditation, simple routines, and spiritual reflection.",
-        duration: "2 Days",
-        price: "From US$190",
-        location: "Kathmandu Valley / Monastery Area",
-        style: "Meditation Experience",
-        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
-      }),
-      exp({
-        id: "sound-healing-journey",
-        name: "Sound Healing Journey",
-        subtitle: "Relax with singing bowls, healing vibrations, and calm space.",
-        overview: "A gentle healing session using sound, vibration, breathing, and peaceful guidance.",
-        duration: "Half Day",
-        price: "From US$80",
-        location: "Kathmandu / Pokhara",
-        style: "Healing Experience",
-        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
-      }),
-      exp({
-        id: "devghat-yoga-with-guru",
-        name: "Devghat Yoga with Guru",
-        subtitle: "Practice yoga and reflection in a sacred riverside setting.",
-        overview: "A spiritual wellness experience in Devghat with yoga, calm walks, river rituals, and guidance from local spiritual teachers.",
-        duration: "3 Days",
-        price: "From US$320",
-        location: "Devghat Dham",
-        style: "Spiritual Yoga",
-        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"
-      })
-    ]
-  },
+wellness: {
+  title: "Wellness & Spirituality 🧘",
+  sub: "Slow down, reconnect, and find balance through Nepal's spiritual traditions and peaceful landscapes.",
+  items: [
+
+    exp({
+      id: "yoga-meditation-retreat",
+      name: "Yoga & Meditation Retreat",
+      subtitle: "Reset your body and mind in peaceful Himalayan surroundings.",
+      overview: "A wellness retreat combining yoga, meditation, mindful movement, healthy food, and peaceful reflection in Nepal's natural beauty.",
+      duration: "5 Days",
+      price: "From US$480",
+      location: "Pokhara / Kathmandu Valley",
+      style: "Yoga & Meditation",
+      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80",
+      badge: "Most Popular"
+    }),
+
+    exp({
+      id: "monastery-meditation-experience",
+      name: "Monastery Meditation Experience",
+      subtitle: "Experience silence, mindfulness, and monastery life.",
+      overview: "Spend time with monks, learn meditation techniques, enjoy peaceful surroundings, and experience Nepal's Buddhist traditions.",
+      duration: "2 Days",
+      price: "From US$190",
+      location: "Kathmandu Valley",
+      style: "Meditation Experience",
+      image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+      badge: "Spiritual"
+    }),
+
+    exp({
+      id: "sound-healing-journey",
+      name: "Sound Healing Journey",
+      subtitle: "Relax through singing bowls, vibration, and mindful breathing.",
+      overview: "Experience deep relaxation through traditional Himalayan singing bowls, guided breathing, and sound therapy sessions.",
+      duration: "Half Day",
+      price: "From US$80",
+      location: "Kathmandu / Pokhara",
+      style: "Sound Healing",
+      image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+      badge: "Healing"
+    }),
+
+    exp({
+      id: "devghat-yoga-with-guru",
+      name: "Devghat Yoga with Guru",
+      subtitle: "Practice yoga and reflection in one of Nepal's most sacred places.",
+      overview: "Join yoga sessions, spiritual discussions, riverside meditation, and peaceful walks guided by local spiritual teachers.",
+      duration: "3 Days",
+      price: "From US$320",
+      location: "Devghat Dham",
+      style: "Spiritual Yoga Retreat",
+      image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+      badge: "Sacred"
+    })
+
+  ]
+},
 
   festival: {
     title: "Festivals of Nepal 🎉",

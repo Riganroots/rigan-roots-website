@@ -406,8 +406,233 @@ window.experienceDataV2 = {
           { day: "Day 8: Trek Back to Syabrubesi", text: "Complete the trekking route and return to Syabrubesi." },
           { day: "Day 9: Drive to Kathmandu", text: "Return by road to Kathmandu." },
           { day: "Day 10: Final Departure", text: "Airport transfer or optional extension." }
-        ]
+          }),
+
+      exp({
+        id: "everest-three-passes-trek",
+        name: "Everest Three Passes Trek",
+        subtitle: "The ultimate Everest adventure crossing three legendary high passes.",
+        overview: "A challenging Himalayan journey combining Everest Base Camp, Gokyo Lakes, and the three highest passes of the Everest region.",
+        duration: "19 Days",
+        price: "From US$1900",
+        location: "Everest Region",
+        style: "High Altitude Trekking",
+        groupSize: "2–10 Guests",
+        difficulty: "Advanced",
+        season: "March–May & September–November",
+        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+        badge: "Ultimate Everest"
+      }),
+
+      exp({
+        id: "annapurna-circuit-trek",
+        name: "Annapurna Circuit Trek",
+        subtitle: "One of the world's greatest trekking routes.",
+        overview: "Cross Thorong La Pass and experience Nepal's most diverse trekking circuit.",
+        duration: "15 Days",
+        price: "From US$1350",
+        location: "Annapurna Region",
+        style: "Classic Circuit Trek",
+        groupSize: "2–12 Guests",
+        difficulty: "Moderate",
+        season: "March–May & September–November",
+        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        badge: "Classic Trek"
+      }),
+
+      exp({
+        id: "thorong-la-pass-trek",
+        name: "Thorong La Pass Trek",
+        subtitle: "Cross one of the world's highest trekking passes.",
+        overview: "Experience dramatic landscapes and the iconic Thorong La Pass at 5,416m.",
+        duration: "12 Days",
+        price: "From US$1150",
+        location: "Annapurna Region",
+        style: "Pass Crossing Trek",
+        groupSize: "2–10 Guests",
+        difficulty: "Moderate to Challenging",
+        season: "March–May & September–November",
+        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        badge: "High Pass"
+      }),
+
+      exp({
+        id: "mardi-himal-trek",
+        name: "Mardi Himal Trek",
+        subtitle: "A short Himalayan trek with incredible Annapurna views.",
+        overview: "One of Nepal's best short treks featuring forests, ridgelines, and close-up mountain scenery.",
+        duration: "5 Days",
+        price: "From US$550",
+        location: "Annapurna Region",
+        style: "Short Trek",
+        groupSize: "2–10 Guests",
+        difficulty: "Easy to Moderate",
+        season: "All Trekking Seasons",
+        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        badge: "Short Trek"
+      }),
+
+      exp({
+        id: "tilicho-lake-trek",
+        name: "Tilicho Lake Trek",
+        subtitle: "Journey to one of the world's highest alpine lakes.",
+        overview: "A spectacular trek through dramatic mountain scenery to the turquoise waters of Tilicho Lake.",
+        duration: "12 Days",
+        price: "From US$1100",
+        location: "Annapurna Region",
+        style: "Alpine Lake Trek",
+        groupSize: "2–10 Guests",
+        difficulty: "Moderate",
+        season: "March–May & September–November",
+        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        badge: "High Lake"
+      }),
+
+      exp({
+        id: "shey-phoksundo-trek",
+        name: "Shey Phoksundo Trek",
+        subtitle: "Discover Nepal's most beautiful alpine lake.",
+        overview: "Explore remote Dolpo landscapes, traditional villages, and the stunning turquoise waters of Phoksundo Lake.",
+        duration: "12 Days",
+        price: "From US$1700",
+        location: "Dolpo Region",
+        style: "Remote Trekking",
+        groupSize: "2–8 Guests",
+        difficulty: "Moderate",
+        season: "May–October",
+        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        badge: "Hidden Nepal"
+      }),
+
+      exp({
+        id: "upper-dolpo-trek",
+        name: "Upper Dolpo Trek",
+        subtitle: "Nepal's most remote and mystical trekking region.",
+        overview: "A true expedition through hidden valleys, Tibetan culture, ancient monasteries, and untouched Himalayan landscapes.",
+        duration: "21 Days",
+        price: "From US$3500",
+        location: "Upper Dolpo",
+        style: "Expedition Trek",
+        groupSize: "2–8 Guests",
+        difficulty: "Advanced",
+        season: "May–October",
+        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        badge: "Expedition"
       })
+      }),
+
+      exp({
+        id: "everest-three-passes-trek",
+        name: "Everest Three Passes Trek",
+        subtitle: "The ultimate Everest adventure crossing three legendary high passes.",
+        overview: "A challenging Himalayan journey combining Everest Base Camp, Gokyo Lakes, and the three highest passes of the Everest region.",
+        duration: "19 Days",
+        price: "From US$1900",
+        location: "Everest Region",
+        style: "High Altitude Trekking",
+        groupSize: "2–10 Guests",
+        difficulty: "Advanced",
+        season: "March–May & September–November",
+        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+        badge: "Ultimate Everest"
+      }),
+
+      exp({
+        id: "annapurna-circuit-trek",
+        name: "Annapurna Circuit Trek",
+        subtitle: "One of the world's greatest trekking routes.",
+        overview: "Cross Thorong La Pass and experience Nepal's most diverse trekking circuit.",
+        duration: "15 Days",
+        price: "From US$1350",
+        location: "Annapurna Region",
+        style: "Classic Circuit Trek",
+        groupSize: "2–12 Guests",
+        difficulty: "Moderate",
+        season: "March–May & September–November",
+        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        badge: "Classic Trek"
+      }),
+
+      exp({
+        id: "thorong-la-pass-trek",
+        name: "Thorong La Pass Trek",
+        subtitle: "Cross one of the world's highest trekking passes.",
+        overview: "Experience dramatic landscapes and the iconic Thorong La Pass at 5,416m.",
+        duration: "12 Days",
+        price: "From US$1150",
+        location: "Annapurna Region",
+        style: "Pass Crossing Trek",
+        groupSize: "2–10 Guests",
+        difficulty: "Moderate to Challenging",
+        season: "March–May & September–November",
+        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        badge: "High Pass"
+      }),
+
+      exp({
+        id: "mardi-himal-trek",
+        name: "Mardi Himal Trek",
+        subtitle: "A short Himalayan trek with incredible Annapurna views.",
+        overview: "One of Nepal's best short treks featuring forests, ridgelines, and close-up mountain scenery.",
+        duration: "5 Days",
+        price: "From US$550",
+        location: "Annapurna Region",
+        style: "Short Trek",
+        groupSize: "2–10 Guests",
+        difficulty: "Easy to Moderate",
+        season: "All Trekking Seasons",
+        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        badge: "Short Trek"
+      }),
+
+      exp({
+        id: "tilicho-lake-trek",
+        name: "Tilicho Lake Trek",
+        subtitle: "Journey to one of the world's highest alpine lakes.",
+        overview: "A spectacular trek through dramatic mountain scenery to the turquoise waters of Tilicho Lake.",
+        duration: "12 Days",
+        price: "From US$1100",
+        location: "Annapurna Region",
+        style: "Alpine Lake Trek",
+        groupSize: "2–10 Guests",
+        difficulty: "Moderate",
+        season: "March–May & September–November",
+        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        badge: "High Lake"
+      }),
+
+      exp({
+        id: "shey-phoksundo-trek",
+        name: "Shey Phoksundo Trek",
+        subtitle: "Discover Nepal's most beautiful alpine lake.",
+        overview: "Explore remote Dolpo landscapes, traditional villages, and the stunning turquoise waters of Phoksundo Lake.",
+        duration: "12 Days",
+        price: "From US$1700",
+        location: "Dolpo Region",
+        style: "Remote Trekking",
+        groupSize: "2–8 Guests",
+        difficulty: "Moderate",
+        season: "May–October",
+        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        badge: "Hidden Nepal"
+      }),
+
+      exp({
+        id: "upper-dolpo-trek",
+        name: "Upper Dolpo Trek",
+        subtitle: "Nepal's most remote and mystical trekking region.",
+        overview: "A true expedition through hidden valleys, Tibetan culture, ancient monasteries, and untouched Himalayan landscapes.",
+        duration: "21 Days",
+        price: "From US$3500",
+        location: "Upper Dolpo",
+        style: "Expedition Trek",
+        groupSize: "2–8 Guests",
+        difficulty: "Advanced",
+        season: "May–October",
+        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        badge: "Expedition"
+      })
+
     ]
   },
 

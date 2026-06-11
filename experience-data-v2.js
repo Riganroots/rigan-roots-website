@@ -484,67 +484,78 @@ window.experienceDataV2 = {
   ]
 },
 
-  culture: {
-    title: "Culture & Heritage 🛕",
-    sub: "Temples, courtyards, artisans, old towns, spirituality, and living traditions.",
-    items: [
-      exp({
-        id: "kathmandu-heritage-tour",
-        name: "Kathmandu Heritage Tour",
-        subtitle: "Explore temples, courtyards, and centuries of living history.",
-        overview: "A cultural walk through Kathmandu’s heritage, temples, alleys, food, stories, and local traditions.",
-        duration: "2 Days",
-        price: "From US$220",
-        location: "Kathmandu Valley",
-        style: "Culture & Heritage",
-        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
-      }),
-      exp({
-        id: "bhaktapur-living-heritage",
-        name: "Bhaktapur Living Heritage",
-        subtitle: "Walk ancient streets, pottery squares, temples, and local homes.",
-        overview: "Experience Bhaktapur beyond sightseeing through artisans, food, courtyards, and living Newari culture.",
-        duration: "1 Day",
-        price: "From US$120",
-        location: "Bhaktapur",
-        style: "Living Heritage",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
-      }),
-      exp({
-        id: "patan-artisan-walk",
-        name: "Patan Artisan Walk",
-        subtitle: "Meet metal artists, woodcarvers, and traditional craft families.",
-        overview: "Explore Patan’s old lanes, courtyards, and artisan communities preserving Nepal’s handmade traditions.",
-        duration: "1 Day",
-        price: "From US$115",
-        location: "Patan / Lalitpur",
-        style: "Artisan & Heritage Walk",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
-      }),
-      exp({
-        id: "lumbini-spiritual-journey",
-        name: "Lumbini Spiritual Journey",
-        subtitle: "Visit the birthplace of Buddha and peaceful monastery zones.",
-        overview: "A spiritual journey through Lumbini’s sacred sites, monasteries, meditation spaces, and peaceful gardens.",
-        duration: "3 Days",
-        price: "From US$350",
-        location: "Lumbini",
-        style: "Spiritual Heritage",
-        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
-      }),
-      exp({
-        id: "devghat-spiritual-journey",
-        name: "Devghat Spiritual Journey",
-        subtitle: "Experience sacred rivers, temples, sadhus, and peaceful rituals.",
-        overview: "A spiritual escape to Devghat Dham, where rivers, rituals, temples, and quiet reflection meet.",
-        duration: "2 Days",
-        price: "From US$220",
-        location: "Devghat Dham",
-        style: "Spiritual Culture",
-        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
-      })
-    ]
-  },
+ culture: {
+  title: "Culture & Heritage 🛕",
+  sub: "Temples, courtyards, artisans, old towns, spirituality, and living traditions.",
+  items: [
+
+    exp({
+      id: "kathmandu-heritage-tour",
+      name: "Kathmandu Heritage Tour",
+      subtitle: "Explore temples, courtyards, old alleys, and centuries of living history.",
+      overview: "A cultural journey through Kathmandu’s heritage sites, temples, old markets, hidden courtyards, local food, and living traditions.",
+      duration: "2 Days",
+      price: "From US$220",
+      location: "Kathmandu Valley",
+      style: "Culture & Heritage",
+      image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+      badge: "Classic"
+    }),
+
+    exp({
+      id: "bhaktapur-living-heritage",
+      name: "Bhaktapur Living Heritage",
+      subtitle: "Ancient streets, pottery squares, temples, artisans, and Newari culture.",
+      overview: "Walk through Bhaktapur’s timeless streets, meet local artisans, taste traditional food, and experience one of Nepal’s most beautiful heritage cities.",
+      duration: "1 Day",
+      price: "From US$120",
+      location: "Bhaktapur",
+      style: "Living Heritage",
+      image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+      badge: "Heritage Favorite"
+    }),
+
+    exp({
+      id: "patan-artisan-walk",
+      name: "Patan Artisan Walk",
+      subtitle: "Meet metal artists, woodcarvers, painters, and traditional craft families.",
+      overview: "Explore Patan’s artistic soul through old courtyards, hidden workshops, temple squares, and families preserving Nepal’s handmade traditions.",
+      duration: "1 Day",
+      price: "From US$115",
+      location: "Patan / Lalitpur",
+      style: "Artisan & Heritage Walk",
+      image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+      badge: "Artisan"
+    }),
+
+    exp({
+      id: "lumbini-spiritual-journey",
+      name: "Lumbini Spiritual Journey",
+      subtitle: "Visit the birthplace of Buddha and peaceful monastery zones.",
+      overview: "A peaceful spiritual journey through Lumbini’s sacred garden, monasteries, meditation spaces, and Buddhist heritage.",
+      duration: "3 Days",
+      price: "From US$350",
+      location: "Lumbini",
+      style: "Spiritual Heritage",
+      image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+      badge: "Spiritual"
+    }),
+
+    exp({
+      id: "devghat-spiritual-journey",
+      name: "Devghat Spiritual Journey",
+      subtitle: "Sacred rivers, temples, sadhus, rituals, and peaceful reflection.",
+      overview: "Visit Devghat Dham, one of Nepal’s most sacred spiritual places, where rivers, temples, rituals, and peaceful local life come together.",
+      duration: "2 Days",
+      price: "From US$220",
+      location: "Devghat Dham",
+      style: "Spiritual Culture",
+      image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+      badge: "Sacred"
+    })
+
+  ]
+},
 
   wellness: {
     title: "Wellness & Spirituality 🧘",

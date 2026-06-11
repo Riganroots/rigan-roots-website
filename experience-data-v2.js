@@ -412,66 +412,77 @@ window.experienceDataV2 = {
   },
 
    food: {
-    title: "Taste Nepal 🍲",
-    sub: "Food journeys through local kitchens, family homes, markets, and ethnic traditions.",
-    items: [
-      exp({
-        id: "kathmandu-food-walk",
-        name: "Kathmandu Food Walk",
-        subtitle: "Taste local snacks, tea, sweets, and hidden street food.",
-        overview: "Explore Kathmandu through food, markets, local tea shops, traditional snacks, and hidden family-run places.",
-        duration: "Half Day",
-        price: "From US$65",
-        location: "Kathmandu",
-        style: "Food Walk",
-        image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"
-      }),
-      exp({
-        id: "newari-food-experience",
-        name: "Newari Food Experience",
-        subtitle: "Discover Newari flavors, traditional snacks, and local culture.",
-        overview: "Taste authentic Newari dishes while learning about Kathmandu Valley’s rich food heritage.",
-        duration: "1 Day",
-        price: "From US$95",
-        location: "Kathmandu / Patan / Bhaktapur",
-        style: "Ethnic Food Experience",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
-      }),
-      exp({
-        id: "tharu-food-culture",
-        name: "Tharu Food & Culture",
-        subtitle: "Taste Tharu cuisine and experience Terai village culture.",
-        overview: "Enjoy Tharu food, local village life, cultural stories, and traditional hospitality.",
-        duration: "2 Days",
-        price: "From US$180",
-        location: "Chitwan / Terai",
-        style: "Food & Culture",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
-      }),
-      exp({
-        id: "tamang-food-experience",
-        name: "Tamang Food Experience",
-        subtitle: "Experience mountain food, local drinks, and Tamang hospitality.",
-        overview: "A warm cultural food experience with Tamang families, mountain flavors, and local traditions.",
-        duration: "1 Day",
-        price: "From US$110",
-        location: "Kathmandu Valley / Nearby Hills",
-        style: "Ethnic Food Experience",
-        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"
-      }),
-      exp({
-        id: "sherpa-kitchen-experience",
-        name: "Sherpa Kitchen Experience",
-        subtitle: "Taste Himalayan meals, butter tea, and Sherpa hospitality.",
-        overview: "Discover Sherpa food culture through warm meals, mountain stories, and traditional kitchen experiences.",
-        duration: "1 Day",
-        price: "From US$120",
-        location: "Everest Region / Kathmandu",
-        style: "Himalayan Food Experience",
-        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"
-      })
-    ]
-  },
+  title: "Taste Nepal 🍲",
+  sub: "Discover Nepal through food, kitchens, markets, family traditions, and regional flavors.",
+  items: [
+
+    exp({
+      id: "kathmandu-food-walk",
+      name: "Kathmandu Food Walk",
+      subtitle: "Taste your way through hidden alleys, tea shops, local eateries, and street food gems.",
+      overview: "Explore Kathmandu through food. Visit local markets, tea shops, family-run eateries, and hidden food spots while learning the stories behind Nepal's favorite dishes.",
+      duration: "Half Day",
+      price: "From US$65",
+      location: "Kathmandu",
+      style: "Street Food & Local Culture",
+      image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
+      badge: "Most Popular"
+    }),
+
+    exp({
+      id: "newari-food-experience",
+      name: "Newari Food Experience",
+      subtitle: "Discover the rich flavors of Nepal’s oldest urban civilization.",
+      overview: "Experience authentic Newari cuisine including bara, choila, yomari, chatamari, local feasts, and traditional cooking methods while learning about Newar culture.",
+      duration: "1 Day",
+      price: "From US$95",
+      location: "Kathmandu Valley",
+      style: "Traditional Newari Cuisine",
+      image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+      badge: "Cultural Favorite"
+    }),
+
+    exp({
+      id: "tharu-food-culture",
+      name: "Tharu Food & Culture",
+      subtitle: "Taste the unique flavors and traditions of Nepal’s Terai region.",
+      overview: "Enjoy traditional Tharu dishes, local fishing traditions, village life, cultural performances, and authentic hospitality in Nepal's southern plains.",
+      duration: "2 Days",
+      price: "From US$180",
+      location: "Chitwan & Terai Region",
+      style: "Food & Village Culture",
+      image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+      badge: "Authentic"
+    }),
+
+    exp({
+      id: "tamang-food-experience",
+      name: "Tamang Food Experience",
+      subtitle: "Mountain flavors, local brews, and warm Tamang hospitality.",
+      overview: "Experience traditional Tamang food, local drinks, mountain village culture, and stories passed down through generations.",
+      duration: "1 Day",
+      price: "From US$110",
+      location: "Kathmandu Hills",
+      style: "Mountain Ethnic Cuisine",
+      image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+      badge: "Hidden Gem"
+    }),
+
+    exp({
+      id: "sherpa-kitchen-experience",
+      name: "Sherpa Kitchen Experience",
+      subtitle: "Taste Himalayan meals inspired by Everest region traditions.",
+      overview: "Learn about Sherpa food culture, butter tea, mountain meals, local ingredients, and the lifestyle that supports life in the Himalayas.",
+      duration: "1 Day",
+      price: "From US$120",
+      location: "Everest Region / Kathmandu",
+      style: "Himalayan Food Experience",
+      image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+      badge: "Himalayan Favorite"
+    })
+
+  ]
+},
 
   culture: {
     title: "Culture & Heritage 🛕",

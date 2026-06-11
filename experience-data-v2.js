@@ -379,7 +379,7 @@ window.experienceDataV2 = {
         ]
       }),
 
-      exp({
+           exp({
         id: "langtang-valley-trek",
         name: "Langtang Valley Trek",
         subtitle: "A beautiful Himalayan trek close to Kathmandu with Tamang culture and mountain views.",
@@ -407,96 +407,98 @@ window.experienceDataV2 = {
           { day: "Day 9: Drive to Kathmandu", text: "Return by road to Kathmandu." },
           { day: "Day 10: Final Departure", text: "Airport transfer or optional extension." }
         ]
-        food: {
-  title: "Taste Nepal 🍲",
-  sub: "Food journeys through local kitchens, family homes, markets, and ethnic traditions.",
-  items: [
-    exp({
-      id: "kathmandu-food-walk",
-      name: "Kathmandu Food Walk",
-      subtitle: "Taste local snacks, tea, sweets, and hidden street food.",
-      overview: "Explore Kathmandu through food, markets, local tea shops, traditional snacks, and hidden family-run places.",
-      duration: "Half Day",
-      price: "From US$65",
-      location: "Kathmandu",
-      style: "Food Walk",
-      image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"
-    })
-  ]
-},
+      })
+    ]
+  },
 
-culture: {
-  title: "Culture & Heritage 🛕",
-  sub: "Temples, courtyards, artisans, old towns, spirituality, and living traditions.",
-  items: [
-    exp({
-      id: "kathmandu-heritage-tour",
-      name: "Kathmandu Heritage Tour",
-      subtitle: "Explore temples, courtyards, and centuries of living history.",
-      overview: "A cultural walk through Kathmandu’s heritage, temples, alleys, food, stories, and local traditions.",
-      duration: "2 Days",
-      price: "From US$220",
-      location: "Kathmandu Valley",
-      style: "Culture & Heritage",
-      image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
-    })
-  ]
-},
+  food: {
+    title: "Taste Nepal 🍲",
+    sub: "Food journeys through local kitchens, family homes, markets, and ethnic traditions.",
+    items: [
+      exp({
+        id: "kathmandu-food-walk",
+        name: "Kathmandu Food Walk",
+        subtitle: "Taste local snacks, tea, sweets, and hidden street food.",
+        overview: "Explore Kathmandu through food, markets, local tea shops, traditional snacks, and hidden family-run places.",
+        duration: "Half Day",
+        price: "From US$65",
+        location: "Kathmandu",
+        style: "Food Walk",
+        image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg"
+      })
+    ]
+  },
 
-wellness: {
-  title: "Wellness & Spirituality 🧘",
-  sub: "Quiet retreats for yoga, meditation, healing, and inner peace.",
-  items: [
-    exp({
-      id: "yoga-meditation-retreat",
-      name: "Yoga & Meditation Retreat",
-      subtitle: "Reset your body and mind in peaceful surroundings.",
-      overview: "A peaceful wellness journey with yoga, meditation, mindful walking, and slow travel.",
-      duration: "5 Days",
-      price: "From US$480",
-      location: "Pokhara / Kathmandu Valley",
-      style: "Yoga & Meditation",
-      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"
-    })
-  ]
-},
+  culture: {
+    title: "Culture & Heritage 🛕",
+    sub: "Temples, courtyards, artisans, old towns, spirituality, and living traditions.",
+    items: [
+      exp({
+        id: "kathmandu-heritage-tour",
+        name: "Kathmandu Heritage Tour",
+        subtitle: "Explore temples, courtyards, and centuries of living history.",
+        overview: "A cultural walk through Kathmandu’s heritage, temples, alleys, food, stories, and local traditions.",
+        duration: "2 Days",
+        price: "From US$220",
+        location: "Kathmandu Valley",
+        style: "Culture & Heritage",
+        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg"
+      })
+    ]
+  },
 
-festival: {
-  title: "Festivals of Nepal 🎉",
-  sub: "Celebrate Nepal through rituals, music, food, colors, and local families.",
-  items: [
-    exp({
-      id: "dashain-experience",
-      name: "Dashain Experience",
-      subtitle: "Blessings, tika, bamboo swings, family food, and Nepal’s biggest festival.",
-      overview: "Celebrate Dashain with local families and understand Nepal’s most important family festival.",
-      duration: "3 Days",
-      price: "From US$280",
-      location: "Kathmandu / Local Communities",
-      style: "Festival Experience",
-      image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"
-    })
-  ]
-},
+  wellness: {
+    title: "Wellness & Spirituality 🧘",
+    sub: "Quiet retreats for yoga, meditation, healing, and inner peace.",
+    items: [
+      exp({
+        id: "yoga-meditation-retreat",
+        name: "Yoga & Meditation Retreat",
+        subtitle: "Reset your body and mind in peaceful surroundings.",
+        overview: "A peaceful wellness journey with yoga, meditation, mindful walking, and slow travel.",
+        duration: "5 Days",
+        price: "From US$480",
+        location: "Pokhara / Kathmandu Valley",
+        style: "Yoga & Meditation",
+        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80"
+      })
+    ]
+  },
 
-adventure: {
-  title: "Adventure Activities 🌊",
-  sub: "Sky, rivers, mountains, speed, adrenaline, and outdoor experiences.",
-  items: [
-    exp({
-      id: "paragliding-pokhara",
-      name: "Paragliding in Pokhara",
-      subtitle: "Fly above Phewa Lake with Himalayan views.",
-      overview: "A soft adventure experience in Pokhara with a professional tandem pilot.",
-      duration: "Half Day",
-      price: "From US$120",
-      location: "Pokhara",
-      style: "Adventure",
-      image: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"
-    })
-  ]
-},
+  festival: {
+    title: "Festivals of Nepal 🎉",
+    sub: "Celebrate Nepal through rituals, music, food, colors, and local families.",
+    items: [
+      exp({
+        id: "dashain-experience",
+        name: "Dashain Experience",
+        subtitle: "Blessings, tika, bamboo swings, family food, and Nepal’s biggest festival.",
+        overview: "Celebrate Dashain with local families and understand Nepal’s most important family festival.",
+        duration: "3 Days",
+        price: "From US$280",
+        location: "Kathmandu / Local Communities",
+        style: "Festival Experience",
+        image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"
+      })
+    ]
+  },
+
+  adventure: {
+    title: "Adventure Activities 🌊",
+    sub: "Sky, rivers, mountains, speed, adrenaline, and outdoor experiences.",
+    items: [
+      exp({
+        id: "paragliding-pokhara",
+        name: "Paragliding in Pokhara",
+        subtitle: "Fly above Phewa Lake with Himalayan views.",
+        overview: "A soft adventure experience in Pokhara with a professional tandem pilot.",
+        duration: "Half Day",
+        price: "From US$120",
+        location: "Pokhara",
+        style: "Adventure",
+        image: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"
       })
     ]
   }
+
 };

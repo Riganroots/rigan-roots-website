@@ -618,66 +618,77 @@ wellness: {
 },
 
   festival: {
-    title: "Festivals of Nepal 🎉",
-    sub: "Celebrate Nepal through rituals, music, food, colors, and local families.",
-    items: [
-      exp({
-        id: "dashain-experience",
-        name: "Dashain Experience",
-        subtitle: "Blessings, tika, bamboo swings, family food, and Nepal’s biggest festival.",
-        overview: "Celebrate Dashain with local families and understand Nepal’s most important family festival.",
-        duration: "3 Days",
-        price: "From US$280",
-        location: "Kathmandu / Local Communities",
-        style: "Festival Experience",
-        image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"
-      }),
-      exp({
-        id: "tihar-experience",
-        name: "Tihar Experience",
-        subtitle: "Lights, flowers, candles, music, worship, and family warmth.",
-        overview: "Join local families during Tihar and experience lights, rangoli, worship, sweets, and celebration.",
-        duration: "3 Days",
-        price: "From US$280",
-        location: "Kathmandu / Local Communities",
-        style: "Festival Experience",
-        image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"
-      }),
-      exp({
-        id: "holi-festival-experience",
-        name: "Holi Festival Experience",
-        subtitle: "Celebrate colors, music, laughter, and spring energy.",
-        overview: "Enjoy Holi in a safe and guided way with local context, colors, food, and celebration.",
-        duration: "1 Day",
-        price: "From US$95",
-        location: "Kathmandu / Pokhara",
-        style: "Color Festival",
-        image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg"
-      }),
-      exp({
-        id: "indra-jatra-experience",
-        name: "Indra Jatra Experience",
-        subtitle: "Masked dances, living goddess traditions, and Kathmandu celebrations.",
-        overview: "Witness one of Kathmandu’s most important Newari festivals with local guidance and storytelling.",
-        duration: "1 Day",
-        price: "From US$120",
-        location: "Kathmandu",
-        style: "Cultural Festival",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
-      }),
-      exp({
-        id: "newari-festival-experience",
-        name: "Newari Festival Experience",
-        subtitle: "Experience jatras, rituals, food, music, and living Newari culture.",
-        overview: "Join selected Newari festivals with local hosts and understand the stories behind the celebration.",
-        duration: "1–2 Days",
-        price: "From US$160",
-        location: "Kathmandu Valley",
-        style: "Newari Festival",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg"
-      })
-    ]
-  },
+  title: "Festivals of Nepal 🎉",
+  sub: "Celebrate Nepal through rituals, music, food, colors, and local families.",
+  items: [
+
+    exp({
+      id: "dashain-experience",
+      name: "Dashain Experience",
+      subtitle: "Blessings, tika, bamboo swings, family food, and Nepal’s biggest festival.",
+      overview: "Celebrate Dashain with local families and understand Nepal’s biggest family festival through food, blessings, rituals, and village traditions.",
+      duration: "3 Days",
+      price: "From US$280",
+      location: "Kathmandu / Local Communities",
+      style: "Festival Experience",
+      image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
+      badge: "Biggest Festival"
+    }),
+
+    exp({
+      id: "tihar-experience",
+      name: "Tihar Experience",
+      subtitle: "Lights, flowers, candles, music, worship, and family warmth.",
+      overview: "Experience Nepal’s festival of lights with oil lamps, rangoli, flowers, sweets, family worship, and local celebration.",
+      duration: "3 Days",
+      price: "From US$280",
+      location: "Kathmandu / Local Communities",
+      style: "Festival Experience",
+      image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
+      badge: "Festival of Lights"
+    }),
+
+    exp({
+      id: "holi-festival-experience",
+      name: "Holi Festival Experience",
+      subtitle: "Celebrate colors, music, laughter, and spring energy.",
+      overview: "Enjoy Holi in a safe and guided way with local context, colors, music, food, and celebration.",
+      duration: "1 Day",
+      price: "From US$95",
+      location: "Kathmandu / Pokhara",
+      style: "Color Festival",
+      image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
+      badge: "Colorful"
+    }),
+
+    exp({
+      id: "indra-jatra-experience",
+      name: "Indra Jatra Experience",
+      subtitle: "Masked dances, living goddess traditions, and Kathmandu celebrations.",
+      overview: "Witness one of Kathmandu’s most important festivals with masked dances, chariots, Kumari traditions, and local storytelling.",
+      duration: "1 Day",
+      price: "From US$120",
+      location: "Kathmandu",
+      style: "Cultural Festival",
+      image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+      badge: "Kathmandu Festival"
+    }),
+
+    exp({
+      id: "newari-festival-experience",
+      name: "Newari Festival Experience",
+      subtitle: "Experience jatras, rituals, food, music, and living Newari culture.",
+      overview: "Join selected Newari festivals with local hosts and understand the stories, rituals, food, and community life behind the celebration.",
+      duration: "1–2 Days",
+      price: "From US$160",
+      location: "Kathmandu Valley",
+      style: "Newari Festival",
+      image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+      badge: "Living Culture"
+    })
+
+  ]
+},
 
   adventure: {
     title: "Adventure Activities 🌊",

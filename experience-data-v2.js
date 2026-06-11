@@ -691,76 +691,87 @@ wellness: {
 },
 
   adventure: {
-    title: "Adventure Activities 🌊",
-    sub: "Sky, rivers, mountains, speed, adrenaline, and outdoor experiences.",
-    items: [
-      exp({
-        id: "everest-helicopter-tour",
-        name: "Everest Helicopter Tour",
-        subtitle: "A luxury helicopter flight with breathtaking Everest views.",
-        overview: "Fly into the Everest region by helicopter and enjoy one of Nepal’s most spectacular aerial experiences.",
-        duration: "1 Day",
-        price: "From US$1350",
-        location: "Everest Region",
-        style: "Helicopter Adventure",
-        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg"
-      }),
-      exp({
-        id: "paragliding-pokhara",
-        name: "Paragliding in Pokhara",
-        subtitle: "Fly above Phewa Lake with Himalayan views.",
-        overview: "A soft adventure experience in Pokhara with a professional tandem pilot.",
-        duration: "Half Day",
-        price: "From US$120",
-        location: "Pokhara",
-        style: "Adventure",
-        image: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"
-      }),
-      exp({
-        id: "bungee-jump-nepal",
-        name: "Bungee Jump Nepal",
-        subtitle: "Take the leap into Nepal’s dramatic canyon landscapes.",
-        overview: "A thrilling adventure for adrenaline seekers with professional safety support and dramatic natural scenery.",
-        duration: "1 Day",
-        price: "From US$110",
-        location: "Nepal",
-        style: "Adrenaline Adventure",
-        image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"
-      }),
-      exp({
-        id: "hot-air-balloon-pokhara",
-        name: "Hot Air Balloon Experience",
-        subtitle: "Float above Pokhara with lake and mountain views.",
-        overview: "A calm and scenic adventure above Pokhara’s valley, lakes, hills, and mountain skyline.",
-        duration: "Half Day",
-        price: "From US$150",
-        location: "Pokhara",
-        style: "Soft Adventure",
-        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg"
-      }),
-      exp({
-        id: "trishuli-river-rafting",
-        name: "Trishuli River Rafting",
-        subtitle: "Experience Nepal’s river rapids, scenery, and outdoor energy.",
-        overview: "A fun and accessible white-water rafting experience suitable for beginners and adventure lovers.",
-        duration: "1 Day",
-        price: "From US$85",
-        location: "Trishuli River",
-        style: "River Adventure",
-        image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"
-      }),
-      exp({
-        id: "mountain-cycling-adventure",
-        name: "Mountain Cycling Adventure",
-        subtitle: "Ride through villages, hills, trails, and scenic landscapes.",
-        overview: "A guided cycling experience through Nepal’s hills, rural roads, viewpoints, and local communities.",
-        duration: "1–2 Days",
-        price: "From US$130",
-        location: "Kathmandu Valley / Pokhara",
-        style: "Cycling Adventure",
-        image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg"
-      })
-    ]
-  }
+  title: "Adventure Activities 🚁",
+  sub: "Sky, rivers, mountains, speed, adrenaline, and unforgettable outdoor experiences.",
+  items: [
 
-};
+    exp({
+      id: "everest-helicopter-tour",
+      name: "Everest Helicopter Tour",
+      subtitle: "Fly into the Himalayas and enjoy breathtaking Everest views.",
+      overview: "A luxury helicopter journey to the Everest region with spectacular mountain scenery and optional breakfast at Everest View Hotel.",
+      duration: "1 Day",
+      price: "From US$1350",
+      location: "Everest Region",
+      style: "Helicopter Adventure",
+      image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+      badge: "Luxury"
+    }),
+
+    exp({
+      id: "paragliding-pokhara",
+      name: "Paragliding in Pokhara",
+      subtitle: "Fly above Phewa Lake with Himalayan views.",
+      overview: "One of Nepal’s most famous adventures with incredible views of lakes, hills, and mountains.",
+      duration: "Half Day",
+      price: "From US$120",
+      location: "Pokhara",
+      style: "Air Adventure",
+      image: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg",
+      badge: "Popular"
+    }),
+
+    exp({
+      id: "bungee-jump-nepal",
+      name: "Bungee Jump Nepal",
+      subtitle: "Take the leap into Nepal’s dramatic canyon landscapes.",
+      overview: "A thrilling jump from one of Nepal’s famous bungee locations with professional safety support.",
+      duration: "1 Day",
+      price: "From US$110",
+      location: "Bhote Koshi",
+      style: "Extreme Adventure",
+      image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg",
+      badge: "Adrenaline"
+    }),
+
+    exp({
+      id: "hot-air-balloon-pokhara",
+      name: "Hot Air Balloon Experience",
+      subtitle: "Float above Pokhara with lake and mountain views.",
+      overview: "Enjoy a peaceful balloon flight above Pokhara’s lakes, forests, and Himalayan panorama.",
+      duration: "Half Day",
+      price: "From US$150",
+      location: "Pokhara",
+      style: "Scenic Adventure",
+      image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+      badge: "Scenic"
+    }),
+
+    exp({
+      id: "trishuli-river-rafting",
+      name: "Trishuli River Rafting",
+      subtitle: "Experience Nepal’s river rapids and outdoor excitement.",
+      overview: "A fun rafting adventure suitable for beginners and adventure seekers alike.",
+      duration: "1 Day",
+      price: "From US$85",
+      location: "Trishuli River",
+      style: "River Adventure",
+      image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg",
+      badge: "Water Adventure"
+    }),
+
+    exp({
+      id: "mountain-cycling-adventure",
+      name: "Mountain Cycling Adventure",
+      subtitle: "Ride through villages, trails, hills, and scenic landscapes.",
+      overview: "Explore Nepal on two wheels through local villages, forests, mountain roads, and hidden viewpoints.",
+      duration: "1–2 Days",
+      price: "From US$130",
+      location: "Kathmandu Valley / Pokhara",
+      style: "Cycling Adventure",
+      image: "https://i.postimg.cc/Bn4C557w/biking-trails-nepal-jpg.jpg",
+      badge: "Active"
+    })
+
+  ]
+},

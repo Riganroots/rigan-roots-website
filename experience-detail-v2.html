@@ -15,7 +15,6 @@
   --cream:#f7f0e4;
   --dark:#071611;
   --muted:#64748b;
-  --gold:#d4af37;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -28,7 +27,6 @@ body{
 
 a{text-decoration:none}
 
-/* HERO */
 .detail-hero{
   min-height:620px;
   background-size:cover;
@@ -94,7 +92,6 @@ a{text-decoration:none}
   font-weight:800;
 }
 
-/* CONTAINER */
 .container{
   max-width:1200px;
   margin:-70px auto 80px;
@@ -103,7 +100,6 @@ a{text-decoration:none}
   z-index:3;
 }
 
-/* INFO BAR */
 .info-bar{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -133,7 +129,6 @@ a{text-decoration:none}
   font-weight:900;
 }
 
-/* MAIN GRID */
 .main-grid{
   display:grid;
   grid-template-columns:1fr 380px;
@@ -149,9 +144,7 @@ a{text-decoration:none}
   border:1px solid rgba(23,77,47,.08);
 }
 
-.section{
-  margin-bottom:42px;
-}
+.section{margin-bottom:42px}
 
 .section h2{
   font-family:"Playfair Display",serif;
@@ -166,16 +159,12 @@ a{text-decoration:none}
   color:#475467;
 }
 
-.section ul{
-  padding-left:20px;
-}
+.section ul{padding-left:20px}
 
-/* GALLERY */
 .gallery-grid{
   display:grid;
   grid-template-columns:2fr 1fr;
   gap:14px;
-  margin-bottom:42px;
 }
 
 .gallery-main,
@@ -185,20 +174,15 @@ a{text-decoration:none}
   border-radius:24px;
 }
 
-.gallery-main{
-  height:420px;
-}
+.gallery-main{height:420px}
 
 .gallery-side{
   display:grid;
   gap:14px;
 }
 
-.gallery-side img{
-  height:203px;
-}
+.gallery-side img{height:203px}
 
-/* NOTE */
 .premium-note{
   background:#edf5eb;
   border-left:5px solid var(--green);
@@ -207,7 +191,6 @@ a{text-decoration:none}
   color:#475467;
 }
 
-/* ITINERARY ACCORDION */
 .itinerary-day{
   background:#f8fafc;
   border:1px solid #e5e7eb;
@@ -231,9 +214,7 @@ a{text-decoration:none}
   font-size:15px;
 }
 
-.day-head span:last-child{
-  font-size:22px;
-}
+.day-head span:last-child{font-size:22px}
 
 .day-body{
   display:none;
@@ -242,15 +223,12 @@ a{text-decoration:none}
   line-height:1.8;
 }
 
-.itinerary-day.active .day-body{
-  display:block;
-}
+.itinerary-day.active .day-body{display:block}
 
 .itinerary-day.active .day-head span:last-child{
   transform:rotate(45deg);
 }
 
-/* INCLUDED */
 .two-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -284,10 +262,8 @@ a{text-decoration:none}
   font-weight:900;
 }
 
-/* CTA STRIP */
 .custom-strip{
-  background:
-    linear-gradient(135deg,rgba(23,77,47,.95),rgba(47,107,63,.95));
+  background:linear-gradient(135deg,rgba(23,77,47,.95),rgba(47,107,63,.95));
   color:white;
   padding:30px;
   border-radius:28px;
@@ -313,7 +289,60 @@ a{text-decoration:none}
   font-weight:900;
 }
 
-/* REVIEWS */
+.faq-item{
+  background:#f8faf7;
+  border:1px solid rgba(23,77,47,.1);
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:14px;
+}
+
+.faq-item h3{
+  color:var(--green);
+  margin-bottom:8px;
+  font-size:17px;
+}
+
+.related-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+.related-card{
+  background:#f8faf7;
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(23,77,47,.1);
+  color:#132018;
+  transition:.25s;
+}
+
+.related-card:hover{
+  transform:translateY(-5px);
+}
+
+.related-card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+}
+
+.related-card div{
+  padding:16px;
+}
+
+.related-card h3{
+  color:var(--green);
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.related-card p{
+  font-size:13px;
+  line-height:1.6;
+}
+
 .review-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -339,11 +368,8 @@ a{text-decoration:none}
   margin-bottom:12px;
 }
 
-.review strong{
-  color:var(--green);
-}
+.review strong{color:var(--green)}
 
-/* BOOKING CARD */
 .booking-card{
   position:sticky;
   top:25px;
@@ -442,9 +468,7 @@ a{text-decoration:none}
   outline:none;
 }
 
-.form textarea{
-  height:100px;
-}
+.form textarea{height:100px}
 
 .inquiry-btn{
   width:100%;
@@ -501,7 +525,6 @@ a{text-decoration:none}
   font-weight:900;
 }
 
-/* MOBILE */
 @media(max-width:900px){
   .info-bar,
   .main-grid,
@@ -510,27 +533,17 @@ a{text-decoration:none}
     grid-template-columns:1fr;
   }
 
-  .hero-inner h1{
-    font-size:38px;
-  }
+  .hero-inner h1{font-size:38px}
 
-  .booking-card{
-    position:static;
-  }
+  .booking-card{position:static}
 
   .gallery-main,
-  .gallery-side img{
-    height:240px;
-  }
+  .gallery-side img{height:240px}
 
   .content-card,
-  .booking-card{
-    padding:24px;
-  }
+  .booking-card{padding:24px}
 
-  .container{
-    margin:-45px auto 60px;
-  }
+  .container{margin:-45px auto 60px}
 }
 </style>
 </head>
@@ -630,8 +643,17 @@ a{text-decoration:none}
       </section>
 
       <section class="section">
-        <h2>Traveler Reviews</h2>
+        <h2>Frequently Asked Questions</h2>
+        <div id="faqBox"></div>
+      </section>
 
+      <section class="section">
+        <h2>You May Also Like</h2>
+        <div class="related-grid" id="relatedTrips"></div>
+      </section>
+
+      <section class="section">
+        <h2>Traveler Reviews</h2>
         <div class="review-grid">
           <div class="review">
             <div class="stars">★★★★★</div>
@@ -758,11 +780,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   let selected = null;
+  let selectedCategoryKey = null;
+  let selectedCategory = null;
 
-  Object.values(window.experienceDataV2).forEach(category => {
-    category.items.forEach(item => {
-      const id = item.id || item[3];
-      if (id === experienceId) selected = item;
+  Object.entries(window.experienceDataV2).forEach(([key, category]) => {
+    (category.items || []).forEach(item => {
+      if (item.id === experienceId) {
+        selected = item;
+        selectedCategoryKey = key;
+        selectedCategory = category;
+      }
     });
   });
 
@@ -777,8 +804,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const fallbackImage = "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1600&q=80";
   const heroImage = selected.image || fallbackImage;
 
-  document.getElementById("hero").style.backgroundImage =
-    `url('${heroImage}')`;
+  document.getElementById("hero").style.backgroundImage = `url('${heroImage}')`;
 
   document.getElementById("badge").textContent = selected.badge || "Rigan Experience";
   document.getElementById("title").textContent = selected.name || "Experience";
@@ -812,10 +838,18 @@ document.addEventListener("DOMContentLoaded", function () {
     ]).map(x => `<li>${x}</li>`).join("");
 
   document.getElementById("highlights").innerHTML =
-    (selected.highlights || []).map(x => `<li>${x}</li>`).join("");
+    (selected.highlights && selected.highlights.length ? selected.highlights : [
+      "Local experience support",
+      "Flexible trip design",
+      "Authentic Nepal connection"
+    ]).map(x => `<li>${x}</li>`).join("");
+
+  const itinerary = selected.itinerary && selected.itinerary.length ? selected.itinerary : [
+    {day:"Flexible Itinerary", text:"This experience can be customized based on your travel dates, interests, group size, and preferred pace."}
+  ];
 
   document.getElementById("itinerary").innerHTML =
-    (selected.itinerary || []).map((x, index) => `
+    itinerary.map((x, index) => `
       <div class="itinerary-day ${index === 0 ? "active" : ""}">
         <button class="day-head" type="button">
           <span>${x.day}</span>
@@ -847,6 +881,36 @@ document.addEventListener("DOMContentLoaded", function () {
     (selected.goodToKnow || ["Final route can be customized", "Price depends on season and group size"])
     .map(x => `<li>${x}</li>`).join("");
 
+  document.getElementById("faqBox").innerHTML = `
+    <div class="faq-item">
+      <h3>Can this experience be customized?</h3>
+      <p>Yes. We can adjust the route, duration, hotel level, activities, budget, and pace based on your travel style.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is this suitable for solo travelers?</h3>
+      <p>Yes. Most Rigan experiences can be arranged privately or joined with a small group depending on availability.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do I need travel insurance?</h3>
+      <p>For trekking and adventure experiences, travel insurance is strongly recommended. For high-altitude treks, emergency evacuation coverage is important.</p>
+    </div>
+  `;
+
+  const related = (selectedCategory?.items || [])
+    .filter(item => item.id !== selected.id)
+    .slice(0, 3);
+
+  document.getElementById("relatedTrips").innerHTML =
+    related.length ? related.map(item => `
+      <a class="related-card" href="experience-detail-v2.html?experience=${item.id}">
+        <img src="${item.image || fallbackImage}" alt="${item.name}">
+        <div>
+          <h3>${item.name}</h3>
+          <p>${item.duration || "Custom"} • ${item.price || "Custom"}</p>
+        </div>
+      </a>
+    `).join("") : `<p>No related trips available yet.</p>`;
+
   document.querySelectorAll(".mode-btn").forEach(btn => {
     btn.addEventListener("click", function(){
       document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
@@ -862,11 +926,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("shareBtn").addEventListener("click", async function(){
     if (navigator.share) {
-      await navigator.share({
-        title: selected.name,
-        text: selected.subtitle,
-        url: window.location.href
-      });
+      try{
+        await navigator.share({
+          title: selected.name,
+          text: selected.subtitle,
+          url: window.location.href
+        });
+      }catch(error){}
     } else {
       navigator.clipboard.writeText(window.location.href);
       alert("Trip link copied!");

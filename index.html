@@ -44,6 +44,54 @@
 <section class="cta-banner"><div><h2>Your story in Nepal is waiting.</h2><p>Let us help you create memories that last a lifetime.</p></div><a href="plan.html" class="btn btn-green">Plan My Trip Now</a></section>
 <footer class="footer"><div class="footer-grid"><div><h3>Rigan Roots & Routes</h3><p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p></div><div><h3>Quick Links</h3><div class="footer-links"><a href="index.html">Home</a><a href="experience-v2.html">Experiences</a><a href="regions.html">Regions</a><a href="marketplace.html">Marketplace</a><a href="plan.html">Plan My Trip</a><a href="work-with-us.html">Work With Us</a><a href="about.html">Our Story</a><a href="contact.html">Contact</a></div></div><div><h3>Contact Us</h3><p><i class="fa-solid fa-location-dot"></i> Baniyatar, Kathmandu, Nepal</p><p><i class="fa-solid fa-envelope"></i> riganrootsroutes@gmail.com</p><p><i class="fa-solid fa-phone"></i> +977 9843322695</p></div><div><h3>Follow Us</h3><div class="socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a></div></div></div><div class="footer-bottom">© 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</div></footer>
 <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots%20%26%20Routes,%20I%20want%20to%20plan%20a%20Nepal%20trip." class="whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i> <span>Chat with us</span></a>
-<script>const menuBtn=document.getElementById("menuBtn");const navLinks=document.getElementById("navLinks");menuBtn.addEventListener("click",()=>{navLinks.classList.toggle("active")});const currencySelect=document.getElementById("currencySelect");const prices=document.querySelectorAll(".price-value");const currencyRates={USD:{rate:1,symbol:"$",decimals:0},NPR:{rate:133,symbol:"रू",decimals:0},GBP:{rate:.79,symbol:"£",decimals:0},AUD:{rate:1.52,symbol:"A$",decimals:0},EUR:{rate:.92,symbol:"€",decimals:0},INR:{rate:83,symbol:"₹",decimals:0},JPY:{rate:157,symbol:"¥",decimals:0}};function updatePrices(currency){const selected=currencyRates[currency];prices.forEach(price=>{const usd=Number(price.dataset.usd);const converted=usd*selected.rate;price.textContent=selected.symbol+converted.toLocaleString(undefined,{maximumFractionDigits:selected.decimals})})}if(currencySelect){currencySelect.addEventListener("change",function(){updatePrices(this.value)})}</script>
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+const menuIcon = menuBtn.querySelector("i");
+
+menuBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+
+  if (navLinks.classList.contains("active")) {
+    menuIcon.className = "fa-solid fa-xmark";
+  } else {
+    menuIcon.className = "fa-solid fa-bars";
+  }
+});
+
+const currencySelect = document.getElementById("currencySelect");
+const prices = document.querySelectorAll(".price-value");
+
+const currencyRates = {
+  USD: { rate: 1, symbol: "$", decimals: 0 },
+  NPR: { rate: 133, symbol: "रू", decimals: 0 },
+  GBP: { rate: .79, symbol: "£", decimals: 0 },
+  AUD: { rate: 1.52, symbol: "A$", decimals: 0 },
+  EUR: { rate: .92, symbol: "€", decimals: 0 },
+  INR: { rate: 83, symbol: "₹", decimals: 0 },
+  JPY: { rate: 157, symbol: "¥", decimals: 0 }
+};
+
+function updatePrices(currency) {
+  const selected = currencyRates[currency];
+
+  prices.forEach(price => {
+    const usd = Number(price.dataset.usd);
+    const converted = usd * selected.rate;
+
+    price.textContent =
+      selected.symbol +
+      converted.toLocaleString(undefined, {
+        maximumFractionDigits: selected.decimals
+      });
+  });
+}
+
+if (currencySelect) {
+  currencySelect.addEventListener("change", function () {
+    updatePrices(this.value);
+  });
+}
+</script>
 </body>
 </html>

@@ -1,334 +1,1092 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact | Rigan Roots & Routes</title>
+  <meta charset="UTF-8">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<style>
+  <meta
+    name="description"
+    content="Contact Rigan Roots & Routes to plan a personalised Nepal tour, trekking adventure, cultural journey, family holiday, or group experience."
+  >
 
-/* GLOBAL */
-*{margin:0;padding:0;box-sizing:border-box}
+  <title>Contact | Rigan Roots & Routes</title>
 
-body{
-  font-family:Inter,sans-serif;
-  background:#f7f0e4;
-  color:#2f3a32;
-}
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
 
-h1,h2,h3{
-  font-family:"Playfair Display",serif;
-  color:#174d2f;
-}
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:0 24px;
-}
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-/* NAVBAR */
-.navbar{
-  background:white;
-  border-bottom:1px solid rgba(0,0,0,.05);
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  >
 
-.nav-container{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 24px;
-}
+  <style>
+    :root {
+      --green-dark: #132018;
+      --green-primary: #174d2f;
+      --green-light: #edf5eb;
+      --brown: #9b6238;
+      --cream: #f7f0e4;
+      --text: #2f3a32;
+      --text-muted: #5c6a61;
+      --white: #ffffff;
+      --border: #ded8ce;
+      --whatsapp: #25d366;
+      --shadow: 0 18px 50px rgba(23, 77, 47, 0.1);
+    }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-}
+    /* GLOBAL */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.brand-logo{
-  width:48px;
-  height:48px;
-  background:#174d2f;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-family:"Playfair Display",serif;
-  font-size:28px;
-  font-weight:800;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.brand-name{
-  font-size:1.3rem;
-  font-weight:800;
-  color:#174d2f;
-}
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-.brand-tagline{
-  font-size:.85rem;
-  color:#9b6238;
-}
+    h1,
+    h2,
+    h3 {
+      font-family: "Playfair Display", serif;
+      color: var(--green-primary);
+      line-height: 1.2;
+    }
 
-.nav-links{
-  display:flex;
-  gap:24px;
-}
+    a {
+      color: inherit;
+    }
 
-.nav-links a{
-  text-decoration:none;
-  color:#2f3a32;
-  font-weight:600;
-}
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
 
-.nav-links a.active{
-  color:#174d2f;
-}
+    .container {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+    }
 
-/* HERO */
-.page-header{
-  text-align:center;
-  padding:80px 20px;
-}
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(12px);
+    }
 
-.page-header h1{
-  font-size:clamp(2.5rem,5vw,4rem);
-}
+    .nav-container {
+      width: min(1200px, calc(100% - 48px));
+      min-height: 80px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-.page-header p{
-  max-width:600px;
-  margin:auto;
-  color:#5c6a61;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
 
-/* CONTACT GRID */
-.contact-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:50px;
-  padding:60px 0;
-}
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: var(--green-primary);
+      color: var(--white);
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(23, 77, 47, 0.18);
+    }
 
-/* INFO */
-.info-item{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:18px;
-}
+    .brand-name {
+      color: var(--green-primary);
+      font-size: 1.3rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
 
-.info-icon{
-  width:45px;
-  height:45px;
-  background:#edf5eb;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#174d2f;
-}
+    .brand-tagline {
+      margin-top: 3px;
+      color: var(--brown);
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
 
-/* FORM */
-form input, form textarea, form select{
-  width:100%;
-  padding:14px;
-  margin-bottom:12px;
-  border-radius:12px;
-  border:1px solid #ddd;
-}
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
 
-.btn{
-  background:#174d2f;
-  color:white;
-  padding:14px 30px;
-  border:none;
-  border-radius:999px;
-  font-weight:700;
-  cursor:pointer;
-}
+    .nav-links a {
+      position: relative;
+      padding: 28px 0;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.94rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
 
-/* FOOTER */
-.footer{
-  background:#132018;
-  color:white;
-  padding:50px 0;
-}
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--green-primary);
+    }
 
-.footer-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:30px;
-}
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 20px;
+      left: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--green-primary);
+    }
 
-.footer-links a{
-  color:#cbd5c0;
-  text-decoration:none;
-}
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--green-light);
+      color: var(--green-primary);
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
 
-.footer-bottom{
-  text-align:center;
-  margin-top:30px;
-  opacity:.7;
-}
+    /* HERO */
+    .page-header {
+      position: relative;
+      overflow: hidden;
+      padding: 105px 20px 95px;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(155, 98, 56, 0.16),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(23, 77, 47, 0.14),
+          transparent 38%
+        );
+    }
 
-/* WHATSAPP */
-.floating-whatsapp{
-  position:fixed;
-  bottom:24px;
-  right:24px;
-}
+    .page-header::before {
+      content: "";
+      position: absolute;
+      top: 26px;
+      left: 50%;
+      width: 72px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--brown);
+      transform: translateX(-50%);
+    }
 
-.floating-whatsapp a{
-  background:#25D366;
-  color:white;
-  padding:12px 22px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:600;
-}
+    .page-header h1 {
+      margin-bottom: 18px;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+    }
 
-/* MOBILE */
-@media(max-width:900px){
-  .contact-grid,.footer-grid{
-    grid-template-columns:1fr;
-  }
-}
+    .page-header p {
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+    }
 
-</style>
+    /* CONTACT */
+    .contact-section {
+      padding: 70px 0 90px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .contact-card,
+    .form-card {
+      padding: 38px;
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h2,
+    .form-card h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+    }
+
+    .section-intro {
+      margin-bottom: 30px;
+      color: var(--text-muted);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      border-radius: 16px;
+      background: rgba(237, 245, 235, 0.72);
+    }
+
+    .info-icon {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--green-primary);
+      font-size: 1.05rem;
+      box-shadow: 0 7px 18px rgba(23, 77, 47, 0.08);
+    }
+
+    .info-content strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--green-primary);
+      font-size: 0.9rem;
+    }
+
+    .info-content a,
+    .info-content span {
+      color: var(--text);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .info-content a:hover {
+      color: var(--brown);
+    }
+
+    .contact-note {
+      margin-top: 28px;
+      padding: 18px;
+      border-left: 4px solid var(--brown);
+      border-radius: 0 14px 14px 0;
+      background: #fff8ef;
+      color: var(--text-muted);
+      font-size: 0.93rem;
+    }
+
+    /* FORM */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--green-primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--white);
+      color: var(--text);
+      outline: none;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #8a928d;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green-primary);
+      box-shadow: 0 0 0 4px rgba(23, 77, 47, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .btn {
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 999px;
+      background: var(--green-primary);
+      color: var(--white);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(23, 77, 47, 0.2);
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #0f3f25;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 28px rgba(23, 77, 47, 0.25);
+    }
+
+    .privacy-note {
+      margin-top: 13px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 58px 0 22px;
+      background: var(--green-dark);
+      color: var(--white);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 44px;
+    }
+
+    .footer h3 {
+      margin-bottom: 12px;
+      color: var(--white);
+      font-size: 1.55rem;
+    }
+
+    .footer h4 {
+      margin-bottom: 16px;
+      color: var(--white);
+      font-size: 1rem;
+    }
+
+    .footer p,
+    .footer address {
+      color: #cbd5c0;
+      font-style: normal;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .footer-links a {
+      color: #cbd5c0;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-contact a {
+      color: #cbd5c0;
+      text-decoration: none;
+    }
+
+    .footer-contact a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    /* WHATSAPP */
+    .floating-whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1100;
+    }
+
+    .floating-whatsapp a {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      background: var(--whatsapp);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .floating-whatsapp a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25);
+    }
+
+    .floating-whatsapp i {
+      font-size: 1.2rem;
+    }
+
+    /* TABLET */
+    @media (max-width: 960px) {
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-container {
+        position: relative;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 24px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        background: var(--white);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px 0;
+      }
+
+      .nav-links a.active::after {
+        display: none;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid > div:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      .container,
+      .nav-container {
+        width: min(100% - 32px, 1200px);
+      }
+
+      .page-header {
+        padding: 78px 16px 70px;
+      }
+
+      .page-header h1 {
+        font-size: 2.55rem;
+      }
+
+      .contact-section {
+        padding: 46px 0 70px;
+      }
+
+      .contact-card,
+      .form-card {
+        padding: 25px 20px;
+        border-radius: 20px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid > div:first-child {
+        grid-column: auto;
+      }
+
+      .floating-whatsapp {
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .floating-whatsapp a {
+        width: 54px;
+        height: 54px;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50%;
+      }
+
+      .floating-whatsapp span {
+        display: none;
+      }
+
+      .floating-whatsapp i {
+        font-size: 1.45rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-container">
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-container">
 
-    <a href="index.html" class="brand">
-      <div class="brand-logo">R</div>
-      <div>
-        <div class="brand-name">Rigan</div>
-        <div class="brand-tagline">Roots & Routes</div>
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="Rigan Roots and Routes home"
+      >
+        <div class="brand-logo" aria-hidden="true">R</div>
+
+        <div>
+          <div class="brand-name">Rigan</div>
+          <div class="brand-tagline">Roots &amp; Routes</div>
+        </div>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="experience-v2.html">Experiences</a>
+        <a href="regions.html">Regions</a>
+        <a href="about.html">Our Story</a>
+        <a href="plan.html">Plan</a>
+        <a href="contact.html" class="active" aria-current="page">
+          Contact
+        </a>
       </div>
+
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <h1>Let’s Plan Your Nepal Journey</h1>
+
+    <p>
+      Share your travel ideas, interests, dates, and budget. We will help
+      design a meaningful Nepal experience created around you.
+    </p>
+  </header>
+
+  <!-- CONTACT SECTION -->
+  <main class="contact-section">
+    <div class="container">
+
+      <div class="contact-grid">
+
+        <!-- CONTACT INFORMATION -->
+        <section class="contact-card" aria-labelledby="contact-info-title">
+          <h2 id="contact-info-title">Contact Information</h2>
+
+          <p class="section-intro">
+            Speak directly with our local travel team in Nepal.
+          </p>
+
+          <div class="info-list">
+
+            <div class="info-item">
+              <div class="info-icon" aria-hidden="true">
+                <i class="fas fa-location-dot"></i>
+              </div>
+
+              <div class="info-content">
+                <strong>Location</strong>
+                <span>Kathmandu, Nepal</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon" aria-hidden="true">
+                <i class="fas fa-envelope"></i>
+              </div>
+
+              <div class="info-content">
+                <strong>Email</strong>
+
+                <a href="mailto:riganrootsroutes@gmail.com">
+                  riganrootsroutes@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon" aria-hidden="true">
+                <i class="fas fa-phone"></i>
+              </div>
+
+              <div class="info-content">
+                <strong>Phone</strong>
+
+                <a href="tel:+9779843322695">
+                  +977 9843322695
+                </a>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon" aria-hidden="true">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+
+              <div class="info-content">
+                <strong>WhatsApp</strong>
+
+                <a
+                  href="https://wa.me/9779843322695?text=Hello%20Rigan%20Roots%20%26%20Routes!%20I%20would%20like%20help%20planning%20a%20Nepal%20trip."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Start a conversation
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="contact-note">
+            We normally respond as soon as possible during Nepal business
+            hours. For urgent trip inquiries, please contact us on WhatsApp.
+          </div>
+        </section>
+
+        <!-- TOUR INQUIRY FORM -->
+        <section class="form-card" aria-labelledby="inquiry-form-title">
+          <h2 id="inquiry-form-title">Plan Your Journey</h2>
+
+          <p class="section-intro">
+            Complete the form below and we will contact you with suitable
+            travel ideas.
+          </p>
+
+          <form
+            action="https://formspree.io/f/mbdpwkoz"
+            method="POST"
+          >
+
+            <input
+              type="hidden"
+              name="_subject"
+              value="New Tour Inquiry — Rigan Roots & Routes"
+            >
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label for="name">Full name *</label>
+
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  placeholder="Enter your full name"
+                  autocomplete="name"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email address *</label>
+
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  autocomplete="email"
+                  required
+                >
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label for="phone">Phone or WhatsApp *</label>
+
+                <input
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  placeholder="+977..."
+                  autocomplete="tel"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="country">Country of residence</label>
+
+                <input
+                  id="country"
+                  type="text"
+                  name="country"
+                  placeholder="Your country"
+                  autocomplete="country-name"
+                >
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label for="trip-type">Trip type *</label>
+
+                <select
+                  id="trip-type"
+                  name="trip_type"
+                  required
+                >
+                  <option value="">Select trip type</option>
+                  <option value="Cultural Tour">Cultural Tour</option>
+                  <option value="Trekking">Trekking</option>
+                  <option value="Adventure Tour">Adventure Tour</option>
+                  <option value="Family Holiday">Family Holiday</option>
+                  <option value="Honeymoon">Honeymoon</option>
+                  <option value="Group Tour">Group Tour</option>
+                  <option value="Wellness Retreat">Wellness Retreat</option>
+                  <option value="Custom Nepal Trip">Custom Nepal Trip</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="destination">Preferred destination *</label>
+
+                <select
+                  id="destination"
+                  name="destination"
+                  required
+                >
+                  <option value="">Select destination</option>
+                  <option value="Kathmandu">Kathmandu</option>
+                  <option value="Pokhara and Annapurna">
+                    Pokhara &amp; Annapurna
+                  </option>
+                  <option value="Everest Region">Everest Region</option>
+                  <option value="Chitwan">Chitwan</option>
+                  <option value="Upper Mustang">Upper Mustang</option>
+                  <option value="Langtang">Langtang</option>
+                  <option value="Rara Lake">Rara Lake</option>
+                  <option value="Multiple Destinations">
+                    Multiple Destinations
+                  </option>
+                  <option value="Not Sure">
+                    Not Sure — Recommend a Trip
+                  </option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label for="arrival-date">Expected arrival date</label>
+
+                <input
+                  id="arrival-date"
+                  type="date"
+                  name="arrival_date"
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="duration">Trip duration</label>
+
+                <input
+                  id="duration"
+                  type="number"
+                  name="trip_duration_days"
+                  min="1"
+                  max="90"
+                  placeholder="Number of days"
+                >
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label for="travellers">Number of travellers *</label>
+
+                <input
+                  id="travellers"
+                  type="number"
+                  name="number_of_travellers"
+                  min="1"
+                  max="100"
+                  placeholder="For example: 2"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="budget">Budget per person</label>
+
+                <select
+                  id="budget"
+                  name="budget_per_person"
+                >
+                  <option value="">Select estimated budget</option>
+                  <option value="Below USD 500">Below USD 500</option>
+                  <option value="USD 500–1,000">USD 500–1,000</option>
+                  <option value="USD 1,000–2,000">USD 1,000–2,000</option>
+                  <option value="USD 2,000–3,500">USD 2,000–3,500</option>
+                  <option value="Above USD 3,500">Above USD 3,500</option>
+                  <option value="Not Decided">Not decided</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell us about your travel plans *</label>
+
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell us about your interests, preferred activities, accommodation, fitness level, dietary needs, and any special requirements."
+                required
+              ></textarea>
+            </div>
+
+            <button class="btn" type="submit">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
+              Send My Tour Inquiry
+            </button>
+
+            <p class="privacy-note">
+              Your information will only be used to respond to your travel
+              inquiry.
+            </p>
+
+          </form>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <h3>Rigan Roots &amp; Routes</h3>
+
+          <p>
+            Authentic Nepal journeys designed around local culture,
+            meaningful experiences, nature, and human connection.
+          </p>
+        </div>
+
+        <div>
+          <h4>Quick Links</h4>
+
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="experience-v2.html">Experiences</a>
+            <a href="regions.html">Regions</a>
+            <a href="about.html">Our Story</a>
+            <a href="plan.html">Plan Your Trip</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contact</h4>
+
+          <address>
+            Kathmandu, Nepal<br>
+
+            <a href="tel:+9779843322695">
+              +977 9843322695
+            </a>
+            <br>
+
+            <a href="mailto:riganrootsroutes@gmail.com">
+              riganrootsroutes@gmail.com
+            </a>
+          </address>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Rigan Roots &amp; Routes. All rights reserved.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <div class="floating-whatsapp">
+    <a
+      href="https://wa.me/9779843322695?text=Hello%20Rigan%20Roots%20%26%20Routes!%20I%20would%20like%20help%20planning%20a%20Nepal%20trip."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Plan your Nepal trip on WhatsApp"
+    >
+      <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      <span>Plan on WhatsApp</span>
     </a>
-
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="experience-v2.html">Experiences</a>
-      <a href="regions.html">Regions</a>
-      <a href="about.html">Our Story</a>
-      <a href="plan.html">Plan</a>
-      <a href="contact.html" class="active">Contact</a>
-    </div>
-
-  </div>
-</nav>
-
-<!-- HEADER -->
-<section class="page-header">
-  <h1>Let’s Plan Your Nepal Journey</h1>
-  <p>Tell us your idea, and we’ll design a meaningful experience for you.</p>
-</section>
-
-<div class="container">
-
-  <div class="contact-grid">
-
-    <!-- INFO -->
-    <div>
-      <h2>Contact Info</h2>
-
-      <div class="info-item">
-        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-        Kathmandu, Nepal
-      </div>
-
-      <div class="info-item">
-        <div class="info-icon"><i class="fas fa-envelope"></i></div>
-        riganrootsroutes@gmail.com
-      </div>
-
-      <div class="info-item">
-        <div class="info-icon"><i class="fas fa-phone"></i></div>
-        +977 9843322695
-      </div>
-
-      <div class="info-item">
-        <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
-        WhatsApp Available
-      </div>
-    </div>
-
-    <!-- FORM -->
-    <div>
-      <h2>Send Message</h2>
-
-      <form action="https://formspree.io/f/mbdpwkoz" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="phone" placeholder="Phone">
-
-        <select name="subject" required>
-          <option value="">Select Topic</option>
-          <option>Trip Planning</option>
-          <option>Trekking</option>
-          <option>Group Tour</option>
-        </select>
-
-        <textarea name="message" rows="5" placeholder="Tell us your plan..." required></textarea>
-
-        <button class="btn">Send Message →</button>
-      </form>
-    </div>
-
   </div>
 
-</div>
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container footer-grid">
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
 
-    <div>
-      <h3>Rigan Roots & Routes</h3>
-      <p>Authentic Nepal experiences.</p>
-    </div>
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
 
-    <div>
-      <h4>Quick Links</h4>
-      <p><a href="index.html">Home</a></p>
-      <p><a href="experience-v2.html">Experiences</a></p>
-      <p><a href="regions.html">Regions</a></p>
-      <p><a href="about.html">Our Story</a></p>
-      <p><a href="plan.html">Plan</a></p>
-    </div>
+      menuToggle.innerHTML = isOpen
+        ? '<i class="fas fa-xmark" aria-hidden="true"></i>'
+        : '<i class="fas fa-bars" aria-hidden="true"></i>';
+    });
 
-    <div>
-      <h4>Contact</h4>
-      Kathmandu, Nepal<br>
-      +977 9843322695
-    </div>
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML =
+          '<i class="fas fa-bars" aria-hidden="true"></i>';
+      });
+    });
 
-  </div>
+    document.addEventListener("click", function (event) {
+      const clickedInsideNavigation =
+        navLinks.contains(event.target) ||
+        menuToggle.contains(event.target);
 
-  <div class="footer-bottom">
-    © 2026 Rigan Roots & Routes
-  </div>
-</footer>
+      if (!clickedInsideNavigation) {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML =
+          '<i class="fas fa-bars" aria-hidden="true"></i>';
+      }
+    });
 
-<!-- WHATSAPP -->
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots!">
-    Chat on WhatsApp
-  </a>
-</div>
+    const arrivalDate = document.getElementById("arrival-date");
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    arrivalDate.min = `${year}-${month}-${day}`;
+  </script>
 
 </body>
 </html>

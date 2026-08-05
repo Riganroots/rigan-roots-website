@@ -1,980 +1,2258 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Experience Detail | Rigan Roots & Routes</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --green:#174d2f;
-  --olive:#9fba6b;
-  --brown:#a46a3f;
-  --cream:#f7f0e4;
-  --dark:#071611;
-  --muted:#64748b;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-  font-family:Inter,Arial,sans-serif;
-  background:var(--cream);
-  color:#132018;
-}
-
-a{text-decoration:none}
-
-.detail-hero{
-  min-height:620px;
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  align-items:end;
-  color:white;
-  position:relative;
-}
-
-.detail-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,.18));
-}
-
-.hero-inner{
-  max-width:1200px;
-  width:100%;
-  margin:auto;
-  padding:100px 25px 95px;
-  position:relative;
-  z-index:2;
-}
-
-.hero-inner span{
-  background:var(--olive);
-  padding:9px 16px;
-  border-radius:999px;
-  font-weight:900;
-  font-size:12px;
-  letter-spacing:.8px;
-  text-transform:uppercase;
-}
-
-.hero-inner h1{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(42px,7vw,82px);
-  line-height:1.05;
-  margin:20px 0 14px;
-}
-
-.hero-inner p{
-  font-size:18px;
-  max-width:780px;
-  line-height:1.7;
-  color:rgba(255,255,255,.92);
-}
-
-.hero-badges{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:24px;
-}
-
-.hero-badges small{
-  background:rgba(255,255,255,.16);
-  border:1px solid rgba(255,255,255,.25);
-  padding:10px 16px;
-  border-radius:999px;
-  font-weight:800;
-}
-
-.container{
-  max-width:1200px;
-  margin:-70px auto 80px;
-  padding:0 25px;
-  position:relative;
-  z-index:3;
-}
-
-.info-bar{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  background:white;
-  padding:24px;
-  border-radius:30px;
-  box-shadow:0 22px 60px rgba(0,0,0,.12);
-  margin-bottom:30px;
-}
-
-.info-box{
-  background:#f8faf7;
-  border-radius:20px;
-  padding:18px;
-}
-
-.info-box strong{
-  display:block;
-  color:var(--green);
-  margin-bottom:6px;
-  font-size:13px;
-  text-transform:uppercase;
-}
-
-.info-box span{
-  font-weight:900;
-}
-
-.main-grid{
-  display:grid;
-  grid-template-columns:1fr 380px;
-  gap:30px;
-}
-
-.content-card,
-.booking-card{
-  background:white;
-  border-radius:30px;
-  padding:34px;
-  box-shadow:0 22px 60px rgba(0,0,0,.08);
-  border:1px solid rgba(23,77,47,.08);
-}
-
-.section{margin-bottom:42px}
-
-.section h2{
-  font-family:"Playfair Display",serif;
-  font-size:32px;
-  margin-bottom:16px;
-  color:var(--green);
-}
-
-.section p,
-.section li{
-  line-height:1.85;
-  color:#475467;
-}
-
-.section ul{padding-left:20px}
-
-.gallery-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:14px;
-}
-
-.gallery-main,
-.gallery-side img{
-  width:100%;
-  object-fit:cover;
-  border-radius:24px;
-}
-
-.gallery-main{height:420px}
-
-.gallery-side{
-  display:grid;
-  gap:14px;
-}
-
-.gallery-side img{height:203px}
-
-.premium-note{
-  background:#edf5eb;
-  border-left:5px solid var(--green);
-  padding:22px;
-  border-radius:20px;
-  color:#475467;
-}
-
-.itinerary-day{
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-  border-radius:18px;
-  margin-bottom:14px;
-  overflow:hidden;
-}
-
-.day-head{
-  width:100%;
-  border:none;
-  background:white;
-  padding:18px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  cursor:pointer;
-  color:var(--green);
-  font-weight:900;
-  text-align:left;
-  font-size:15px;
-}
-
-.day-head span:last-child{font-size:22px}
-
-.day-body{
-  display:none;
-  padding:0 20px 20px;
-  color:#475467;
-  line-height:1.8;
-}
-
-.itinerary-day.active .day-body{display:block}
-
-.itinerary-day.active .day-head span:last-child{
-  transform:rotate(45deg);
-}
-
-.two-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px;
-}
-
-.included,
-.excluded{
-  padding:24px;
-  border-radius:24px;
-}
-
-.included{background:#e9fbf0}
-.excluded{background:#fff0f0}
-
-.included li,
-.excluded li{
-  list-style:none;
-  margin-bottom:10px;
-}
-
-.included li::before{
-  content:"✓ ";
-  color:#16a34a;
-  font-weight:900;
-}
-
-.excluded li::before{
-  content:"× ";
-  color:#dc2626;
-  font-weight:900;
-}
-
-.custom-strip{
-  background:linear-gradient(135deg,rgba(23,77,47,.95),rgba(47,107,63,.95));
-  color:white;
-  padding:30px;
-  border-radius:28px;
-  margin-bottom:42px;
-}
-
-.custom-strip h2{
-  color:white;
-  margin-bottom:10px;
-}
-
-.custom-strip p{
-  color:rgba(255,255,255,.85);
-  margin-bottom:20px;
-}
-
-.custom-strip a{
-  display:inline-block;
-  background:white;
-  color:var(--green);
-  padding:14px 22px;
-  border-radius:999px;
-  font-weight:900;
-}
-
-.faq-item{
-  background:#f8faf7;
-  border:1px solid rgba(23,77,47,.1);
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:14px;
-}
-
-.faq-item h3{
-  color:var(--green);
-  margin-bottom:8px;
-  font-size:17px;
-}
-
-.related-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
-}
-
-.related-card{
-  background:#f8faf7;
-  border-radius:22px;
-  overflow:hidden;
-  border:1px solid rgba(23,77,47,.1);
-  color:#132018;
-  transition:.25s;
-}
-
-.related-card:hover{
-  transform:translateY(-5px);
-}
-
-.related-card img{
-  width:100%;
-  height:150px;
-  object-fit:cover;
-}
-
-.related-card div{
-  padding:16px;
-}
-
-.related-card h3{
-  color:var(--green);
-  font-size:17px;
-  margin-bottom:6px;
-}
-
-.related-card p{
-  font-size:13px;
-  line-height:1.6;
-}
-
-.review-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:18px;
-}
-
-.review{
-  background:#f8faf7;
-  border:1px solid rgba(23,77,47,.1);
-  padding:20px;
-  border-radius:20px;
-}
-
-.stars{
-  color:#f59e0b;
-  font-size:18px;
-  margin-bottom:10px;
-  letter-spacing:2px;
-}
-
-.review p{
-  font-style:italic;
-  margin-bottom:12px;
-}
-
-.review strong{color:var(--green)}
-
-.booking-card{
-  position:sticky;
-  top:25px;
-  align-self:start;
-}
-
-.price-label{
-  color:#64748b;
-  font-weight:900;
-  text-transform:uppercase;
-  font-size:12px;
-  letter-spacing:.8px;
-}
-
-.price{
-  font-size:40px;
-  font-weight:900;
-  margin:8px 0;
-  color:var(--green);
-}
-
-.mode-toggle{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin:20px 0;
-}
-
-.mode-btn{
-  border:2px solid #e5e7eb;
-  background:white;
-  padding:13px;
-  border-radius:14px;
-  font-weight:900;
-  cursor:pointer;
-  color:var(--green);
-}
-
-.mode-btn.active{
-  background:var(--green);
-  color:white;
-  border-color:var(--green);
-}
-
-.mini-list{
-  margin:20px 0;
-  background:#f8faf7;
-  padding:18px;
-  border-radius:18px;
-}
-
-.mini-list p{
-  margin:10px 0;
-  color:#475467;
-  font-weight:700;
-}
-
-.mini-list p::before{
-  content:"✓ ";
-  color:#16a34a;
-  font-weight:900;
-}
-
-.availability-box{
-  background:#edf5eb;
-  padding:20px;
-  border-radius:22px;
-  margin-bottom:20px;
-}
-
-.availability-box h3{
-  color:var(--green);
-  margin-bottom:14px;
-}
-
-.availability-box label{
-  display:block;
-  font-size:13px;
-  font-weight:900;
-  color:var(--green);
-  margin:12px 0 6px;
-}
-
-.form input,
-.form textarea,
-.form select,
-.availability-box input,
-.availability-box select{
-  width:100%;
-  padding:15px;
-  margin-bottom:12px;
-  border-radius:14px;
-  border:1px solid #e5e7eb;
-  background:#f8fafc;
-  font-weight:700;
-  outline:none;
-}
-
-.form textarea{height:100px}
-
-.inquiry-btn{
-  width:100%;
-  border:none;
-  background:var(--green);
-  color:white;
-  padding:16px;
-  border-radius:16px;
-  font-weight:900;
-  font-size:16px;
-  cursor:pointer;
-  box-shadow:0 14px 30px rgba(23,77,47,.25);
-}
-
-.custom-btn,
-.print-btn,
-.share-btn{
-  display:block;
-  text-align:center;
-  margin-top:12px;
-  border:2px solid var(--green);
-  color:var(--green);
-  padding:14px;
-  border-radius:16px;
-  text-decoration:none;
-  font-weight:900;
-  background:white;
-  cursor:pointer;
-  width:100%;
-}
-
-.trust-box{
-  background:#edf5eb;
-  border-radius:22px;
-  padding:22px;
-  margin-top:20px;
-}
-
-.trust-box h3{
-  color:var(--green);
-  margin-bottom:10px;
-}
-
-.trust-box p{
-  color:#475467;
-  line-height:1.7;
-  font-size:14px;
-}
-
-.back{
-  display:inline-block;
-  margin-top:20px;
-  color:var(--green);
-  font-weight:900;
-}
-
-@media(max-width:900px){
-  .info-bar,
-  .main-grid,
-  .two-grid,
-  .gallery-grid{
-    grid-template-columns:1fr;
-  }
-
-  .hero-inner h1{font-size:38px}
-
-  .booking-card{position:static}
-
-  .gallery-main,
-  .gallery-side img{height:240px}
-
-  .content-card,
-  .booking-card{padding:24px}
-
-  .container{margin:-45px auto 60px}
-}
-</style>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="View detailed Nepal travel experiences, itineraries, inclusions, prices, and booking options from Rigan Roots & Routes."
+  >
+
+  <title>Experience Detail | Rigan Roots &amp; Routes</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  >
+
+  <style>
+    :root {
+      --green: #174d2f;
+      --green-dark: #0d3822;
+      --olive: #9fba6b;
+      --brown: #a46a3f;
+      --cream: #f7f0e4;
+      --dark: #071611;
+      --muted: #64748b;
+      --white: #ffffff;
+      --whatsapp: #25d366;
+      --border: rgba(23, 77, 47, 0.1);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: var(--cream);
+      color: #132018;
+      line-height: 1.6;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 100%;
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 55px;
+      background: linear-gradient(
+        to bottom,
+        rgba(7, 22, 17, 0.85),
+        rgba(7, 22, 17, 0.12)
+      );
+    }
+
+    .logo img {
+      width: auto;
+      height: 62px;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 800;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--olive);
+    }
+
+    .menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--white);
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .detail-hero {
+      position: relative;
+      min-height: 650px;
+      display: flex;
+      align-items: flex-end;
+      background-position: center;
+      background-size: cover;
+      color: var(--white);
+    }
+
+    .detail-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.8),
+          rgba(0, 0, 0, 0.12) 70%
+        );
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 130px 25px 105px;
+    }
+
+    .hero-inner > span {
+      display: inline-block;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: var(--olive);
+      color: #102519;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .hero-inner h1 {
+      max-width: 950px;
+      margin: 20px 0 14px;
+      color: var(--white);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1.05;
+    }
+
+    .hero-inner p {
+      max-width: 780px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .hero-badges small {
+      padding: 10px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      font-weight: 800;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ERROR STATE */
+    .error-state {
+      display: none;
+      max-width: 900px;
+      margin: 120px auto;
+      padding: 45px 25px;
+      text-align: center;
+    }
+
+    .error-state h1 {
+      margin-bottom: 14px;
+      color: var(--green);
+      font-family: "Playfair Display", serif;
+      font-size: 44px;
+    }
+
+    .error-state p {
+      margin-bottom: 24px;
+      color: var(--muted);
+    }
+
+    .error-state a {
+      display: inline-flex;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 900;
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      margin: -70px auto 80px;
+      padding: 0 25px;
+    }
+
+    .info-bar {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+      padding: 24px;
+      border-radius: 30px;
+      background: var(--white);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.12);
+    }
+
+    .info-box {
+      padding: 18px;
+      border-radius: 20px;
+      background: #f8faf7;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--green);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .info-box span {
+      font-weight: 900;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .content-card,
+    .booking-card {
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 30px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .content-card {
+      padding: 34px;
+    }
+
+    .booking-card {
+      position: sticky;
+      top: 25px;
+      align-self: start;
+      padding: 30px;
+    }
+
+    .section {
+      margin-bottom: 42px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section h2,
+    .custom-strip h2 {
+      margin-bottom: 16px;
+      color: var(--green);
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+    }
+
+    .section p,
+    .section li {
+      color: #475467;
+      line-height: 1.85;
+    }
+
+    .section ul {
+      padding-left: 20px;
+    }
+
+    .section li {
+      margin-bottom: 8px;
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 14px;
+    }
+
+    .gallery-main,
+    .gallery-side img {
+      width: 100%;
+      border-radius: 24px;
+      object-fit: cover;
+      background: #e9eee9;
+    }
+
+    .gallery-main {
+      height: 420px;
+    }
+
+    .gallery-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .gallery-side img {
+      height: 203px;
+    }
+
+    /* CONTENT BLOCKS */
+    .premium-note {
+      padding: 22px;
+      border-left: 5px solid var(--green);
+      border-radius: 20px;
+      background: #edf5eb;
+      color: #475467;
+      line-height: 1.8;
+    }
+
+    .itinerary-day {
+      margin-bottom: 14px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      background: #f8fafc;
+    }
+
+    .day-head {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 18px 20px;
+      border: 0;
+      background: var(--white);
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 900;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .day-icon {
+      font-size: 21px;
+      transition: transform 0.25s ease;
+    }
+
+    .day-body {
+      display: none;
+      padding: 0 20px 20px;
+      color: #475467;
+      line-height: 1.8;
+    }
+
+    .itinerary-day.active .day-body {
+      display: block;
+    }
+
+    .itinerary-day.active .day-icon {
+      transform: rotate(45deg);
+    }
+
+    .two-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .included,
+    .excluded {
+      padding: 24px;
+      border-radius: 24px;
+    }
+
+    .included {
+      background: #e9fbf0;
+    }
+
+    .excluded {
+      background: #fff0f0;
+    }
+
+    .included h2,
+    .excluded h2 {
+      font-size: 26px;
+    }
+
+    .included ul,
+    .excluded ul {
+      padding-left: 0;
+    }
+
+    .included li,
+    .excluded li {
+      list-style: none;
+      margin-bottom: 10px;
+    }
+
+    .included li::before {
+      content: "✓ ";
+      color: #16a34a;
+      font-weight: 900;
+    }
+
+    .excluded li::before {
+      content: "× ";
+      color: #dc2626;
+      font-weight: 900;
+    }
+
+    .custom-strip {
+      margin-bottom: 42px;
+      padding: 30px;
+      border-radius: 28px;
+      background: linear-gradient(
+        135deg,
+        rgba(23, 77, 47, 0.98),
+        rgba(47, 107, 63, 0.98)
+      );
+      color: var(--white);
+    }
+
+    .custom-strip h2 {
+      color: var(--white);
+    }
+
+    .custom-strip p {
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .custom-strip a {
+      display: inline-flex;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .faq-item {
+      margin-bottom: 14px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #f8faf7;
+    }
+
+    .faq-item h3 {
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 17px;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .related-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: #f8faf7;
+      color: #132018;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .related-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 35px rgba(23, 77, 47, 0.12);
+    }
+
+    .related-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .related-card div {
+      padding: 16px;
+    }
+
+    .related-card h3 {
+      margin-bottom: 6px;
+      color: var(--green);
+      font-size: 17px;
+    }
+
+    .related-card p {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* BOOKING CARD */
+    .price-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .price {
+      margin: 8px 0;
+      color: var(--green);
+      font-size: 40px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .price-note {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .mode-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .mode-btn {
+      padding: 13px;
+      border: 2px solid #e5e7eb;
+      border-radius: 14px;
+      background: var(--white);
+      color: var(--green);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .mode-btn.active {
+      border-color: var(--green);
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .mini-list {
+      margin: 20px 0;
+      padding: 18px;
+      border-radius: 18px;
+      background: #f8faf7;
+    }
+
+    .mini-list p {
+      margin: 10px 0;
+      color: #475467;
+      font-weight: 700;
+    }
+
+    .mini-list p::before {
+      content: "✓ ";
+      color: #16a34a;
+      font-weight: 900;
+    }
+
+    .availability-box {
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 22px;
+      background: #edf5eb;
+    }
+
+    .availability-box h3 {
+      margin-bottom: 14px;
+      color: var(--green);
+    }
+
+    .availability-box label,
+    .form label {
+      display: block;
+      margin: 12px 0 6px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .form input,
+    .form textarea,
+    .form select,
+    .availability-box input,
+    .availability-box select {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 14px 15px;
+      border: 1px solid #dfe5df;
+      border-radius: 14px;
+      background: var(--white);
+      color: #132018;
+      outline: none;
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .form input:focus,
+    .form textarea:focus,
+    .form select:focus,
+    .availability-box input:focus,
+    .availability-box select:focus {
+      border-color: var(--olive);
+      box-shadow: 0 0 0 4px rgba(159, 186, 107, 0.18);
+    }
+
+    .form textarea {
+      min-height: 105px;
+      resize: vertical;
+    }
+
+    .inquiry-btn,
+    .whatsapp-direct-btn,
+    .custom-btn,
+    .print-btn,
+    .share-btn {
+      width: 100%;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      font-weight: 900;
+      text-align: center;
+      cursor: pointer;
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .inquiry-btn {
+      border: 0;
+      background: var(--green);
+      color: var(--white);
+      box-shadow: 0 14px 30px rgba(23, 77, 47, 0.25);
+    }
+
+    .inquiry-btn:hover,
+    .whatsapp-direct-btn:hover,
+    .custom-btn:hover,
+    .print-btn:hover,
+    .share-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .whatsapp-direct-btn {
+      border: 0;
+      background: var(--whatsapp);
+      color: var(--white);
+    }
+
+    .custom-btn,
+    .print-btn,
+    .share-btn {
+      border: 2px solid var(--green);
+      background: var(--white);
+      color: var(--green);
+    }
+
+    .trust-box {
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: 22px;
+      background: #edf5eb;
+    }
+
+    .trust-box h3 {
+      margin-bottom: 10px;
+      color: var(--green);
+    }
+
+    .trust-box p {
+      color: #475467;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #e9fbf0;
+      color: #166534;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 20px;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    /* FLOATING WHATSAPP */
+    .floating-whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1200;
+    }
+
+    .floating-whatsapp a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      background: var(--whatsapp);
+      color: var(--white);
+      font-weight: 900;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    /* PRINT */
+    @media print {
+      .navbar,
+      .booking-card,
+      .floating-whatsapp,
+      .custom-strip,
+      .back,
+      .related-grid {
+        display: none !important;
+      }
+
+      body {
+        background: var(--white);
+      }
+
+      .detail-hero {
+        min-height: 360px;
+      }
+
+      .container {
+        margin: 20px auto;
+      }
+
+      .main-grid {
+        display: block;
+      }
+
+      .content-card {
+        border: 0;
+        box-shadow: none;
+      }
+
+      .day-body {
+        display: block !important;
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1050px) {
+      .info-bar {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .main-grid {
+        grid-template-columns: minmax(0, 1fr) 340px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .navbar {
+        position: absolute;
+        padding: 12px 20px;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 999;
+        width: min(82%, 360px);
+        height: 100vh;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 90px 30px 30px;
+        background: rgba(7, 22, 17, 0.99);
+        box-shadow: -20px 0 45px rgba(0, 0, 0, 0.3);
+        transition: right 0.3s ease;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        padding: 13px 0;
+        font-size: 16px;
+      }
+
+      .info-bar,
+      .main-grid,
+      .two-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-card {
+        position: static;
+      }
+
+      .gallery-main,
+      .gallery-side img {
+        height: 250px;
+      }
+
+      .content-card,
+      .booking-card {
+        padding: 24px;
+      }
+
+      .container {
+        margin: -45px auto 60px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo img {
+        height: 52px;
+      }
+
+      .detail-hero {
+        min-height: 590px;
+      }
+
+      .hero-inner {
+        padding: 120px 20px 80px;
+      }
+
+      .hero-inner h1 {
+        font-size: 42px;
+      }
+
+      .hero-inner p {
+        font-size: 16px;
+      }
+
+      .hero-badges small {
+        padding: 8px 12px;
+        font-size: 11px;
+      }
+
+      .container {
+        padding: 0 15px;
+      }
+
+      .info-bar {
+        grid-template-columns: 1fr 1fr;
+        padding: 16px;
+        border-radius: 24px;
+      }
+
+      .info-box {
+        padding: 15px;
+      }
+
+      .content-card,
+      .booking-card {
+        border-radius: 24px;
+      }
+
+      .content-card {
+        padding: 20px;
+      }
+
+      .booking-card {
+        padding: 22px;
+      }
+
+      .section h2,
+      .custom-strip h2 {
+        font-size: 28px;
+      }
+
+      .gallery-main,
+      .gallery-side img {
+        height: 220px;
+      }
+
+      .mode-toggle {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-whatsapp {
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .floating-whatsapp a {
+        width: 58px;
+        height: 58px;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50%;
+        font-size: 23px;
+      }
+
+      .floating-whatsapp span {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<section class="detail-hero" id="hero">
-  <div class="hero-inner">
-    <span id="badge">Rigan Experience</span>
-    <h1 id="title">Loading...</h1>
-    <p id="subtitle">Please wait...</p>
+  <!-- NAVIGATION -->
+  <nav class="navbar" aria-label="Main navigation">
 
-    <div class="hero-badges">
-      <small>Private / Small Group</small>
-      <small>Local Host Support</small>
-      <small>Customizable Journey</small>
+    <a
+      href="index.html"
+      class="logo"
+      aria-label="Rigan Roots and Routes home"
+    >
+      <img
+        src="https://i.postimg.cc/G2m13ZZh/logo.jpg"
+        alt="Rigan Roots and Routes logo"
+      >
+    </a>
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="navLinks"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="experience-v2.html">Experiences</a>
+      <a href="regions.html">Regions</a>
+      <a href="guides.html">Local Guides</a>
+      <a href="marketplace.html">Marketplace</a>
+      <a href="work-with-us.html">Work With Us</a>
+      <a href="about.html">Our Story</a>
+      <a href="plan.html">Plan</a>
+      <a href="contact.html">Contact</a>
     </div>
-  </div>
-</section>
 
-<div class="container">
+  </nav>
 
-  <div class="info-bar">
-    <div class="info-box"><strong>Duration</strong><span id="durationTop">-</span></div>
-    <div class="info-box"><strong>Group Size</strong><span id="groupSize">Flexible</span></div>
-    <div class="info-box"><strong>Difficulty</strong><span id="difficulty">Flexible</span></div>
-    <div class="info-box"><strong>Best Season</strong><span id="season">All Year</span></div>
-  </div>
+  <!-- HERO -->
+  <section class="detail-hero" id="hero">
+    <div class="hero-inner">
 
-  <div class="main-grid">
+      <span id="badge">Rigan Experience</span>
 
-    <main class="content-card">
+      <h1 id="title">Loading Experience...</h1>
 
-      <section class="section">
-        <div class="gallery-grid" id="galleryGrid"></div>
-      </section>
+      <p id="subtitle">
+        Please wait while we prepare your selected Nepal journey.
+      </p>
 
-      <section class="section">
-        <h2>Overview</h2>
-        <p id="overview"></p>
-      </section>
+      <div class="hero-badges">
+        <small>
+          <i class="fa-solid fa-user-group"></i>
+          Private / Small Group
+        </small>
 
-      <section class="section">
-        <div class="premium-note">
-          This experience is designed to help travelers feel Nepal through people, culture, food, nature, and real local connection — not just sightseeing.
-        </div>
-      </section>
+        <small>
+          <i class="fa-solid fa-handshake-angle"></i>
+          Local Support
+        </small>
 
-      <section class="section">
-        <h2>Who This Is For</h2>
-        <ul id="bestFor"></ul>
-      </section>
-
-      <section class="section">
-        <h2>Experience Style</h2>
-        <p id="style"></p>
-      </section>
-
-      <section class="section">
-        <h2>Highlights</h2>
-        <ul id="highlights"></ul>
-      </section>
-
-      <section class="section">
-        <h2>Detailed Day-by-Day Itinerary</h2>
-        <div id="itinerary"></div>
-      </section>
-
-      <section class="section">
-        <div class="two-grid">
-          <div class="included">
-            <h2>What’s Included</h2>
-            <ul id="includes"></ul>
-          </div>
-
-          <div class="excluded">
-            <h2>What’s Not Included</h2>
-            <ul id="excludes"></ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Important Things to Pack</h2>
-        <ul id="packing"></ul>
-      </section>
-
-      <section class="section">
-        <h2>Good to Know</h2>
-        <ul id="goodToKnow"></ul>
-      </section>
-
-      <section class="custom-strip">
-        <h2>Want this experience customized?</h2>
-        <p>We can adjust the route, duration, hotel level, activities, budget, and pace based on your travel style.</p>
-        <a href="plan.html">Customize My Trip →</a>
-      </section>
-
-      <section class="section">
-        <h2>Frequently Asked Questions</h2>
-        <div id="faqBox"></div>
-      </section>
-
-      <section class="section">
-        <h2>You May Also Like</h2>
-        <div class="related-grid" id="relatedTrips"></div>
-      </section>
-
-      <section class="section">
-        <h2>Traveler Reviews</h2>
-        <div class="review-grid">
-          <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"This was not just a trip. I felt like I was part of a Nepali family."</p>
-            <strong>— Emma, Germany</strong>
-          </div>
-
-          <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"The most authentic experience I’ve had in Asia. Everything felt real and personal."</p>
-            <strong>— Daniel, Australia</strong>
-          </div>
-
-          <div class="review">
-            <div class="stars">★★★★★</div>
-            <p>"Amazing hosts, beautiful moments, and a completely different side of Nepal."</p>
-            <strong>— Sophie, UK</strong>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Why Book With Rigan?</h2>
-        <ul>
-          <li>Locally designed Nepal experiences</li>
-          <li>Direct support before and during the journey</li>
-          <li>Flexible customization based on your travel style</li>
-          <li>Meaningful connection with local people and communities</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Cancellation & Payment</h2>
-        <p>
-          Final pricing and payment details are confirmed after checking availability.
-          A small advance may be required to secure guides, hosts, transport, or accommodation.
-        </p>
-      </section>
-
-      <a href="experience-v2.html" class="back">← Back to Experiences</a>
-
-    </main>
-
-    <aside class="booking-card">
-      <p class="price-label">Starting From</p>
-      <div class="price" id="price">Custom</div>
-      <p class="price-label">Per Person</p>
-
-      <div class="mode-toggle">
-        <button class="mode-btn active" type="button" data-mode="Scheduled Trip">Scheduled</button>
-        <button class="mode-btn" type="button" data-mode="Custom Trip">Custom</button>
+        <small>
+          <i class="fa-solid fa-sliders"></i>
+          Customizable
+        </small>
       </div>
 
-      <div class="mini-list">
-        <p>Flexible Customization</p>
-        <p>No Hidden Charges</p>
-        <p>Local Support Included</p>
-        <p>WhatsApp Confirmation</p>
-      </div>
-
-      <div class="availability-box">
-        <h3>Check Availability</h3>
-
-        <label>Select Date</label>
-        <input type="date" id="travelDate">
-
-        <label>Number of Travelers</label>
-        <input type="number" id="travelers" min="1" placeholder="e.g. 2">
-
-        <label>Trip Type</label>
-        <select id="tripType">
-          <option>Private Trip</option>
-          <option>Group Joining</option>
-          <option>Family Trip</option>
-          <option>Custom Trip</option>
-        </select>
-      </div>
-
-      <form class="form" id="inquiryForm">
-        <input type="text" id="name" placeholder="Full Name *" required>
-        <input type="tel" id="phone" placeholder="+977 984-1234567" required>
-        <input type="email" id="email" placeholder="Email Address (Optional)">
-
-        <select id="contactMethod">
-          <option>WhatsApp</option>
-          <option>Email</option>
-          <option>Phone Call</option>
-        </select>
-
-        <textarea id="message" placeholder="Tell us your interests, preferred budget, or special requests"></textarea>
-        <button type="submit" class="inquiry-btn">Inquiry Now →</button>
-      </form>
-
-      <button class="print-btn" type="button" id="printBtn">Download / Print Itinerary</button>
-      <button class="share-btn" type="button" id="shareBtn">Share This Trip</button>
-
-      <a href="plan.html" class="custom-btn">Customize Itinerary</a>
-
-      <div class="trust-box">
-        <h3>Need help choosing?</h3>
-        <p>
-          Message us on WhatsApp and we’ll suggest the best route, season,
-          budget, and itinerary based on your travel style.
-        </p>
-      </div>
-    </aside>
-
-  </div>
-</div>
-
-<script src="experience-data-v2.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const params = new URLSearchParams(window.location.search);
-  const experienceId = params.get("id") || params.get("experience");
-
-  let selectedMode = "Scheduled Trip";
-
-  if (!window.experienceDataV2) {
-    document.getElementById("title").textContent = "Data File Not Loaded";
-    document.getElementById("subtitle").textContent = "Check experience-data-v2.js file name and location.";
-    return;
-  }
-
-  let selected = null;
-  let selectedCategoryKey = null;
-  let selectedCategory = null;
-
-  Object.entries(window.experienceDataV2).forEach(([key, category]) => {
-    (category.items || []).forEach(item => {
-      if (item.id === experienceId) {
-        selected = item;
-        selectedCategoryKey = key;
-        selectedCategory = category;
-      }
-    });
-  });
-
-  if (!selected) {
-    document.getElementById("title").textContent = "Experience Not Found";
-    document.getElementById("subtitle").textContent = "Wrong or missing ID in URL.";
-    return;
-  }
-
-  document.title = selected.name + " | Rigan Roots & Routes";
-
-  const fallbackImage = "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1600&q=80";
-  const heroImage = selected.image || fallbackImage;
-
-  document.getElementById("hero").style.backgroundImage = `url('${heroImage}')`;
-
-  document.getElementById("badge").textContent = selected.badge || "Rigan Experience";
-  document.getElementById("title").textContent = selected.name || "Experience";
-  document.getElementById("subtitle").textContent = selected.subtitle || "";
-  document.getElementById("overview").textContent = selected.overview || selected.description || "";
-
-  document.getElementById("durationTop").textContent = selected.duration || "-";
-  document.getElementById("groupSize").textContent = selected.groupSize || "Flexible";
-  document.getElementById("difficulty").textContent = selected.difficulty || "Flexible";
-  document.getElementById("season").textContent = selected.season || "All Year";
-  document.getElementById("price").textContent = selected.price || "Custom";
-
-  document.getElementById("style").textContent =
-    selected.style || "Custom Nepal experience designed around your interests.";
-
-  const gallery = selected.gallery && selected.gallery.length ? selected.gallery : [heroImage, heroImage, heroImage];
-
-  document.getElementById("galleryGrid").innerHTML = `
-    <img class="gallery-main" src="${gallery[0]}" alt="${selected.name}">
-    <div class="gallery-side">
-      <img src="${gallery[1] || gallery[0]}" alt="${selected.name}">
-      <img src="${gallery[2] || gallery[0]}" alt="${selected.name}">
     </div>
-  `;
+  </section>
 
-  document.getElementById("bestFor").innerHTML =
-    (selected.bestFor || [
-      "Travelers who want authentic local connection",
-      "Couples, families, solo travelers, and small groups",
-      "People who want Nepal beyond normal sightseeing"
-    ]).map(x => `<li>${x}</li>`).join("");
+  <!-- ERROR STATE -->
+  <section class="error-state" id="errorState">
+    <h1>Experience Not Found</h1>
 
-  document.getElementById("highlights").innerHTML =
-    (selected.highlights && selected.highlights.length ? selected.highlights : [
-      "Local experience support",
-      "Flexible trip design",
-      "Authentic Nepal connection"
-    ]).map(x => `<li>${x}</li>`).join("");
+    <p>
+      The experience link may be incorrect, unavailable, or missing from
+      the experience data file.
+    </p>
 
-  const itinerary = selected.itinerary && selected.itinerary.length ? selected.itinerary : [
-    {day:"Flexible Itinerary", text:"This experience can be customized based on your travel dates, interests, group size, and preferred pace."}
-  ];
+    <a href="experience-v2.html">
+      View All Experiences
+    </a>
+  </section>
 
-  document.getElementById("itinerary").innerHTML =
-    itinerary.map((x, index) => `
-      <div class="itinerary-day ${index === 0 ? "active" : ""}">
-        <button class="day-head" type="button">
-          <span>${x.day}</span>
-          <span>+</span>
+  <!-- MAIN EXPERIENCE -->
+  <div class="container" id="experienceContainer">
+
+    <div class="info-bar">
+
+      <div class="info-box">
+        <strong>Duration</strong>
+        <span id="durationTop">Flexible</span>
+      </div>
+
+      <div class="info-box">
+        <strong>Group Size</strong>
+        <span id="groupSize">Flexible</span>
+      </div>
+
+      <div class="info-box">
+        <strong>Difficulty</strong>
+        <span id="difficulty">Flexible</span>
+      </div>
+
+      <div class="info-box">
+        <strong>Best Season</strong>
+        <span id="season">All Year</span>
+      </div>
+
+      <div class="info-box">
+        <strong>Location</strong>
+        <span id="location">Nepal</span>
+      </div>
+
+    </div>
+
+    <div class="main-grid">
+
+      <!-- CONTENT -->
+      <main class="content-card">
+
+        <section class="section">
+          <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <section class="section">
+          <h2>Overview</h2>
+          <p id="overview"></p>
+        </section>
+
+        <section class="section">
+          <div class="premium-note">
+            This journey is designed to help travellers feel Nepal through
+            people, culture, food, nature, and genuine local connection—not
+            only through sightseeing.
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Who This Is For</h2>
+          <ul id="bestFor"></ul>
+        </section>
+
+        <section class="section">
+          <h2>Experience Style</h2>
+          <p id="style"></p>
+        </section>
+
+        <section class="section">
+          <h2>Highlights</h2>
+          <ul id="highlights"></ul>
+        </section>
+
+        <section class="section">
+          <h2>Day-by-Day Itinerary</h2>
+          <div id="itinerary"></div>
+        </section>
+
+        <section class="section">
+          <div class="two-grid">
+
+            <div class="included">
+              <h2>What’s Included</h2>
+              <ul id="includes"></ul>
+            </div>
+
+            <div class="excluded">
+              <h2>What’s Not Included</h2>
+              <ul id="excludes"></ul>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Important Things to Pack</h2>
+          <ul id="packing"></ul>
+        </section>
+
+        <section class="section">
+          <h2>Good to Know</h2>
+          <ul id="goodToKnow"></ul>
+        </section>
+
+        <section class="custom-strip">
+          <h2>Want this experience customized?</h2>
+
+          <p>
+            We can adjust the route, duration, hotel level, activities,
+            budget, and pace according to your travel style.
+          </p>
+
+          <a id="customizeStripLink" href="plan.html">
+            Customize This Trip →
+          </a>
+        </section>
+
+        <section class="section">
+          <h2>Frequently Asked Questions</h2>
+          <div id="faqBox"></div>
+        </section>
+
+        <section class="section">
+          <h2>You May Also Like</h2>
+          <div class="related-grid" id="relatedTrips"></div>
+        </section>
+
+        <section class="section">
+          <h2>Why Book With Rigan?</h2>
+
+          <ul>
+            <li>Locally designed Nepal experiences</li>
+            <li>Direct support before and during the journey</li>
+            <li>Flexible customization based on your travel style</li>
+            <li>Meaningful connection with people and communities</li>
+            <li>Clear communication through WhatsApp and email</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>Cancellation &amp; Payment</h2>
+
+          <p>
+            Final prices and payment conditions are confirmed after
+            availability is checked. An advance payment may be required to
+            secure guides, local hosts, transport, accommodation, permits,
+            or activities.
+          </p>
+        </section>
+
+        <a href="experience-v2.html" class="back">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back to Experiences
+        </a>
+
+      </main>
+
+      <!-- BOOKING -->
+      <aside class="booking-card">
+
+        <p class="price-label">Starting From</p>
+
+        <div class="price" id="price">Request Quote</div>
+
+        <p class="price-label">Per Person / Estimated</p>
+
+        <p class="price-note">
+          Final price depends on your travel date, group size, hotel level,
+          transport, permits, and customization.
+        </p>
+
+        <div class="mode-toggle">
+
+          <button
+            class="mode-btn active"
+            type="button"
+            data-mode="Scheduled Trip"
+          >
+            Scheduled
+          </button>
+
+          <button
+            class="mode-btn"
+            type="button"
+            data-mode="Custom Trip"
+          >
+            Custom
+          </button>
+
+        </div>
+
+        <div class="mini-list">
+          <p>Flexible Customization</p>
+          <p>Transparent Quotation</p>
+          <p>Local Support Included</p>
+          <p>WhatsApp Assistance</p>
+        </div>
+
+        <div class="availability-box">
+          <h3>Check Availability</h3>
+
+          <label for="travelDate">Preferred travel date</label>
+
+          <input
+            type="date"
+            id="travelDate"
+          >
+
+          <label for="travelers">Number of travellers</label>
+
+          <input
+            type="number"
+            id="travelers"
+            min="1"
+            max="100"
+            placeholder="For example: 2"
+          >
+
+          <label for="tripType">Trip type</label>
+
+          <select id="tripType">
+            <option value="Private Trip">Private Trip</option>
+            <option value="Group Joining">Group Joining</option>
+            <option value="Family Trip">Family Trip</option>
+            <option value="Custom Trip">Custom Trip</option>
+          </select>
+        </div>
+
+        <form
+          class="form"
+          id="inquiryForm"
+          action="https://formspree.io/f/mbdpwkoz"
+          method="POST"
+        >
+
+          <input
+            type="hidden"
+            name="_subject"
+            id="subjectInput"
+            value="New Experience Inquiry — Rigan Roots & Routes"
+          >
+
+          <input
+            type="hidden"
+            name="experience"
+            id="experienceInput"
+          >
+
+          <input
+            type="hidden"
+            name="booking_mode"
+            id="modeInput"
+          >
+
+          <input
+            type="hidden"
+            name="travel_date"
+            id="dateInput"
+          >
+
+          <input
+            type="hidden"
+            name="number_of_travellers"
+            id="travellersInput"
+          >
+
+          <input
+            type="hidden"
+            name="trip_type"
+            id="tripTypeInput"
+          >
+
+          <input
+            type="hidden"
+            name="displayed_price"
+            id="priceInput"
+          >
+
+          <label for="name">Full name *</label>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your full name"
+            autocomplete="name"
+            required
+          >
+
+          <label for="phone">Phone or WhatsApp *</label>
+
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+977..."
+            autocomplete="tel"
+            required
+          >
+
+          <label for="email">Email address</label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+          >
+
+          <label for="contactMethod">Preferred contact method</label>
+
+          <select
+            id="contactMethod"
+            name="preferred_contact_method"
+          >
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Email">Email</option>
+            <option value="Phone Call">Phone Call</option>
+          </select>
+
+          <label for="message">Additional requirements</label>
+
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Tell us your interests, budget, accommodation preference, dietary requirements, or special requests."
+          ></textarea>
+
+          <button type="submit" class="inquiry-btn">
+            <i class="fa-solid fa-paper-plane"></i>
+            Send Tour Inquiry
+          </button>
+
+          <div class="form-status" id="formStatus">
+            Your inquiry is being submitted.
+          </div>
+
+        </form>
+
+        <button
+          class="whatsapp-direct-btn"
+          type="button"
+          id="whatsappBtn"
+        >
+          <i class="fa-brands fa-whatsapp"></i>
+          Send Inquiry on WhatsApp
         </button>
-        <div class="day-body">${x.text}</div>
-      </div>
-    `).join("");
 
-  document.querySelectorAll(".day-head").forEach(btn => {
-    btn.addEventListener("click", function(){
-      this.parentElement.classList.toggle("active");
-    });
-  });
+        <button
+          class="print-btn"
+          type="button"
+          id="printBtn"
+        >
+          <i class="fa-solid fa-print"></i>
+          Print Itinerary
+        </button>
 
-  document.getElementById("includes").innerHTML =
-    (selected.includes || ["Local coordination", "Experience support", "Basic itinerary guidance"])
-    .map(x => `<li>${x}</li>`).join("");
+        <button
+          class="share-btn"
+          type="button"
+          id="shareBtn"
+        >
+          <i class="fa-solid fa-share-nodes"></i>
+          Share This Trip
+        </button>
 
-  document.getElementById("excludes").innerHTML =
-    (selected.excludes || ["International flights", "Travel insurance", "Personal expenses"])
-    .map(x => `<li>${x}</li>`).join("");
+        <a
+          href="plan.html"
+          class="custom-btn"
+          id="customizeButton"
+        >
+          <i class="fa-solid fa-route"></i>
+          Plan This Trip
+        </a>
 
-  document.getElementById("packing").innerHTML =
-    (selected.packing || ["Comfortable clothes", "Walking shoes", "Water bottle", "Camera"])
-    .map(x => `<li>${x}</li>`).join("");
+        <div class="trust-box">
+          <h3>Need help choosing?</h3>
 
-  document.getElementById("goodToKnow").innerHTML =
-    (selected.goodToKnow || ["Final route can be customized", "Price depends on season and group size"])
-    .map(x => `<li>${x}</li>`).join("");
-
-  document.getElementById("faqBox").innerHTML = `
-    <div class="faq-item">
-      <h3>Can this experience be customized?</h3>
-      <p>Yes. We can adjust the route, duration, hotel level, activities, budget, and pace based on your travel style.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Is this suitable for solo travelers?</h3>
-      <p>Yes. Most Rigan experiences can be arranged privately or joined with a small group depending on availability.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Do I need travel insurance?</h3>
-      <p>For trekking and adventure experiences, travel insurance is strongly recommended. For high-altitude treks, emergency evacuation coverage is important.</p>
-    </div>
-  `;
-
-  const related = (selectedCategory?.items || [])
-    .filter(item => item.id !== selected.id)
-    .slice(0, 3);
-
-  document.getElementById("relatedTrips").innerHTML =
-    related.length ? related.map(item => `
-      <a class="related-card" href="experience-detail-v2.html?experience=${item.id}">
-        <img src="${item.image || fallbackImage}" alt="${item.name}">
-        <div>
-          <h3>${item.name}</h3>
-          <p>${item.duration || "Custom"} • ${item.price || "Custom"}</p>
+          <p>
+            Contact us on WhatsApp and we will suggest a suitable route,
+            season, budget, duration, and experience based on your travel
+            style.
+          </p>
         </div>
-      </a>
-    `).join("") : `<p>No related trips available yet.</p>`;
 
-  document.querySelectorAll(".mode-btn").forEach(btn => {
-    btn.addEventListener("click", function(){
-      document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
-      this.classList.add("active");
-      selectedMode = this.dataset.mode;
-      document.getElementById("tripType").value = selectedMode === "Custom Trip" ? "Custom Trip" : "Private Trip";
-    });
-  });
+      </aside>
 
-  document.getElementById("printBtn").addEventListener("click", function(){
-    window.print();
-  });
+    </div>
+  </div>
 
-  document.getElementById("shareBtn").addEventListener("click", async function(){
-    if (navigator.share) {
-      try{
-        await navigator.share({
-          title: selected.name,
-          text: selected.subtitle,
-          url: window.location.href
+  <!-- FLOATING WHATSAPP -->
+  <div class="floating-whatsapp">
+    <a
+      id="floatingWhatsApp"
+      href="https://wa.me/9779843322695"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Ask about this experience on WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+      <span>Ask on WhatsApp</span>
+    </a>
+  </div>
+
+  <script src="experience-data-v2.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const fallbackImage =
+        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1600&q=80";
+
+      const params = new URLSearchParams(window.location.search);
+      const experienceId =
+        params.get("experience") ||
+        params.get("id");
+
+      const hero =
+        document.getElementById("hero");
+
+      const experienceContainer =
+        document.getElementById("experienceContainer");
+
+      const errorState =
+        document.getElementById("errorState");
+
+      const menuBtn =
+        document.getElementById("menuBtn");
+
+      const navLinks =
+        document.getElementById("navLinks");
+
+      const inquiryForm =
+        document.getElementById("inquiryForm");
+
+      const travelDateInput =
+        document.getElementById("travelDate");
+
+      const travelersInput =
+        document.getElementById("travelers");
+
+      const tripTypeSelect =
+        document.getElementById("tripType");
+
+      let selectedMode = "Scheduled Trip";
+      let selected = null;
+      let selectedCategory = null;
+
+      function escapeHTML(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function createSafeSlug(item) {
+        const value =
+          item.id ||
+          item.slug ||
+          item.name ||
+          "";
+
+        return String(value)
+          .trim()
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+      }
+
+      function showError(title, message) {
+        hero.style.display = "none";
+        experienceContainer.style.display = "none";
+        errorState.style.display = "block";
+
+        errorState.querySelector("h1").textContent = title;
+        errorState.querySelector("p").textContent = message;
+
+        document.title =
+          "Experience Not Found | Rigan Roots & Routes";
+      }
+
+      function setMinimumTravelDate() {
+        const today = new Date();
+
+        const localDate = new Date(
+          today.getTime() -
+          today.getTimezoneOffset() * 60000
+        )
+          .toISOString()
+          .split("T")[0];
+
+        travelDateInput.min = localDate;
+      }
+
+      function populateList(elementId, items, fallbackItems) {
+        const element =
+          document.getElementById(elementId);
+
+        const finalItems =
+          Array.isArray(items) && items.length
+            ? items
+            : fallbackItems;
+
+        element.innerHTML = finalItems
+          .map(function (item) {
+            return `<li>${escapeHTML(item)}</li>`;
+          })
+          .join("");
+      }
+
+      function normalizeItinerary(itinerary) {
+        if (!Array.isArray(itinerary) || !itinerary.length) {
+          return [
+            {
+              day: "Flexible Itinerary",
+              text:
+                "This journey can be customized based on your travel dates, interests, group size, budget, and preferred pace."
+            }
+          ];
+        }
+
+        return itinerary.map(function (item, index) {
+          if (Array.isArray(item)) {
+            return {
+              day: item[0] || `Day ${index + 1}`,
+              text: item[1] || ""
+            };
+          }
+
+          return {
+            day:
+              item.day ||
+              item.title ||
+              `Day ${index + 1}`,
+
+            text:
+              item.text ||
+              item.description ||
+              item.details ||
+              ""
+          };
         });
-      }catch(error){}
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert("Trip link copied!");
-    }
-  });
+      }
 
-  document.getElementById("inquiryForm").addEventListener("submit", function(e){
-    e.preventDefault();
+      function buildWhatsAppMessage() {
+        const name =
+          document.getElementById("name").value ||
+          "Not provided";
 
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const contactMethod = document.getElementById("contactMethod").value;
-    const message = document.getElementById("message").value;
+        const phone =
+          document.getElementById("phone").value ||
+          "Not provided";
 
-    const date = document.getElementById("travelDate").value;
-    const travelers = document.getElementById("travelers").value;
-    const tripType = document.getElementById("tripType").value;
+        const email =
+          document.getElementById("email").value ||
+          "Not provided";
 
-    const whatsappText = encodeURIComponent(
-`Hi Rigan Roots & Routes,
+        const preferredContact =
+          document.getElementById("contactMethod").value;
 
-I am interested in: ${selected.name}
-Mode: ${selectedMode}
+        const date =
+          travelDateInput.value ||
+          "Flexible";
+
+        const travelers =
+          travelersInput.value ||
+          "Not selected";
+
+        const tripType =
+          tripTypeSelect.value;
+
+        const additionalMessage =
+          document.getElementById("message").value ||
+          "No additional request";
+
+        const price =
+          selected.price ||
+          "Request Quote";
+
+        return encodeURIComponent(
+`Hello Rigan Roots & Routes,
+
+I am interested in this Nepal experience:
+
+Experience: ${selected.name}
+Booking Mode: ${selectedMode}
+Displayed Price: ${price}
 
 Name: ${name}
-Phone: ${phone}
+Phone / WhatsApp: ${phone}
 Email: ${email}
+Preferred Contact: ${preferredContact}
 
-Travel Date: ${date}
-Travelers: ${travelers}
+Preferred Travel Date: ${date}
+Number of Travellers: ${travelers}
 Trip Type: ${tripType}
 
-Preferred Contact: ${contactMethod}
+Additional Requirements:
+${additionalMessage}
 
-Message: ${message}`
-    );
+Please send me the availability, detailed quotation, inclusions, and next steps.`
+        );
+      }
 
-    window.open(`https://wa.me/9779843322695?text=${whatsappText}`, "_blank");
-  });
-});
-</script>
+      function buildSimpleWhatsAppMessage() {
+        return encodeURIComponent(
+`Hello Rigan Roots & Routes!
+
+I am interested in the ${selected.name} experience.
+
+Duration: ${selected.duration || "Flexible"}
+Price: ${selected.price || "Request Quote"}
+
+Please send me more information about availability, itinerary, inclusions, and price.`
+        );
+      }
+
+      function updateHiddenFormFields() {
+        document.getElementById(
+          "experienceInput"
+        ).value = selected.name;
+
+        document.getElementById(
+          "modeInput"
+        ).value = selectedMode;
+
+        document.getElementById(
+          "dateInput"
+        ).value =
+          travelDateInput.value || "Flexible";
+
+        document.getElementById(
+          "travellersInput"
+        ).value =
+          travelersInput.value || "Not selected";
+
+        document.getElementById(
+          "tripTypeInput"
+        ).value = tripTypeSelect.value;
+
+        document.getElementById(
+          "priceInput"
+        ).value =
+          selected.price || "Request Quote";
+
+        document.getElementById(
+          "subjectInput"
+        ).value =
+          `New Inquiry — ${selected.name}`;
+      }
+
+      function closeMobileMenu() {
+        navLinks.classList.remove("active");
+        document.body.classList.remove("menu-open");
+
+        menuBtn.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        menuBtn.innerHTML =
+          '<i class="fa-solid fa-bars"></i>';
+      }
+
+      menuBtn.addEventListener("click", function () {
+        const isOpen =
+          navLinks.classList.toggle("active");
+
+        document.body.classList.toggle(
+          "menu-open",
+          isOpen
+        );
+
+        menuBtn.setAttribute(
+          "aria-expanded",
+          String(isOpen)
+        );
+
+        menuBtn.innerHTML = isOpen
+          ? '<i class="fa-solid fa-xmark"></i>'
+          : '<i class="fa-solid fa-bars"></i>';
+      });
+
+      navLinks.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener(
+          "click",
+          closeMobileMenu
+        );
+      });
+
+      if (!window.experienceDataV2) {
+        showError(
+          "Experience Data Not Loaded",
+          "Please keep experience-data-v2.js in the same folder as this page."
+        );
+
+        return;
+      }
+
+      Object.entries(
+        window.experienceDataV2
+      ).some(function ([categoryKey, category]) {
+        const foundItem =
+          (category.items || []).find(function (item) {
+            return (
+              item.id === experienceId ||
+              item.slug === experienceId ||
+              createSafeSlug(item) === experienceId
+            );
+          });
+
+        if (foundItem) {
+          selected = foundItem;
+          selectedCategory = {
+            key: categoryKey,
+            ...category
+          };
+
+          return true;
+        }
+
+        return false;
+      });
+
+      if (!selected) {
+        showError(
+          "Experience Not Found",
+          "The experience link is incorrect, unavailable, or missing from the data file."
+        );
+
+        return;
+      }
+
+      const heroImage =
+        selected.image || fallbackImage;
+
+      const safeExperienceSlug =
+        encodeURIComponent(
+          createSafeSlug(selected)
+        );
+
+      const planLink =
+        `plan.html?experience=${safeExperienceSlug}`;
+
+      document.title =
+        `${selected.name} | Rigan Roots & Routes`;
+
+      hero.style.backgroundImage =
+        `url('${heroImage}')`;
+
+      document.getElementById(
+        "badge"
+      ).textContent =
+        selected.badge ||
+        selectedCategory?.title ||
+        "Rigan Experience";
+
+      document.getElementById(
+        "title"
+      ).textContent =
+        selected.name ||
+        "Nepal Experience";
+
+      document.getElementById(
+        "subtitle"
+      ).textContent =
+        selected.subtitle ||
+        selected.overview ||
+        "A meaningful journey through Nepal.";
+
+      document.getElementById(
+        "overview"
+      ).textContent =
+        selected.overview ||
+        selected.description ||
+        selected.subtitle ||
+        "This experience can be personalized according to your dates, interests, group size, and budget.";
+
+      document.getElementById(
+        "durationTop"
+      ).textContent =
+        selected.duration || "Flexible";
+
+      document.getElementById(
+        "groupSize"
+      ).textContent =
+        selected.groupSize ||
+        selected.group ||
+        "Flexible";
+
+      document.getElementById(
+        "difficulty"
+      ).textContent =
+        selected.difficulty || "Flexible";
+
+      document.getElementById(
+        "season"
+      ).textContent =
+        selected.season ||
+        selected.bestSeason ||
+        "All Year";
+
+      document.getElementById(
+        "location"
+      ).textContent =
+        selected.location || "Nepal";
+
+      document.getElementById(
+        "price"
+      ).textContent =
+        selected.price || "Request Quote";
+
+      document.getElementById(
+        "style"
+      ).textContent =
+        selected.style ||
+        "A customizable Nepal experience designed around your interests, pace, and preferred comfort level.";
+
+      const gallery =
+        Array.isArray(selected.gallery) &&
+        selected.gallery.length
+          ? selected.gallery
+          : [
+              heroImage,
+              heroImage,
+              heroImage
+            ];
+
+      document.getElementById(
+        "galleryGrid"
+      ).innerHTML = `
+        <img
+          class="gallery-main"
+          src="${escapeHTML(gallery[0] || heroImage)}"
+          alt="${escapeHTML(selected.name)}"
+          onerror="this.src='${fallbackImage}'"
+        >
+
+        <div class="gallery-side">
+          <img
+            src="${escapeHTML(gallery[1] || gallery[0] || heroImage)}"
+            alt="${escapeHTML(selected.name)}"
+            loading="lazy"
+            onerror="this.src='${fallbackImage}'"
+          >
+
+          <img
+            src="${escapeHTML(gallery[2] || gallery[0] || heroImage)}"
+            alt="${escapeHTML(selected.name)}"
+            loading="lazy"
+            onerror="this.src='${fallbackImage}'"
+          >
+        </div>
+      `;
+
+      populateList(
+        "bestFor",
+        selected.bestFor,
+        [
+          "Travellers seeking authentic local connection",
+          "Couples, families, solo travellers, and small groups",
+          "People wanting Nepal beyond standard sightseeing"
+        ]
+      );
+
+      populateList(
+        "highlights",
+        selected.highlights,
+        [
+          "Local experience support",
+          "Flexible itinerary design",
+          "Authentic connection with Nepal",
+          "Customizable duration and comfort level"
+        ]
+      );
+
+      populateList(
+        "includes",
+        selected.includes,
+        [
+          "Local coordination",
+          "Experience support",
+          "Basic itinerary planning",
+          "Services mentioned in the confirmed quotation"
+        ]
+      );
+
+      populateList(
+        "excludes",
+        selected.excludes,
+        [
+          "International flights",
+          "Travel insurance",
+          "Personal expenses",
+          "Services not mentioned in the confirmed quotation"
+        ]
+      );
+
+      populateList(
+        "packing",
+        selected.packing,
+        [
+          "Comfortable clothing",
+          "Suitable walking shoes",
+          "Reusable water bottle",
+          "Sun protection",
+          "Personal medicines",
+          "Camera or phone"
+        ]
+      );
+
+      populateList(
+        "goodToKnow",
+        selected.goodToKnow,
+        [
+          "The final itinerary can be customized",
+          "Price depends on dates, group size, and inclusions",
+          "Travel insurance is recommended",
+          "Weather and local conditions may affect the itinerary"
+        ]
+      );
+
+      const itinerary =
+        normalizeItinerary(selected.itinerary);
+
+      document.getElementById(
+        "itinerary"
+      ).innerHTML = itinerary
+        .map(function (item, index) {
+          return `
+            <div class="itinerary-day ${index === 0 ? "active" : ""}">
+              <button
+                class="day-head"
+                type="button"
+                aria-expanded="${index === 0 ? "true" : "false"}"
+              >
+                <span>${escapeHTML(item.day)}</span>
+                <span class="day-icon">+</span>
+              </button>
+
+              <div class="day-body">
+                ${escapeHTML(item.text)}
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      document.querySelectorAll(
+        ".day-head"
+      ).forEach(function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            const day =
+              button.parentElement;
+
+            const isActive =
+              day.classList.toggle("active");
+
+            button.setAttribute(
+              "aria-expanded",
+              String(isActive)
+            );
+          }
+        );
+      });
+
+      document.getElementById(
+        "faqBox"
+      ).innerHTML = `
+        <div class="faq-item">
+          <h3>Can this experience be customized?</h3>
+
+          <p>
+            Yes. We can adjust the duration, route, activities,
+            accommodation, transportation, budget, and travel pace.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Is it suitable for solo travellers?</h3>
+
+          <p>
+            Most Rigan experiences can be arranged privately for solo
+            travellers or as small-group journeys, depending on
+            availability.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Do I need travel insurance?</h3>
+
+          <p>
+            Travel insurance is recommended for all travellers. Trekking
+            and adventure journeys should include emergency treatment and
+            evacuation coverage.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Is the displayed price final?</h3>
+
+          <p>
+            No. It is a starting price or estimate. Your final quotation
+            will depend on dates, availability, hotels, group size,
+            transport, permits, and selected services.
+          </p>
+        </div>
+      `;
+
+      const related =
+        (selectedCategory?.items || [])
+          .filter(function (item) {
+            return (
+              createSafeSlug(item) !==
+              createSafeSlug(selected)
+            );
+          })
+          .slice(0, 3);
+
+      document.getElementById(
+        "relatedTrips"
+      ).innerHTML = related.length
+        ? related
+            .map(function (item) {
+              const relatedSlug =
+                encodeURIComponent(
+                  createSafeSlug(item)
+                );
+
+              return `
+                <a
+                  class="related-card"
+                  href="experience-detail-v2.html?experience=${relatedSlug}"
+                >
+                  <img
+                    src="${escapeHTML(item.image || fallbackImage)}"
+                    alt="${escapeHTML(item.name)}"
+                    loading="lazy"
+                    onerror="this.src='${fallbackImage}'"
+                  >
+
+                  <div>
+                    <h3>${escapeHTML(item.name)}</h3>
+
+                    <p>
+                      ${escapeHTML(item.duration || "Flexible")}
+                      •
+                      ${escapeHTML(item.price || "Request Quote")}
+                    </p>
+                  </div>
+                </a>
+              `;
+            })
+            .join("")
+        : "<p>No related experiences are available yet.</p>";
+
+      document.getElementById(
+        "customizeStripLink"
+      ).href = planLink;
+
+      document.getElementById(
+        "customizeButton"
+      ).href = planLink;
+
+      const simpleWhatsAppLink =
+        `https://wa.me/9779843322695?text=${buildSimpleWhatsAppMessage()}`;
+
+      document.getElementById(
+        "floatingWhatsApp"
+      ).href = simpleWhatsAppLink;
+
+      document.querySelectorAll(
+        ".mode-btn"
+      ).forEach(function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            document.querySelectorAll(
+              ".mode-btn"
+            ).forEach(function (item) {
+              item.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            selectedMode =
+              button.dataset.mode;
+
+            tripTypeSelect.value =
+              selectedMode === "Custom Trip"
+                ? "Custom Trip"
+                : "Private Trip";
+          }
+        );
+      });
+
+      document.getElementById(
+        "printBtn"
+      ).addEventListener(
+        "click",
+        function () {
+          window.print();
+        }
+      );
+
+      document.getElementById(
+        "shareBtn"
+      ).addEventListener(
+        "click",
+        async function () {
+          const shareData = {
+            title: selected.name,
+            text:
+              selected.subtitle ||
+              `Explore ${selected.name} with Rigan Roots & Routes.`,
+            url: window.location.href
+          };
+
+          if (navigator.share) {
+            try {
+              await navigator.share(shareData);
+            } catch (error) {
+              return;
+            }
+          } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(
+              window.location.href
+            );
+
+            alert("Trip link copied.");
+          } else {
+            window.prompt(
+              "Copy this trip link:",
+              window.location.href
+            );
+          }
+        }
+      );
+
+      document.getElementById(
+        "whatsappBtn"
+      ).addEventListener(
+        "click",
+        function () {
+          if (!inquiryForm.checkValidity()) {
+            inquiryForm.reportValidity();
+            return;
+          }
+
+          const message =
+            buildWhatsAppMessage();
+
+          window.open(
+            `https://wa.me/9779843322695?text=${message}`,
+            "_blank",
+            "noopener,noreferrer"
+          );
+        }
+      );
+
+      inquiryForm.addEventListener(
+        "submit",
+        function () {
+          updateHiddenFormFields();
+
+          document.getElementById(
+            "formStatus"
+          ).style.display = "block";
+        }
+      );
+
+      setMinimumTravelDate();
+      updateHiddenFormFields();
+    });
+  </script>
 
 </body>
 </html>
+```

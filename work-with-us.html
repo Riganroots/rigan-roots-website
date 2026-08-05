@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Become a Rigan host and share your home, food, culture, village life, and local traditions with travellers visiting Nepal." />
   <title>Work With Us | Rigan Roots & Routes</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +24,6 @@
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
-
     html{scroll-behavior:smooth}
 
     body{
@@ -109,6 +109,7 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
+      gap:20px;
     }
 
     .logo{
@@ -119,7 +120,7 @@
 
     .nav-links{
       display:flex;
-      gap:28px;
+      gap:24px;
       font-size:14px;
       font-weight:700;
     }
@@ -469,33 +470,197 @@
       color:var(--muted);
     }
 
-    .cta{
+    /* FORM SECTION */
+    .host-application-section{
+      padding:95px 0;
       background:
-        linear-gradient(rgba(16,24,21,.82),rgba(16,24,21,.82)),
-        url("https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg") center/cover no-repeat;
+        radial-gradient(circle at 12% 10%,rgba(159,186,107,.18),transparent 26%),
+        linear-gradient(135deg,#fffaf2,#f2eadc);
+    }
+
+    .application-heading{
+      max-width:760px;
+      margin-bottom:45px;
+    }
+
+    .application-layout{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:30px;
+      align-items:start;
+    }
+
+    .application-info{
+      display:grid;
+      gap:16px;
+    }
+
+    .application-info-card{
+      display:grid;
+      grid-template-columns:52px 1fr;
+      gap:16px;
+      padding:22px;
+      border:1px solid var(--border);
+      border-radius:22px;
+      background:rgba(255,255,255,.78);
+    }
+
+    .application-info-card>span{
+      width:46px;
+      height:46px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--green);
       color:#fff;
-      text-align:center;
-      padding:110px 0;
+      font-weight:900;
     }
 
-    .cta h2{
-      font-family:"Playfair Display",serif;
-      font-size:clamp(38px,5vw,68px);
-      line-height:1.05;
-      margin-bottom:20px;
-    }
-
-    .cta p{
-      max-width:680px;
-      margin:0 auto 34px;
-      color:rgba(255,255,255,.78);
+    .application-info-card h3{
+      margin-bottom:5px;
+      color:var(--dark);
       font-size:18px;
     }
 
-    .cta-note{
-      margin-top:15px!important;
-      opacity:.7;
-      font-size:14px!important;
+    .application-info-card p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .host-form-card{
+      padding:32px;
+      border:1px solid var(--border);
+      border-radius:32px;
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .host-form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .form-field{
+      display:grid;
+      gap:7px;
+    }
+
+    .form-field.full-width{
+      grid-column:1/-1;
+    }
+
+    .form-field label{
+      color:var(--dark);
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .host-form-grid input,
+    .host-form-grid select,
+    .host-form-grid textarea{
+      width:100%;
+      padding:14px 15px;
+      border:1px solid rgba(23,77,47,.14);
+      border-radius:14px;
+      background:#fff;
+      color:var(--text);
+      font:inherit;
+      outline:none;
+    }
+
+    .host-form-grid textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+
+    .host-form-grid input:focus,
+    .host-form-grid select:focus,
+    .host-form-grid textarea:focus{
+      border-color:var(--green2);
+      box-shadow:0 0 0 4px rgba(47,107,63,.13);
+    }
+
+    .consent-box{
+      display:flex;
+      align-items:flex-start;
+      gap:11px;
+      margin:22px 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .consent-box input{
+      width:18px;
+      height:18px;
+      flex-shrink:0;
+      margin-top:3px;
+    }
+
+    .host-submit-btn{
+      width:100%;
+      padding:16px 24px;
+      border:0;
+      border-radius:999px;
+      background:var(--green);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 15px 35px rgba(23,77,47,.22);
+      transition:.3s ease;
+    }
+
+    .host-submit-btn:hover{
+      background:#103721;
+      transform:translateY(-2px);
+    }
+
+    .host-form-note{
+      margin-top:13px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+      text-align:center;
+    }
+
+    .host-divider{
+      position:relative;
+      margin:24px 0;
+      text-align:center;
+    }
+
+    .host-divider::before{
+      content:"";
+      position:absolute;
+      top:50%;
+      left:0;
+      width:100%;
+      border-top:1px solid var(--border);
+    }
+
+    .host-divider span{
+      position:relative;
+      z-index:2;
+      padding:0 12px;
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    .host-whatsapp-btn{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:15px 24px;
+      border-radius:999px;
+      background:#25d366;
+      color:#fff;
+      font-weight:900;
     }
 
     footer{
@@ -507,33 +672,21 @@
     }
 
     @media(max-width:1050px){
-      .cards,.why-grid,.steps{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .offer-grid,.profile-preview,.split{
-        grid-template-columns:1fr;
-      }
-
+      .cards,.why-grid,.steps{grid-template-columns:repeat(2,1fr)}
+      .offer-grid,.profile-preview,.split,.application-layout{grid-template-columns:1fr}
       .profile-preview img{min-height:320px}
     }
 
     @media(max-width:700px){
       .nav-links{display:none}
-
       .hero{min-height:90vh}
-
-      .hero-stats,.cards,.why-grid,.steps,.mini-details{
-        grid-template-columns:1fr;
-      }
-
+      .hero-stats,.cards,.why-grid,.steps,.mini-details{grid-template-columns:1fr}
       .section{padding:70px 0}
-
       .offer-image{height:360px}
-
-      .hero h1{
-        font-size:46px;
-      }
+      .hero h1{font-size:46px}
+      .host-form-card{padding:22px}
+      .host-form-grid{grid-template-columns:1fr}
+      .form-field.full-width{grid-column:auto}
     }
   </style>
 </head>
@@ -547,6 +700,7 @@
         <div class="nav-links">
           <a href="index.html">Home</a>
           <a href="experience-v2.html">Experiences</a>
+          <a href="regions.html">Regions</a>
           <a href="about.html">About</a>
           <a href="work-with-us.html#apply">Become a Host</a>
         </div>
@@ -557,7 +711,7 @@
       <span class="hero-badge">Become a Rigan Host</span>
       <h1>Open Your Home. Share Your Culture. Welcome the World.</h1>
       <p>
-        Turn your home, food, daily life, and local traditions into meaningful experiences for travelers who want to feel the real Nepal.
+        Turn your home, food, daily life, and local traditions into meaningful experiences for travellers who want to feel the real Nepal.
       </p>
 
       <div class="hero-actions">
@@ -566,18 +720,9 @@
       </div>
 
       <div class="hero-stats">
-        <div class="stat">
-          <strong>Earn</strong>
-          <span>from your home, food, and skills</span>
-        </div>
-        <div class="stat">
-          <strong>Share</strong>
-          <span>your culture with global travelers</span>
-        </div>
-        <div class="stat">
-          <strong>Grow</strong>
-          <span>with training and booking support</span>
-        </div>
+        <div class="stat"><strong>Earn</strong><span>from your home, food, and skills</span></div>
+        <div class="stat"><strong>Share</strong><span>your culture with global travellers</span></div>
+        <div class="stat"><strong>Grow</strong><span>with training and booking support</span></div>
       </div>
     </div>
   </section>
@@ -586,34 +731,13 @@
     <div class="container">
       <p class="label">Who can join?</p>
       <h2 class="title">You Don’t Need a Hotel. You Need a Story.</h2>
-      <p class="text">
-        If you have a welcoming home, local knowledge, traditional skills, or a family experience to share, you can become a Rigan host.
-      </p>
+      <p class="text">If you have a welcoming home, local knowledge, traditional skills, or a family experience to share, you can become a Rigan host.</p>
 
       <div class="cards">
-        <div class="card">
-          <div class="icon">🏡</div>
-          <h3>Homestay Host</h3>
-          <p>Welcome travelers into your home and share real Nepali daily life.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🍲</div>
-          <h3>Cooking Host</h3>
-          <p>Teach momo, dal bhat, local snacks, family recipes, and food culture.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🌾</div>
-          <h3>Village Life Host</h3>
-          <p>Share farming, harvesting, animal care, village walks, and local work.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🎉</div>
-          <h3>Culture Host</h3>
-          <p>Invite travelers into festivals, rituals, crafts, music, and storytelling.</p>
-        </div>
+        <div class="card"><div class="icon">🏡</div><h3>Homestay Host</h3><p>Welcome travellers into your home and share real Nepali daily life.</p></div>
+        <div class="card"><div class="icon">🍲</div><h3>Cooking Host</h3><p>Teach momo, dal bhat, local snacks, family recipes, and food culture.</p></div>
+        <div class="card"><div class="icon">🌾</div><h3>Village Life Host</h3><p>Share farming, harvesting, animal care, village walks, and local work.</p></div>
+        <div class="card"><div class="icon">🎉</div><h3>Culture Host</h3><p>Invite travellers into festivals, rituals, crafts, music, and storytelling.</p></div>
       </div>
     </div>
   </section>
@@ -622,13 +746,11 @@
     <div class="container">
       <p class="label">Why become a host?</p>
       <h2 class="title">Your Everyday Life Can Become a Meaningful Experience.</h2>
-      <p class="text">
-        Rigan helps local families and hosts earn income while proudly sharing Nepal’s culture, food, people, and stories.
-      </p>
+      <p class="text">Rigan helps local families and hosts earn income while proudly sharing Nepal’s culture, food, people, and stories.</p>
 
       <div class="why-grid">
         <div class="why-box"><h3>Earn Income</h3><p>Turn your home, food, and skills into a new source of income.</p></div>
-        <div class="why-box"><h3>Meet Travelers</h3><p>Welcome people from around the world and exchange stories.</p></div>
+        <div class="why-box"><h3>Meet Travellers</h3><p>Welcome people from around the world and exchange stories.</p></div>
         <div class="why-box"><h3>Promote Culture</h3><p>Share your traditions, family recipes, festivals, and lifestyle.</p></div>
         <div class="why-box"><h3>Support Community</h3><p>Your hosting can support your family and local economy.</p></div>
         <div class="why-box"><h3>Get Support</h3><p>Rigan helps with training, bookings, pricing, and guest communication.</p></div>
@@ -664,15 +786,13 @@
     <div class="container">
       <p class="label">Simple process</p>
       <h2 class="title">How Becoming a Host Works</h2>
-      <p class="text">
-        We make the process simple, supportive, and professional from your first application to your first guest.
-      </p>
+      <p class="text">We make the process simple, supportive, and professional from your first application to your first guest.</p>
 
       <div class="steps">
         <div class="step"><h3>Apply</h3><p>Tell us about your home, family, skill, or local experience.</p></div>
         <div class="step"><h3>Review</h3><p>Our team checks your idea, safety, location, and suitability.</p></div>
         <div class="step"><h3>Create Profile</h3><p>We help build your host profile, photos, story, and pricing.</p></div>
-        <div class="step"><h3>Receive Bookings</h3><p>Travelers discover your experience and book through Rigan.</p></div>
+        <div class="step"><h3>Receive Bookings</h3><p>Travellers discover your experience and book through Rigan.</p></div>
         <div class="step"><h3>Host & Earn</h3><p>Welcome guests, share your culture, and earn from your experience.</p></div>
       </div>
     </div>
@@ -722,9 +842,7 @@
         <div class="profile-content">
           <span class="host-tag">Sample Host Profile</span>
           <h3>Aama Maya’s Kitchen Experience</h3>
-          <p>
-            Join Aama Maya in her family kitchen to learn traditional momo making, share a warm meal, and hear stories of Nepali home life.
-          </p>
+          <p>Join Aama Maya in her family kitchen to learn traditional momo making, share a warm meal, and hear stories of Nepali home life.</p>
 
           <div class="mini-details">
             <div>📍 Kathmandu Valley</div>
@@ -746,46 +864,160 @@
       <h2 class="title">Host Questions</h2>
 
       <div class="faq">
-        <details>
-          <summary>Do I need to speak English?</summary>
-          <p>No, perfect English is not required. Basic communication is helpful, and Rigan can support guest coordination.</p>
-        </details>
-
-        <details>
-          <summary>Do I need a big house?</summary>
-          <p>No. A clean, safe, welcoming home is more important than size or luxury.</p>
-        </details>
-
-        <details>
-          <summary>Can I host only food experiences?</summary>
-          <p>Yes. You can offer cooking, lunch, dinner, momo making, dal bhat, or local snack experiences.</p>
-        </details>
-
-        <details>
-          <summary>Can I choose my available dates?</summary>
-          <p>Yes. Hosts can decide when they are available for guests.</p>
-        </details>
-
-        <details>
-          <summary>How do I get paid?</summary>
-          <p>Rigan helps manage bookings and payment support professionally after each confirmed experience.</p>
-        </details>
+        <details><summary>Do I need to speak English?</summary><p>No, perfect English is not required. Basic communication is helpful, and Rigan can support guest coordination.</p></details>
+        <details><summary>Do I need a big house?</summary><p>No. A clean, safe, welcoming home is more important than size or luxury.</p></details>
+        <details><summary>Can I host only food experiences?</summary><p>Yes. You can offer cooking, lunch, dinner, momo making, dal bhat, or local snack experiences.</p></details>
+        <details><summary>Can I choose my available dates?</summary><p>Yes. Hosts can decide when they are available for guests.</p></details>
+        <details><summary>How do I get paid?</summary><p>Rigan helps manage bookings and payment support professionally after each confirmed experience.</p></details>
       </div>
     </div>
   </section>
 
-  <section class="cta" id="apply">
+  <section class="host-application-section" id="apply">
     <div class="container">
-      <h2>Your Home Has a Story. Let the World Experience It.</h2>
-      <p>
-        Join Rigan Roots & Routes as a host and become part of a community sharing the real Nepal with travelers from around the world.
-      </p>
 
-      <a href="https://wa.me/9779843322695?text=Hi%20Rigan%2C%20I%20want%20to%20become%20a%20host." class="btn btn-primary">
-        Apply via WhatsApp
-      </a>
+      <div class="application-heading">
+        <p class="label">Host application</p>
+        <h2 class="title">Your Home Has a Story. Let the World Experience It.</h2>
+        <p class="text">
+          Complete the form below. Our team will review your location, facilities, experience idea, safety, and guest suitability before contacting you.
+        </p>
+      </div>
 
-      <p class="cta-note">Takes less than 2 minutes • No commitment</p>
+      <div class="application-layout">
+
+        <div class="application-info">
+          <div class="application-info-card">
+            <span>01</span>
+            <div><h3>Submit Your Details</h3><p>Tell us about your home, location, family, facilities, and the experience you want to offer.</p></div>
+          </div>
+
+          <div class="application-info-card">
+            <span>02</span>
+            <div><h3>Verification</h3><p>Rigan may contact you, request photos, arrange a video call, or visit the location before approval.</p></div>
+          </div>
+
+          <div class="application-info-card">
+            <span>03</span>
+            <div><h3>Create Your Host Experience</h3><p>Approved hosts receive help with experience design, pricing, storytelling, promotion, and booking coordination.</p></div>
+          </div>
+        </div>
+
+        <div class="host-form-card">
+          <form id="hostApplicationForm" action="https://formspree.io/f/mbdpwkoz" method="POST">
+
+            <input type="hidden" name="_subject" value="New Become a Host Application — Rigan Roots & Routes">
+            <input type="hidden" name="application_type" value="Become a Host">
+
+            <div class="host-form-grid">
+
+              <div class="form-field">
+                <label for="hostName">Full Name *</label>
+                <input type="text" id="hostName" name="full_name" placeholder="Enter your full name" autocomplete="name" required>
+              </div>
+
+              <div class="form-field">
+                <label for="hostPhone">Phone / WhatsApp *</label>
+                <input type="tel" id="hostPhone" name="phone" placeholder="+977..." autocomplete="tel" required>
+              </div>
+
+              <div class="form-field">
+                <label for="hostEmail">Email Address *</label>
+                <input type="email" id="hostEmail" name="email" placeholder="Enter your email" autocomplete="email" required>
+              </div>
+
+              <div class="form-field">
+                <label for="hostLocation">Location *</label>
+                <input type="text" id="hostLocation" name="location" placeholder="Village, municipality, district" required>
+              </div>
+
+              <div class="form-field">
+                <label for="hostType">Host Type *</label>
+                <select id="hostType" name="host_type" required>
+                  <option value="">Select host type</option>
+                  <option value="Family Homestay">Family Homestay</option>
+                  <option value="Village Host">Village Host</option>
+                  <option value="Farm Host">Farm Host</option>
+                  <option value="Cooking Host">Food & Cooking Host</option>
+                  <option value="Culture Host">Cultural Host</option>
+                  <option value="Festival Host">Festival Host</option>
+                  <option value="Activity Host">Local Activity Host</option>
+                  <option value="Community Organisation">Community Organisation</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="guestCapacity">Guest Capacity *</label>
+                <select id="guestCapacity" name="guest_capacity" required>
+                  <option value="">Select guest capacity</option>
+                  <option value="1–2 Guests">1–2 Guests</option>
+                  <option value="3–5 Guests">3–5 Guests</option>
+                  <option value="6–10 Guests">6–10 Guests</option>
+                  <option value="More than 10 Guests">More than 10 Guests</option>
+                  <option value="Activities Only">Activities Only — No Stay</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="hostLanguages">Languages Spoken</label>
+                <input type="text" id="hostLanguages" name="languages" placeholder="For example: Nepali, English, Newari">
+              </div>
+
+              <div class="form-field">
+                <label for="hostAvailability">Availability</label>
+                <input type="text" id="hostAvailability" name="availability" placeholder="For example: Weekends or October–March">
+              </div>
+
+              <div class="form-field full-width">
+                <label for="hostFacilities">Accommodation and Facilities *</label>
+                <textarea id="hostFacilities" name="facilities" placeholder="Describe rooms, beds, toilets, food facilities, drinking water, electricity, transport access, and safety." required></textarea>
+              </div>
+
+              <div class="form-field full-width">
+                <label for="hostActivities">Activities You Can Offer *</label>
+                <textarea id="hostActivities" name="activities" placeholder="For example: cooking, farming, village walks, crafts, music, festivals, local food, storytelling, or cultural programmes." required></textarea>
+              </div>
+
+              <div class="form-field full-width">
+                <label for="hostIntroduction">Tell Us About Yourself *</label>
+                <textarea id="hostIntroduction" name="host_introduction" placeholder="Tell us about your family, community, skills, culture, and why you want to become a Rigan host." required></textarea>
+              </div>
+
+              <div class="form-field full-width">
+                <label for="hostPhotoLink">Photo or Video Link</label>
+                <input type="url" id="hostPhotoLink" name="photo_link" placeholder="Google Drive, Facebook, Instagram, or website link">
+              </div>
+
+            </div>
+
+            <label class="consent-box">
+              <input type="checkbox" name="verification_consent" value="Yes" required>
+              <span>
+                I confirm that the information is correct and agree that Rigan Roots & Routes may contact me, verify the details, request photos, and inspect the location before approval.
+              </span>
+            </label>
+
+            <button type="submit" class="host-submit-btn">Submit Host Application</button>
+
+            <p class="host-form-note">
+              Submitting this form does not guarantee approval. Applications are reviewed for safety, authenticity, hygiene, accessibility, guest suitability, and service quality.
+            </p>
+
+          </form>
+
+          <div class="host-divider"><span>or</span></div>
+
+          <a
+            href="https://wa.me/9779843322695?text=Hi%20Rigan%2C%20I%20want%20to%20become%20a%20host."
+            class="host-whatsapp-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Apply via WhatsApp
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 

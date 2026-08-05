@@ -1,384 +1,2480 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Explore Nepal's Regions | Rigan Roots & Routes</title>
+  <meta charset="UTF-8">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<style>
-:root{
-  --green:#174d2f;
-  --green-dark:#0f3522;
-  --sage:#9fba6b;
-  --cream:#f7f0e4;
-  --sand:#efe3cf;
-  --brown:#9a6a42;
-  --gold:#e6c36a;
-  --text:#132018;
-  --muted:#64748b;
-  --white:#ffffff;
-  --shadow:0 24px 70px rgba(19,32,24,.13);
-  --transition:.35s cubic-bezier(.4,0,.2,1);
-}
+  <meta
+    name="description"
+    content="Explore Nepal's famous regions, Himalayan base camps, hidden trails, remote valleys, sacred landscapes, wildlife regions, and lesser-known cultural destinations with Rigan Roots & Routes."
+  >
 
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:Inter,Arial,sans-serif;
-  color:var(--text);
-  line-height:1.65;
-  overflow-x:hidden;
-  background:
-    radial-gradient(circle at 10% 8%, rgba(159,186,107,.28), transparent 28%),
-    radial-gradient(circle at 92% 18%, rgba(154,106,66,.22), transparent 30%),
-    var(--cream);
-}
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background-image:
-    radial-gradient(circle at center, rgba(23,77,47,.045) 1px, transparent 1px),
-    linear-gradient(rgba(23,77,47,.026) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23,77,47,.026) 1px, transparent 1px);
-  background-size:34px 34px,48px 48px,48px 48px;
-  mask-image:linear-gradient(to bottom, rgba(0,0,0,.65), transparent 75%);
-  z-index:-3;
-}
-body::after{
-  content:"ॐ";
-  position:fixed;
-  right:-80px;
-  top:150px;
-  width:420px;
-  height:420px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  font-family:"Playfair Display",serif;
-  font-size:92px;
-  color:rgba(23,77,47,.045);
-  border:2px solid rgba(23,77,47,.045);
-  box-shadow:inset 0 0 0 22px rgba(159,186,107,.035), inset 0 0 0 42px rgba(154,106,66,.025), inset 0 0 0 64px rgba(23,77,47,.025);
-  pointer-events:none;
-  z-index:-2;
-}
-h1,h2,h3{font-family:"Playfair Display",serif;color:var(--green-dark)}
-a{text-decoration:none;color:inherit}
-.container{max-width:1200px;margin:0 auto;padding:0 25px}
+  <title>Explore Nepal's Regions | Rigan Roots &amp; Routes</title>
 
-.top-nav{
-  position:sticky;
-  top:16px;
-  z-index:1000;
-  width:min(1180px,calc(100% - 40px));
-  margin:16px auto 0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  padding:14px 16px 14px 20px;
-  border-radius:999px;
-  background:rgba(255,255,255,.80);
-  border:1px solid rgba(23,77,47,.10);
-  backdrop-filter:blur(18px);
-  box-shadow:0 16px 45px rgba(19,32,24,.08);
-}
-.brand{display:flex;align-items:center;gap:11px;color:var(--green-dark);font-weight:900}
-.brand-mark{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--sage),var(--gold));color:var(--green-dark);box-shadow:0 10px 25px rgba(23,77,47,.18)}
-.brand-text small{display:block;color:var(--muted);font-size:11px;font-weight:800;margin-top:1px}
-.nav-links{display:flex;align-items:center;gap:18px}
-.nav-links a{color:#475467;font-weight:800;font-size:13px;transition:var(--transition)}
-.nav-links a:hover,.nav-links a.active{color:var(--green)}
-.nav-cta{background:var(--green);color:white!important;padding:11px 16px;border-radius:999px;box-shadow:0 12px 25px rgba(23,77,47,.18)}
-.mobile-menu-btn{display:none;cursor:pointer;font-size:24px;color:var(--green)}
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
 
-.hero{position:relative;padding:105px 0 36px;text-align:center;overflow:hidden}
-.hero::before{
-  content:"";
-  position:absolute;
-  left:50%;top:48%;
-  width:650px;height:650px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:repeating-conic-gradient(from 0deg, rgba(23,77,47,.055) 0 8deg, transparent 8deg 16deg), radial-gradient(circle, transparent 0 34%, rgba(159,186,107,.10) 35% 36%, transparent 37% 49%, rgba(154,106,66,.08) 50% 51%, transparent 52% 100%);
-  opacity:.75;z-index:-1;
-}
-.section-label{display:inline-flex;align-items:center;gap:8px;background:rgba(23,77,47,.08);color:var(--green);border:1px solid rgba(23,77,47,.12);padding:9px 16px;border-radius:999px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px}
-.hero-title{font-size:clamp(46px,7vw,88px);line-height:.98;max-width:980px;margin:0 auto 22px;letter-spacing:-1px}
-.hero-subtitle{font-size:18px;color:#475467;max-width:850px;margin:0 auto;line-height:1.85}
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
-.region-note{margin:36px auto 0;max-width:1080px;background:rgba(255,255,255,.88);border-radius:30px;box-shadow:var(--shadow);padding:18px;border:1px solid rgba(23,77,47,.08);display:grid;grid-template-columns:repeat(3,1fr);gap:14px;backdrop-filter:blur(18px)}
-.region-note-item{background:linear-gradient(180deg,#ffffff,#f8faf7);border:1px solid rgba(23,77,47,.07);border-radius:22px;padding:20px;text-align:left}
-.region-note-item i{color:var(--green);font-size:22px;margin-bottom:12px}.region-note-item strong{display:block;color:var(--green);margin-bottom:7px;font-weight:900}.region-note-item span{color:#64748b;font-size:14px}
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-.region-mandala-area{padding:30px 0 22px}
-.region-mandala-shell{display:grid;grid-template-columns:minmax(320px,580px) 1fr;gap:32px;align-items:center;max-width:1180px;margin:0 auto}
-.region-mandala-wrap{height:560px;position:relative;border-radius:42px;overflow:hidden;background:linear-gradient(rgba(247,240,228,.86),rgba(247,240,228,.92)),url("https://i.postimg.cc/8Pzv11cF/kathmandu_valley.jpg") center/cover no-repeat;box-shadow:0 30px 90px rgba(23,77,47,.15);border:1px solid rgba(23,77,47,.08);transition:.45s ease}
-.region-mandala-wrap::before{content:"";position:absolute;inset:20px;border-radius:34px;border:1px solid rgba(23,77,47,.08);pointer-events:none}
-.region-ring{position:absolute;inset:72px 155px;border:1px dashed rgba(23,77,47,.25);border-radius:50%}
-.region-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:205px;height:205px;border-radius:50%;background:linear-gradient(135deg,var(--green),#2f6b3f);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 30px 70px rgba(23,77,47,.3);z-index:3;animation:float 6s ease-in-out infinite}
-@keyframes float{0%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-12px)}100%{transform:translate(-50%,-50%) translateY(0)}}
-.region-center h2{color:white;font-size:42px}.region-center p{font-size:13px;opacity:.86;max-width:140px}
-.region-cat{position:absolute;width:130px;height:130px;border:none;border-radius:50%;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);color:var(--green);font-weight:900;cursor:pointer;box-shadow:0 18px 45px rgba(0,0,0,.10);transition:all .35s ease;z-index:4;padding:12px;font-family:Inter,sans-serif}
-.region-cat:hover{transform:scale(1.1) rotate(3deg)}.region-cat.active{background:var(--sage);color:white;box-shadow:0 22px 55px rgba(159,186,107,.45)}.region-cat small{display:block;font-size:24px;margin-bottom:4px}.region-cat span{display:block;font-size:12px;line-height:1.2}
-.r1{left:50%;top:8px;transform:translateX(-50%)}.r2{right:34px;top:96px}.r3{right:34px;bottom:96px}.r4{left:50%;bottom:8px;transform:translateX(-50%)}.r5{left:34px;bottom:96px}.r6{left:34px;top:96px}
-.region-story-panel{background:rgba(255,255,255,.92);border:1px solid rgba(23,77,47,.08);border-radius:38px;padding:32px;box-shadow:var(--shadow);position:relative;overflow:hidden}.region-story-panel::after{content:"✦";position:absolute;right:28px;top:18px;color:rgba(23,77,47,.10);font-size:82px}.region-story-panel h2{font-size:42px;line-height:1.05;margin-bottom:14px}.region-story-panel p{color:#64748b;line-height:1.85;margin-bottom:18px}.story-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}.story-meta div{background:#f8faf7;border:1px solid rgba(23,77,47,.08);border-radius:18px;padding:14px}.story-meta strong{display:block;color:var(--green);font-size:13px;margin-bottom:4px}.story-meta span{font-size:13px;color:#64748b}
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  >
 
-.intro-block{max-width:880px;margin:0 auto;text-align:center;padding:22px 0 0}.intro-block h2{font-size:40px;margin-bottom:14px}.intro-block p{color:#64748b;font-size:16px;line-height:1.85}
-.region-result-section{padding:38px 0 20px}.result-title{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:26px}.result-title h2{font-size:clamp(34px,5vw,52px);line-height:1.05}.result-title p{color:#64748b;max-width:760px;line-height:1.75}.view-note{font-size:13px;font-weight:900;color:var(--green);background:rgba(23,77,47,.08);border-radius:999px;padding:10px 15px;white-space:nowrap}
-.regions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}.region-card{background:rgba(255,255,255,.94);border-radius:34px;overflow:hidden;box-shadow:0 18px 45px rgba(19,32,24,.09);transition:var(--transition);cursor:pointer;border:1px solid rgba(23,77,47,.08);position:relative}.region-card::before{content:"";position:absolute;inset:12px;border:1px solid rgba(23,77,47,.08);border-radius:26px;pointer-events:none;z-index:2}.region-card:hover{transform:translateY(-9px);box-shadow:var(--shadow)}.region-img{height:252px;background-size:cover;background-position:center;position:relative;overflow:hidden}.region-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,20,13,.52),rgba(7,20,13,.04)),radial-gradient(circle at 20% 20%,rgba(230,195,106,.20),transparent 36%)}.untouched-badge{position:absolute;top:17px;left:17px;z-index:3;background:rgba(255,255,255,.94);color:var(--green);padding:8px 12px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;box-shadow:0 12px 25px rgba(0,0,0,.12)}.mandala-dot{position:absolute;right:17px;bottom:17px;z-index:3;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.88);display:grid;place-items:center;color:var(--green);font-size:18px;box-shadow:0 12px 25px rgba(0,0,0,.14)}.region-content{padding:24px}.region-name{font-size:25px;margin-bottom:11px;line-height:1.15}.region-desc{font-size:14.5px;color:#64748b;margin-bottom:16px;min-height:112px;line-height:1.75}.region-tags{display:flex;gap:8px;flex-wrap:wrap}.region-tag{background:#edf5eb;color:var(--green);border:1px solid rgba(23,77,47,.08);padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900}
+  <style>
+    :root {
+      --green: #174d2f;
+      --green-dark: #0f3522;
+      --sage: #9fba6b;
+      --cream: #f7f0e4;
+      --brown: #9a6a42;
+      --gold: #e6c36a;
+      --text: #132018;
+      --muted: #64748b;
+      --white: #ffffff;
+      --whatsapp: #25d366;
+      --border: rgba(23, 77, 47, 0.1);
+      --shadow: 0 24px 70px rgba(19, 32, 24, 0.13);
+      --transition: 0.3s ease;
+    }
 
-.all-regions-block{padding:42px 0 8px}.all-regions-card{background:linear-gradient(135deg,#ffffff,#fff8e9 55%,#edf5eb);border-radius:34px;box-shadow:var(--shadow);padding:34px;border:1px solid rgba(23,77,47,.08);position:relative;overflow:hidden}.all-regions-card h3{font-size:34px;margin-bottom:12px}.all-regions-card p{color:#64748b;max-width:950px;line-height:1.85}.region-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.region-chip{background:white;color:var(--green);border:1px solid rgba(23,77,47,.12);border-radius:999px;padding:9px 13px;font-size:12px;font-weight:900}
-.footer{background:var(--green-dark);color:white;padding:64px 0 32px;margin-top:52px;position:relative;overflow:hidden}.footer::before{content:"";position:absolute;right:-120px;top:-120px;width:360px;height:360px;border-radius:50%;border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 0 0 28px rgba(255,255,255,.035),inset 0 0 0 58px rgba(255,255,255,.025)}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px;position:relative;z-index:2}.footer-logo{font-size:24px;font-weight:900;margin-bottom:16px;font-family:"Playfair Display",serif}.footer p,.footer-links a{color:rgba(255,255,255,.75);font-size:14px;line-height:1.8}.footer-title{margin-bottom:14px;font-size:16px;color:white;font-family:Inter,sans-serif;font-weight:900}.footer-links{list-style:none;display:grid;gap:10px}.social-links{display:flex;gap:12px;margin-bottom:14px}.social-links a{width:42px;height:42px;background:rgba(255,255,255,.10);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;transition:var(--transition)}.social-links a:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}.footer-bottom{text-align:center;padding-top:30px;border-top:1px solid rgba(255,255,255,.10);font-size:13px;opacity:.7;position:relative;z-index:2}.floating-whatsapp{position:fixed;bottom:24px;right:24px;z-index:99}.floating-whatsapp a{display:flex;align-items:center;gap:10px;background:#25D366;color:white;padding:13px 22px;border-radius:999px;font-weight:900;box-shadow:0 18px 40px rgba(0,0,0,.22)}
-@media(max-width:1100px){.region-mandala-shell{grid-template-columns:1fr}.region-story-panel{max-width:900px;margin:0 auto}.regions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.region-note{grid-template-columns:1fr}.region-mandala-wrap{max-width:720px;margin:0 auto}}
-@media(max-width:840px){.mobile-menu-btn{display:block}.nav-links{position:fixed;top:0;right:-100%;width:78%;height:100vh;background:white;flex-direction:column;justify-content:center;padding:40px;box-shadow:var(--shadow);transition:right .3s ease;z-index:999}.nav-links.active{right:0}.nav-links a{font-size:17px}.result-title{flex-direction:column;align-items:flex-start}.view-note{white-space:normal}.story-meta{grid-template-columns:1fr}}
-@media(max-width:650px){body::after{display:none}.top-nav{width:calc(100% - 24px);top:10px;margin-top:10px;border-radius:24px}.brand-text small{display:none}.brand-text span{font-size:14px}.container{padding:0 16px}.hero{padding:76px 0 32px}.hero-title{font-size:42px}.hero-subtitle{font-size:16px}.region-mandala-wrap{height:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:18px}.region-ring,.region-center{display:none}.region-cat{position:static;width:100%;height:96px;border-radius:24px;transform:none!important}.regions-grid{grid-template-columns:1fr;gap:22px}.region-desc{min-height:auto}.footer-grid{grid-template-columns:1fr}.floating-whatsapp a span{display:none}.floating-whatsapp a{width:58px;height:58px;border-radius:50%;padding:0;justify-content:center;font-size:24px}}
-</style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+      background:
+        radial-gradient(
+          circle at 10% 8%,
+          rgba(159, 186, 107, 0.28),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 92% 18%,
+          rgba(154, 106, 66, 0.22),
+          transparent 30%
+        ),
+        var(--cream);
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background-image:
+        radial-gradient(
+          circle at center,
+          rgba(23, 77, 47, 0.045) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          rgba(23, 77, 47, 0.026) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(23, 77, 47, 0.026) 1px,
+          transparent 1px
+        );
+      background-size: 34px 34px, 48px 48px, 48px 48px;
+      mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.65),
+        transparent 80%
+      );
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Playfair Display", serif;
+      color: var(--green-dark);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 25px;
+    }
+
+    /* NAVIGATION */
+    .top-nav {
+      position: sticky;
+      top: 16px;
+      z-index: 1000;
+      width: min(1180px, calc(100% - 40px));
+      min-height: 70px;
+      margin: 16px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 16px 13px 20px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 45px rgba(19, 32, 24, 0.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--green-dark);
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sage), var(--gold));
+      color: var(--green-dark);
+      box-shadow: 0 10px 25px rgba(23, 77, 47, 0.18);
+    }
+
+    .brand-text > span {
+      display: block;
+      line-height: 1.2;
+    }
+
+    .brand-text small {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      color: #475467;
+      font-size: 13px;
+      font-weight: 800;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--green);
+    }
+
+    .nav-cta {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: var(--green);
+      color: var(--white) !important;
+      box-shadow: 0 12px 25px rgba(23, 77, 47, 0.18);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(23, 77, 47, 0.08);
+      color: var(--green);
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 110px 0 44px;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      z-index: -1;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      background:
+        repeating-conic-gradient(
+          from 0deg,
+          rgba(23, 77, 47, 0.055) 0 8deg,
+          transparent 8deg 16deg
+        ),
+        radial-gradient(
+          circle,
+          transparent 0 34%,
+          rgba(159, 186, 107, 0.1) 35% 36%,
+          transparent 37% 49%,
+          rgba(154, 106, 66, 0.08) 50% 51%,
+          transparent 52% 100%
+        );
+      opacity: 0.75;
+      transform: translate(-50%, -50%);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 9px 16px;
+      border: 1px solid rgba(23, 77, 47, 0.12);
+      border-radius: 999px;
+      background: rgba(23, 77, 47, 0.08);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      max-width: 980px;
+      margin: 0 auto 22px;
+      font-size: clamp(46px, 7vw, 88px);
+      letter-spacing: -1px;
+      line-height: 0.98;
+    }
+
+    .hero-subtitle {
+      max-width: 900px;
+      margin: 0 auto;
+      color: #475467;
+      font-size: 18px;
+      line-height: 1.85;
+    }
+
+    .region-note {
+      max-width: 1100px;
+      margin: 38px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .region-note-item {
+      padding: 21px;
+      border: 1px solid rgba(23, 77, 47, 0.07);
+      border-radius: 22px;
+      background: linear-gradient(180deg, #ffffff, #f8faf7);
+      text-align: left;
+    }
+
+    .region-note-item i {
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: 22px;
+    }
+
+    .region-note-item strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .region-note-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* SEARCH */
+    .region-controls {
+      margin: 30px auto 38px;
+      padding: 24px;
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .search-wrap {
+      position: relative;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .search-wrap i {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      color: var(--green);
+      transform: translateY(-50%);
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 16px 20px 16px 50px;
+      border: 1px solid rgba(23, 77, 47, 0.12);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--text);
+      outline: none;
+      box-shadow: 0 10px 30px rgba(19, 32, 24, 0.06);
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 4px rgba(159, 186, 107, 0.18);
+    }
+
+    /* MANDALA */
+    .region-mandala-section {
+      padding: 15px 0 58px;
+    }
+
+    .mandala-heading {
+      max-width: 820px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+
+    .mandala-heading h2 {
+      margin-bottom: 12px;
+      font-size: clamp(34px, 5vw, 52px);
+    }
+
+    .mandala-heading p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .region-mandala {
+      position: relative;
+      width: min(760px, 100%);
+      height: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 44px;
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(159, 186, 107, 0.18),
+          transparent 27%
+        ),
+        radial-gradient(
+          circle at 18% 15%,
+          rgba(230, 195, 106, 0.18),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 82% 84%,
+          rgba(154, 106, 66, 0.14),
+          transparent 28%
+        ),
+        rgba(255, 255, 255, 0.84);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .region-mandala::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 34px;
+      pointer-events: none;
+    }
+
+    .mandala-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 490px;
+      height: 490px;
+      border: 1px dashed rgba(23, 77, 47, 0.22);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .mandala-rings::before,
+    .mandala-rings::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(23, 77, 47, 0.1);
+      border-radius: 50%;
+    }
+
+    .mandala-rings::before {
+      inset: 55px;
+    }
+
+    .mandala-rings::after {
+      inset: 115px;
+    }
+
+    .mandala-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 3;
+      width: 210px;
+      height: 210px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #2f6b3f);
+      color: var(--white);
+      text-align: center;
+      box-shadow: 0 28px 65px rgba(23, 77, 47, 0.3);
+      transform: translate(-50%, -50%);
+      animation: mandalaFloat 6s ease-in-out infinite;
+    }
+
+    .mandala-center i {
+      margin-bottom: 8px;
+      font-size: 31px;
+    }
+
+    .mandala-center strong {
+      font-family: "Playfair Display", serif;
+      font-size: 38px;
+    }
+
+    .mandala-center span {
+      max-width: 130px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 12px;
+    }
+
+    @keyframes mandalaFloat {
+      0%,
+      100% {
+        transform: translate(-50%, -50%) translateY(0);
+      }
+
+      50% {
+        transform: translate(-50%, -50%) translateY(-9px);
+      }
+    }
+
+    .mandala-option {
+      position: absolute;
+      z-index: 4;
+      width: 145px;
+      height: 145px;
+      padding: 12px;
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--green);
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 16px 40px rgba(19, 32, 24, 0.1);
+      backdrop-filter: blur(14px);
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .mandala-option:hover {
+      transform: scale(1.09) rotate(2deg);
+      box-shadow: 0 24px 55px rgba(23, 77, 47, 0.17);
+    }
+
+    .mandala-option.active {
+      border-color: var(--sage);
+      background: var(--sage);
+      color: var(--white);
+      box-shadow: 0 24px 58px rgba(159, 186, 107, 0.42);
+    }
+
+    .mandala-option span,
+    .mandala-option strong,
+    .mandala-option small {
+      display: block;
+    }
+
+    .mandala-icon {
+      margin-bottom: 5px;
+      font-size: 26px;
+    }
+
+    .mandala-option strong {
+      font-size: 14px;
+    }
+
+    .mandala-option small {
+      margin-top: 3px;
+      font-size: 10px;
+      opacity: 0.78;
+    }
+
+    .mandala-classic {
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .mandala-basecamp {
+      top: 92px;
+      right: 60px;
+    }
+
+    .mandala-hidden {
+      right: 60px;
+      bottom: 92px;
+    }
+
+    .mandala-culture {
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .mandala-wildlife {
+      bottom: 92px;
+      left: 60px;
+    }
+
+    .mandala-farwest {
+      top: 92px;
+      left: 60px;
+    }
+
+    .mandala-selection {
+      max-width: 600px;
+      margin: 22px auto 0;
+      padding: 15px 20px;
+      border: 1px solid rgba(23, 77, 47, 0.1);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--muted);
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(19, 32, 24, 0.06);
+    }
+
+    .mandala-selection strong {
+      margin-left: 6px;
+      color: var(--green);
+    }
+
+    /* RESULTS */
+    .region-result-section {
+      padding: 20px 0;
+    }
+
+    .result-title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .result-title h2 {
+      margin-bottom: 7px;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.05;
+    }
+
+    .result-title p {
+      max-width: 790px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .view-note {
+      flex-shrink: 0;
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: rgba(23, 77, 47, 0.08);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .regions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 26px;
+    }
+
+    .region-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 18px 45px rgba(19, 32, 24, 0.09);
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .region-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+    }
+
+    .region-card-top {
+      position: relative;
+      min-height: 150px;
+      padding: 24px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(230, 195, 106, 0.35),
+          transparent 38%
+        ),
+        linear-gradient(135deg, #eaf3df, #fff8ea);
+    }
+
+    .region-card-top::after {
+      content: "✦";
+      position: absolute;
+      right: 22px;
+      bottom: 8px;
+      color: rgba(23, 77, 47, 0.1);
+      font-family: "Playfair Display", serif;
+      font-size: 76px;
+    }
+
+    .region-type {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      margin-bottom: 17px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .region-name {
+      position: relative;
+      z-index: 2;
+      max-width: 90%;
+      font-size: 27px;
+      line-height: 1.12;
+    }
+
+    .region-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+    }
+
+    .region-desc {
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .region-details {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .region-detail {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 10px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: #f7faf5;
+      font-size: 12px;
+    }
+
+    .region-detail strong {
+      color: var(--green);
+    }
+
+    .region-detail span {
+      color: #53645a;
+    }
+
+    .region-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .region-tag {
+      padding: 6px 10px;
+      border: 1px solid rgba(23, 77, 47, 0.08);
+      border-radius: 999px;
+      background: #edf5eb;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .region-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid rgba(23, 77, 47, 0.1);
+    }
+
+    .region-action {
+      min-height: 43px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: center;
+      transition: transform var(--transition);
+    }
+
+    .region-action:hover {
+      transform: translateY(-2px);
+    }
+
+    .plan-btn {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .whatsapp-btn {
+      background: var(--whatsapp);
+      color: var(--white);
+    }
+
+    .details-btn {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(23, 77, 47, 0.14);
+      background: #edf5eb;
+      color: var(--green);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 40px;
+      border-radius: 28px;
+      background: var(--white);
+      color: var(--muted);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .empty-state h3 {
+      margin-bottom: 8px;
+      color: var(--green);
+    }
+
+    /* CTA */
+    .custom-cta {
+      margin: 55px 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 38px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, var(--green), #2f6b3f);
+      color: var(--white);
+      box-shadow: 0 30px 80px rgba(23, 77, 47, 0.25);
+    }
+
+    .custom-cta h2 {
+      margin-bottom: 7px;
+      color: var(--white);
+      font-size: 34px;
+    }
+
+    .custom-cta p {
+      max-width: 760px;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .custom-cta a {
+      flex-shrink: 0;
+      padding: 15px 24px;
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    /* FOOTER */
+    .footer {
+      position: relative;
+      overflow: hidden;
+      margin-top: 52px;
+      padding: 64px 0 32px;
+      background: var(--green-dark);
+      color: var(--white);
+    }
+
+    .footer-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      margin-bottom: 16px;
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .footer p,
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-title {
+      margin-bottom: 14px;
+      color: var(--white);
+      font-family: Inter, sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .social-links a {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      position: relative;
+      z-index: 2;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+      text-align: center;
+      opacity: 0.7;
+    }
+
+    /* FLOATING WHATSAPP */
+    .floating-whatsapp {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1100;
+    }
+
+    .floating-whatsapp a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 22px;
+      border-radius: 999px;
+      background: var(--whatsapp);
+      color: var(--white);
+      font-weight: 900;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    @media (max-width: 1050px) {
+      .regions-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .region-note {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 840px) {
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 999;
+        width: min(82%, 360px);
+        height: 100vh;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 0;
+        padding: 80px 36px 35px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+        transition: right 0.3s ease;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        padding: 12px 0;
+        font-size: 17px;
+      }
+
+      .result-title,
+      .custom-cta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .top-nav {
+        top: 10px;
+        width: calc(100% - 24px);
+        margin-top: 10px;
+        border-radius: 24px;
+      }
+
+      .brand-text small {
+        display: none;
+      }
+
+      .brand-text > span {
+        font-size: 14px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .hero {
+        padding: 76px 0 32px;
+      }
+
+      .hero-title {
+        font-size: 42px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .region-controls {
+        padding: 20px 16px;
+      }
+
+      .region-mandala {
+        height: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 18px;
+        border-radius: 30px;
+      }
+
+      .mandala-rings,
+      .mandala-center {
+        display: none;
+      }
+
+      .mandala-option {
+        position: static;
+        width: 100%;
+        height: 105px;
+        border-radius: 22px;
+        transform: none !important;
+      }
+
+      .mandala-selection {
+        border-radius: 22px;
+      }
+
+      .regions-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .region-detail {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+
+      .region-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .details-btn {
+        grid-column: auto;
+      }
+
+      .custom-cta {
+        padding: 30px 22px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-whatsapp {
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .floating-whatsapp a {
+        width: 58px;
+        height: 58px;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50%;
+        font-size: 24px;
+      }
+
+      .floating-whatsapp span {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav class="top-nav">
-  <a href="index.html" class="brand">
-    <span class="brand-mark"><i class="fa-solid fa-mountain-sun"></i></span>
-    <span class="brand-text"><span>Rigan Roots & Routes</span><small>Meaningful Journeys Through Nepal</small></span>
-  </a>
-  <div class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></div>
-  <div class="nav-links" id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="experience-v2.html">Experiences</a>
-    <a href="regions.html" class="active">Regions</a>
-    <a href="about.html">Our Story</a>
-    <a href="plan.html">Plan My Trip</a>
-    <a href="contact.html" class="nav-cta">Contact</a>
-  </div>
-</nav>
 
-<section class="hero">
-  <div class="container">
-    <div class="section-label" data-aos="fade-up"><i class="fa-solid fa-dharmachakra"></i> Explore Nepal</div>
-    <h1 class="hero-title" data-aos="fade-up">Explore Nepal Through Its Regions</h1>
-    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Choose a travel mood from the mandala. Each region opens a different Nepal — sacred cities, Himalayan trails, village life, jungle culture, hidden valleys, far-west plateaus, food, festivals, and stories.</p>
-    <div class="region-note" data-aos="fade-up" data-aos-delay="160">
-      <div class="region-note-item"><i class="fa-solid fa-landmark-dome"></i><strong>Iconic Nepal</strong><span>Kathmandu, Pokhara, Everest, Chitwan, Lumbini, Annapurna, and first-time Nepal routes.</span></div>
-      <div class="region-note-item"><i class="fa-solid fa-compass"></i><strong>Hidden Nepal</strong><span>Dolpo, Tsum, Khaptad, Ruby Valley, Kanchenjunga, Badimalika, Dhorpatan, and far-west gems.</span></div>
-      <div class="region-note-item"><i class="fa-solid fa-hands-holding-circle"></i><strong>Rigan Style</strong><span>Not only views — people, homes, food, festivals, local hosts, guides, and human connection.</span></div>
+  <nav class="top-nav" aria-label="Main navigation">
+
+    <a
+      href="index.html"
+      class="brand"
+      aria-label="Rigan Roots and Routes home"
+    >
+      <span class="brand-mark">
+        <i class="fa-solid fa-mountain-sun"></i>
+      </span>
+
+      <span class="brand-text">
+        <span>Rigan Roots &amp; Routes</span>
+        <small>Meaningful Journeys Through Nepal</small>
+      </span>
+    </a>
+
+    <button
+      class="mobile-menu-btn"
+      id="mobileMenuBtn"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-controls="navLinks"
+      aria-expanded="false"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="experience-v2.html">Experiences</a>
+
+      <a
+        href="regions.html"
+        class="active"
+        aria-current="page"
+      >
+        Regions
+      </a>
+
+      <a href="about.html">Our Story</a>
+      <a href="plan.html">Plan My Trip</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
     </div>
-  </div>
-</section>
 
-<main class="container">
-  <section class="region-mandala-area" data-aos="fade-up">
-    <div class="region-mandala-shell">
-      <div class="region-mandala-wrap" id="mandalaWrap">
-        <div class="region-ring"></div>
-        <div class="region-center"><h2>Nepal</h2><p>Choose a region story</p></div>
-        <button class="region-cat r1 active" data-region="classic"><small>⭐</small><span>Classic Nepal</span></button>
-        <button class="region-cat r2" data-region="himalaya"><small>🏔️</small><span>Himalaya</span></button>
-        <button class="region-cat r3" data-region="hidden"><small>🧭</small><span>Hidden Nepal</span></button>
-        <button class="region-cat r4" data-region="culture"><small>🛕</small><span>Culture</span></button>
-        <button class="region-cat r5" data-region="terai"><small>🐅</small><span>Terai & Jungle</span></button>
-        <button class="region-cat r6" data-region="farwest"><small>🌿</small><span>Far West</span></button>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+
+      <div class="section-label">
+        <i class="fa-solid fa-map-location-dot"></i>
+        Explore Nepal
       </div>
-      <div class="region-story-panel" id="storyPanel">
-        <div class="section-label"><i class="fa-solid fa-map-location-dot"></i> Region Story</div>
-        <h2 id="storyTitle">Classic Nepal</h2>
-        <p id="storyDesc">The places most travelers dream about first — Kathmandu, Pokhara, Everest, Chitwan, Lumbini, Bandipur, and Annapurna. With Rigan, these famous regions become deeper through homes, food, guides, local walks, and authentic stories.</p>
-        <div class="story-meta">
-          <div><strong>Best For</strong><span id="storyBest">First-time travelers, families, culture lovers</span></div>
-          <div><strong>Travel Mood</strong><span id="storyMood">Easy, iconic, beautiful, meaningful</span></div>
+
+      <h1 class="hero-title">
+        From Famous Routes to Nepal’s Hidden Frontiers
+      </h1>
+
+      <p class="hero-subtitle">
+        Explore iconic cities, Himalayan base camps, remote valleys,
+        sacred lakes, hidden trekking trails, village cultures, wildlife
+        regions, and destinations far beyond Nepal’s normal tourism routes.
+      </p>
+
+      <div class="region-note">
+
+        <div class="region-note-item">
+          <i class="fa-solid fa-landmark-dome"></i>
+          <strong>Iconic Nepal</strong>
+
+          <span>
+            Kathmandu, Pokhara, Everest, Annapurna, Chitwan, Lumbini,
+            Bandipur, and first-time Nepal journeys.
+          </span>
         </div>
+
+        <div class="region-note-item">
+          <i class="fa-solid fa-person-hiking"></i>
+          <strong>Base Camps &amp; High Trails</strong>
+
+          <span>
+            Everest, Annapurna, Makalu, Kanchenjunga, Dhaulagiri, Manaslu,
+            Mardi Himal, and remote mountain approaches.
+          </span>
+        </div>
+
+        <div class="region-note-item">
+          <i class="fa-solid fa-compass"></i>
+          <strong>Hidden &amp; Unexplored Nepal</strong>
+
+          <span>
+            Dolpo, Limi Valley, Tsum, Nar Phu, Ruby Valley, Khaptad,
+            Dhorpatan, Badimalika, Numbur, and forgotten village trails.
+          </span>
+        </div>
+
       </div>
+
     </div>
   </section>
 
-  <section class="intro-block" data-aos="fade-up">
-    <h2>Every Region Tells a Different Story</h2>
-    <p>Nepal is more than one route. Some places are famous, some are quiet, some are wild, and some are deeply spiritual. This page helps travelers see the full range of Nepal before planning their journey.</p>
-  </section>
+  <main class="container">
 
-  <section class="region-result-section">
-    <div class="result-title" data-aos="fade-up">
-      <div><h2 id="regionTitle">Classic Nepal</h2><p id="regionSub">Kathmandu, Pokhara, Everest, Chitwan, Lumbini, Bandipur and other famous first-time Nepal experiences — presented with deeper local connection.</p></div>
-      <div class="view-note" id="regionCount">6 regions</div>
-    </div>
-    <div class="regions-grid" id="regionCards"></div>
-  </section>
+    <section class="region-controls">
 
-  <section class="all-regions-block" data-aos="fade-up">
-    <div class="all-regions-card">
-      <h3>All Regions We Can Promote</h3>
-      <p>Use these regions for packages, blogs, guide profiles, local experiences, reels, and custom trips. They make Rigan look like a full Nepal storytelling platform, not only a trekking company.</p>
-      <div class="region-list" id="allRegionList"></div>
-    </div>
-  </section>
-</main>
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div><div class="footer-logo">Rigan Roots & Routes</div><p>Curating authentic journeys that connect travelers with the people, culture, and landscapes of Nepal.</p></div>
-      <div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="experience-v2.html">Experiences</a></li><li><a href="regions.html">Regions</a></li><li><a href="plan.html">Plan My Trip</a></li></ul></div>
-      <div><h4 class="footer-title">Connect</h4><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div><p>📍 Kathmandu, Nepal<br />✉️ riganrootsroutes@gmail.com<br />📞 +977 9843322695</p></div>
+        <input
+          type="search"
+          id="regionSearch"
+          placeholder="Search regions, base camps, hidden trails, culture or wildlife..."
+          aria-label="Search Nepal regions"
+        >
+      </div>
+
+    </section>
+
+    <section class="region-mandala-section">
+
+      <div class="mandala-heading">
+
+        <div class="section-label">
+          <i class="fa-solid fa-dharmachakra"></i>
+          Choose Your Nepal
+        </div>
+
+        <h2>Explore Nepal by Travel Mood</h2>
+
+        <p>
+          Select a part of the mandala to discover iconic regions,
+          Himalayan base camps, hidden trails, cultural villages,
+          wildlife areas, or remote far-western landscapes.
+        </p>
+
+      </div>
+
+      <div class="region-mandala">
+
+        <div class="mandala-rings" aria-hidden="true"></div>
+
+        <div class="mandala-center">
+          <i class="fa-solid fa-mountain-sun"></i>
+          <strong>Nepal</strong>
+          <span>Choose a journey</span>
+        </div>
+
+        <button
+          type="button"
+          class="mandala-option mandala-classic active"
+          data-filter="classic"
+        >
+          <span class="mandala-icon">⭐</span>
+          <strong>Classic</strong>
+          <small>Iconic Nepal</small>
+        </button>
+
+        <button
+          type="button"
+          class="mandala-option mandala-basecamp"
+          data-filter="basecamp"
+        >
+          <span class="mandala-icon">🏔️</span>
+          <strong>Base Camps</strong>
+          <small>High Himalaya</small>
+        </button>
+
+        <button
+          type="button"
+          class="mandala-option mandala-hidden"
+          data-filter="hidden"
+        >
+          <span class="mandala-icon">🧭</span>
+          <strong>Hidden Trails</strong>
+          <small>Remote Nepal</small>
+        </button>
+
+        <button
+          type="button"
+          class="mandala-option mandala-culture"
+          data-filter="culture"
+        >
+          <span class="mandala-icon">🛕</span>
+          <strong>Culture</strong>
+          <small>Villages &amp; Heritage</small>
+        </button>
+
+        <button
+          type="button"
+          class="mandala-option mandala-wildlife"
+          data-filter="wildlife"
+        >
+          <span class="mandala-icon">🐅</span>
+          <strong>Wildlife</strong>
+          <small>Terai &amp; Jungle</small>
+        </button>
+
+        <button
+          type="button"
+          class="mandala-option mandala-farwest"
+          data-filter="farwest"
+        >
+          <span class="mandala-icon">🌿</span>
+          <strong>Far West</strong>
+          <small>Untouched Nepal</small>
+        </button>
+
+      </div>
+
+      <div class="mandala-selection">
+        <span>Selected Journey:</span>
+        <strong id="mandalaSelectionText">Classic Nepal</strong>
+      </div>
+
+    </section>
+
+    <section class="region-result-section">
+
+      <div class="result-title">
+
+        <div>
+          <h2 id="regionTitle">Classic Nepal</h2>
+
+          <p id="regionSub">
+            Nepal’s best-known cities, mountain gateways, spiritual sites,
+            jungle regions, and first-time travel routes.
+          </p>
+        </div>
+
+        <div class="view-note" id="regionCount">
+          0 regions
+        </div>
+
+      </div>
+
+      <div class="regions-grid" id="regionCards"></div>
+
+    </section>
+
+    <section class="custom-cta">
+
+      <div>
+        <h2>Want to explore a place not listed here?</h2>
+
+        <p>
+          Tell us the village, district, hidden trail, base camp, sacred
+          lake, or travel idea. We can research the route and create a
+          custom Nepal journey around your interests.
+        </p>
+      </div>
+
+      <a href="plan.html?region=custom-nepal-region">
+        Plan a Custom Region
+      </a>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <div class="footer-logo">
+            Rigan Roots &amp; Routes
+          </div>
+
+          <p>
+            Authentic journeys connecting travellers with Nepal’s people,
+            heritage, mountains, villages, food, wildlife, and hidden
+            landscapes.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="experience-v2.html">Experiences</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="plan.html">Plan My Trip</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Connect</h4>
+
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a href="#" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="#" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+
+          <p>
+            📍 Kathmandu, Nepal<br>
+            ✉️ riganrootsroutes@gmail.com<br>
+            📞 +977 9843322695
+          </p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Rigan Roots &amp; Routes. Crafted with ❤️ in Nepal.
+      </div>
+
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 Rigan Roots & Routes. Crafted with ❤️ in Nepal.</p></div>
+  </footer>
+
+  <div class="floating-whatsapp">
+
+    <a
+      href="https://wa.me/9779843322695?text=Hello%20Rigan%20Roots%20%26%20Routes!%20I%20would%20like%20help%20choosing%20a%20region%20in%20Nepal."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Ask about Nepal regions on WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+      <span>Chat with us</span>
+    </a>
+
   </div>
-</footer>
 
-<div class="floating-whatsapp"><a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots!%20I'm%20interested%20in%20planning%20a%20trip%20to%20Nepal." target="_blank"><i class="fab fa-whatsapp"></i><span>Chat with us</span></a></div>
+  <script>
+    const regionData = [
+      {
+        name: "Kathmandu Valley",
+        slug: "kathmandu-valley",
+        category: "classic",
+        type: "Classic Nepal",
+        description:
+          "Nepal’s cultural heart, combining ancient royal cities, sacred temples, Buddhist stupas, hidden courtyards, artisan neighbourhoods, Newari food, festivals, and living heritage.",
+        duration: "3–5 days",
+        season: "All year",
+        bestFor: "First-time visitors, culture, food and architecture",
+        highlights: [
+          "Kathmandu Durbar Square",
+          "Patan",
+          "Bhaktapur",
+          "Boudhanath",
+          "Kirtipur"
+        ]
+      },
+      {
+        name: "Pokhara & Annapurna",
+        slug: "pokhara-annapurna",
+        category: "classic",
+        type: "Classic Nepal",
+        description:
+          "A lakeside gateway to Himalayan trekking, mountain villages, sunrise viewpoints, paragliding, wellness escapes, local food, and soft-adventure journeys.",
+        duration: "3–14 days",
+        season: "September–May",
+        bestFor: "Families, couples, trekkers and adventure travellers",
+        highlights: [
+          "Phewa Lake",
+          "Sarangkot",
+          "Ghandruk",
+          "Poon Hill",
+          "Annapurna trails"
+        ]
+      },
+      {
+        name: "Everest Region",
+        slug: "everest-region",
+        category: "classic",
+        type: "Classic Nepal",
+        description:
+          "A legendary Himalayan region of Sherpa communities, Buddhist monasteries, high-altitude trails, mountain viewpoints, Namche Bazaar, and routes toward Everest Base Camp.",
+        duration: "7–18 days",
+        season: "March–May, September–November",
+        bestFor: "Trekkers, photographers and mountain lovers",
+        highlights: [
+          "Namche Bazaar",
+          "Tengboche",
+          "Kala Patthar",
+          "Everest Base Camp",
+          "Gokyo"
+        ]
+      },
+      {
+        name: "Chitwan National Park",
+        slug: "chitwan-national-park",
+        category: "classic",
+        type: "Classic Nepal",
+        description:
+          "A lowland jungle region combining wildlife safaris, rhino habitats, river landscapes, canoe journeys, birdwatching, and rich Tharu culture.",
+        duration: "2–4 days",
+        season: "October–April",
+        bestFor: "Families, wildlife lovers and photographers",
+        highlights: [
+          "Jeep safari",
+          "Rhinos",
+          "Canoe ride",
+          "Tharu villages",
+          "Birdwatching"
+        ]
+      },
+      {
+        name: "Lumbini",
+        slug: "lumbini",
+        category: "classic",
+        type: "Classic Nepal",
+        description:
+          "The birthplace of Buddha, offering sacred gardens, international monasteries, Buddhist heritage, meditation, archaeological sites, and peaceful spiritual journeys.",
+        duration: "2–3 days",
+        season: "October–March",
+        bestFor: "Pilgrims, spiritual travellers and families",
+        highlights: [
+          "Maya Devi Temple",
+          "Sacred Garden",
+          "Monastery Zone",
+          "Kapilvastu",
+          "Meditation"
+        ]
+      },
+      {
+        name: "Bandipur",
+        slug: "bandipur",
+        category: "classic",
+        type: "Classic Nepal",
+        description:
+          "A preserved hill town with Newari heritage, traditional stone streets, mountain views, village walks, local food, and a calm slow-travel atmosphere.",
+        duration: "1–3 days",
+        season: "September–May",
+        bestFor: "Couples, families and slow travellers",
+        highlights: [
+          "Old Bazaar",
+          "Newari architecture",
+          "Mountain views",
+          "Siddha Cave",
+          "Village walks"
+        ]
+      },
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-AOS.init({duration:800,once:true});
+      {
+        name: "Everest Base Camp",
+        slug: "everest-base-camp",
+        category: "basecamp",
+        type: "Himalayan Base Camp",
+        description:
+          "The iconic trail through Sherpa settlements, suspension bridges, monasteries, alpine valleys, Gorak Shep, and the base of the world’s highest mountain.",
+        duration: "12–16 days",
+        season: "March–May, September–November",
+        bestFor: "Experienced trekkers and bucket-list travellers",
+        highlights: [
+          "Lukla",
+          "Namche",
+          "Tengboche",
+          "Kala Patthar",
+          "Everest Base Camp"
+        ]
+      },
+      {
+        name: "Annapurna Base Camp",
+        slug: "annapurna-base-camp",
+        category: "basecamp",
+        type: "Himalayan Base Camp",
+        description:
+          "A dramatic trek through Gurung villages, rhododendron forests, river valleys, mountain viewpoints, and the natural amphitheatre of the Annapurna Sanctuary.",
+        duration: "8–13 days",
+        season: "March–May, September–November",
+        bestFor: "Moderate trekkers and mountain photographers",
+        highlights: [
+          "Ghandruk",
+          "Chhomrong",
+          "Machhapuchhre Base Camp",
+          "Annapurna Sanctuary",
+          "Hot springs"
+        ]
+      },
+      {
+        name: "Makalu Base Camp",
+        slug: "makalu-base-camp",
+        category: "basecamp",
+        type: "Remote Base Camp",
+        description:
+          "A demanding eastern Nepal expedition through subtropical valleys, forests, high passes, remote settlements, and the wild Makalu-Barun landscape.",
+        duration: "18–24 days",
+        season: "April–May, October–November",
+        bestFor: "Advanced trekkers and wilderness explorers",
+        highlights: [
+          "Makalu-Barun",
+          "Shipton La",
+          "Remote valleys",
+          "High-altitude wilderness",
+          "Makalu views"
+        ]
+      },
+      {
+        name: "Kanchenjunga Base Camp",
+        slug: "kanchenjunga-base-camp",
+        category: "basecamp",
+        type: "Remote Base Camp",
+        description:
+          "A long and remote trek into Nepal’s eastern Himalaya, combining Limbu and Rai culture, forests, alpine landscapes, and north and south base-camp routes.",
+        duration: "20–27 days",
+        season: "April–May, October–November",
+        bestFor: "Experienced trekkers seeking solitude",
+        highlights: [
+          "Pang Pema",
+          "Yalung Base Camp",
+          "Ghunsa",
+          "Eastern culture",
+          "Remote Himalayan trails"
+        ]
+      },
+      {
+        name: "Manaslu Base Camp & Circuit",
+        slug: "manaslu-base-camp-circuit",
+        category: "basecamp",
+        type: "Mountain Circuit",
+        description:
+          "A high Himalayan route through Nubri culture, stone settlements, monasteries, glacial landscapes, Manaslu Base Camp, and the Larkya La crossing.",
+        duration: "14–19 days",
+        season: "March–May, September–November",
+        bestFor: "Strong trekkers wanting fewer crowds",
+        highlights: [
+          "Samagaun",
+          "Manaslu Base Camp",
+          "Birendra Lake",
+          "Larkya La",
+          "Nubri culture"
+        ]
+      },
+      {
+        name: "Dhaulagiri Base Camp & Circuit",
+        slug: "dhaulagiri-base-camp",
+        category: "basecamp",
+        type: "Expedition-Style Trek",
+        description:
+          "A serious wilderness circuit featuring Italian Base Camp, Dhaulagiri Base Camp, glaciers, French Pass, Hidden Valley, and remote alpine terrain.",
+        duration: "16–22 days",
+        season: "April–May, September–October",
+        bestFor: "Highly experienced trekkers",
+        highlights: [
+          "Italian Base Camp",
+          "Dhaulagiri Base Camp",
+          "French Pass",
+          "Hidden Valley",
+          "Dhampus Pass"
+        ]
+      },
+      {
+        name: "Mardi Himal Base Camp",
+        slug: "mardi-himal-base-camp",
+        category: "basecamp",
+        type: "Short Base Camp Trek",
+        description:
+          "A shorter ridge journey above Pokhara through forests, high camps, panoramic viewpoints, and close views of Machhapuchhre and the Annapurna range.",
+        duration: "5–8 days",
+        season: "March–May, September–December",
+        bestFor: "Short-stay trekkers and photographers",
+        highlights: [
+          "Forest Camp",
+          "High Camp",
+          "Mardi viewpoint",
+          "Machhapuchhre",
+          "Ridge walking"
+        ]
+      },
 
-const regionData = {
-  classic:{
-    title:"Classic Nepal",
-    sub:"Kathmandu, Pokhara, Everest, Chitwan, Lumbini, Bandipur and other famous first-time Nepal experiences — presented with deeper local connection.",
-    story:"The places most travelers dream about first — Kathmandu, Pokhara, Everest, Chitwan, Lumbini, Bandipur, and Annapurna. With Rigan, these famous regions become deeper through homes, food, guides, local walks, and authentic stories.",
-    best:"First-time travelers, families, culture lovers",
-    mood:"Easy, iconic, beautiful, meaningful",
-    bg:"https://i.postimg.cc/8Pzv11cF/kathmandu_valley.jpg",
-    items:[
-      ["Kathmandu Valley","The cultural soul of Nepal, where temples, living heritage, hidden courtyards, and Newari traditions shape every street.","https://i.postimg.cc/8Pzv11cF/kathmandu_valley.jpg",["🏛️ UNESCO","🍲 Newari Food","🏯 Heritage"],"Iconic Nepal"],
-      ["Pokhara & Annapurna","Peaceful lakes, mountain reflections, soft adventure, village trails, and the gateway to Annapurna trekking journeys.","https://i.postimg.cc/zfhjNJvb/pokhara.jpg",["🏔️ Trekking","🪂 Adventure","🌊 Lakeside"],"Lake City"],
-      ["Everest Region","A legendary Himalayan world of Sherpa culture, alpine landscapes, monasteries, and the iconic route toward Everest Base Camp.","https://images.pexels.com/photos/2443155/pexels-photo-2443155.jpeg?auto=compress&cs=tinysrgb&w=1200",["🗻 Everest","🥾 Trekking","🕉️ Monasteries"],"Himalaya"],
-      ["Chitwan National Park","Wildlife safaris, rare rhinos, river landscapes, and rich Tharu culture reveal a completely different Nepal.","https://i.postimg.cc/8kHWQF12/chitwan_national_park.jpg",["🐘 Safari","🦏 Rhinos","🎭 Tharu Culture"],"Jungle"],
-      ["Lumbini","The birthplace of Buddha, offering monasteries, sacred gardens, and journeys rooted in reflection and history.","https://i.postimg.cc/kXrsGPQ6/lumbini_jpg.jpg",["🕯️ Buddha","🛕 Monasteries","🧘 Spiritual"],"Spiritual"],
-      ["Bandipur","A preserved hilltop town where Newari heritage, quiet stone lanes, mountain views, and slow travel meet beautifully.","https://i.postimg.cc/kMRw7gtZ/bandipur_cultural_escape_jpg.jpg",["🏡 Homestays","🌄 Views","🏘️ Heritage Town"],"Slow Travel"]
-    ]
-  },
-  himalaya:{
-    title:"Himalayan Regions",
-    sub:"High mountains, remote valleys, sacred lakes, ancient monasteries, trekking culture, and dramatic landscapes across Nepal.",
-    story:"These are regions for travelers who want the emotion of the Himalayas — snowy peaks, stone villages, prayer flags, high passes, glacial lakes, yak trails, and silent valleys.",
-    best:"Trekkers, photographers, adventure travelers",
-    mood:"Epic, remote, powerful, scenic",
-    bg:"https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
-    items:[
-      ["Upper Mustang","A remote Himalayan kingdom of desert cliffs, Tibetan Buddhist heritage, walled settlements, sky caves, and rare cultural depth.","https://i.postimg.cc/1RH6hgmh/upper_mustang.jpg",["🏯 Hidden Kingdom","🕉️ Tibetan Culture","🪨 Cliffs"],"High Value"],
-      ["Manaslu & Tsum Valley","Remote villages, sacred valleys, monasteries, mountain culture, and one of Nepal’s most emotional trekking regions.","https://i.postimg.cc/D02X4hgw/Tsum_Valley.avif",["🙏 Sacred Valley","🏔️ Manaslu","🛕 Monasteries"],"Sacred"],
-      ["Langtang & Gosaikunda","Tamang culture, sacred alpine lakes, mountain trails, yak pastures, and spiritual Himalayan landscapes close to Kathmandu.","https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?auto=format&fit=crop&w=1200&q=80",["💧 Sacred Lakes","🏔️ Langtang","🙏 Spiritual"],"Sacred Lakes"],
-      ["Kanchenjunga Region","Remote eastern Himalaya with Limbu and Rai culture, cardamom villages, forest trails, and wild trekking energy.","https://i.postimg.cc/C5mfj2Ph/eastern_nepal.jpg",["🏔️ Kanchenjunga","🌿 Eastern Culture","🥾 Remote Trek"],"Wild East"],
-      ["Makalu Barun","Deep valleys, forests, waterfalls, remote settlements, and dramatic views near the world’s fifth-highest mountain.","https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1200&q=80",["🏔️ Makalu","🌳 Wilderness","🥾 Expedition"],"Wild East"],
-      ["Nar Phu Valley","Tibetan-style villages, ancient monasteries, hidden trails, and high mountain passes near Annapurna.","https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",["🏔️ Remote Trek","🛕 Monasteries","🥾 High Pass"],"Hidden Valley"]
-    ]
-  },
-  hidden:{
-    title:"Hidden Nepal",
-    sub:"Raw, quiet, less-commercial regions for travelers who want something different from normal tourism routes.",
-    story:"Hidden Nepal is where Rigan can become powerful — places with fewer crowds, stronger stories, local hosts, village trails, sacred lakes, wild landscapes, and unexplored emotional value.",
-    best:"Slow travelers, explorers, repeat visitors",
-    mood:"Raw, local, intimate, less crowded",
-    bg:"https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg",
-    items:[
-      ["Rara Lake & Murma Top","Remote alpine calm in western Nepal, with blue lake views, pine forests, quiet trails, and Murma Top viewpoint.","https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg",["💙 Hidden Lake","🌲 Remote Nature","🌄 Murma Top"],"Far-West Gem"],
-      ["Shey Phoksundo & Dolpo","Turquoise lake views, Bon culture, wilderness, deep valleys, and one of Nepal’s most remote experiences.","https://i.postimg.cc/xjRHDkfn/shey_phoksundo.jpg",["💎 Blue Lake","🥾 Dolpo","⛰️ Remote"],"Dolpo"],
-      ["Panch Pokhari","Five sacred alpine lakes, highland solitude, raw landscapes, and a spiritual atmosphere above central Nepal.","https://i.postimg.cc/pr2F5vBS/panch_pokhari.webp",["💧 Sacred Lakes","🥾 Trekking","🕊️ Peaceful"],"Sacred Lakes"],
-      ["Dhorpatan & Baglung","Alpine meadows, Magar culture, traditional villages, hunting reserve landscapes, and wide Himalayan silence.","https://i.postimg.cc/C5Fqn04Q/dhorpatan.webp",["🏔️ Remote Trails","🌾 Meadows","🧭 Hidden Nepal"],"Hidden Nepal"],
-      ["Ruby Valley","A hidden route between Langtang and Manaslu with Tamang and Gurung villages, homestays, and raw scenery.","https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",["🏡 Homestays","💎 Hidden Trail","🥾 Soft Trek"],"Village Trails"],
-      ["Numbur Cheese Circuit","Alpine lakes, yak pastures, cheese-making stories, Sherpa culture, and fewer crowds than famous routes.","https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",["🧀 Cheese Trail","🏔️ Alpine Lakes","🏡 Villages"],"Community Travel"]
-    ]
-  },
-  culture:{
-    title:"Culture & Heritage Regions",
-    sub:"Old towns, temples, art, festivals, food, local rituals, heritage streets, and community identity.",
-    story:"Culture regions are perfect for travelers who want Nepal through people, festivals, homes, food, crafts, music, architecture, and living traditions — not only mountains.",
-    best:"Culture lovers, food lovers, families, photographers",
-    mood:"Human, artistic, spiritual, colorful",
-    bg:"https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
-    items:[
-      ["Janakpur & Mithila","Janaki Mandir, Mithila art, sacred ponds, festivals, sweet food, and a completely different rhythm of Nepal.","https://images.unsplash.com/photo-1605649461784-737d0e9e6c55?auto=format&fit=crop&w=1200&q=80",["🎨 Mithila Art","🛕 Janaki Mandir","🎉 Festivals"],"Mithila Culture"],
-      ["Tansen Palpa & Rani Mahal","Old streets, Newari influence, Magar culture, sunrise views, and the riverside beauty of Nepal’s Rani Mahal.","https://images.unsplash.com/photo-1628873901547-0d9d459a3d37?auto=format&fit=crop&w=1200&q=80",["🏰 Rani Mahal","🏘️ Hill Town","🌄 Sunrise"],"Ancient City"],
-      ["Kirtipur & Newari Towns","Old lanes, temple squares, Newari food, history, and local stories close to Kathmandu.","https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",["🍲 Newari Food","🏯 Heritage","🚶 Local Walk"],"Local Culture"],
-      ["Gorkha","Historic palace, hill culture, village life, and the gateway to Manaslu and hidden Himalayan trails.","https://images.unsplash.com/photo-1628873901547-0d9d459a3d37?auto=format&fit=crop&w=1200&q=80",["🏰 History","🏔️ Manaslu Gate","🏡 Villages"],"Hill Culture"],
-      ["Ghalegaun & Ghanpokhara","Gurung homestays, mountain views, traditional food, dances, and genuine people-to-people travel.","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",["🏡 Homestay","🎭 Gurung Culture","🍚 Local Food"],"Village Escape"],
-      ["Ilam & Mai Pokhari","Tea gardens, misty hills, sacred wetlands, local villages, and eastern calm for slow travel and photography.","https://i.postimg.cc/BbM1xzYt/illam.jpg",["🍃 Tea Country","🌫️ Misty Hills","📷 Scenic"],"Slow Travel"]
-    ]
-  },
-  terai:{
-    title:"Terai, Jungle & Lowland Nepal",
-    sub:"Wildlife, wetlands, Tharu culture, river life, food, warm villages, birdwatching, and lowland festivals.",
-    story:"The Terai shows Nepal beyond mountains — jungle safaris, tiger tracking, rhino habitats, river life, Tharu homes, Mithila art, wetlands, and warm lowland hospitality.",
-    best:"Wildlife lovers, families, birdwatchers, culture travelers",
-    mood:"Warm, wild, colorful, relaxed",
-    bg:"https://i.postimg.cc/8kHWQF12/chitwan_national_park.jpg",
-    items:[
-      ["Bardiya National Park","A wilder alternative to Chitwan, ideal for tiger tracking, river landscapes, Tharu culture, and deep jungle experiences.","https://images.unsplash.com/photo-1573160103600-91b41a67d1b2?auto=format&fit=crop&w=1200&q=80",["🐅 Tiger Tracking","🌿 Jungle","🎭 Tharu Culture"],"Lowland Wild"],
-      ["Koshi Tappu","Wetlands, birdwatching, river life, village culture, buffalo landscapes, and slower nature experiences in eastern Terai.","https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?auto=format&fit=crop&w=1200&q=80",["🦜 Birdwatching","🌊 Wetlands","🚣 River Life"],"River Culture"],
-      ["Tharu Villages","Traditional homes, dance, food, farming life, wetlands, and warm lowland hospitality.","https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=80",["🎭 Tharu Culture","🍲 Local Food","🏡 Village Life"],"Terai Culture"],
-      ["Chitwan Villages","Beyond safari: Tharu food, village walks, river sunsets, canoe rides, and local farming life.","https://i.postimg.cc/8kHWQF12/chitwan_national_park.jpg",["🦏 Rhino","🚣 Canoe","🏡 Villages"],"Classic Jungle"],
-      ["Parsa Wildlife Region","Less crowded jungle landscapes, wildlife trails, forests, and warm Terai settlement culture.","https://images.unsplash.com/photo-1573160103600-91b41a67d1b2?auto=format&fit=crop&w=1200&q=80",["🌳 Forest","🐾 Wildlife","🧭 Offbeat"],"Untouched Jungle"],
-      ["Lumbini Lowlands","Sacred Buddhist sites, village culture, monasteries, peaceful gardens, and slow spiritual travel.","https://i.postimg.cc/kXrsGPQ6/lumbini_jpg.jpg",["🕯️ Buddha","🛕 Monasteries","🧘 Spiritual"],"Sacred Lowland"]
-    ]
-  },
-  farwest:{
-    title:"Far-West Nepal",
-    sub:"Remote plateaus, sacred highlands, hidden lakes, borderland culture, forests, meadows, and deep local hospitality.",
-    story:"Far-West Nepal is one of the strongest future stories for Rigan. It is raw, emotional, peaceful, and different — perfect for travelers seeking places that still feel untouched.",
-    best:"Explorers, photographers, spiritual travelers, repeat Nepal visitors",
-    mood:"Untouched, peaceful, spiritual, adventurous",
-    bg:"https://i.postimg.cc/MHWQfwD8/khaptad.jpg",
-    items:[
-      ["Khaptad National Park","Rolling grasslands, forests, quiet trails, spiritual stillness, wildflowers, and far-western hospitality.","https://i.postimg.cc/MHWQfwD8/khaptad.jpg",["🌿 Meadows","🦜 Birdwatching","⛺ Camping"],"Peace Escape"],
-      ["Badimalika","A spiritual far-western highland journey with open meadows, pilgrimage culture, and untouched mountain landscapes.","https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1200&q=80",["⛰️ Highland","🙏 Pilgrimage","🌿 Meadows"],"Far-West"],
-      ["Api Nampa & Darchula","Remote valleys, borderland culture, high peaks, traditional life, and powerful adventure potential.","https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=80",["🏔️ Api Himal","🧭 Far-West","🏡 Local Life"],"Far-West Culture"],
-      ["Rara & Mugu","Blue alpine lake, remote villages, pine forests, Murma Top views, and quiet Himalayan calm.","https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg",["💙 Rara Lake","🌲 Pine Forest","🌄 Murma Top"],"Hidden Lake"],
-      ["Humla & Limi Valley","A remote highland world with Tibetan-influenced villages, trade routes, monasteries, and wild silence.","https://i.postimg.cc/1RH6hgmh/upper_mustang.jpg",["🏔️ Remote","🛕 Monasteries","🧭 Borderland"],"Deep Remote"],
-      ["Jumla & Sinja Valley","Apple country, ancient Nepali history, local food, hill culture, and gateway to Rara journeys.","https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",["🍎 Apple Country","🏛️ History","🏡 Villages"],"Local Heritage"]
-    ]
-  }
-};
+      {
+        name: "Upper Dolpo",
+        slug: "upper-dolpo",
+        category: "hidden",
+        type: "Hidden Nepal",
+        description:
+          "One of Nepal’s most isolated Himalayan worlds, known for Bon traditions, ancient monasteries, dry trans-Himalayan landscapes, high passes, and centuries-old settlements.",
+        duration: "20–30 days",
+        season: "May–October",
+        bestFor: "Expedition travellers, filmmakers and cultural explorers",
+        highlights: [
+          "Shey Gompa",
+          "Crystal Mountain",
+          "Bon culture",
+          "High passes",
+          "Remote villages"
+        ]
+      },
+      {
+        name: "Shey Phoksundo",
+        slug: "shey-phoksundo",
+        category: "hidden",
+        type: "Hidden Lake Trail",
+        description:
+          "A remote journey to Nepal’s deep-blue alpine lake, passing waterfalls, traditional settlements, pine forests, and landscapes connected to Dolpo culture.",
+        duration: "8–14 days",
+        season: "April–November",
+        bestFor: "Nature lovers and remote trekking travellers",
+        highlights: [
+          "Phoksundo Lake",
+          "Ringmo village",
+          "Waterfall",
+          "Bon culture",
+          "Dolpo landscapes"
+        ]
+      },
+      {
+        name: "Tsum Valley",
+        slug: "tsum-valley",
+        category: "hidden",
+        type: "Sacred Hidden Valley",
+        description:
+          "A culturally preserved Himalayan valley with Tibetan Buddhist communities, ancient monasteries, sacred caves, traditional villages, and peaceful mountain trails.",
+        duration: "12–18 days",
+        season: "March–May, September–November",
+        bestFor: "Spiritual travellers and cultural trekkers",
+        highlights: [
+          "Mu Gompa",
+          "Rachen Gompa",
+          "Milarepa Cave",
+          "Chhekampar",
+          "Tsum culture"
+        ]
+      },
+      {
+        name: "Nar Phu Valley",
+        slug: "nar-phu-valley",
+        category: "hidden",
+        type: "Restricted Hidden Valley",
+        description:
+          "A remote valley north of the Annapurna region, featuring Tibetan-influenced villages, stone settlements, monasteries, dramatic cliffs, and the Kang La crossing.",
+        duration: "10–16 days",
+        season: "March–May, September–November",
+        bestFor: "Experienced cultural trekkers",
+        highlights: [
+          "Nar village",
+          "Phu village",
+          "Kang La",
+          "Monasteries",
+          "High mountain culture"
+        ]
+      },
+      {
+        name: "Ruby Valley",
+        slug: "ruby-valley",
+        category: "hidden",
+        type: "Community Trail",
+        description:
+          "A lesser-visited trail between Langtang and Manaslu, combining Tamang and Gurung villages, homestays, mountain viewpoints, hot springs, and quiet walking routes.",
+        duration: "7–12 days",
+        season: "March–May, September–November",
+        bestFor: "Community travellers and soft trekkers",
+        highlights: [
+          "Homestays",
+          "Tamang culture",
+          "Gurung villages",
+          "Pangsang Pass",
+          "Quiet trails"
+        ]
+      },
+      {
+        name: "Numbur Cheese Circuit",
+        slug: "numbur-cheese-circuit",
+        category: "hidden",
+        type: "Community Mountain Trail",
+        description:
+          "A quiet trail through Sherpa and Tamang settlements, yak pastures, cheese-making communities, alpine lakes, mountain viewpoints, and traditional village life.",
+        duration: "10–16 days",
+        season: "March–May, September–November",
+        bestFor: "Slow trekkers and community tourism",
+        highlights: [
+          "Cheese farms",
+          "Sherpa villages",
+          "Alpine lakes",
+          "Yak pastures",
+          "Numbur Himal"
+        ]
+      },
+      {
+        name: "Dhorpatan",
+        slug: "dhorpatan",
+        category: "hidden",
+        type: "Hidden Highland",
+        description:
+          "A broad highland landscape of meadows, forests, Magar communities, traditional settlements, seasonal migration routes, and remote trekking possibilities.",
+        duration: "6–12 days",
+        season: "March–May, September–November",
+        bestFor: "Remote travellers and cultural explorers",
+        highlights: [
+          "Alpine meadows",
+          "Magar culture",
+          "Dhorpatan reserve",
+          "Remote villages",
+          "Hidden trekking routes"
+        ]
+      },
+      {
+        name: "Panch Pokhari",
+        slug: "panch-pokhari",
+        category: "hidden",
+        type: "Sacred Lake Trail",
+        description:
+          "A quieter high-altitude route to five sacred lakes, offering open landscapes, spiritual pilgrimage traditions, mountain viewpoints, and less-commercial trekking.",
+        duration: "7–12 days",
+        season: "March–May, September–November",
+        bestFor: "Spiritual trekkers and quiet-trail seekers",
+        highlights: [
+          "Five sacred lakes",
+          "Pilgrimage culture",
+          "Jugal Himal",
+          "Remote camps",
+          "Highland views"
+        ]
+      },
+      {
+        name: "Limi Valley",
+        slug: "limi-valley",
+        category: "hidden",
+        type: "Borderland Hidden Valley",
+        description:
+          "An extremely remote highland region of Humla with Tibetan-influenced villages, monasteries, ancient trade routes, traditional architecture, and untouched landscapes.",
+        duration: "18–25 days",
+        season: "May–October",
+        bestFor: "Expedition travellers and cultural researchers",
+        highlights: [
+          "Halji monastery",
+          "Til village",
+          "Jang village",
+          "Ancient trade routes",
+          "Tibetan-influenced culture"
+        ]
+      },
 
-const buttons=document.querySelectorAll('.region-cat');
-const cards=document.getElementById('regionCards');
-const title=document.getElementById('regionTitle');
-const sub=document.getElementById('regionSub');
-const count=document.getElementById('regionCount');
-const mandala=document.getElementById('mandalaWrap');
-const storyTitle=document.getElementById('storyTitle');
-const storyDesc=document.getElementById('storyDesc');
-const storyBest=document.getElementById('storyBest');
-const storyMood=document.getElementById('storyMood');
-const allRegionList=document.getElementById('allRegionList');
+      {
+        name: "Janakpur & Mithila",
+        slug: "janakpur-mithila",
+        category: "culture",
+        type: "Culture & Heritage",
+        description:
+          "A vibrant lowland cultural region known for Janaki Mandir, Mithila art, sacred ponds, marriage traditions, festivals, music, sweets, and colourful local identity.",
+        duration: "2–4 days",
+        season: "October–March",
+        bestFor: "Art, religion, culture and festival travellers",
+        highlights: [
+          "Janaki Mandir",
+          "Mithila art",
+          "Vivah Panchami",
+          "Sacred ponds",
+          "Local food"
+        ]
+      },
+      {
+        name: "Tansen, Palpa & Rani Mahal",
+        slug: "tansen-palpa",
+        category: "culture",
+        type: "Hill Culture",
+        description:
+          "A historic hill-town region combining Newari and Magar culture, traditional streets, mountain views, local textiles, food, and the riverside Rani Mahal.",
+        duration: "2–4 days",
+        season: "September–May",
+        bestFor: "Culture, photography and slow travel",
+        highlights: [
+          "Tansen Bazaar",
+          "Rani Mahal",
+          "Palpali Dhaka",
+          "Srinagar Hill",
+          "Magar culture"
+        ]
+      },
+      {
+        name: "Ghalegaun & Ghanpokhara",
+        slug: "ghalegaun-ghanpokhara",
+        category: "culture",
+        type: "Community Village",
+        description:
+          "Gurung villages known for homestays, mountain views, traditional dances, local meals, community hospitality, farming culture, and meaningful people-to-people travel.",
+        duration: "2–4 days",
+        season: "September–May",
+        bestFor: "Families, students and cultural travellers",
+        highlights: [
+          "Gurung homestays",
+          "Traditional dance",
+          "Local food",
+          "Mountain views",
+          "Village life"
+        ]
+      },
+      {
+        name: "Ilam & Mai Pokhari",
+        slug: "ilam-mai-pokhari",
+        category: "culture",
+        type: "Eastern Slow Travel",
+        description:
+          "A calm eastern region of tea gardens, misty hills, local villages, sacred wetlands, mountain viewpoints, ethnic cultures, and photography-friendly landscapes.",
+        duration: "3–6 days",
+        season: "October–May",
+        bestFor: "Nature, tea, photography and slow travel",
+        highlights: [
+          "Tea gardens",
+          "Mai Pokhari",
+          "Antu Danda",
+          "Eastern villages",
+          "Local food"
+        ]
+      },
+      {
+        name: "Kirtipur & Newari Towns",
+        slug: "kirtipur-newari-towns",
+        category: "culture",
+        type: "Living Heritage",
+        description:
+          "Historic Newari settlements close to Kathmandu, offering temple squares, traditional houses, local food, artisan communities, festivals, and powerful local stories.",
+        duration: "Half day–2 days",
+        season: "All year",
+        bestFor: "Food, architecture and cultural walking tours",
+        highlights: [
+          "Kirtipur",
+          "Panauti",
+          "Bungamati",
+          "Khokana",
+          "Newari food"
+        ]
+      },
+      {
+        name: "Gorkha",
+        slug: "gorkha",
+        category: "culture",
+        type: "Historic Hill Region",
+        description:
+          "A historic district of palace heritage, hill settlements, farming communities, mountain views, religious sites, and gateways toward Manaslu and remote villages.",
+        duration: "2–5 days",
+        season: "September–May",
+        bestFor: "History, village life and cultural exploration",
+        highlights: [
+          "Gorkha Durbar",
+          "Gorakhnath",
+          "Village walks",
+          "Manaslu gateway",
+          "Local history"
+        ]
+      },
 
-function renderRegion(key){
-  const data=regionData[key];
-  title.textContent=data.title;
-  sub.textContent=data.sub;
-  count.textContent=data.items.length+' regions';
-  storyTitle.textContent=data.title;
-  storyDesc.textContent=data.story;
-  storyBest.textContent=data.best;
-  storyMood.textContent=data.mood;
-  mandala.style.background=`linear-gradient(rgba(247,240,228,.86),rgba(247,240,228,.92)),url('${data.bg}') center/cover no-repeat`;
-  cards.innerHTML=data.items.map(item=>`
-    <div class="region-card" onclick="window.location.href='plan.html'" data-aos="fade-up">
-      <div class="region-img" style="background-image:url('${item[2]}')"><span class="untouched-badge">${item[4]}</span><span class="mandala-dot">✦</span></div>
-      <div class="region-content">
-        <h3 class="region-name">${item[0]}</h3>
-        <p class="region-desc">${item[1]}</p>
-        <div class="region-tags">${item[3].map(tag=>`<span class="region-tag">${tag}</span>`).join('')}</div>
-      </div>
-    </div>
-  `).join('');
-  AOS.refresh();
-}
+      {
+        name: "Bardiya National Park",
+        slug: "bardiya-national-park",
+        category: "wildlife",
+        type: "Wildlife & Terai",
+        description:
+          "A quieter and wilder alternative to Chitwan, known for tiger tracking, river landscapes, elephants, gharials, birdlife, jungle walks, and Tharu communities.",
+        duration: "3–5 days",
+        season: "October–April",
+        bestFor: "Wildlife lovers and photographers",
+        highlights: [
+          "Tiger tracking",
+          "Karnali River",
+          "Tharu culture",
+          "Jungle walks",
+          "Birdwatching"
+        ]
+      },
+      {
+        name: "Koshi Tappu",
+        slug: "koshi-tappu",
+        category: "wildlife",
+        type: "Wetlands & Birdlife",
+        description:
+          "A wetland landscape in eastern Nepal with migratory birds, river channels, wild buffalo, fishing communities, rural settlements, and peaceful nature experiences.",
+        duration: "2–4 days",
+        season: "October–March",
+        bestFor: "Birdwatchers and nature travellers",
+        highlights: [
+          "Migratory birds",
+          "Wetlands",
+          "Arna buffalo",
+          "River life",
+          "Village culture"
+        ]
+      },
+      {
+        name: "Parsa Wildlife Region",
+        slug: "parsa-wildlife-region",
+        category: "wildlife",
+        type: "Lesser-Known Jungle",
+        description:
+          "A less-commercial jungle region with forests, wildlife corridors, rural Terai settlements, safari possibilities, and access to landscapes beyond mainstream tourism.",
+        duration: "2–4 days",
+        season: "October–April",
+        bestFor: "Offbeat wildlife and nature travellers",
+        highlights: [
+          "Forest safaris",
+          "Wildlife",
+          "Terai villages",
+          "Quiet jungle",
+          "Nature photography"
+        ]
+      },
+      {
+        name: "Tharu Villages",
+        slug: "tharu-villages",
+        category: "wildlife",
+        type: "Lowland Village Culture",
+        description:
+          "Traditional lowland communities offering distinctive architecture, farming practices, food, dance, festivals, oral histories, wetlands, and warm family hospitality.",
+        duration: "1–3 days",
+        season: "October–March",
+        bestFor: "Culture, food, families and community tourism",
+        highlights: [
+          "Tharu homes",
+          "Local food",
+          "Traditional dance",
+          "Farming life",
+          "Village stays"
+        ]
+      },
 
-buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderRegion(btn.dataset.region);document.querySelector('.region-result-section').scrollIntoView({behavior:'smooth',block:'start'});}));
+      {
+        name: "Khaptad National Park",
+        slug: "khaptad-national-park",
+        category: "farwest",
+        type: "Far-West Nepal",
+        description:
+          "A peaceful highland plateau of rolling meadows, forests, wildflowers, spiritual sites, birdlife, remote trails, and far-western village hospitality.",
+        duration: "5–10 days",
+        season: "April–June, September–November",
+        bestFor: "Nature, spirituality, camping and photography",
+        highlights: [
+          "Grasslands",
+          "Khaptad Baba",
+          "Wildflowers",
+          "Birdwatching",
+          "Remote camping"
+        ]
+      },
+      {
+        name: "Badimalika",
+        slug: "badimalika",
+        category: "farwest",
+        type: "Sacred Far-West Trail",
+        description:
+          "A remote pilgrimage and trekking region of open highlands, seasonal flowers, sacred traditions, panoramic landscapes, village paths, and little-explored routes.",
+        duration: "7–12 days",
+        season: "May–October",
+        bestFor: "Spiritual trekkers and remote explorers",
+        highlights: [
+          "Badimalika Temple",
+          "Highland meadows",
+          "Pilgrimage",
+          "Remote villages",
+          "Mountain landscapes"
+        ]
+      },
+      {
+        name: "Api Nampa & Darchula",
+        slug: "api-nampa-darchula",
+        category: "farwest",
+        type: "Remote Mountain Frontier",
+        description:
+          "A rarely visited western frontier with high peaks, borderland communities, traditional villages, remote valleys, long trekking routes, and strong expedition potential.",
+        duration: "12–22 days",
+        season: "April–June, September–November",
+        bestFor: "Expedition trekkers and documentary travellers",
+        highlights: [
+          "Api Himal",
+          "Nampa peaks",
+          "Darchula culture",
+          "Remote valleys",
+          "Borderland trails"
+        ]
+      },
+      {
+        name: "Rara Lake & Mugu",
+        slug: "rara-lake-mugu",
+        category: "farwest",
+        type: "Hidden Himalayan Lake",
+        description:
+          "Nepal’s largest lake surrounded by pine forests, remote villages, high viewpoints, quiet trails, changing colours, and the dramatic landscapes of Mugu.",
+        duration: "5–10 days",
+        season: "April–June, September–November",
+        bestFor: "Nature, photography and remote travel",
+        highlights: [
+          "Rara Lake",
+          "Murma Top",
+          "Pine forests",
+          "Mugu villages",
+          "Remote landscapes"
+        ]
+      },
+      {
+        name: "Jumla & Sinja Valley",
+        slug: "jumla-sinja-valley",
+        category: "farwest",
+        type: "Remote Heritage Region",
+        description:
+          "A culturally important western region known for apple farming, ancient Nepali history, local grains, traditional villages, mountain trails, and access toward Rara.",
+        duration: "4–8 days",
+        season: "April–November",
+        bestFor: "Heritage, agriculture, food and rural travel",
+        highlights: [
+          "Sinja Valley",
+          "Apple farms",
+          "Local grains",
+          "Ancient heritage",
+          "Village life"
+        ]
+      }
+    ];
 
-const allNames=[...new Set(Object.values(regionData).flatMap(group=>group.items.map(item=>item[0])) )];
-allRegionList.innerHTML=allNames.map(name=>`<span class="region-chip">${name}</span>`).join('');
-renderRegion('classic');
+    const categoryInformation = {
+      classic: {
+        title: "Classic Nepal",
+        description:
+          "Nepal’s best-known cities, mountain gateways, cultural centres, jungle regions, spiritual sites, and first-time travel routes."
+      },
 
-const mobileBtn=document.getElementById('mobileMenuBtn');
-const navLinks=document.getElementById('navLinks');
-mobileBtn?.addEventListener('click',()=>navLinks.classList.toggle('active'));
-document.querySelectorAll('.nav-links a').forEach(link=>link.addEventListener('click',()=>navLinks.classList.remove('active')));
-</script>
+      basecamp: {
+        title: "Himalayan Base Camps",
+        description:
+          "Major and remote base-camp journeys including Everest, Annapurna, Makalu, Kanchenjunga, Manaslu, Dhaulagiri, and Mardi Himal."
+      },
+
+      hidden: {
+        title: "Hidden Trails & Remote Valleys",
+        description:
+          "Less-commercial trails, sacred valleys, alpine lakes, forgotten community routes, remote monasteries, and unexplored Himalayan landscapes."
+      },
+
+      culture: {
+        title: "Culture, Heritage & Village Regions",
+        description:
+          "Historic towns, ethnic villages, festivals, local food, artisan traditions, spiritual communities, and meaningful homestay experiences."
+      },
+
+      wildlife: {
+        title: "Wildlife, Wetlands & Terai Nepal",
+        description:
+          "Jungle safaris, river landscapes, wetlands, birdlife, lowland villages, Tharu culture, and lesser-known wildlife regions."
+      },
+
+      farwest: {
+        title: "Far-West Nepal",
+        description:
+          "Remote lakes, sacred highlands, borderland valleys, ancient heritage, unexplored mountain trails, forests, and far-western hospitality."
+      }
+    };
+
+    const mandalaNames = {
+      classic: "Classic Nepal",
+      basecamp: "Himalayan Base Camps",
+      hidden: "Hidden Trails & Remote Valleys",
+      culture: "Culture, Heritage & Villages",
+      wildlife: "Wildlife, Wetlands & Terai",
+      farwest: "Far-West Nepal"
+    };
+
+    const regionCards =
+      document.getElementById("regionCards");
+
+    const regionTitle =
+      document.getElementById("regionTitle");
+
+    const regionSub =
+      document.getElementById("regionSub");
+
+    const regionCount =
+      document.getElementById("regionCount");
+
+    const regionSearch =
+      document.getElementById("regionSearch");
+
+    const mandalaButtons =
+      document.querySelectorAll(".mandala-option");
+
+    const mandalaSelectionText =
+      document.getElementById("mandalaSelectionText");
+
+    const mobileMenuBtn =
+      document.getElementById("mobileMenuBtn");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+    let activeFilter = "classic";
+
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function createWhatsAppLink(region) {
+      const message = encodeURIComponent(
+`Hello Rigan Roots & Routes!
+
+I am interested in exploring this region of Nepal:
+
+Region: ${region.name}
+Type: ${region.type}
+Suggested Duration: ${region.duration}
+Best Season: ${region.season}
+
+Please send me a suggested itinerary, estimated price, accommodation options, transportation details, and the best activities for this region.`
+      );
+
+      return `https://wa.me/9779843322695?text=${message}`;
+    }
+
+    function getFilteredRegions() {
+      const searchTerm =
+        regionSearch.value
+          .trim()
+          .toLowerCase();
+
+      return regionData.filter(function (region) {
+        const matchesCategory =
+          region.category === activeFilter;
+
+        const searchableText = `
+          ${region.name}
+          ${region.type}
+          ${region.description}
+          ${region.duration}
+          ${region.season}
+          ${region.bestFor}
+          ${region.highlights.join(" ")}
+        `.toLowerCase();
+
+        const matchesSearch =
+          !searchTerm ||
+          searchableText.includes(searchTerm);
+
+        return matchesCategory && matchesSearch;
+      });
+    }
+
+    function renderRegions() {
+      const filteredRegions =
+        getFilteredRegions();
+
+      const category =
+        categoryInformation[activeFilter];
+
+      regionTitle.textContent =
+        category.title;
+
+      regionSub.textContent =
+        category.description;
+
+      regionCount.textContent =
+        `${filteredRegions.length} ${
+          filteredRegions.length === 1
+            ? "region"
+            : "regions"
+        }`;
+
+      if (!filteredRegions.length) {
+        regionCards.innerHTML = `
+          <div class="empty-state">
+            <h3>No matching region found</h3>
+
+            <p>
+              Try another search or choose a different part of the mandala.
+            </p>
+          </div>
+        `;
+
+        return;
+      }
+
+      regionCards.innerHTML =
+        filteredRegions
+          .map(function (region) {
+            const planLink =
+              `plan.html?region=${encodeURIComponent(region.slug)}`;
+
+            const whatsappLink =
+              createWhatsAppLink(region);
+
+            return `
+              <article class="region-card">
+
+                <div class="region-card-top">
+
+                  <span class="region-type">
+                    ${escapeHTML(region.type)}
+                  </span>
+
+                  <h3 class="region-name">
+                    ${escapeHTML(region.name)}
+                  </h3>
+
+                </div>
+
+                <div class="region-content">
+
+                  <p class="region-desc">
+                    ${escapeHTML(region.description)}
+                  </p>
+
+                  <div class="region-details">
+
+                    <div class="region-detail">
+                      <strong>Ideal Duration</strong>
+                      <span>${escapeHTML(region.duration)}</span>
+                    </div>
+
+                    <div class="region-detail">
+                      <strong>Best Season</strong>
+                      <span>${escapeHTML(region.season)}</span>
+                    </div>
+
+                    <div class="region-detail">
+                      <strong>Best For</strong>
+                      <span>${escapeHTML(region.bestFor)}</span>
+                    </div>
+
+                  </div>
+
+                  <div class="region-tags">
+                    ${region.highlights
+                      .map(function (highlight) {
+                        return `
+                          <span class="region-tag">
+                            ${escapeHTML(highlight)}
+                          </span>
+                        `;
+                      })
+                      .join("")}
+                  </div>
+
+                  <div class="region-actions">
+
+                    <a
+                      class="region-action plan-btn"
+                      href="${planLink}"
+                    >
+                      <i class="fa-solid fa-route"></i>
+                      Plan This Region
+                    </a>
+
+                    <a
+                      class="region-action whatsapp-btn"
+                      href="${whatsappLink}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i class="fab fa-whatsapp"></i>
+                      WhatsApp
+                    </a>
+
+                    <a
+                      class="region-action details-btn"
+                      href="${planLink}"
+                    >
+                      <i class="fa-solid fa-map-location-dot"></i>
+                      Create a Detailed Regional Itinerary
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </article>
+            `;
+          })
+          .join("");
+    }
+
+    mandalaButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        activeFilter =
+          button.dataset.filter;
+
+        regionSearch.value = "";
+
+        mandalaButtons.forEach(function (item) {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        mandalaSelectionText.textContent =
+          mandalaNames[activeFilter];
+
+        renderRegions();
+
+        document
+          .querySelector(".region-result-section")
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+      });
+    });
+
+    regionSearch.addEventListener(
+      "input",
+      renderRegions
+    );
+
+    function closeMenu() {
+      navLinks.classList.remove("active");
+      document.body.classList.remove("menu-open");
+
+      mobileMenuBtn.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      mobileMenuBtn.innerHTML =
+        '<i class="fa-solid fa-bars"></i>';
+    }
+
+    mobileMenuBtn.addEventListener(
+      "click",
+      function () {
+        const isOpen =
+          navLinks.classList.toggle("active");
+
+        document.body.classList.toggle(
+          "menu-open",
+          isOpen
+        );
+
+        mobileMenuBtn.setAttribute(
+          "aria-expanded",
+          String(isOpen)
+        );
+
+        mobileMenuBtn.innerHTML = isOpen
+          ? '<i class="fa-solid fa-xmark"></i>'
+          : '<i class="fa-solid fa-bars"></i>';
+      }
+    );
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach(function (link) {
+        link.addEventListener(
+          "click",
+          closeMenu
+        );
+      });
+
+    renderRegions();
+  </script>
+
 </body>
 </html>

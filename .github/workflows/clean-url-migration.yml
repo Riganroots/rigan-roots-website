@@ -90,7 +90,6 @@ jobs:
                   candidate = root / path.lstrip('/')
                   if path.endswith('/'):
                       candidate = candidate / 'index.html'
-                  # Ignore intentionally missing affiliation logo placeholders that hide onerror.
                   if path.startswith('/images/'):
                       continue
                   assert candidate.exists(), f'Missing local target from {rel}: {ref}'
@@ -122,3 +121,5 @@ jobs:
             git commit -m 'Migrate site to clean GitHub Pages URLs'
             git push origin HEAD:feature/clean-urls-responsive-nav
           fi
+
+# Triggered after workflow registration on the feature branch.

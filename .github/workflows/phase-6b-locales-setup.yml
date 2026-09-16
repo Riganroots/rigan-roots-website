@@ -1,0 +1,83 @@
+name: Phase 6B locale setup
+
+on:
+  push:
+    branches:
+      - feature/phase-6b-package-translations
+    paths:
+      - '.github/workflows/phase-6b-locales-setup.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out translation branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/phase-6b-package-translations
+
+      - name: Link package localizer on detail page
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('experience-detail-v2.html')
+          text = path.read_text(encoding='utf-8')
+          marker = '<script src="experience-localizer.js" defer></script>'
+          if marker not in text:
+              anchor = '<script src="i18n.js" defer></script>'
+              if anchor not in text:
+                  raise SystemExit('Could not find i18n.js script tag')
+              text = text.replace(anchor, anchor + '\n' + marker, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate translation JavaScript
+        shell: bash
+        run: |
+          node --check experience-localizer.js
+          node --check experience-locale-ja.js
+          node --check experience-locale-de.js
+          node --check experience-locale-hi.js
+          node --check experience-locale-es.js
+
+          python - <<'PY'
+          from pathlib import Path
+          trek_ids = [
+            'everest-base-camp-trek',
+            'annapurna-base-camp-trek',
+            'langtang-valley-trek',
+            'everest-three-passes-trek',
+            'annapurna-circuit-trek',
+            'thorong-la-pass-trek',
+            'mardi-himal-trek',
+            'tilicho-lake-trek',
+            'shey-phoksundo-trek',
+            'upper-dolpo-trek',
+          ]
+          for lang in ('ja', 'de', 'hi', 'es'):
+              text = Path(f'experience-locale-{lang}.js').read_text(encoding='utf-8')
+              missing = [item for item in trek_ids if f'"{item}"' not in text]
+              if missing:
+                  raise SystemExit(f'{lang} missing: {missing}')
+          detail = Path('experience-detail-v2.html').read_text(encoding='utf-8')
+          if detail.count('experience-localizer.js') != 1:
+              raise SystemExit('experience-localizer.js must be linked exactly once')
+          print('Validated four languages across all 10 trek packages.')
+          PY
+
+      - name: Commit detail-page integration
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No integration changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experience-detail-v2.html
+          git commit -m 'Enable localized trek content on package details'
+          git push

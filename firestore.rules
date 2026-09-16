@@ -12,21 +12,7 @@ service cloud.firestore {
 
     function validPublicBooking() {
       return request.resource.data.keys().hasAll([
-          'schemaVersion',
-          'bookingRef',
-          'status',
-          'experienceId',
-          'experienceName',
-          'fullName',
-          'phone',
-          'travelDate',
-          'travellers',
-          'preferredContact',
-          'tripType',
-          'language',
-          'consent',
-          'createdAt',
-          'updatedAt'
+          'schemaVersion','bookingRef','status','experienceId','experienceName','fullName','phone','travelDate','travellers','preferredContact','tripType','language','consent','createdAt','updatedAt'
         ])
         && request.resource.data.schemaVersion == 1
         && request.resource.data.status == 'New'
@@ -75,12 +61,7 @@ service cloud.firestore {
         && resource.data.publicQuoteToken is string
         && resource.data.quoteVersion is int
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
-          'status',
-          'quoteAcceptedName',
-          'quoteAcceptedToken',
-          'quoteAcceptedVersion',
-          'quoteAcceptedAt',
-          'updatedAt'
+          'status','quoteAcceptedName','quoteAcceptedToken','quoteAcceptedVersion','quoteAcceptedAt','updatedAt'
         ])
         && request.resource.data.status == 'Confirmed'
         && request.resource.data.quoteAcceptedName is string
@@ -97,10 +78,7 @@ service cloud.firestore {
         && resource.data.validUntilAt is timestamp
         && resource.data.validUntilAt >= request.time
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
-          'status',
-          'acceptedName',
-          'acceptedAt',
-          'updatedAt'
+          'status','acceptedName','acceptedAt','updatedAt'
         ])
         && request.resource.data.status == 'accepted'
         && request.resource.data.acceptedName is string
@@ -121,6 +99,11 @@ service cloud.firestore {
       allow list: if isAdmin();
       allow create, delete: if isAdmin();
       allow update: if isAdmin() || validPublicQuoteAcceptance();
+    }
+
+    match /publicReceipts/{receiptToken} {
+      allow get: if true;
+      allow list, create, update, delete: if isAdmin();
     }
 
     match /admins/{userId} {

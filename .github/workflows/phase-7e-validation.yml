@@ -41,5 +41,7 @@ jobs:
               raise SystemExit('Payment limitation is not documented')
           if rules.count('{') != rules.count('}'):
               raise SystemExit('Firestore rules braces are unbalanced')
+          if "booking.status === 'Paid'" not in pjs:
+              raise SystemExit('Missing duplicate-payment guard for Paid bookings')
           print('Phase 7E static validation passed')
           PY

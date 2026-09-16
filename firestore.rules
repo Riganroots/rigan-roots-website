@@ -1,0 +1,87 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function validPublicBooking() {
+      return request.resource.data.keys().hasAll([
+          'schemaVersion',
+          'bookingRef',
+          'status',
+          'experienceId',
+          'experienceName',
+          'fullName',
+          'phone',
+          'travelDate',
+          'travellers',
+          'preferredContact',
+          'tripType',
+          'language',
+          'consent',
+          'createdAt',
+          'updatedAt'
+        ])
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.status == 'New'
+        && request.resource.data.bookingRef is string
+        && request.resource.data.bookingRef.size() >= 10
+        && request.resource.data.bookingRef.size() <= 40
+        && request.resource.data.experienceId is string
+        && request.resource.data.experienceId.size() <= 120
+        && request.resource.data.experienceName is string
+        && request.resource.data.experienceName.size() >= 1
+        && request.resource.data.experienceName.size() <= 160
+        && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() >= 2
+        && request.resource.data.fullName.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() >= 5
+        && request.resource.data.phone.size() <= 40
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 160
+        && request.resource.data.nationality is string
+        && request.resource.data.nationality.size() <= 80
+        && request.resource.data.travelDate is string
+        && request.resource.data.travelDate.size() <= 20
+        && request.resource.data.travellers is int
+        && request.resource.data.travellers >= 1
+        && request.resource.data.travellers <= 100
+        && request.resource.data.preferredContact is string
+        && request.resource.data.preferredContact.size() <= 40
+        && request.resource.data.tripType is string
+        && request.resource.data.tripType.size() <= 60
+        && request.resource.data.specialRequests is string
+        && request.resource.data.specialRequests.size() <= 3000
+        && request.resource.data.language is string
+        && request.resource.data.language.size() <= 10
+        && request.resource.data.sourceUrl is string
+        && request.resource.data.sourceUrl.size() <= 500
+        && request.resource.data.pageUrl is string
+        && request.resource.data.pageUrl.size() <= 500
+        && request.resource.data.consent == true
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    match /bookings/{bookingId} {
+      allow create: if validPublicBooking();
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /admins/{userId} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

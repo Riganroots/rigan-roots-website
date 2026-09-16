@@ -91,6 +91,24 @@
       <div class="modal-footer">
         <button class="btn btn-primary modal-save" id="saveOpsBtn" type="button">Save quote & notes</button>
       </div>
+
+      <section class="followup-box">
+        <div class="followup-head">
+          <div>
+            <p class="eyebrow">Customer follow-up</p>
+            <h3>Ready-to-send message</h3>
+          </div>
+          <button class="btn btn-outline btn-small" id="regenerateMessageBtn" type="button">Regenerate</button>
+        </div>
+        <p class="followup-help">The draft is based on the booking status and saved quote. Review it before sending.</p>
+        <textarea id="customerMessage" rows="8" aria-label="Customer follow-up message"></textarea>
+        <div class="followup-actions">
+          <button class="btn btn-outline btn-small" id="copyCustomerMessage" type="button">Copy message</button>
+          <button class="btn btn-whatsapp btn-small" id="openWhatsAppDraft" type="button">Open WhatsApp draft</button>
+          <button class="btn btn-primary btn-small followup-email" id="openEmailDraft" type="button">Open email draft</button>
+        </div>
+      </section>
+
       <div class="notice" id="detailNotice" role="status"></div>
     </section>
   </div>

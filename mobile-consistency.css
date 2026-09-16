@@ -1,0 +1,145 @@
+/* Rigan Roots & Routes — shared mobile consistency layer */
+html {
+  max-width: 100%;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  max-width: 100%;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(159, 186, 107, 0.72);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  .menu-btn,
+  .mobile-menu-btn,
+  .menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    min-height: 44px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .trip-book,
+  .trip-link,
+  .book-btn,
+  .back,
+  .back-btn,
+  .contact-link,
+  .submit,
+  .wa {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-title-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Regions: keep the off-canvas menu outside the visual canvas without
+     increasing document scroll width. */
+  .top-nav .mobile-menu-btn + .nav-links {
+    right: 0 !important;
+    transform: translateX(115%);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .top-nav .mobile-menu-btn + .nav-links.active {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Plan page uses the same off-canvas pattern but a different navbar. */
+  .navbar .nav-container > .mobile-menu-btn + .nav-links {
+    right: 0 !important;
+    transform: translateX(115%);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .navbar .nav-container > .mobile-menu-btn + .nav-links.active,
+  .navbar .nav-container > .mobile-menu-btn + .nav-links.open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  a,
+  button,
+  label,
+  span {
+    overflow-wrap: break-word;
+  }
+
+  .floating-whatsapp,
+  .floating,
+  .whatsapp {
+    bottom: max(14px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

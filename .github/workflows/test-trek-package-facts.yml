@@ -1,0 +1,77 @@
+name: Test trek package facts preview
+on:
+  push:
+    branches: [feature/phase-3-trek-package-specs]
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/phase-3-trek-package-specs
+      - name: Wait for Netlify preview
+        run: |
+          URL="https://deploy-preview-8--rigan.netlify.app"
+          for i in $(seq 1 30); do
+            body=$(curl -L -s "$URL/experience-enrichment-v3.js" || true)
+            if echo "$body" | grep -q "Trek Essentials"; then
+              exit 0
+            fi
+            sleep 4
+          done
+          exit 1
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install chromium >/dev/null 2>&1
+      - name: Browser validation
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          (async()=>{
+            const base='https://deploy-preview-8--rigan.netlify.app';
+            const browser=await chromium.launch({headless:true});
+            const ctx=await browser.newContext({viewport:{width:390,height:844}});
+            const tests=[
+              ['everest-base-camp-trek','5,545 m / 18,192 ft (Kala Patthar)'],
+              ['annapurna-base-camp-trek','4,130 m / 13,550 ft (Annapurna Base Camp)'],
+              ['mardi-himal-trek','Approx. 4,200 m / 13,780 ft'],
+              ['upper-dolpo-trek','5,000 m+']
+            ];
+            for (const [slug,expected] of tests) {
+              const page=await ctx.newPage();
+              const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+              const res=await page.goto(`${base}/experience-detail-v2.html?experience=${slug}`,{waitUntil:'networkidle',timeout:45000});
+              if(!res || res.status()>=400) throw new Error(`${slug}: bad HTTP status`);
+              const panel=page.locator('.trek-facts-panel');
+              if(await panel.count()!==1) throw new Error(`${slug}: Trek Essentials panel missing`);
+              const text=await panel.innerText();
+              if(!text.includes(expected)) throw new Error(`${slug}: expected altitude missing`);
+              if(!text.includes('Typical Walking') || !text.includes('Accommodation') || !text.includes('Permits')) throw new Error(`${slug}: package facts incomplete`);
+              const dims=await page.evaluate(()=>({vw:innerWidth,dw:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)}));
+              if(dims.dw>dims.vw+3) throw new Error(`${slug}: horizontal overflow ${dims.dw}/${dims.vw}`);
+              if(errors.length) throw new Error(`${slug}: JS errors ${errors.join('|')}`);
+              console.log(`PASS ${slug}`);
+              await page.close();
+            }
+            const nonTrek=await ctx.newPage();
+            await nonTrek.goto(`${base}/experience-detail-v2.html?experience=kathmandu-heritage-tour`,{waitUntil:'networkidle',timeout:45000});
+            if(await nonTrek.locator('.trek-facts-panel').count()!==0) throw new Error('Non-trek page received Trek Essentials panel');
+            console.log('PASS non-trek unaffected');
+            await browser.close();
+            console.log('ALL TREK PACKAGE FACT TESTS PASSED');
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+      - name: Remove temporary test workflow
+        if: always()
+        run: |
+          rm -f .github/workflows/test-trek-package-facts.yml
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/test-trek-package-facts.yml
+          git commit -m 'Remove temporary trek package preview test'
+          git push origin HEAD:feature/phase-3-trek-package-specs

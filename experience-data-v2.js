@@ -108,7 +108,21 @@ window.experienceDataV2 = {
         season: "March–May and September–November",
         image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
         badge: "Luxury"
-      })
+      }),
+exp({
+  id: "bird-watching-nepal",
+  name: "Bird Watching Nepal",
+  subtitle: "Discover Nepal's remarkable birdlife with local naturalist guidance in forests, wetlands, and foothills.",
+  overview: "A flexible birding journey focused on ethical wildlife viewing, local habitats, and seasonal birdlife across selected Nepal birding areas.",
+  duration: "2–5 Days",
+  location: "Kathmandu Valley / Chitwan / Selected Birding Areas",
+  style: "Birding, Nature & Conservation",
+  groupSize: "1–8 Guests",
+  difficulty: "Easy",
+  season: "October–April",
+  image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=1200&q=80",
+  badge: "Nature Signature"
+})
     ]
   },
 
@@ -479,7 +493,35 @@ window.experienceDataV2 = {
         style: "Air Adventure",
         image: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg",
         badge: "Popular"
-      })
+      }),
+exp({
+  id: "nepal-motorbike-adventure",
+  name: "Nepal Motorbike Adventure",
+  subtitle: "Ride Nepal's hill roads, valleys, villages, and Himalayan landscapes on a guided motorbike journey.",
+  overview: "A flexible road adventure combining scenic riding, local stops, village culture, and changing Himalayan landscapes.",
+  duration: "5–10 Days",
+  location: "Kathmandu / Pokhara / Selected Himalayan Routes",
+  style: "Guided Motorbike Touring",
+  groupSize: "2–8 Riders",
+  difficulty: "Moderate",
+  season: "October–May",
+  image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=80",
+  badge: "Road Adventure"
+}),
+exp({
+  id: "nepal-cycling-adventure",
+  name: "Nepal Cycling Adventure",
+  subtitle: "Cycle through valley trails, villages, forest roads, and scenic Himalayan foothills.",
+  overview: "A customizable cycling journey for riders who want active travel, local encounters, and Nepal's varied landscapes.",
+  duration: "1–7 Days",
+  location: "Kathmandu Valley / Pokhara / Selected Trails",
+  style: "Cycling & Mountain Biking",
+  groupSize: "1–10 Guests",
+  difficulty: "Easy to Challenging",
+  season: "October–May",
+  image: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=1200&q=80",
+  badge: "Active Adventure"
+})
     ]
   }
 

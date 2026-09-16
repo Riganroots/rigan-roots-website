@@ -76,34 +76,22 @@ textarea:focus-visible {
     align-items: center;
   }
 
-  /* Regions: keep the off-canvas menu outside the visual canvas without
-     increasing document scroll width. */
-  .top-nav .mobile-menu-btn + .nav-links {
+  /* Fixed menus positioned far to the right were still contributing to
+     the document scroll width in Chromium. Keep them out of layout until
+     opened instead of parking them off-canvas. */
+  .top-nav .mobile-menu-btn + .nav-links,
+  .navbar .nav-container > .mobile-menu-btn + .nav-links {
+    display: none !important;
     right: 0 !important;
-    transform: translateX(115%);
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .top-nav .mobile-menu-btn + .nav-links.active {
-    transform: translateX(0);
+    transform: none !important;
     visibility: visible;
     pointer-events: auto;
   }
 
-  /* Plan page uses the same off-canvas pattern but a different navbar. */
-  .navbar .nav-container > .mobile-menu-btn + .nav-links {
-    right: 0 !important;
-    transform: translateX(115%);
-    visibility: hidden;
-    pointer-events: none;
-  }
-
+  .top-nav .mobile-menu-btn + .nav-links.active,
   .navbar .nav-container > .mobile-menu-btn + .nav-links.active,
   .navbar .nav-container > .mobile-menu-btn + .nav-links.open {
-    transform: translateX(0);
-    visibility: visible;
-    pointer-events: auto;
+    display: flex !important;
   }
 }
 

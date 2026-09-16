@@ -70,9 +70,57 @@ service cloud.firestore {
         && request.resource.data.updatedAt == request.time;
     }
 
+    function validQuoteAcceptance() {
+      return resource.data.status == 'Quoted'
+        && resource.data.publicQuoteToken is string
+        && resource.data.quoteVersion is int
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'status',
+          'quoteAcceptedName',
+          'quoteAcceptedToken',
+          'quoteAcceptedVersion',
+          'quoteAcceptedAt',
+          'updatedAt'
+        ])
+        && request.resource.data.status == 'Confirmed'
+        && request.resource.data.quoteAcceptedName is string
+        && request.resource.data.quoteAcceptedName.size() >= 2
+        && request.resource.data.quoteAcceptedName.size() <= 120
+        && request.resource.data.quoteAcceptedToken == resource.data.publicQuoteToken
+        && request.resource.data.quoteAcceptedVersion == resource.data.quoteVersion
+        && request.resource.data.quoteAcceptedAt == request.time
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function validPublicQuoteAcceptance() {
+      return resource.data.status == 'active'
+        && resource.data.validUntilAt is timestamp
+        && resource.data.validUntilAt >= request.time
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'status',
+          'acceptedName',
+          'acceptedAt',
+          'updatedAt'
+        ])
+        && request.resource.data.status == 'accepted'
+        && request.resource.data.acceptedName is string
+        && request.resource.data.acceptedName.size() >= 2
+        && request.resource.data.acceptedName.size() <= 120
+        && request.resource.data.acceptedAt == request.time
+        && request.resource.data.updatedAt == request.time;
+    }
+
     match /bookings/{bookingId} {
       allow create: if validPublicBooking();
-      allow read, update, delete: if isAdmin();
+      allow read, delete: if isAdmin();
+      allow update: if isAdmin() || validQuoteAcceptance();
+    }
+
+    match /publicQuotes/{quoteToken} {
+      allow get: if true;
+      allow list: if isAdmin();
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || validPublicQuoteAcceptance();
     }
 
     match /admins/{userId} {

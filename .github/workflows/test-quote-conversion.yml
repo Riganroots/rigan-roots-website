@@ -1,0 +1,133 @@
+name: Test quote and WhatsApp conversion preview
+on:
+  push:
+    branches: [feature/phase-3-quote-conversion]
+    paths: [.github/workflows/test-quote-conversion.yml]
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/phase-3-quote-conversion
+      - name: Wait for Netlify preview
+        run: |
+          URL="https://deploy-preview-9--rigan.netlify.app"
+          for i in $(seq 1 30); do
+            body=$(curl -L -s "$URL/plan.html" || true)
+            if echo "$body" | grep -q "Please send me the detailed quotation and next steps"; then exit 0; fi
+            sleep 4
+          done
+          exit 1
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install chromium >/dev/null 2>&1
+      - name: Validate quote and WhatsApp flows
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          (async()=>{
+            const base='https://deploy-preview-9--rigan.netlify.app';
+            const browser=await chromium.launch({headless:true});
+            const ctx=await browser.newContext({viewport:{width:390,height:844}});
+
+            async function open(path){
+              const page=await ctx.newPage();
+              const errors=[];
+              page.on('pageerror',e=>errors.push(e.message));
+              const res=await page.goto(base+path,{waitUntil:'domcontentloaded',timeout:30000});
+              if(!res||res.status()>=400) throw new Error(`${path}: bad HTTP status`);
+              await page.waitForTimeout(500);
+              return {page,errors};
+            }
+            async function noOverflow(page,label){
+              const d=await page.evaluate(()=>({vw:innerWidth,dw:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)}));
+              if(d.dw>d.vw+3) throw new Error(`${label}: horizontal overflow ${d.dw}/${d.vw}`);
+            }
+
+            {
+              const {page,errors}=await open('/plan.html?experience=mardi-himal-trek');
+              const title=(await page.locator('#previewTitle').innerText()).trim();
+              if(!/Mardi Himal/i.test(title)) throw new Error(`Mardi: wrong title ${title}`);
+              if((await page.locator('#estimatedPrice').innerText()).trim()!=='Request Quote') throw new Error('Mardi: should be Request Quote');
+              if((await page.locator('#priceHeading').innerText()).trim()!=='Tailored Quote') throw new Error('Mardi: wrong quote heading');
+              await page.evaluate(()=>{window.__opened='';window.open=(u)=>{window.__opened=u;};});
+              await page.locator('#waBtn').click();
+              const opened=await page.evaluate(()=>window.__opened);
+              if(!opened.startsWith('https://wa.me/9779843322695?text=')) throw new Error('Mardi: WhatsApp did not open without form completion');
+              const msg=decodeURIComponent(opened.split('?text=')[1]||'');
+              if(!msg.includes('Mardi Himal')||!msg.includes('Request Quote')) throw new Error('Mardi: WhatsApp message missing package or quote status');
+              await noOverflow(page,'Mardi plan');
+              if(errors.length) throw new Error(`Mardi plan JS errors: ${errors.join('|')}`);
+              console.log('PASS Mardi quote-only Plan flow');
+              await page.close();
+            }
+
+            {
+              const {page,errors}=await open('/plan.html?experience=shey-phoksundo-trek');
+              const title=(await page.locator('#previewTitle').innerText()).trim();
+              if(!/Shey Phoksundo/i.test(title)) throw new Error(`Shey: wrong title ${title}`);
+              if((await page.locator('#estimatedPrice').innerText()).trim()!=='Request Quote') throw new Error('Shey: should be Request Quote');
+              if((await page.locator('#priceHeading').innerText()).trim()!=='Tailored Quote') throw new Error('Shey: wrong quote heading');
+              if(errors.length) throw new Error(`Shey plan JS errors: ${errors.join('|')}`);
+              console.log('PASS Shey Phoksundo quote-only Plan flow');
+              await page.close();
+            }
+
+            {
+              const {page,errors}=await open('/plan.html?experience=everest-base-camp-trek');
+              await page.locator('#group').selectOption('2');
+              await page.locator('#duration').selectOption('14');
+              await page.locator('#group').dispatchEvent('change');
+              await page.waitForTimeout(100);
+              const price=(await page.locator('#estimatedPrice').innerText()).trim();
+              if(!price.startsWith('$')) throw new Error(`EBC: expected initial estimate, got ${price}`);
+              if((await page.locator('#priceHeading').innerText()).trim()!=='Estimated Total') throw new Error('EBC: wrong estimate heading');
+              if(errors.length) throw new Error(`EBC plan JS errors: ${errors.join('|')}`);
+              console.log('PASS known-package estimate remains available');
+              await page.close();
+            }
+
+            {
+              const {page,errors}=await open('/plan.html?experience=custom-trip');
+              if((await page.locator('#estimatedPrice').innerText()).trim()!=='Request Quote') throw new Error('Custom trip: should be quote-only');
+              if((await page.locator('#priceHeading').innerText()).trim()!=='Tailored Quote') throw new Error('Custom trip: wrong heading');
+              if(errors.length) throw new Error(`Custom plan JS errors: ${errors.join('|')}`);
+              console.log('PASS custom trip quote-only');
+              await page.close();
+            }
+
+            {
+              const {page,errors}=await open('/experience-detail-v2.html?experience=everest-base-camp-trek');
+              const waText=(await page.locator('#whatsappBtn').innerText()).trim();
+              if(!/Get Quote on WhatsApp/i.test(waText)) throw new Error('Detail: WhatsApp CTA not updated');
+              await page.evaluate(()=>{window.__opened='';window.open=(u)=>{window.__opened=u;};});
+              await page.locator('#whatsappBtn').click();
+              const opened=await page.evaluate(()=>window.__opened);
+              if(!opened.startsWith('https://wa.me/9779843322695?text=')) throw new Error('Detail: WhatsApp quote did not open without filling required fields');
+              const msg=decodeURIComponent(opened.split('?text=')[1]||'');
+              if(!msg.includes('Everest Base Camp')) throw new Error('Detail: WhatsApp message missing package');
+              await noOverflow(page,'EBC detail');
+              if(errors.length) throw new Error(`Detail JS errors: ${errors.join('|')}`);
+              console.log('PASS package-detail WhatsApp conversion');
+              await page.close();
+            }
+
+            await browser.close();
+            console.log('ALL QUOTE CONVERSION TESTS PASSED');
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+      - name: Remove temporary preview test
+        if: always()
+        run: |
+          rm -f .github/workflows/test-quote-conversion.yml
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/test-quote-conversion.yml
+          git commit -m 'Remove temporary quote conversion test'
+          git push origin HEAD:feature/phase-3-quote-conversion

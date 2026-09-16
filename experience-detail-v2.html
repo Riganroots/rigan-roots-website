@@ -1232,11 +1232,11 @@
       <!-- BOOKING -->
       <aside class="booking-card">
 
-        <p class="price-label">Starting From</p>
+        <p class="price-label" id="priceHeadingLabel">Starting From</p>
 
         <div class="price" id="price">Request Quote</div>
 
-        <p class="price-label">Per Person / Estimated</p>
+        <p class="price-label" id="priceSubLabel">Per Person / Estimated</p>
 
         <p class="price-note">
           Final price depends on your travel date, group size, hotel level,
@@ -1403,7 +1403,7 @@
 
           <button type="submit" class="inquiry-btn">
             <i class="fa-solid fa-paper-plane"></i>
-            Send Tour Inquiry
+            Request Detailed Quote
           </button>
 
           <div class="form-status" id="formStatus">
@@ -1418,7 +1418,7 @@
           id="whatsappBtn"
         >
           <i class="fa-brands fa-whatsapp"></i>
-          Send Inquiry on WhatsApp
+          Get Quote on WhatsApp
         </button>
 
         <button
@@ -1881,10 +1881,26 @@ Please send me more information about availability, itinerary, inclusions, and p
       ).textContent =
         selected.location || "Nepal";
 
+      const hasDisplayedPrice = Boolean(
+        selected.price && String(selected.price).trim()
+      );
+
       document.getElementById(
         "price"
       ).textContent =
-        selected.price || "Request Quote";
+        hasDisplayedPrice ? selected.price : "Request Quote";
+
+      document.getElementById(
+        "priceHeadingLabel"
+      ).textContent = hasDisplayedPrice
+        ? "Starting From"
+        : "Custom Quote";
+
+      document.getElementById(
+        "priceSubLabel"
+      ).textContent = hasDisplayedPrice
+        ? "Per Person / Estimated"
+        : "Tailored to Your Dates & Group";
 
       document.getElementById(
         "style"
@@ -2220,11 +2236,6 @@ Please send me more information about availability, itinerary, inclusions, and p
       ).addEventListener(
         "click",
         function () {
-          if (!inquiryForm.checkValidity()) {
-            inquiryForm.reportValidity();
-            return;
-          }
-
           const message =
             buildWhatsAppMessage();
 

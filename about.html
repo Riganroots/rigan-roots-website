@@ -21,6 +21,8 @@ body{
   line-height:1.7;
 }
 
+body.menu-open{overflow:hidden}
+
 h1,h2,h3{
   font-family:"Playfair Display",serif;
   color:#174d2f;
@@ -46,6 +48,7 @@ h1,h2,h3{
   justify-content:space-between;
   align-items:center;
   padding:16px 24px;
+  position:relative;
 }
 
 .brand{
@@ -78,6 +81,15 @@ h1,h2,h3{
 .brand-tagline{
   font-size:.85rem;
   color:#9b6238;
+}
+
+.menu-btn{
+  display:none;
+  border:0;
+  background:transparent;
+  color:#174d2f;
+  font-size:26px;
+  cursor:pointer;
 }
 
 .nav-links{
@@ -199,6 +211,23 @@ h1,h2,h3{
 
 /* MOBILE */
 @media(max-width:900px){
+  .menu-btn{display:block}
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:16px;
+    right:16px;
+    flex-direction:column;
+    gap:0;
+    padding:14px 20px;
+    background:white;
+    border:1px solid rgba(0,0,0,.06);
+    border-radius:0 0 18px 18px;
+    box-shadow:0 20px 35px rgba(0,0,0,.12);
+  }
+  .nav-links.active{display:flex}
+  .nav-links a{padding:12px 0}
   .grid,.cards,.footer-grid{
     grid-template-columns:1fr;
   }
@@ -221,7 +250,11 @@ h1,h2,h3{
       </div>
     </a>
 
-    <div class="nav-links">
+    <button class="menu-btn" id="aboutMenuBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="aboutNavLinks">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <div class="nav-links" id="aboutNavLinks">
       <a href="index.html">Home</a>
       <a href="experience-v2.html">Experiences</a>
       <a href="regions.html">Regions</a>
@@ -248,7 +281,7 @@ h1,h2,h3{
       <p>From village mornings to festivals, from food to hidden trails, we design experiences that feel personal and meaningful.</p>
     </div>
 
-    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80">
+    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80" alt="Nepal landscape and local culture">
 
   </div>
 </section>
@@ -341,6 +374,39 @@ h1,h2,h3{
     © 2026 Rigan Roots & Routes
   </div>
 </footer>
+
+<script>
+const aboutMenuBtn = document.getElementById('aboutMenuBtn');
+const aboutNavLinks = document.getElementById('aboutNavLinks');
+
+if (aboutMenuBtn && aboutNavLinks) {
+  const closeAboutMenu = () => {
+    aboutNavLinks.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    aboutMenuBtn.setAttribute('aria-expanded', 'false');
+    aboutMenuBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+  };
+
+  aboutMenuBtn.addEventListener('click', () => {
+    const open = aboutNavLinks.classList.toggle('active');
+    document.body.classList.toggle('menu-open', open);
+    aboutMenuBtn.setAttribute('aria-expanded', String(open));
+    aboutMenuBtn.innerHTML = open
+      ? '<i class="fas fa-xmark" aria-hidden="true"></i>'
+      : '<i class="fas fa-bars" aria-hidden="true"></i>';
+  });
+
+  aboutNavLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeAboutMenu);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeAboutMenu();
+    }
+  });
+}
+</script>
 
 </body>
 </html>

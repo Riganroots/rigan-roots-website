@@ -1,0 +1,31 @@
+name: Phase 7B admin validation
+
+on:
+  push:
+    branches: [feature/phase-7b-admin-operations]
+    paths: ['.github/workflows/phase-7b-validation.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate admin upgrade
+        run: |
+          node --check --input-type=module < admin.js
+          python - <<'PY'
+          from pathlib import Path
+          html=Path('admin.html').read_text(encoding='utf-8')
+          js=Path('admin.js').read_text(encoding='utf-8')
+          css=Path('admin.css').read_text(encoding='utf-8')
+          for token in ['exportBtn','detailModal','quotedAmount','internalNotes','saveOpsBtn']:
+              if token not in html: raise SystemExit(f'Missing HTML token: {token}')
+              if token not in js: raise SystemExit(f'Missing JS token: {token}')
+          for token in ['arrayUnion','statusHistory','exportCsv','openBookingDetails']:
+              if token not in js: raise SystemExit(f'Missing JS feature: {token}')
+          if '.modal-backdrop' not in css: raise SystemExit('Missing modal CSS')
+          print('Phase 7B validation passed')
+          PY

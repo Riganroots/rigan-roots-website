@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Travel Quotation | Rigan Roots & Routes</title>
+  <meta name="description" content="Private travel quotation from Rigan Roots & Routes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="quote.css">
+</head>
+<body>
+  <header class="quote-topbar no-print">
+    <a class="brand" href="index.html">
+      <img src="rigan-logo.svg" alt="Rigan Roots & Routes" onerror="this.style.display='none'">
+      <span><strong>Rigan Roots & Routes</strong><small>Private Travel Quotation</small></span>
+    </a>
+    <div class="top-actions">
+      <button id="printQuoteBtn" class="button button-outline" type="button" disabled>Print / Save PDF</button>
+      <a class="button button-whatsapp" id="quoteWhatsApp" href="https://wa.me/9779843322695" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </div>
+  </header>
+
+  <main class="quote-shell">
+    <section class="state-card" id="loadingState">
+      <div class="spinner"></div>
+      <h1>Loading your quotation…</h1>
+      <p>Please wait while we retrieve the private quotation.</p>
+    </section>
+
+    <section class="state-card error-card" id="errorState" hidden>
+      <h1>Quotation unavailable</h1>
+      <p id="errorMessage">This quotation link is invalid or no longer available.</p>
+      <a class="button button-primary" href="https://wa.me/9779843322695" target="_blank" rel="noopener noreferrer">Contact Rigan on WhatsApp</a>
+    </section>
+
+    <article class="quote-document" id="quoteDocument" hidden>
+      <header class="document-header">
+        <div>
+          <p class="eyebrow">Travel Quotation</p>
+          <h1 id="experienceName">Nepal Journey</h1>
+          <p class="intro">Prepared by Rigan Roots & Routes</p>
+        </div>
+        <div class="quote-meta-card">
+          <div><span>Quote No.</span><strong id="quoteNumber">—</strong></div>
+          <div><span>Booking Ref.</span><strong id="bookingRef">—</strong></div>
+          <div><span>Version</span><strong id="quoteVersion">—</strong></div>
+          <div><span>Status</span><strong class="status-pill" id="quoteStatus">Active</strong></div>
+        </div>
+      </header>
+
+      <section class="customer-grid">
+        <div><span>Prepared for</span><strong id="customerName">—</strong></div>
+        <div><span>Preferred travel date</span><strong id="travelDate">—</strong></div>
+        <div><span>Travellers</span><strong id="travellers">—</strong></div>
+        <div><span>Trip type</span><strong id="tripType">—</strong></div>
+        <div><span>Duration</span><strong id="duration">—</strong></div>
+        <div><span>Destination</span><strong id="location">Nepal</strong></div>
+      </section>
+
+      <section class="price-panel">
+        <div class="price-main"><span>Total quotation</span><strong id="totalAmount">—</strong></div>
+        <div><span>Deposit</span><strong id="depositAmount">—</strong></div>
+        <div><span>Balance after deposit</span><strong id="balanceAmount">—</strong></div>
+        <div><span>Valid until</span><strong id="validUntil">—</strong></div>
+      </section>
+
+      <section class="quote-section">
+        <h2>Proposed itinerary</h2>
+        <div class="multiline itinerary" id="itinerary"></div>
+      </section>
+
+      <section class="two-column-section">
+        <div class="quote-section compact">
+          <h2>Included</h2>
+          <ul id="inclusions"></ul>
+        </div>
+        <div class="quote-section compact">
+          <h2>Not included</h2>
+          <ul id="exclusions"></ul>
+        </div>
+      </section>
+
+      <section class="two-column-section terms-grid">
+        <div class="quote-section compact">
+          <h2>Payment terms</h2>
+          <div class="multiline" id="paymentTerms"></div>
+        </div>
+        <div class="quote-section compact">
+          <h2>Cancellation & amendments</h2>
+          <div class="multiline" id="cancellationTerms"></div>
+        </div>
+      </section>
+
+      <section class="important-note">
+        <strong>Important:</strong> This quotation does not collect payment. Final services are supplied according to the accepted quotation and subsequent written confirmation. Operational details can change when weather, permits, flights, roads, suppliers, or safety conditions require adjustments.
+      </section>
+
+      <section class="acceptance-box no-print" id="acceptanceBox">
+        <div class="acceptance-head">
+          <div>
+            <p class="eyebrow">Customer acceptance</p>
+            <h2>Accept this quotation</h2>
+          </div>
+          <span id="acceptanceVersion">Version —</span>
+        </div>
+        <p>Accepting records your approval of this quotation and changes the booking status to <strong>Confirmed</strong>. It does not process a payment.</p>
+        <label for="acceptedName">Your full name</label>
+        <input id="acceptedName" type="text" maxlength="120" autocomplete="name" placeholder="Type your full name">
+        <label class="accept-check">
+          <input id="acceptTerms" type="checkbox">
+          <span>I have reviewed the itinerary, price, inclusions, exclusions, payment terms, and cancellation/amendment notes shown above.</span>
+        </label>
+        <button class="button button-primary" id="acceptQuoteBtn" type="button">Accept Quotation</button>
+        <div class="message" id="acceptanceMessage" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="accepted-box no-print" id="acceptedBox" hidden>
+        <div class="accepted-icon">✓</div>
+        <div>
+          <h2>Quotation accepted</h2>
+          <p id="acceptedText">Your acceptance has been recorded.</p>
+        </div>
+      </section>
+
+      <footer class="document-footer">
+        <strong>Rigan Roots & Routes</strong>
+        <span>Meet Nepal Through Its People</span>
+        <span>riganrootsroutes.com · WhatsApp +977 9843322695</span>
+      </footer>
+    </article>
+  </main>
+
+  <script type="module" src="quote.js"></script>
+</body>
+</html>

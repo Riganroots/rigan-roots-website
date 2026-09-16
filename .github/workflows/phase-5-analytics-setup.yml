@@ -1,0 +1,80 @@
+name: Phase 5 analytics setup
+
+on:
+  push:
+    branches:
+      - feature/phase-5-analytics
+    paths:
+      - '.github/workflows/phase-5-analytics-setup.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-analytics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/phase-5-analytics
+
+      - name: Add analytics loader and Search Console verification
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          analytics_tag = '<script defer src="analytics.js"></script>'
+          verification_tag = '<meta name="google-site-verification" content="Sk4sJY3V14AtLxg2Lsx1nYoP4uO2AMwToGJcaDxWIew">'
+          changed = []
+
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              original = text
+
+              if analytics_tag not in text and '</head>' in text:
+                  text = text.replace('</head>', f'{analytics_tag}\n</head>', 1)
+
+              if path.name == 'index.html' and verification_tag not in text:
+                  marker = '<!-- SEO FOUNDATION START -->'
+                  if marker in text:
+                      text = text.replace(marker, f'{verification_tag}\n{marker}', 1)
+                  elif '</head>' in text:
+                      text = text.replace('</head>', f'{verification_tag}\n</head>', 1)
+
+              if text != original:
+                  path.write_text(text, encoding='utf-8')
+                  changed.append(str(path))
+
+          print('Updated:', ', '.join(changed) if changed else 'no files')
+          PY
+
+      - name: Verify expected integration
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          pages = sorted(Path('.').glob('*.html'))
+          missing = [str(p) for p in pages if '<script defer src="analytics.js"></script>' not in p.read_text(encoding='utf-8')]
+          index = Path('index.html').read_text(encoding='utf-8')
+          token = 'Sk4sJY3V14AtLxg2Lsx1nYoP4uO2AMwToGJcaDxWIew'
+          if missing:
+              raise SystemExit('Missing analytics loader in: ' + ', '.join(missing))
+          if token not in index:
+              raise SystemExit('Search Console verification token missing from index.html')
+          print(f'Validated analytics loader on {len(pages)} HTML pages and Search Console verification on homepage.')
+          PY
+
+      - name: Commit Phase 5 integration
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html'
+          git commit -m 'Integrate GA4 and Search Console verification'
+          git push origin HEAD:feature/phase-5-analytics

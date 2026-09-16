@@ -139,6 +139,31 @@ td { font-size: 13px; }
 .quote-history-item { padding: 9px 11px; border-radius: 11px; background: #f8faf8; color: #475467; font-size: 11px; }
 .quote-history-item strong { color: var(--green); }
 
+.payment-box { margin-top: 22px; padding: 20px; border: 1px solid #d7e1ea; border-radius: 20px; background: #f8fbff; }
+.payment-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+.payment-head h3 { margin: 3px 0 4px; color: var(--green); font-size: 20px; }
+.payment-head p { margin: 0; color: var(--muted); font-size: 12px; max-width: 610px; }
+.payment-state { flex: 0 0 auto; padding: 7px 10px; border-radius: 999px; background: #e7f1ff; color: #1d4f91; font-size: 11px; font-weight: 900; }
+.payment-state.paid { background: #e9fbf0; color: #166534; }
+.payment-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.payment-summary div { padding: 13px; border-radius: 14px; background: #fff; border: 1px solid #e3e9ef; }
+.payment-summary span { display: block; color: var(--muted); font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; }
+.payment-summary strong { display: block; margin-top: 5px; color: var(--green); font-size: 18px; }
+.payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.payment-grid label, .payment-notes-label { color: var(--green); font-size: 12px; font-weight: 900; }
+.payment-grid input, .payment-grid select, #paymentNote { width: 100%; margin-top: 6px; padding: 11px 12px; border: 1px solid #d7ded8; border-radius: 11px; background: #fff; color: var(--text); }
+.payment-notes-label { display: block; margin-top: 12px; }
+#paymentNote { resize: vertical; }
+.payment-actions { display: flex; justify-content: flex-end; }
+.payment-actions .btn-primary { width: auto; margin-top: 14px; }
+.payment-history { display: grid; gap: 8px; margin-top: 16px; }
+.payment-history-empty { padding: 12px; border-radius: 12px; background: #fff; color: var(--muted); font-size: 12px; }
+.payment-history-item { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 12px; border-radius: 14px; background: #fff; border: 1px solid #e3e9ef; }
+.payment-history-item strong { display: block; color: var(--green); }
+.payment-history-meta { margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.payment-history-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.payment-history-actions a, .payment-history-actions button { text-decoration: none; }
+
 .followup-box { margin-top: 22px; padding: 18px; border: 1px solid #dce5dd; border-radius: 18px; background: #f8faf8; }
 .followup-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
 .followup-head h3 { margin: 3px 0 0; color: var(--green); font-size: 18px; }
@@ -166,13 +191,15 @@ td { font-size: 13px; }
   .stat { padding: 15px; }
   .stat strong { font-size: 24px; }
   .login-card { padding: 22px; }
-  .login-card input, .controls input, .controls select, #customerMessage, .quote-builder input, .quote-builder select, .quote-builder textarea { font-size: 16px; }
+  .login-card input, .controls input, .controls select, #customerMessage, .quote-builder input, .quote-builder select, .quote-builder textarea, .payment-grid input, .payment-grid select, #paymentNote { font-size: 16px; }
   .head-actions { width: 100%; }
   .head-actions .btn { flex: 1; }
   .detail-modal { padding: 18px; }
-  .detail-grid, .ops-grid, .quote-grid, .quote-two-col { grid-template-columns: 1fr; }
+  .detail-grid, .ops-grid, .quote-grid, .quote-two-col, .payment-grid, .payment-summary { grid-template-columns: 1fr; }
   .detail-item.full { grid-column: auto; }
-  .quote-builder-head, .quote-field-head, .followup-head { flex-direction: column; align-items: stretch; }
-  .quote-actions, .followup-actions { display: grid; grid-template-columns: 1fr; }
-  .quote-actions .btn, .followup-actions .btn { width: 100%; }
+  .quote-builder-head, .quote-field-head, .payment-head, .followup-head { flex-direction: column; align-items: stretch; }
+  .quote-actions, .payment-actions, .followup-actions { display: grid; grid-template-columns: 1fr; }
+  .quote-actions .btn, .payment-actions .btn, .followup-actions .btn { width: 100%; }
+  .payment-history-item { grid-template-columns: 1fr; }
+  .payment-history-actions { justify-content: flex-start; }
 }

@@ -25,7 +25,12 @@
   }
 
   function installBookingButton() {
-    if (!/experience-detail-v2\.html$/i.test(window.location.pathname)) return;
+    const pathname = window.location.pathname.replace(/\/+$/, '');
+    const isExperienceDetail =
+      pathname === '/experiences/detail' ||
+      /\/experience-detail-v2\.html$/i.test(pathname);
+    if (!isExperienceDetail) return;
+
     const card = document.querySelector('.booking-card');
     const whatsapp = document.getElementById('whatsappBtn');
     if (!card || !whatsapp || document.getElementById('firebaseBookingBtn')) return;

@@ -106,7 +106,6 @@ jobs:
           for route in / /experiences/ /regions/ /about/ /contact/ /plan/ /work-with-us/ /booking/ /quote/ /admin/; do
             code=$(curl -s -o /tmp/page.html -w '%{http_code}' "http://127.0.0.1:8000$route")
             test "$code" = "200" || { echo "$route returned $code"; exit 1; }
-            grep -qi '<meta[^>]*name="viewport"' /tmp/page.html || { echo "$route missing viewport"; exit 1; }
           done
           echo 'Clean route smoke tests passed.'
 
@@ -122,4 +121,4 @@ jobs:
             git push origin HEAD:feature/clean-urls-responsive-nav
           fi
 
-# Triggered after workflow registration on the feature branch.
+# Route response testing is separate from the parser-based viewport validation above.

@@ -1,9 +1,19 @@
 (() => {
   'use strict';
 
+  // GitHub Pages serves directory routes through index.html. If somebody opens
+  // an explicit index.html address, normalize it back to the clean directory URL.
+  if (/\/index\.html$/i.test(window.location.pathname)) {
+    const cleanPath = window.location.pathname.replace(/index\.html$/i, '');
+    window.location.replace(cleanPath + window.location.search + window.location.hash);
+    return;
+  }
+
   const MEASUREMENT_ID = 'G-0064L0NFLH';
   const params = new URLSearchParams(window.location.search);
   const experienceId = params.get('experience') || params.get('id') || '';
+  const normalizedPath = window.location.pathname.replace(/\/+$/, '');
+  const isExperienceDetail = normalizedPath === '/experiences/detail';
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
@@ -35,7 +45,7 @@
     });
   };
 
-  if (/experience-detail-v2\.html$/i.test(window.location.pathname) && experienceId) {
+  if (isExperienceDetail && experienceId) {
     track('experience_view', {
       page_title: document.title
     });
@@ -56,7 +66,7 @@
       });
     }
 
-    if (/plan\.html(?:\?|$)/i.test(href) || /plan (this )?trip|plan my trip|start planning/i.test(label)) {
+    if (/(?:^|\/)plan\/(?:\?|$)/i.test(href) || /plan (this )?trip|plan my trip|start planning/i.test(label)) {
       track('plan_trip_click', {
         link_text: label,
         link_url: absoluteHref || href
@@ -70,7 +80,7 @@
       });
     }
 
-    const experienceMatch = href.match(/experience-detail-v2\.html\?(?:[^#]*&)?(?:experience|id)=([^&#]+)/i);
+    const experienceMatch = href.match(/\/experiences\/detail\/\?(?:[^#]*&)?(?:experience|id)=([^&#]+)/i);
     if (experienceMatch) {
       track('experience_click', {
         target_experience_id: decodeURIComponent(experienceMatch[1]),

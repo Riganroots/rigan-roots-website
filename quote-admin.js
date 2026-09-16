@@ -69,7 +69,7 @@ function secureToken() {
 }
 
 function publicQuoteUrl(token) {
-  const url = new URL('quote.html', window.location.href);
+  const url = new URL('/quote/', window.location.href);
   url.searchParams.set('token', token);
   return url.href;
 }

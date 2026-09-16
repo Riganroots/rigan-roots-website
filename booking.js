@@ -75,7 +75,7 @@ function renderSummary() {
 
   const backLink = document.getElementById('backToExperience');
   if (selected.id && selected.id !== 'custom-nepal-trip') {
-    const back = new URL('experience-detail-v2.html', window.location.href);
+    const back = new URL('/experiences/detail/', window.location.href);
     back.searchParams.set('experience', selected.id);
     if (language !== 'en') back.searchParams.set('lang', language);
     backLink.href = back.pathname + back.search;

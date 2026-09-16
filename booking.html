@@ -4,153 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,follow">
-  <title>Request Booking | Rigan Roots & Routes</title>
-  <meta name="description" content="Request a Nepal trip booking with Rigan Roots & Routes.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="booking.css">
-  <link rel="stylesheet" href="mobile-consistency.css">
-  <script defer src="analytics.js"></script>
+  <title>Booking | Rigan Roots &amp; Routes</title>
+  <link rel="canonical" href="https://riganrootsroutes.com/booking/">
+  <meta http-equiv="refresh" content="0; url=/booking/">
+  <script>
+    (function () {
+      var target = "/booking/";
+      window.location.replace(target + window.location.search + window.location.hash);
+    })();
+  </script>
 </head>
 <body>
-  <nav class="booking-nav" aria-label="Booking navigation">
-    <a href="index.html" aria-label="Rigan Roots & Routes home">
-      <img src="rigan-logo.svg" alt="Rigan Roots & Routes logo">
-    </a>
-    <a id="backToExperience" href="experience-v2.html">← Back to experience</a>
-  </nav>
-
-  <header class="booking-hero">
-    <div class="booking-hero-inner">
-      <p class="eyebrow">Booking Request</p>
-      <h1>Start your Nepal journey</h1>
-      <p>Send your preferred date and traveller details. This is a booking request, not an automatic payment or final confirmation. Our team will check availability and contact you with the next steps.</p>
-    </div>
-  </header>
-
-  <main class="booking-shell">
-    <section class="booking-card" id="bookingCard">
-      <h2>Your details</h2>
-      <p class="intro">Fields marked with * are required.</p>
-
-      <form id="bookingForm" novalidate>
-        <div class="form-grid">
-          <div class="field full">
-            <label for="experienceName">Experience</label>
-            <input id="experienceName" name="experienceName" type="text" readonly>
-          </div>
-
-          <div class="field">
-            <label for="fullName">Full name *</label>
-            <input id="fullName" name="fullName" type="text" autocomplete="name" maxlength="120" required>
-          </div>
-
-          <div class="field">
-            <label for="nationality">Nationality</label>
-            <input id="nationality" name="nationality" type="text" autocomplete="country-name" maxlength="80">
-          </div>
-
-          <div class="field">
-            <label for="phone">Phone / WhatsApp *</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" required>
-          </div>
-
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" maxlength="160">
-          </div>
-
-          <div class="field">
-            <label for="travelDate">Preferred travel date *</label>
-            <input id="travelDate" name="travelDate" type="date" required>
-          </div>
-
-          <div class="field">
-            <label for="travellers">Number of travellers *</label>
-            <input id="travellers" name="travellers" type="number" min="1" max="100" value="2" required>
-          </div>
-
-          <div class="field">
-            <label for="tripType">Trip type</label>
-            <select id="tripType" name="tripType">
-              <option value="Private Trip">Private Trip</option>
-              <option value="Group Joining">Group Joining</option>
-              <option value="Family Trip">Family Trip</option>
-              <option value="Custom Trip">Custom Trip</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="preferredContact">Preferred contact</label>
-            <select id="preferredContact" name="preferredContact">
-              <option value="WhatsApp">WhatsApp</option>
-              <option value="Email">Email</option>
-              <option value="Phone Call">Phone Call</option>
-            </select>
-          </div>
-
-          <div class="field full">
-            <label for="specialRequests">Special requests</label>
-            <textarea id="specialRequests" name="specialRequests" maxlength="3000" placeholder="Tell us about your budget, hotel preference, dietary needs, mobility requirements, interests, room type, or anything else we should know."></textarea>
-          </div>
-        </div>
-
-        <label class="consent">
-          <input id="consent" type="checkbox" required>
-          <span>I agree that Rigan Roots & Routes may use these details to respond to this booking request and arrange the requested travel services.</span>
-        </label>
-
-        <button class="primary-btn" id="submitBooking" type="submit">Send Booking Request</button>
-        <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
-      </form>
-
-      <div class="booking-note">No payment is collected on this page. Availability, final price, inclusions, payment schedule and cancellation conditions are confirmed separately before you pay.</div>
-    </section>
-
-    <section class="success-card" id="successCard" aria-live="polite">
-      <div class="success-icon">✓</div>
-      <p class="success-kicker">Request saved securely</p>
-      <h2>Booking request received</h2>
-      <p>Keep this reference number. Our team can use it to find your request quickly.</p>
-      <div class="ref-code" id="bookingReference"></div>
-      <p class="success-summary" id="successSummary"></p>
-      <div class="notification-state" id="successNotification">Your booking request is safely stored.</div>
-
-      <div class="success-action-grid">
-        <button class="secondary-action" id="copyReference" type="button">Copy reference</button>
-        <button class="secondary-action" id="calendarButton" type="button">Add date to calendar</button>
-        <a class="secondary-action" id="successEmail" href="mailto:">Email this reference</a>
-      </div>
-
-      <a class="primary-btn success-whatsapp" id="successWhatsApp" href="https://wa.me/9779843322695" target="_blank" rel="noopener noreferrer">Continue on WhatsApp</a>
-
-      <div class="next-steps">
-        <h3>What happens next?</h3>
-        <ol>
-          <li>Our team reviews availability, route and your travel requirements.</li>
-          <li>We contact you with the quotation, inclusions and any questions.</li>
-          <li>Your trip becomes confirmed only after you accept the final plan and payment terms.</li>
-        </ol>
-      </div>
-
-      <a class="secondary-btn" href="experience-v2.html">Explore more experiences</a>
-    </section>
-
-    <aside class="summary-card" id="summaryCard">
-      <span class="summary-badge">Selected Experience</span>
-      <h2 class="summary-title" id="summaryTitle">Custom Nepal Trip</h2>
-      <p id="summarySubtitle">We will tailor the journey around your dates and travel style.</p>
-      <div class="summary-list">
-        <div class="summary-row"><span>Duration</span><strong id="summaryDuration">Flexible</strong></div>
-        <div class="summary-row"><span>Location</span><strong id="summaryLocation">Nepal</strong></div>
-        <div class="summary-row"><span>Price</span><strong id="summaryPrice">Request Quote</strong></div>
-      </div>
-      <p>After submission, the request appears in the Rigan admin dashboard with status <strong>New</strong>.</p>
-    </aside>
-  </main>
-
-  <script src="experience-data-v2.js"></script>
-  <script type="module" src="booking.js"></script>
+  <p>This page has moved. <a href="/booking/">Continue to the new address</a>.</p>
 </body>
 </html>

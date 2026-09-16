@@ -1,0 +1,48 @@
+name: Phase 6B2 translation validation
+
+on:
+  push:
+    branches:
+      - feature/phase-6b2-non-trek-translations
+    paths:
+      - '.github/workflows/phase-6b2-validation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JavaScript and package coverage
+        shell: bash
+        run: |
+          node --check experience-localizer.js
+          node --check experience-locale-ja-extra.js
+          node --check experience-locale-de-extra.js
+          node --check experience-locale-hi-extra.js
+          node --check experience-locale-es-extra.js
+          python - <<'PY'
+          from pathlib import Path
+          ids = [
+            'live-like-a-nepali','women-guided-trek','hidden-nepal-expedition','rigan-signature-nepal',
+            'breakfast-at-everest-basecamp','bird-watching-nepal','farm-and-harvest-experience',
+            'rice-planting-experience','mountain-farming-experience','village-immersion',
+            'kathmandu-food-walk','newari-food-experience','tharu-food-culture','tamang-food-experience',
+            'sherpa-kitchen-experience','kathmandu-heritage-tour','bhaktapur-living-heritage',
+            'yoga-meditation-retreat','dashain-experience','everest-helicopter-tour','paragliding-pokhara',
+            'nepal-motorbike-adventure','nepal-cycling-adventure'
+          ]
+          for lang in ('ja','de','hi','es'):
+              text = Path(f'experience-locale-{lang}-extra.js').read_text(encoding='utf-8')
+              missing = [item for item in ids if f'"{item}"' not in text]
+              if missing:
+                  raise SystemExit(f'{lang} missing: {missing}')
+              if text.count('itinerary:') != len(ids):
+                  raise SystemExit(f'{lang}: expected {len(ids)} itineraries, found {text.count("itinerary:")}')
+          localizer = Path('experience-localizer.js').read_text(encoding='utf-8')
+          if 'experience-locale-${lang}-extra.js' not in localizer:
+              raise SystemExit('Localizer does not load Phase 6B2 files')
+          print(f'Validated {len(ids)} non-trek packages across four languages.')
+          PY

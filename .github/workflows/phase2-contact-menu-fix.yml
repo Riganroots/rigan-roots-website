@@ -1,0 +1,41 @@
+name: Fix Contact mobile menu handling
+on:
+  push:
+    branches: [fix/phase-2-mobile-consistency]
+permissions:
+  contents: write
+jobs:
+  fix-contact-menu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/phase-2-mobile-consistency
+      - name: Fix click-outside detection
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('contact.html')
+          text = path.read_text(encoding='utf-8')
+          old = '''      const clickedInsideNavigation =
+        navLinks.contains(event.target) ||
+        menuToggle.contains(event.target);'''
+          new = '''      const eventPath = event.composedPath ? event.composedPath() : [];
+      const clickedInsideNavigation =
+        eventPath.includes(navLinks) ||
+        eventPath.includes(menuToggle) ||
+        navLinks.contains(event.target) ||
+        menuToggle.contains(event.target);'''
+          if old not in text:
+              raise SystemExit('Expected Contact navigation click handler not found')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          print('Contact mobile navigation click handling updated.')
+          PY
+      - name: Remove temporary workflow and commit
+        run: |
+          rm -f .github/workflows/phase2-contact-menu-fix.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add contact.html .github/workflows/phase2-contact-menu-fix.yml
+          git commit -m 'Fix Contact mobile menu click handling'
+          git push origin HEAD:fix/phase-2-mobile-consistency

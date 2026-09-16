@@ -9,12 +9,19 @@ import {
 const params = new URLSearchParams(window.location.search);
 const experienceId = params.get('experience') || params.get('id') || 'custom-nepal-trip';
 const language = params.get('lang') || localStorage.getItem('rigan-language') || 'en';
+const TEAM_NOTIFICATION_ENDPOINT = 'https://formspree.io/f/mbdpwkoz';
 
 const form = document.getElementById('bookingForm');
 const submitButton = document.getElementById('submitBooking');
 const messageBox = document.getElementById('formMessage');
 const bookingCard = document.getElementById('bookingCard');
 const successCard = document.getElementById('successCard');
+const successNotification = document.getElementById('successNotification');
+const copyReferenceButton = document.getElementById('copyReference');
+const calendarButton = document.getElementById('calendarButton');
+const successEmail = document.getElementById('successEmail');
+
+let lastSuccessfulBooking = null;
 
 function clean(value, max = 3000) {
   return String(value || '').replace(/\s+/g, ' ').trim().slice(0, max);
@@ -90,6 +97,145 @@ function makeReference(docId) {
   return `RIG-${stamp}-${docId.slice(0, 6).toUpperCase()}`;
 }
 
+async function notifyTeam(booking) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 6000);
+  const payload = {
+    _subject: `New booking request ${booking.bookingRef} — ${booking.experienceName}`,
+    booking_reference: booking.bookingRef,
+    status: booking.status,
+    experience: booking.experienceName,
+    traveller_name: booking.fullName,
+    phone_whatsapp: booking.phone,
+    nationality: booking.nationality || 'Not provided',
+    preferred_travel_date: booking.travelDate,
+    travellers: String(booking.travellers),
+    trip_type: booking.tripType,
+    preferred_contact: booking.preferredContact,
+    displayed_price: booking.displayedPrice,
+    language: booking.language,
+    special_requests: booking.specialRequests || 'None',
+    page_url: booking.pageUrl
+  };
+
+  if (booking.email) payload.email = booking.email;
+
+  try {
+    const response = await fetch(TEAM_NOTIFICATION_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+    if (!response.ok) throw new Error(`Team notification failed with status ${response.status}`);
+    return true;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+function setSuccessNotification(sent) {
+  if (sent) {
+    successNotification.textContent = 'Your booking is safely stored and our team has been notified by email.';
+    successNotification.classList.remove('warning');
+  } else {
+    successNotification.textContent = 'Your booking is safely stored. For the fastest follow-up, continue on WhatsApp below.';
+    successNotification.classList.add('warning');
+  }
+}
+
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand('copy');
+  area.remove();
+}
+
+function addOneDay(dateText) {
+  const date = new Date(`${dateText}T00:00:00`);
+  date.setDate(date.getDate() + 1);
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, '0'),
+    String(date.getDate()).padStart(2, '0')
+  ].join('-');
+}
+
+function icsDate(dateText) {
+  return String(dateText || '').replaceAll('-', '');
+}
+
+function icsEscape(value) {
+  return String(value || '')
+    .replaceAll('\\', '\\\\')
+    .replaceAll('\n', '\\n')
+    .replaceAll(',', '\\,')
+    .replaceAll(';', '\\;');
+}
+
+function downloadCalendarReminder(booking) {
+  if (!booking?.travelDate) return;
+  const nowStamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+  const start = icsDate(booking.travelDate);
+  const end = icsDate(addOneDay(booking.travelDate));
+  const content = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Rigan Roots & Routes//Booking Request//EN',
+    'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    `UID:${icsEscape(booking.bookingRef)}@riganrootsroutes.com`,
+    `DTSTAMP:${nowStamp}`,
+    `DTSTART;VALUE=DATE:${start}`,
+    `DTEND;VALUE=DATE:${end}`,
+    `SUMMARY:${icsEscape(`${booking.experienceName} — Rigan travel date`)}`,
+    `DESCRIPTION:${icsEscape(`Booking request ${booking.bookingRef}. Preferred travel date only; final trip confirmation and exact schedule are provided separately by Rigan Roots & Routes.`)}`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${booking.bookingRef}-travel-date.ics`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+copyReferenceButton.addEventListener('click', async () => {
+  if (!lastSuccessfulBooking) return;
+  const original = copyReferenceButton.textContent;
+  try {
+    await copyText(lastSuccessfulBooking.bookingRef);
+    copyReferenceButton.textContent = 'Copied ✓';
+  } catch (error) {
+    console.error('Could not copy booking reference:', error);
+    copyReferenceButton.textContent = 'Copy failed';
+  }
+  window.setTimeout(() => {
+    copyReferenceButton.textContent = original;
+  }, 1800);
+});
+
+calendarButton.addEventListener('click', () => {
+  if (lastSuccessfulBooking) downloadCalendarReminder(lastSuccessfulBooking);
+});
+
 form.addEventListener('submit', async event => {
   event.preventDefault();
 
@@ -139,6 +285,7 @@ form.addEventListener('submit', async event => {
     };
 
     await setDoc(bookingDoc, booking);
+    lastSuccessfulBooking = { ...booking };
 
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'booking_request_submit', {
@@ -148,13 +295,42 @@ form.addEventListener('submit', async event => {
       });
     }
 
+    let teamNotificationSent = false;
+    try {
+      teamNotificationSent = await notifyTeam(booking);
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'booking_team_notification_sent', {
+          experience_id: booking.experienceId
+        });
+      }
+    } catch (notificationError) {
+      console.warn('Booking saved but team email notification failed:', notificationError);
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'booking_team_notification_failed', {
+          experience_id: booking.experienceId
+        });
+      }
+    }
+
     document.getElementById('bookingReference').textContent = bookingRef;
     document.getElementById('successSummary').textContent = `${selected.name} • ${booking.travelDate} • ${travellers} traveller${travellers === 1 ? '' : 's'}`;
+    setSuccessNotification(teamNotificationSent);
 
     const waText = encodeURIComponent(
       `Hello Rigan Roots & Routes! I just submitted booking request ${bookingRef} for ${selected.name}. Please help me with availability and the next steps.`
     );
     document.getElementById('successWhatsApp').href = `https://wa.me/9779843322695?text=${waText}`;
+
+    const emailSubject = `My Rigan booking request ${bookingRef}`;
+    const emailBody = [
+      `Booking reference: ${bookingRef}`,
+      `Experience: ${selected.name}`,
+      `Preferred travel date: ${booking.travelDate}`,
+      `Travellers: ${travellers}`,
+      '',
+      'This is a booking request reference. Final availability, price and confirmation are provided separately by Rigan Roots & Routes.'
+    ].join('\n');
+    successEmail.href = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
     bookingCard.style.display = 'none';
     successCard.style.display = 'block';

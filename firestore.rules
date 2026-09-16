@@ -123,6 +123,11 @@ service cloud.firestore {
       allow update: if isAdmin() || validPublicQuoteAcceptance();
     }
 
+    match /publicReceipts/{receiptToken} {
+      allow get: if true;
+      allow list, create, update, delete: if isAdmin();
+    }
+
     match /admins/{userId} {
       allow read: if signedIn() && request.auth.uid == userId;
       allow write: if false;

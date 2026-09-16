@@ -46,6 +46,7 @@ button, input, select, textarea { font: inherit; }
 .btn-primary { width: 100%; margin-top: 18px; background: var(--green); color: var(--white); }
 .btn-light { background: rgba(255,255,255,.12); color: var(--white); }
 .btn-outline { border: 1px solid var(--green); background: var(--white); color: var(--green); }
+.btn-whatsapp { border: 0; background: #25d366; color: #fff; }
 .btn-small { min-height: 36px; padding: 7px 10px; font-size: 12px; }
 
 .notice { display: none; margin-top: 14px; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 700; }
@@ -118,6 +119,16 @@ td { font-size: 13px; }
 .modal-footer { display: flex; justify-content: flex-end; }
 .modal-save { width: auto; min-width: 180px; }
 
+.followup-box { margin-top: 22px; padding: 18px; border: 1px solid #dce5dd; border-radius: 18px; background: #f8faf8; }
+.followup-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.followup-head h3 { margin: 3px 0 0; color: var(--green); font-size: 18px; }
+.followup-help { margin: 8px 0 12px; color: var(--muted); font-size: 12px; }
+#customerMessage { width: 100%; min-height: 160px; padding: 12px; border: 1px solid #d7ded8; border-radius: 12px; background: #fff; color: var(--text); resize: vertical; }
+#customerMessage:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 4px rgba(23,77,47,.1); }
+.followup-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.followup-actions .btn-primary { width: auto; margin-top: 0; }
+.followup-email { min-width: 130px; }
+
 @media (max-width: 820px) {
   .stats { grid-template-columns: 1fr 1fr; }
   .controls { grid-template-columns: 1fr; }
@@ -135,10 +146,13 @@ td { font-size: 13px; }
   .stat { padding: 15px; }
   .stat strong { font-size: 24px; }
   .login-card { padding: 22px; }
-  .login-card input, .controls input, .controls select { font-size: 16px; }
+  .login-card input, .controls input, .controls select, #customerMessage { font-size: 16px; }
   .head-actions { width: 100%; }
   .head-actions .btn { flex: 1; }
   .detail-modal { padding: 18px; }
   .detail-grid, .ops-grid { grid-template-columns: 1fr; }
   .detail-item.full { grid-column: auto; }
+  .followup-head { flex-direction: column; }
+  .followup-actions { display: grid; grid-template-columns: 1fr; }
+  .followup-actions .btn { width: 100%; }
 }

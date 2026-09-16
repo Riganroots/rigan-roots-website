@@ -110,11 +110,30 @@
 
     <section class="success-card" id="successCard" aria-live="polite">
       <div class="success-icon">✓</div>
+      <p class="success-kicker">Request saved securely</p>
       <h2>Booking request received</h2>
       <p>Keep this reference number. Our team can use it to find your request quickly.</p>
       <div class="ref-code" id="bookingReference"></div>
-      <p id="successSummary"></p>
-      <a class="primary-btn" id="successWhatsApp" href="https://wa.me/9779843322695" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">Continue on WhatsApp</a>
+      <p class="success-summary" id="successSummary"></p>
+      <div class="notification-state" id="successNotification">Your booking request is safely stored.</div>
+
+      <div class="success-action-grid">
+        <button class="secondary-action" id="copyReference" type="button">Copy reference</button>
+        <button class="secondary-action" id="calendarButton" type="button">Add date to calendar</button>
+        <a class="secondary-action" id="successEmail" href="mailto:">Email this reference</a>
+      </div>
+
+      <a class="primary-btn success-whatsapp" id="successWhatsApp" href="https://wa.me/9779843322695" target="_blank" rel="noopener noreferrer">Continue on WhatsApp</a>
+
+      <div class="next-steps">
+        <h3>What happens next?</h3>
+        <ol>
+          <li>Our team reviews availability, route and your travel requirements.</li>
+          <li>We contact you with the quotation, inclusions and any questions.</li>
+          <li>Your trip becomes confirmed only after you accept the final plan and payment terms.</li>
+        </ol>
+      </div>
+
       <a class="secondary-btn" href="experience-v2.html">Explore more experiences</a>
     </section>
 

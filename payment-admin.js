@@ -6,7 +6,6 @@ import {
   serverTimestamp
 } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
-const paymentPanel = document.getElementById('paymentPanel');
 const paymentState = document.getElementById('paymentState');
 const paymentQuoteTotal = document.getElementById('paymentQuoteTotal');
 const paymentTotalPaid = document.getElementById('paymentTotalPaid');
@@ -140,17 +139,18 @@ function renderPaymentPanel() {
   paymentTotalPaid.textContent = money(paid, currency);
   paymentBalance.textContent = quoteTotal > 0 ? money(balance, currency) : '—';
 
-  const eligibleStatus = ['Confirmed', 'Paid'].includes(currentBooking.status);
+  const eligibleStatus = currentBooking.status === 'Confirmed';
   const fullyPaid = quoteTotal > 0 && balance <= 0.005;
-  recordPaymentBtn.disabled = !eligibleStatus || fullyPaid || quoteTotal <= 0;
+  const markedPaid = currentBooking.status === 'Paid';
+  recordPaymentBtn.disabled = !eligibleStatus || fullyPaid || markedPaid || quoteTotal <= 0;
   paymentAmount.disabled = recordPaymentBtn.disabled;
   paymentMethod.disabled = recordPaymentBtn.disabled;
   paymentDate.disabled = recordPaymentBtn.disabled;
   paymentReference.disabled = recordPaymentBtn.disabled;
   paymentNote.disabled = recordPaymentBtn.disabled;
 
-  paymentState.classList.toggle('paid', fullyPaid || currentBooking.status === 'Paid');
-  if (fullyPaid || currentBooking.status === 'Paid') {
+  paymentState.classList.toggle('paid', fullyPaid || markedPaid);
+  if (fullyPaid || markedPaid) {
     paymentState.textContent = 'Paid in full';
   } else if (!eligibleStatus) {
     paymentState.textContent = 'Confirm booking first';
@@ -218,7 +218,10 @@ async function recordPayment() {
       if (!bookingSnap.exists()) throw new Error('Booking not found');
       const booking = bookingSnap.data();
 
-      if (!['Confirmed', 'Paid'].includes(booking.status)) {
+      if (booking.status === 'Paid') {
+        throw new Error('This booking is already marked Paid. Change it back to Confirmed only if a payment still needs to be recorded.');
+      }
+      if (booking.status !== 'Confirmed') {
         throw new Error('The booking must be Confirmed before recording payment.');
       }
 
@@ -290,7 +293,7 @@ async function recordPayment() {
         updatedAt: serverTimestamp()
       };
 
-      if (fullyPaid && booking.status !== 'Paid') {
+      if (fullyPaid) {
         update.status = 'Paid';
         update.statusHistory = [
           ...(Array.isArray(booking.statusHistory) ? booking.statusHistory : []),

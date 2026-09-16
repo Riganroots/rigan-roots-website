@@ -42,7 +42,10 @@
   }
 
   document.addEventListener('click', function (event) {
-    const target = event.target.closest('a, button');
+    const origin = event.target;
+    if (!(origin instanceof Element)) return;
+
+    const target = origin.closest('a, button');
     if (!target) return;
 
     const href = String(target.getAttribute('href') || '');
@@ -59,8 +62,7 @@
       lowerHref.includes('plan.html') ||
       /plan (this|your|trip|journey)/i.test(text);
 
-    const isQuote =
-      /request (a )?(tailored )?quote|get quote|request quote/i.test(text);
+    const isQuote = lowerText.includes('quote');
 
     if (isWhatsApp) {
       track('whatsapp_click', {

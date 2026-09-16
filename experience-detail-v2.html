@@ -14,6 +14,20 @@
   >
 
   <title>Experience Detail | Rigan Roots &amp; Routes</title>
+<!-- SEO FOUNDATION START -->
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website" id="ogType">
+<meta property="og:site_name" content="Rigan Roots & Routes">
+<meta property="og:title" content="Nepal Experience | Rigan Roots & Routes" id="ogTitle">
+<meta property="og:description" content="Explore a detailed Nepal itinerary and request a tailored quotation from Rigan Roots & Routes." id="ogDescription">
+<meta property="og:url" content="https://riganrootsroutes.com/experience-detail-v2.html" id="ogUrl">
+<meta property="og:image" content="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85" id="ogImage">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nepal Experience | Rigan Roots & Routes" id="twitterTitle">
+<meta name="twitter:description" content="Explore a detailed Nepal itinerary and request a tailored quotation from Rigan Roots & Routes." id="twitterDescription">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85" id="twitterImage">
+<script type="application/ld+json" id="experienceSchema">{}</script>
+<!-- SEO FOUNDATION END -->
 
   <link
     rel="preconnect"
@@ -1818,8 +1832,104 @@ Please send me more information about availability, itinerary, inclusions, and p
       const planLink =
         `plan.html?experience=${safeExperienceSlug}`;
 
-      document.title =
+      const canonicalUrl =
+        `https://riganrootsroutes.com/experience-detail-v2.html?experience=${safeExperienceSlug}`;
+
+      const seoDescription = String(
+        selected.subtitle ||
+        selected.overview ||
+        selected.description ||
+        `Explore ${selected.name} in Nepal with Rigan Roots & Routes.`
+      ).replace(/\s+/g, " ").trim().slice(0, 160);
+
+      let canonicalLink =
+        document.querySelector('link[rel="canonical"]');
+
+      if (!canonicalLink) {
+        canonicalLink = document.createElement("link");
+        canonicalLink.rel = "canonical";
+        document.head.appendChild(canonicalLink);
+      }
+
+      canonicalLink.href = canonicalUrl;
+
+      const metaDescription =
+        document.querySelector('meta[name="description"]');
+
+      if (metaDescription) {
+        metaDescription.content = seoDescription;
+      }
+
+      const seoTitle =
         `${selected.name} | Rigan Roots & Routes`;
+
+      document.title = seoTitle;
+
+      const seoTags = {
+        ogTitle: seoTitle,
+        ogDescription: seoDescription,
+        ogUrl: canonicalUrl,
+        ogImage: heroImage,
+        twitterTitle: seoTitle,
+        twitterDescription: seoDescription,
+        twitterImage: heroImage
+      };
+
+      Object.entries(seoTags).forEach(function ([id, value]) {
+        const element = document.getElementById(id);
+        if (element) element.setAttribute("content", value);
+      });
+
+      const schemaElement =
+        document.getElementById("experienceSchema");
+
+      if (schemaElement) {
+        const touristType = Array.isArray(selected.bestFor)
+          ? selected.bestFor.join(", ")
+          : selected.bestFor || "Travellers visiting Nepal";
+
+        schemaElement.textContent = JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "TouristTrip",
+              "name": selected.name,
+              "description": seoDescription,
+              "url": canonicalUrl,
+              "image": heroImage,
+              "touristType": touristType,
+              "provider": {
+                "@type": "TravelAgency",
+                "name": "Rigan Roots & Routes",
+                "url": "https://riganrootsroutes.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://riganrootsroutes.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Experiences",
+                  "item": "https://riganrootsroutes.com/experience-v2.html"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": selected.name,
+                  "item": canonicalUrl
+                }
+              ]
+            }
+          ]
+        });
+      }
 
       hero.style.backgroundImage =
         `url('${heroImage}')`;

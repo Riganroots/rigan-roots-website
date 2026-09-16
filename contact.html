@@ -1070,7 +1070,7 @@
     document.addEventListener("click", function (event) {
       const clickedInsideNavigation =
         navLinks.contains(event.target) ||
-        menuToggle.contains(event.target);
+        menuToggle.contains(event.target) || event.composedPath().includes(menuToggle);
 
       if (!clickedInsideNavigation) {
         navLinks.classList.remove("open");

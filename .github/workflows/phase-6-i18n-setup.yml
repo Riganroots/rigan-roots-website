@@ -47,11 +47,14 @@ jobs:
                   raise SystemExit(f'i18n assets not correctly linked in {name}')
 
           js = Path('i18n.js').read_text(encoding='utf-8')
-          for code in ('en', 'ja', 'de', 'hi', 'es'):
-              if f'{code}:' not in js and code != 'en':
+          for code in ('ja', 'de', 'hi', 'es'):
+              if f'{code}:' not in js:
                   raise SystemExit(f'Missing language {code}')
           print('Validated multilingual support on all 8 HTML pages.')
           PY
+
+      - name: Check JavaScript syntax
+        run: node --check i18n.js
 
       - name: Commit multilingual page links
         shell: bash

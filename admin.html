@@ -89,8 +89,62 @@
       <label class="notes-label" for="internalNotes">Internal notes</label>
       <textarea id="internalNotes" rows="5" placeholder="Private notes for your team. Not visible to the customer."></textarea>
       <div class="modal-footer">
-        <button class="btn btn-primary modal-save" id="saveOpsBtn" type="button">Save quote & notes</button>
+        <button class="btn btn-primary modal-save" id="saveOpsBtn" type="button">Save amount & notes</button>
       </div>
+
+      <section class="quote-builder" id="quoteBuilder">
+        <div class="quote-builder-head">
+          <div>
+            <p class="eyebrow">Professional quotation</p>
+            <h3>Create & publish quote</h3>
+            <p>Publishing creates a private customer link and changes the booking status to <strong>Quoted</strong>.</p>
+          </div>
+          <span class="quote-version" id="quoteVersionLabel">No quote yet</span>
+        </div>
+
+        <div class="quote-grid">
+          <label>Deposit amount
+            <input id="quoteDeposit" type="number" min="0" step="0.01" placeholder="0.00">
+          </label>
+          <label>Quote valid until
+            <input id="quoteValidUntil" type="date">
+          </label>
+        </div>
+        <div class="quote-balance" id="quoteBalance">Balance after deposit: —</div>
+
+        <div class="quote-field-head">
+          <label for="quoteItinerary">Itinerary</label>
+          <button class="btn btn-outline btn-small" id="loadPackageItinerary" type="button">Load package itinerary</button>
+        </div>
+        <textarea id="quoteItinerary" rows="11" placeholder="Day 1 — ..."></textarea>
+
+        <div class="quote-two-col">
+          <label>Included
+            <textarea id="quoteIncludes" rows="8" placeholder="One inclusion per line"></textarea>
+          </label>
+          <label>Not included
+            <textarea id="quoteExcludes" rows="8" placeholder="One exclusion per line"></textarea>
+          </label>
+        </div>
+
+        <label>Payment terms
+          <textarea id="quotePaymentTerms" rows="5"></textarea>
+        </label>
+        <label>Cancellation / amendment notes
+          <textarea id="quoteCancellationTerms" rows="5"></textarea>
+        </label>
+
+        <div class="quote-actions">
+          <button class="btn btn-primary" id="publishQuoteBtn" type="button">Save & Publish Quote</button>
+          <button class="btn btn-outline" id="openQuoteBtn" type="button" disabled>Preview / Print</button>
+          <button class="btn btn-outline" id="copyQuoteLinkBtn" type="button" disabled>Copy Link</button>
+          <button class="btn btn-whatsapp" id="quoteWhatsAppBtn" type="button" disabled>WhatsApp Quote</button>
+          <button class="btn btn-outline" id="quoteEmailBtn" type="button" disabled>Email Quote</button>
+        </div>
+        <div class="quote-link" id="quoteLinkText"></div>
+        <div class="quote-history" id="quoteHistory"></div>
+        <div class="notice" id="quoteNotice" role="status"></div>
+      </section>
 
       <section class="followup-box">
         <div class="followup-head">
@@ -113,6 +167,8 @@
     </section>
   </div>
 
+  <script src="experience-data-v2.js"></script>
   <script type="module" src="admin.js"></script>
+  <script type="module" src="quote-admin.js"></script>
 </body>
 </html>

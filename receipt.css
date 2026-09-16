@@ -1,0 +1,54 @@
+:root {
+  --green: #174d2f;
+  --green-dark: #0d3822;
+  --cream: #f7f0e4;
+  --text: #132018;
+  --muted: #64748b;
+  --border: #e4e9e5;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: #f3f6f3; color: var(--text); font-family: Inter, Arial, sans-serif; }
+a { color: inherit; }
+.receipt-shell { width: min(900px, calc(100% - 24px)); margin: 32px auto 60px; }
+.receipt-card { overflow: hidden; border: 1px solid var(--border); border-radius: 28px; background: #fff; box-shadow: 0 22px 60px rgba(0,0,0,.09); }
+.receipt-head { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; padding: 34px; background: var(--green-dark); color: #fff; }
+.brand { margin: 0 0 7px; font-size: 14px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+.receipt-head h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); }
+.muted { margin: 8px 0 0; color: rgba(255,255,255,.72); }
+.receipt-status { padding: 8px 12px; border-radius: 999px; background: #e9fbf0; color: #166534; font-size: 12px; font-weight: 900; white-space: nowrap; }
+.receipt-meta, .customer-box, .payment-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 24px 34px 0; }
+.receipt-meta div, .customer-box div, .payment-detail-grid div { padding: 14px; border-radius: 14px; background: #f8faf8; border: 1px solid #edf0ed; }
+.receipt-meta span, .customer-box span, .payment-detail-grid span, .receipt-note span { display: block; margin-bottom: 5px; color: var(--muted); font-size: 10px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+.receipt-meta strong, .customer-box strong, .payment-detail-grid strong { display: block; color: var(--green); word-break: break-word; }
+.amount-box { margin: 24px 34px 0; padding: 26px; border-radius: 22px; background: linear-gradient(135deg, #edf5eb, #f9fcf8); text-align: center; }
+.amount-box p { margin: 0 0 7px; color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .05em; }
+.amount-box strong { display: block; color: var(--green); font-size: clamp(34px, 7vw, 58px); }
+.amount-box span { display: block; margin-top: 7px; color: #475467; font-weight: 800; }
+.receipt-note, .receipt-disclaimer { margin: 24px 34px 0; padding: 18px; border-radius: 16px; background: #fffdf8; border: 1px solid #efe7d8; }
+.receipt-note p, .receipt-disclaimer p { margin: 6px 0 0; color: #475467; line-height: 1.65; }
+.receipt-disclaimer strong { color: var(--green); }
+.receipt-actions { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 34px 34px; }
+.receipt-actions button, .receipt-actions a { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; padding: 10px 16px; border-radius: 12px; border: 0; font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; }
+.receipt-actions button { background: var(--green); color: #fff; }
+.receipt-actions a { border: 1px solid var(--green); background: #fff; color: var(--green); }
+.receipt-error { padding: 50px 24px; border-radius: 24px; background: #fff; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.06); }
+.receipt-error h1 { color: var(--green); }
+.receipt-error p { color: var(--muted); }
+.receipt-error a { display: inline-block; margin-top: 10px; color: var(--green); font-weight: 900; }
+
+@media (max-width: 640px) {
+  .receipt-shell { margin-top: 12px; width: min(100% - 12px, 900px); }
+  .receipt-head { padding: 24px 20px; flex-direction: column; }
+  .receipt-meta, .customer-box, .payment-detail-grid { grid-template-columns: 1fr; padding: 18px 20px 0; }
+  .amount-box, .receipt-note, .receipt-disclaimer { margin-left: 20px; margin-right: 20px; }
+  .receipt-actions { padding: 22px 20px 26px; display: grid; grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { background: #fff; }
+  .receipt-shell { width: 100%; margin: 0; }
+  .receipt-card { border: 0; border-radius: 0; box-shadow: none; }
+  .no-print { display: none !important; }
+  .receipt-error { display: none !important; }
+}

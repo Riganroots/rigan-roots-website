@@ -1,0 +1,160 @@
+name: Retest GA4 preview
+on:
+  push:
+    branches:
+      - feature/phase-5-ga4-analytics
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/phase-5-ga4-analytics
+      - name: Wait for Netlify preview
+        shell: bash
+        run: |
+          URL="https://deploy-preview-11--rigan.netlify.app"
+          for i in $(seq 1 40); do
+            body=$(curl -L -s "$URL/analytics.js" || true)
+            if echo "$body" | grep -q 'G-0064L0NFLH' && echo "$body" | grep -q 'whatsapp_click'; then
+              exit 0
+            fi
+            sleep 4
+          done
+          echo "Preview did not update in time"
+          exit 1
+      - name: Install Playwright
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install chromium >/dev/null 2>&1
+      - name: Validate GA4 and conversion events
+        shell: bash
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+
+          (async () => {
+            const base = 'https://deploy-preview-11--rigan.netlify.app';
+            const browser = await chromium.launch({ headless: true });
+            const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+            let passes = 0;
+            const check = (condition, message) => {
+              if (!condition) throw new Error(message);
+              passes += 1;
+            };
+
+            async function open(path) {
+              const page = await context.newPage();
+              const errors = [];
+              page.on('pageerror', e => errors.push(e.message));
+              const response = await page.goto(base + path, { waitUntil: 'domcontentloaded', timeout: 30000 });
+              check(response && response.status() < 400, path + ' HTTP status');
+              await page.waitForTimeout(500);
+              return { page, errors };
+            }
+
+            const pages = [
+              '/',
+              '/experience-v2.html',
+              '/experience-detail-v2.html?experience=everest-base-camp-trek',
+              '/regions.html',
+              '/about.html',
+              '/plan.html?experience=mardi-himal-trek',
+              '/contact.html',
+              '/work-with-us.html'
+            ];
+
+            for (const path of pages) {
+              const { page, errors } = await open(path);
+              check(await page.locator('script[src="analytics.js"]').count() === 1, path + ' analytics tag');
+              const hasConfig = await page.evaluate(() => Array.from(window.dataLayer || []).some(item => item && item[0] === 'config' && item[1] === 'G-0064L0NFLH'));
+              check(hasConfig, path + ' GA4 config');
+              const dims = await page.evaluate(() => ({ vw: innerWidth, dw: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) }));
+              check(dims.dw <= dims.vw + 3, path + ' mobile overflow ' + dims.dw + '/' + dims.vw);
+              check(errors.length === 0, path + ' JS errors: ' + errors.join('|'));
+              await page.close();
+            }
+
+            {
+              const { page, errors } = await open('/experience-detail-v2.html?experience=everest-base-camp-trek');
+              const packageView = await page.evaluate(() => Array.from(window.dataLayer || []).find(item => item && item[0] === 'event' && item[1] === 'package_view'));
+              check(Boolean(packageView), 'package_view event');
+              check(packageView[2] && packageView[2].experience === 'everest-base-camp-trek', 'package_view slug');
+              check(errors.length === 0, 'package page JS errors');
+              await page.close();
+            }
+
+            {
+              const { page } = await open('/');
+              const result = await page.evaluate(() => {
+                const el = document.querySelector('a[href*="wa.me"],a[href*="whatsapp"]');
+                if (!el) return { exists: false };
+                el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+                const event = Array.from(window.dataLayer || []).find(item => item && item[0] === 'event' && item[1] === 'whatsapp_click');
+                return { exists: true, event };
+              });
+              check(result.exists, 'homepage WhatsApp link exists');
+              check(Boolean(result.event), 'whatsapp_click event');
+              check(!JSON.stringify(result.event).includes('wa.me'), 'WhatsApp destination not sent as analytics parameter');
+              await page.close();
+            }
+
+            {
+              const { page } = await open('/');
+              const result = await page.evaluate(() => {
+                const el = document.querySelector('a[href*="plan.html"]');
+                if (!el) return { exists: false };
+                el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+                const event = Array.from(window.dataLayer || []).find(item => item && item[0] === 'event' && item[1] === 'plan_trip_click');
+                return { exists: true, event };
+              });
+              check(result.exists, 'Plan link exists');
+              check(Boolean(result.event), 'plan_trip_click event');
+              await page.close();
+            }
+
+            for (const [path, expected] of [
+              ['/contact.html', 'contact_enquiry_submit'],
+              ['/plan.html?experience=mardi-himal-trek', 'plan_enquiry_submit'],
+              ['/experience-detail-v2.html?experience=mardi-himal-trek', 'package_enquiry_submit']
+            ]) {
+              const { page } = await open(path);
+              const result = await page.evaluate((expected) => {
+                const form = document.querySelector('form');
+                if (!form) return { exists: false, data: '' };
+                const email = form.querySelector('input[type="email"]');
+                const name = form.querySelector('input[name*="name" i],input[id*="name" i]');
+                if (email) email.value = 'private-test@example.com';
+                if (name) name.value = 'Private Test Person';
+                form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+                return { exists: true, data: JSON.stringify(window.dataLayer || []), expected };
+              }, expected);
+              check(result.exists, path + ' form exists');
+              check(result.data.includes(expected), path + ' ' + expected);
+              check(!result.data.includes('private-test@example.com'), path + ' email not tracked');
+              check(!result.data.includes('Private Test Person'), path + ' name not tracked');
+              await page.close();
+            }
+
+            await browser.close();
+            console.log('GA4 PREVIEW TESTS PASSED:', passes);
+          })().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+      - name: Remove temporary preview retest
+        if: always()
+        shell: bash
+        run: |
+          rm -f .github/workflows/retest-ga4-preview.yml
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/retest-ga4-preview.yml
+          git commit -m 'Remove temporary GA4 preview retest'
+          git push origin HEAD:feature/phase-5-ga4-analytics

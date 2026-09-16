@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Rigan Booking Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="admin-topbar">
+    <div class="admin-brand"><img src="rigan-logo.svg" alt="Rigan Roots & Routes"><span>Booking Admin</span></div>
+    <div class="admin-actions">
+      <span id="adminEmail" class="small"></span>
+      <button class="btn btn-light" id="logoutBtn" type="button" hidden>Log out</button>
+    </div>
+  </header>
+
+  <section class="login-wrap" id="loginView">
+    <form class="login-card card" id="loginForm">
+      <h1>Admin sign in</h1>
+      <p>Use the Firebase Authentication account created for your Rigan admin team.</p>
+      <label for="adminLoginEmail">Email</label>
+      <input id="adminLoginEmail" type="email" autocomplete="username" required>
+      <label for="adminLoginPassword">Password</label>
+      <input id="adminLoginPassword" type="password" autocomplete="current-password" required>
+      <button class="btn btn-primary" type="submit">Sign in</button>
+      <div class="notice" id="loginNotice" role="status"></div>
+      <div class="admin-access-note">Only authenticated users whose UID exists in the Firestore <strong>admins</strong> collection can read or update bookings.</div>
+    </form>
+  </section>
+
+  <main class="admin-shell dashboard" id="dashboardView">
+    <div class="dashboard-head">
+      <div><h1>Booking requests</h1><p>Review customer requests, contact travellers, and update booking status.</p></div>
+      <button class="btn btn-outline" id="refreshBtn" type="button">Refresh</button>
+    </div>
+
+    <section class="stats">
+      <div class="stat card"><span>Total</span><strong id="statTotal">0</strong></div>
+      <div class="stat card"><span>New</span><strong id="statNew">0</strong></div>
+      <div class="stat card"><span>Confirmed</span><strong id="statConfirmed">0</strong></div>
+      <div class="stat card"><span>Paid</span><strong id="statPaid">0</strong></div>
+    </section>
+
+    <section class="controls card">
+      <input id="searchInput" type="search" placeholder="Search name, booking ref, phone, package…">
+      <select id="statusFilter"><option value="All">All statuses</option><option>New</option><option>Contacted</option><option>Quoted</option><option>Confirmed</option><option>Paid</option><option>Completed</option><option>Cancelled</option></select>
+      <button class="btn btn-outline" id="clearFilters" type="button">Clear</button>
+    </section>
+
+    <section class="table-card card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Reference</th><th>Traveller</th><th>Experience</th><th>Travel</th><th>Contact</th><th>Status</th><th>Created</th></tr></thead>
+          <tbody id="bookingRows"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="emptyState">No bookings match the current filter.</div>
+    </section>
+    <div class="notice" id="dashboardNotice" role="status"></div>
+  </main>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

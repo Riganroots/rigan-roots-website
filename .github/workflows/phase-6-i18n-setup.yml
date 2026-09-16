@@ -1,0 +1,67 @@
+name: Phase 6 multilingual setup
+
+on:
+  push:
+    branches:
+      - feature/phase-6-multilingual
+    paths:
+      - '.github/workflows/phase-6-i18n-setup.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-i18n:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/phase-6-multilingual
+
+      - name: Add multilingual assets to all site pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          pages = [
+              'index.html', 'experience-v2.html', 'experience-detail-v2.html',
+              'regions.html', 'plan.html', 'about.html', 'work-with-us.html', 'contact.html'
+          ]
+          marker = '<!-- MULTILINGUAL SUPPORT -->'
+          snippet = f'''{marker}\n<link rel="stylesheet" href="i18n.css">\n<script src="i18n.js" defer></script>\n'''
+
+          for name in pages:
+              path = Path(name)
+              text = path.read_text(encoding='utf-8')
+              if marker not in text:
+                  if '</head>' not in text:
+                      raise SystemExit(f'Missing </head> in {name}')
+                  text = text.replace('</head>', snippet + '</head>', 1)
+                  path.write_text(text, encoding='utf-8')
+
+          for name in pages:
+              text = Path(name).read_text(encoding='utf-8')
+              if text.count('i18n.css') != 1 or text.count('i18n.js') != 1:
+                  raise SystemExit(f'i18n assets not correctly linked in {name}')
+
+          js = Path('i18n.js').read_text(encoding='utf-8')
+          for code in ('en', 'ja', 'de', 'hi', 'es'):
+              if f'{code}:' not in js and code != 'en':
+                  raise SystemExit(f'Missing language {code}')
+          print('Validated multilingual support on all 8 HTML pages.')
+          PY
+
+      - name: Commit multilingual page links
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No multilingual page changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html'
+          git commit -m 'Enable multilingual interface on all pages'
+          git push

@@ -36,6 +36,11 @@ const detailNotice = document.getElementById('detailNotice');
 const quotedAmount = document.getElementById('quotedAmount');
 const quotedCurrency = document.getElementById('quotedCurrency');
 const internalNotes = document.getElementById('internalNotes');
+const customerMessage = document.getElementById('customerMessage');
+const copyCustomerMessage = document.getElementById('copyCustomerMessage');
+const openWhatsAppDraft = document.getElementById('openWhatsAppDraft');
+const openEmailDraft = document.getElementById('openEmailDraft');
+const regenerateMessageBtn = document.getElementById('regenerateMessageBtn');
 
 const STATUSES = ['New', 'Contacted', 'Quoted', 'Confirmed', 'Paid', 'Completed', 'Cancelled'];
 let bookings = [];
@@ -70,6 +75,22 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand('copy');
+  area.remove();
+}
+
 function currentFilteredBookings() {
   const search = searchInput.value.trim().toLowerCase();
   const status = statusFilter.value;
@@ -94,11 +115,71 @@ function renderStats() {
   document.getElementById('statPaid').textContent = bookings.filter(b => b.status === 'Paid').length;
 }
 
-function bookingWhatsApp(item) {
+function bookingWhatsApp(item, message) {
   const whatsappText = encodeURIComponent(
-    `Hello ${item.fullName || ''}, this is Rigan Roots & Routes regarding booking ${item.bookingRef || ''} for ${item.experienceName || 'your Nepal trip'}.`
+    message || `Hello ${item.fullName || ''}, this is Rigan Roots & Routes regarding booking ${item.bookingRef || ''} for ${item.experienceName || 'your Nepal trip'}.`
   );
   return `https://wa.me/${safePhone(item.phone)}?text=${whatsappText}`;
+}
+
+function selectedBooking() {
+  return bookings.find(item => item.id === selectedBookingId) || null;
+}
+
+function customerFirstName(item) {
+  return String(item?.fullName || '').trim().split(/\s+/)[0] || 'there';
+}
+
+function quoteText(item) {
+  const amount = Number(item?.quotedAmount);
+  if (!Number.isFinite(amount) || amount < 0 || item?.quotedAmount === null || item?.quotedAmount === undefined || item?.quotedAmount === '') return '';
+  const currency = item.quotedCurrency || 'USD';
+  return `${currency} ${amount.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+}
+
+function buildCustomerFollowup(item) {
+  const name = customerFirstName(item);
+  const reference = item.bookingRef || 'your booking request';
+  const experience = item.experienceName || 'your Nepal trip';
+  const travelDate = item.travelDate || 'your preferred date';
+  const quote = quoteText(item);
+  const intro = `Hello ${name}, this is Rigan Roots & Routes regarding ${reference} for ${experience}.`;
+  let body = '';
+
+  switch (item.status) {
+    case 'Contacted':
+      body = `We are following up on your request for travel around ${travelDate}. If you have any updated preferences for hotels, budget, activities or group size, please send them to us so we can refine the plan.`;
+      break;
+    case 'Quoted':
+      body = quote
+        ? `We have prepared a quotation of ${quote} for your current request. Please review the proposed services and let us know if you would like any changes before confirmation.`
+        : 'We have prepared your quotation. Please review the itinerary, inclusions and payment terms we send you and let us know if you would like any changes before confirmation.';
+      break;
+    case 'Confirmed':
+      body = `Your booking has been marked confirmed by our team for the current plan. We will share any remaining payment, document and pre-departure instructions separately. Please do not make assumptions about services that are not listed in the final confirmation.`;
+      break;
+    case 'Paid':
+      body = 'We have recorded your booking as paid. We will continue with the confirmed arrangements and share final pre-departure details, contacts and timing as they become available.';
+      break;
+    case 'Completed':
+      body = 'Thank you for travelling with Rigan Roots & Routes. We hope your Nepal journey was meaningful. We would be happy to help with a future trip or receive your feedback.';
+      break;
+    case 'Cancelled':
+      body = 'This booking is currently marked cancelled in our system. If you did not expect this or would like to discuss another date or route, please contact us and we will help.';
+      break;
+    case 'New':
+    default:
+      body = `We have received your booking request for travel around ${travelDate}. Our team is reviewing availability, route, group requirements and pricing. We will contact you with the next steps and a detailed quotation.`;
+      break;
+  }
+
+  return `${intro}\n\n${body}\n\nBooking reference: ${reference}\n\nThank you,\nRigan Roots & Routes`;
+}
+
+function regenerateCustomerMessage() {
+  const item = selectedBooking();
+  if (!item) return;
+  customerMessage.value = buildCustomerFollowup(item);
 }
 
 function renderBookings() {
@@ -148,6 +229,7 @@ function renderBookings() {
         if (booking) booking.status = newStatus;
         renderStats();
         clearNotice(dashboardNotice);
+        if (selectedBookingId === id) regenerateCustomerMessage();
       } catch (error) {
         console.error(error);
         select.value = previousStatus;
@@ -198,6 +280,9 @@ function openBookingDetails(id) {
   quotedAmount.value = item.quotedAmount ?? '';
   quotedCurrency.value = item.quotedCurrency || 'USD';
   internalNotes.value = item.internalNotes || '';
+  customerMessage.value = buildCustomerFollowup(item);
+  openWhatsAppDraft.disabled = !item.phone;
+  openEmailDraft.disabled = !item.email;
   detailModal.hidden = false;
   document.body.style.overflow = 'hidden';
 }
@@ -205,6 +290,7 @@ function openBookingDetails(id) {
 function closeBookingDetails() {
   detailModal.hidden = true;
   selectedBookingId = null;
+  customerMessage.value = '';
   document.body.style.overflow = '';
   clearNotice(detailNotice);
 }
@@ -235,6 +321,7 @@ async function saveBookingOperations() {
     item.quotedAmount = amount;
     item.quotedCurrency = quotedCurrency.value;
     item.internalNotes = internalNotes.value.trim().slice(0, 5000);
+    regenerateCustomerMessage();
     setNotice(detailNotice, 'Quote and internal notes saved.', 'success');
   } catch (error) {
     console.error(error);
@@ -242,6 +329,33 @@ async function saveBookingOperations() {
   } finally {
     button.disabled = false;
   }
+}
+
+async function copyFollowupMessage() {
+  const message = customerMessage.value.trim();
+  if (!message) return;
+  try {
+    await copyText(message);
+    setNotice(detailNotice, 'Customer message copied.', 'success');
+  } catch (error) {
+    console.error(error);
+    setNotice(detailNotice, 'Could not copy the message.', 'error');
+  }
+}
+
+function openFollowupWhatsApp() {
+  const item = selectedBooking();
+  const message = customerMessage.value.trim();
+  if (!item?.phone || !message) return;
+  window.open(bookingWhatsApp(item, message), '_blank', 'noopener,noreferrer');
+}
+
+function openFollowupEmail() {
+  const item = selectedBooking();
+  const message = customerMessage.value.trim();
+  if (!item?.email || !message) return;
+  const subject = `Rigan booking ${item.bookingRef || ''} — ${item.experienceName || 'Nepal trip'}`;
+  window.location.href = `mailto:${encodeURIComponent(item.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
 }
 
 function csvCell(value) {
@@ -310,6 +424,10 @@ document.getElementById('refreshBtn').addEventListener('click', loadBookings);
 document.getElementById('exportBtn').addEventListener('click', exportCsv);
 document.getElementById('closeDetailBtn').addEventListener('click', closeBookingDetails);
 document.getElementById('saveOpsBtn').addEventListener('click', saveBookingOperations);
+regenerateMessageBtn.addEventListener('click', regenerateCustomerMessage);
+copyCustomerMessage.addEventListener('click', copyFollowupMessage);
+openWhatsAppDraft.addEventListener('click', openFollowupWhatsApp);
+openEmailDraft.addEventListener('click', openFollowupEmail);
 detailModal.addEventListener('click', event => {
   if (event.target === detailModal) closeBookingDetails();
 });

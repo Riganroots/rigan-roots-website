@@ -13,9 +13,7 @@
   const params = new URLSearchParams(window.location.search);
   const experienceId = params.get('experience') || params.get('id') || '';
   const normalizedPath = window.location.pathname.replace(/\/+$/, '');
-  const isExperienceDetail =
-    normalizedPath === '/experiences/detail' ||
-    /\/experience-detail-v2\.html$/i.test(normalizedPath);
+  const isExperienceDetail = normalizedPath === '/experiences/detail';
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
@@ -68,7 +66,7 @@
       });
     }
 
-    if (/(?:^|\/)plan\/(?:\?|$)/i.test(href) || /plan\.html(?:\?|$)/i.test(href) || /plan (this )?trip|plan my trip|start planning/i.test(label)) {
+    if (/(?:^|\/)plan\/(?:\?|$)/i.test(href) || /plan (this )?trip|plan my trip|start planning/i.test(label)) {
       track('plan_trip_click', {
         link_text: label,
         link_url: absoluteHref || href
@@ -82,7 +80,7 @@
       });
     }
 
-    const experienceMatch = href.match(/(?:\/experiences\/detail\/|experience-detail-v2\.html)\?(?:[^#]*&)?(?:experience|id)=([^&#]+)/i);
+    const experienceMatch = href.match(/\/experiences\/detail\/\?(?:[^#]*&)?(?:experience|id)=([^&#]+)/i);
     if (experienceMatch) {
       track('experience_click', {
         target_experience_id: decodeURIComponent(experienceMatch[1]),

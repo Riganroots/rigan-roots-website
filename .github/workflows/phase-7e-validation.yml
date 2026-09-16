@@ -1,0 +1,45 @@
+name: Phase 7E payments validation
+
+on:
+  push:
+    branches: [feature/phase-7e-payments-receipts]
+    paths: ['.github/workflows/phase-7e-validation.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate payment and receipt system
+        run: |
+          node --check --input-type=module < payment-admin.js
+          node --check --input-type=module < receipt.js
+          node --check --input-type=module < admin.js
+          node --check --input-type=module < quote-admin.js
+          python - <<'PY'
+          from pathlib import Path
+          admin = Path('admin.html').read_text(encoding='utf-8')
+          pjs = Path('payment-admin.js').read_text(encoding='utf-8')
+          receipt = Path('receipt.html').read_text(encoding='utf-8')
+          rjs = Path('receipt.js').read_text(encoding='utf-8')
+          rules = Path('firestore.rules').read_text(encoding='utf-8')
+          docs = Path('PAYMENT_SETUP.md').read_text(encoding='utf-8')
+          for token in ['paymentPanel','recordPaymentBtn','paymentHistory','payment-admin.js']:
+              if token not in admin: raise SystemExit(f'Missing admin payment token: {token}')
+          for token in ['runTransaction','publicReceipts','totalPaid','balanceDue','receiptNumber','Paid']:
+              if token not in pjs: raise SystemExit(f'Missing payment workflow token: {token}')
+          for token in ['Print / Save PDF','paymentAmount','balanceAfter','receipt-disclaimer']:
+              if token not in receipt: raise SystemExit(f'Missing receipt page token: {token}')
+          for token in ['publicReceipts','getDoc','issued']:
+              if token not in rjs: raise SystemExit(f'Missing receipt loader token: {token}')
+          if 'match /publicReceipts/{receiptToken}' not in rules or 'allow get: if true;' not in rules:
+              raise SystemExit('Missing publicReceipts Firestore rule')
+          if 'does **not** collect money' not in docs:
+              raise SystemExit('Payment limitation is not documented')
+          if rules.count('{') != rules.count('}'):
+              raise SystemExit('Firestore rules braces are unbalanced')
+          print('Phase 7E static validation passed')
+          PY

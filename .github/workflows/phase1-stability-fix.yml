@@ -1,0 +1,126 @@
+name: Phase 1 website stability fixes
+
+on:
+  push:
+    paths:
+      - '.github/workflows/phase1-stability-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Phase 1 branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/phase-1-site-stability
+
+      - name: Apply safe stability fixes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          changed = []
+
+          def write_if_changed(path, original, updated):
+              if updated != original:
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(str(path))
+
+          # 1) Clean accidental Markdown code fences from HTML files and remove
+          # links to pages that do not exist yet.
+          for path in Path('.').glob('*.html'):
+              original = path.read_text(encoding='utf-8')
+              text = original
+
+              text = re.sub(r'^\s*```html\s*\n', '', text, count=1, flags=re.I)
+              text = re.sub(r'^\s*```\s*\n', '', text, count=1)
+              text = re.sub(r'\n\s*```\s*$', '\n', text, count=1)
+
+              # Remove broken nav/footer links until those pages are actually built.
+              text = re.sub(r'\s*<a\s+href=["\'](?:guides|marketplace)\.html["\'][^>]*>.*?</a>\s*', '\n', text, flags=re.I|re.S)
+
+              write_if_changed(path, original, text)
+
+          # 2) Make the Plan page accept the same canonical IDs used by the
+          # experience database and preserve unknown-but-valid experience slugs.
+          plan = Path('plan.html')
+          if plan.exists():
+              original = plan.read_text(encoding='utf-8')
+              text = original
+
+              text = text.replace('value="everest-base-camp">Everest Base Camp Trek',
+                                  'value="everest-base-camp-trek">Everest Base Camp Trek')
+              text = text.replace('value="annapurna-base-camp">Annapurna Base Camp Trek',
+                                  'value="annapurna-base-camp-trek">Annapurna Base Camp Trek')
+              text = text.replace("'everest-base-camp':['Everest Base Camp Trek'",
+                                  "'everest-base-camp-trek':['Everest Base Camp Trek'")
+              text = text.replace("'annapurna-base-camp':['Annapurna Base Camp Trek'",
+                                  "'annapurna-base-camp-trek':['Annapurna Base Camp Trek'")
+
+              old = "experience.value=ep&&[...experience.options].some(o=>o.value===ep)?ep:(rp?'custom-trip':'live-like-a-nepali');duration.value=getExp()[4];"
+              new = "if(ep){let existing=[...experience.options].find(o=>o.value===ep);if(!existing){const option=document.createElement('option');option.value=ep;option.textContent=ep.split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');experience.appendChild(option)}experience.value=ep}else{experience.value=rp?'custom-trip':'live-like-a-nepali'}duration.value=getExp()[4];"
+              text = text.replace(old, new)
+
+              write_if_changed(plan, original, text)
+
+          # 3) Avoid broken partner-logo placeholders when local image assets are absent.
+          index = Path('index.html')
+          if index.exists():
+              original = index.read_text(encoding='utf-8')
+              text = original
+              for src in ('images/nepal-gov.png','images/ntb.png','images/nma.png','images/taan.png'):
+                  text = text.replace(f'<img src="{src}"', f'<img src="{src}" onerror="this.style.display=\'none\'"')
+              write_if_changed(index, original, text)
+
+          # 4) Restore usable mobile navigation on Work With Us.
+          work = Path('work-with-us.html')
+          if work.exists():
+              original = work.read_text(encoding='utf-8')
+              text = original
+
+              if '.mobile-menu-btn{' not in text:
+                  text = text.replace(
+                      '.nav-links{\n      display:flex;',
+                      '.mobile-menu-btn{display:none;border:0;background:transparent;color:#fff;font-size:25px;cursor:pointer}\n\n    .nav-links{\n      display:flex;'
+                  )
+
+              text = text.replace(
+                  '@media(max-width:700px){\n      .nav-links{display:none}',
+                  '@media(max-width:700px){\n      .mobile-menu-btn{display:block}\n      .nav-inner{position:relative}\n      .nav-links{display:none;position:absolute;top:54px;left:0;right:0;flex-direction:column;gap:0;padding:14px 20px;background:rgba(10,24,16,.97);border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.25)}\n      .nav-links.active{display:flex}\n      .nav-links a{padding:11px 0}'
+              )
+
+              nav_marker = '<a href="index.html" class="logo">RIGAN ROOTS & ROUTES</a>\n        <div class="nav-links">'
+              nav_replacement = '<a href="index.html" class="logo">RIGAN ROOTS & ROUTES</a>\n        <button class="mobile-menu-btn" id="hostMenuBtn" type="button" aria-label="Open navigation menu" aria-expanded="false">☰</button>\n        <div class="nav-links" id="hostNavLinks">'
+              text = text.replace(nav_marker, nav_replacement)
+
+              if 'id="hostMenuBtn"' in text and 'const hostMenuBtn=' not in text:
+                  text = text.replace(
+                      '</body>',
+                      '''<script>\nconst hostMenuBtn=document.getElementById('hostMenuBtn');\nconst hostNavLinks=document.getElementById('hostNavLinks');\nif(hostMenuBtn&&hostNavLinks){\n  hostMenuBtn.addEventListener('click',()=>{\n    const open=hostNavLinks.classList.toggle('active');\n    hostMenuBtn.setAttribute('aria-expanded',String(open));\n    hostMenuBtn.textContent=open?'✕':'☰';\n  });\n  hostNavLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{\n    hostNavLinks.classList.remove('active');\n    hostMenuBtn.setAttribute('aria-expanded','false');\n    hostMenuBtn.textContent='☰';\n  }));\n}\n</script>\n</body>'''
+                  )
+
+              write_if_changed(work, original, text)
+
+          # Remove this one-time workflow from the resulting branch.
+          Path('.github/workflows/phase1-stability-fix.yml').unlink(missing_ok=True)
+
+          print('Changed files:', ', '.join(changed) if changed else 'none')
+          PY
+
+      - name: Commit Phase 1 fixes
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No fixes were required.'
+            exit 0
+          fi
+          git commit -m 'Fix Phase 1 website stability issues'
+          git push origin HEAD:fix/phase-1-site-stability

@@ -39,22 +39,28 @@
     });
   }
 
-  function loadLocale(lang) {
-    if (!SUPPORTED.has(lang)) return Promise.resolve();
-    if (window.RiganExperienceLocales && window.RiganExperienceLocales[lang]) return Promise.resolve();
-    if (loaded.has(lang)) return loaded.get(lang);
-
+  function loadScriptOnce(key, src) {
+    if (loaded.has(key)) return loaded.get(key);
     const promise = new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = `experience-locale-${lang}.js`;
+      script.src = src;
       script.async = true;
       script.onload = resolve;
-      script.onerror = () => reject(new Error(`Unable to load locale: ${lang}`));
+      script.onerror = () => reject(new Error(`Unable to load locale file: ${src}`));
       document.head.appendChild(script);
     });
-
-    loaded.set(lang, promise);
+    loaded.set(key, promise);
     return promise;
+  }
+
+  async function loadLocale(lang) {
+    if (!SUPPORTED.has(lang)) return;
+
+    if (!(window.RiganExperienceLocales && window.RiganExperienceLocales[lang])) {
+      await loadScriptOnce(`${lang}:base`, `experience-locale-${lang}.js`);
+    }
+
+    await loadScriptOnce(`${lang}:extra`, `experience-locale-${lang}-extra.js`);
   }
 
   function setText(id, value) {

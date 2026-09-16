@@ -8,7 +8,7 @@
 
   function createBookingUrl() {
     const current = new URLSearchParams(window.location.search);
-    const booking = new URL('booking.html', window.location.href);
+    const booking = new URL('/booking/', window.location.href);
     const experience = current.get('experience') || current.get('id');
     const travelDate = document.getElementById('travelDate')?.value;
     const travellers = document.getElementById('travelers')?.value;

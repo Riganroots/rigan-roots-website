@@ -3,172 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex,nofollow">
-  <title>Rigan Booking Admin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css">
+  <meta name="robots" content="noindex,follow">
+  <title>Booking Admin | Rigan Roots &amp; Routes</title>
+  <link rel="canonical" href="https://riganrootsroutes.com/admin/">
+  <meta http-equiv="refresh" content="0; url=/admin/">
+  <script>
+    (function () {
+      var target = "/admin/";
+      window.location.replace(target + window.location.search + window.location.hash);
+    })();
+  </script>
 </head>
 <body>
-  <header class="admin-topbar">
-    <div class="admin-brand">
-      <img src="rigan-logo.svg" alt="Rigan Roots & Routes" onerror="this.style.display='none'">
-      <div class="admin-brand-text"><strong>Rigan Roots & Routes</strong><span>Booking Admin</span></div>
-    </div>
-    <div class="admin-actions">
-      <span id="adminEmail" class="small"></span>
-      <button class="btn btn-light" id="logoutBtn" type="button" hidden>Log out</button>
-    </div>
-  </header>
-
-  <section class="login-wrap" id="loginView">
-    <form class="login-card card" id="loginForm">
-      <h1>Admin sign in</h1>
-      <p>Use the Firebase Authentication account created for your Rigan admin team.</p>
-      <label for="adminLoginEmail">Email</label>
-      <input id="adminLoginEmail" type="email" autocomplete="username" required>
-      <label for="adminLoginPassword">Password</label>
-      <input id="adminLoginPassword" type="password" autocomplete="current-password" required>
-      <button class="btn btn-primary" type="submit">Sign in</button>
-      <div class="notice" id="loginNotice" role="status"></div>
-      <div class="admin-access-note">Only authenticated users whose UID exists in the Firestore <strong>admins</strong> collection can read or update bookings.</div>
-    </form>
-  </section>
-
-  <main class="admin-shell dashboard" id="dashboardView">
-    <div class="dashboard-head">
-      <div><h1>Booking requests</h1><p>Review customer requests, contact travellers, prepare quotes, and update booking status.</p></div>
-      <div class="head-actions">
-        <button class="btn btn-outline" id="exportBtn" type="button">Export CSV</button>
-        <button class="btn btn-outline" id="refreshBtn" type="button">Refresh</button>
-      </div>
-    </div>
-
-    <section class="stats">
-      <div class="stat card"><span>Total</span><strong id="statTotal">0</strong></div>
-      <div class="stat card"><span>New</span><strong id="statNew">0</strong></div>
-      <div class="stat card"><span>Confirmed</span><strong id="statConfirmed">0</strong></div>
-      <div class="stat card"><span>Paid</span><strong id="statPaid">0</strong></div>
-    </section>
-
-    <section class="controls card">
-      <input id="searchInput" type="search" placeholder="Search name, booking ref, phone, package…">
-      <select id="statusFilter"><option value="All">All statuses</option><option>New</option><option>Contacted</option><option>Quoted</option><option>Confirmed</option><option>Paid</option><option>Completed</option><option>Cancelled</option></select>
-      <button class="btn btn-outline" id="clearFilters" type="button">Clear</button>
-    </section>
-
-    <section class="table-card card">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Reference</th><th>Traveller</th><th>Experience</th><th>Travel</th><th>Contact</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
-          <tbody id="bookingRows"></tbody>
-        </table>
-      </div>
-      <div class="empty-state" id="emptyState">No bookings match the current filter.</div>
-    </section>
-    <div class="notice" id="dashboardNotice" role="status"></div>
-  </main>
-
-  <div class="modal-backdrop" id="detailModal" hidden>
-    <section class="detail-modal card" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
-      <div class="detail-modal-head">
-        <div><p class="eyebrow">Booking details</p><h2 id="detailTitle">Booking</h2></div>
-        <button class="icon-btn" id="closeDetailBtn" type="button" aria-label="Close booking details">×</button>
-      </div>
-      <div class="detail-grid" id="detailGrid"></div>
-      <div class="detail-actions" id="detailActions"></div>
-      <div class="ops-grid">
-        <label>Quoted amount
-          <input id="quotedAmount" type="number" min="0" step="0.01" placeholder="0.00">
-        </label>
-        <label>Currency
-          <select id="quotedCurrency"><option>USD</option><option>NPR</option><option>EUR</option><option>GBP</option><option>JPY</option><option>INR</option></select>
-        </label>
-      </div>
-      <label class="notes-label" for="internalNotes">Internal notes</label>
-      <textarea id="internalNotes" rows="5" placeholder="Private notes for your team. Not visible to the customer."></textarea>
-      <div class="modal-footer">
-        <button class="btn btn-primary modal-save" id="saveOpsBtn" type="button">Save amount & notes</button>
-      </div>
-
-      <section class="quote-builder" id="quoteBuilder">
-        <div class="quote-builder-head">
-          <div>
-            <p class="eyebrow">Professional quotation</p>
-            <h3>Create & publish quote</h3>
-            <p>Publishing creates a private customer link and changes the booking status to <strong>Quoted</strong>.</p>
-          </div>
-          <span class="quote-version" id="quoteVersionLabel">No quote yet</span>
-        </div>
-
-        <div class="quote-grid">
-          <label>Deposit amount
-            <input id="quoteDeposit" type="number" min="0" step="0.01" placeholder="0.00">
-          </label>
-          <label>Quote valid until
-            <input id="quoteValidUntil" type="date">
-          </label>
-        </div>
-        <div class="quote-balance" id="quoteBalance">Balance after deposit: —</div>
-
-        <div class="quote-field-head">
-          <label for="quoteItinerary">Itinerary</label>
-          <button class="btn btn-outline btn-small" id="loadPackageItinerary" type="button">Load package itinerary</button>
-        </div>
-        <textarea id="quoteItinerary" rows="11" placeholder="Day 1 — ..."></textarea>
-
-        <div class="quote-two-col">
-          <label>Included
-            <textarea id="quoteIncludes" rows="8" placeholder="One inclusion per line"></textarea>
-          </label>
-          <label>Not included
-            <textarea id="quoteExcludes" rows="8" placeholder="One exclusion per line"></textarea>
-          </label>
-        </div>
-
-        <label>Payment terms
-          <textarea id="quotePaymentTerms" rows="5"></textarea>
-        </label>
-        <label>Cancellation / amendment notes
-          <textarea id="quoteCancellationTerms" rows="5"></textarea>
-        </label>
-
-        <div class="quote-actions">
-          <button class="btn btn-primary" id="publishQuoteBtn" type="button">Save & Publish Quote</button>
-          <button class="btn btn-outline" id="openQuoteBtn" type="button" disabled>Preview / Print</button>
-          <button class="btn btn-outline" id="copyQuoteLinkBtn" type="button" disabled>Copy Link</button>
-          <button class="btn btn-whatsapp" id="quoteWhatsAppBtn" type="button" disabled>WhatsApp Quote</button>
-          <button class="btn btn-outline" id="quoteEmailBtn" type="button" disabled>Email Quote</button>
-        </div>
-        <div class="quote-link" id="quoteLinkText"></div>
-        <div class="quote-history" id="quoteHistory"></div>
-        <div class="notice" id="quoteNotice" role="status"></div>
-      </section>
-
-      <section class="followup-box">
-        <div class="followup-head">
-          <div>
-            <p class="eyebrow">Customer follow-up</p>
-            <h3>Ready-to-send message</h3>
-          </div>
-          <button class="btn btn-outline btn-small" id="regenerateMessageBtn" type="button">Regenerate</button>
-        </div>
-        <p class="followup-help">The draft is based on the booking status and saved quote. Review it before sending.</p>
-        <textarea id="customerMessage" rows="8" aria-label="Customer follow-up message"></textarea>
-        <div class="followup-actions">
-          <button class="btn btn-outline btn-small" id="copyCustomerMessage" type="button">Copy message</button>
-          <button class="btn btn-whatsapp btn-small" id="openWhatsAppDraft" type="button">Open WhatsApp draft</button>
-          <button class="btn btn-primary btn-small followup-email" id="openEmailDraft" type="button">Open email draft</button>
-        </div>
-      </section>
-
-      <div class="notice" id="detailNotice" role="status"></div>
-    </section>
-  </div>
-
-  <script src="experience-data-v2.js"></script>
-  <script type="module" src="admin.js"></script>
-  <script type="module" src="quote-admin.js"></script>
+  <p>This page has moved. <a href="/admin/">Continue to the new address</a>.</p>
 </body>
 </html>

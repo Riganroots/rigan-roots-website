@@ -1,0 +1,42 @@
+name: Phase 7C validation
+
+on:
+  push:
+    branches: [feature/phase-7c-customer-followup]
+    paths: ['.github/workflows/phase-7c-validation.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate booking follow-up upgrade
+        run: |
+          node --check --input-type=module < booking.js
+          node --check --input-type=module < admin.js
+          python - <<'PY'
+          from pathlib import Path
+          booking_html=Path('booking.html').read_text(encoding='utf-8')
+          booking_js=Path('booking.js').read_text(encoding='utf-8')
+          admin_html=Path('admin.html').read_text(encoding='utf-8')
+          admin_js=Path('admin.js').read_text(encoding='utf-8')
+          docs=Path('NOTIFICATION_SETUP.md').read_text(encoding='utf-8')
+          for token in ['copyReference','calendarButton','successEmail','successNotification']:
+              if token not in booking_html or token not in booking_js:
+                  raise SystemExit(f'Missing booking confirmation feature: {token}')
+          for token in ['TEAM_NOTIFICATION_ENDPOINT','notifyTeam','downloadCalendarReminder']:
+              if token not in booking_js:
+                  raise SystemExit(f'Missing booking workflow feature: {token}')
+          for token in ['customerMessage','copyCustomerMessage','openWhatsAppDraft','openEmailDraft','regenerateMessageBtn']:
+              if token not in admin_html or token not in admin_js:
+                  raise SystemExit(f'Missing admin follow-up feature: {token}')
+          for token in ['buildCustomerFollowup','bookingWhatsApp','quoteText']:
+              if token not in admin_js:
+                  raise SystemExit(f'Missing follow-up logic: {token}')
+          if 'True server-triggered WhatsApp messages' not in docs:
+              raise SystemExit('Notification limitations are not documented')
+          print('Phase 7C validation passed')
+          PY

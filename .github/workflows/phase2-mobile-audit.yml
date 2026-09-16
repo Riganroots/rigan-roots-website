@@ -1,0 +1,115 @@
+name: Phase 2 mobile audit
+on:
+  push:
+    branches: [fix/phase-2-mobile-consistency]
+permissions:
+  contents: write
+jobs:
+  audit-mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Phase 2 branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/phase-2-mobile-consistency
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install chromium >/dev/null 2>&1
+      - name: Audit live mobile layouts
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          (async () => {
+            const base = 'https://riganrootsroutes.com';
+            const pages = [
+              ['index.html','Home'],
+              ['experience-v2.html','Experiences'],
+              ['experience-detail-v2.html?experience=annapurna-base-camp-trek','Experience detail'],
+              ['regions.html','Regions'],
+              ['about.html','About'],
+              ['plan.html','Plan'],
+              ['contact.html','Contact'],
+              ['work-with-us.html','Work With Us']
+            ];
+            const browser = await chromium.launch({headless:true});
+            const context = await browser.newContext();
+            let hardFailures = 0;
+            for (const [path,name] of pages) {
+              for (const viewport of [{width:390,height:844,label:'390px'},{width:768,height:1024,label:'768px'}]) {
+                const page = await context.newPage({viewport:{width:viewport.width,height:viewport.height}});
+                const errors = [];
+                page.on('pageerror', e => errors.push(e.message));
+                try {
+                  const r = await page.goto(`${base}/${path}`, {waitUntil:'networkidle', timeout:45000});
+                  if (!r || r.status() >= 400) {
+                    console.log(`FAIL | ${name} | ${viewport.label} | HTTP ${r ? r.status() : 'none'}`);
+                    hardFailures++;
+                    await page.close();
+                    continue;
+                  }
+                  const audit = await page.evaluate(() => {
+                    const vw = window.innerWidth;
+                    const docW = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth);
+                    const overflowers = [...document.querySelectorAll('body *')].filter(el => {
+                      const s = getComputedStyle(el);
+                      if (s.display === 'none' || s.visibility === 'hidden') return false;
+                      const r = el.getBoundingClientRect();
+                      return r.right > vw + 3 || r.left < -3;
+                    }).slice(0,12).map(el => ({tag:el.tagName.toLowerCase(), cls:el.className || '', id:el.id || '', left:Math.round(el.getBoundingClientRect().left), right:Math.round(el.getBoundingClientRect().right)}));
+                    const imgs = [...document.images].filter(img => {
+                      const r = img.getBoundingClientRect();
+                      return r.width > vw + 3;
+                    }).slice(0,8).map(img => img.alt || img.src);
+                    const smallInputs = [...document.querySelectorAll('input,select,textarea')].filter(el => {
+                      const s = getComputedStyle(el);
+                      return el.offsetParent !== null && parseFloat(s.fontSize) < 16;
+                    }).slice(0,10).map(el => `${el.tagName.toLowerCase()}#${el.id || ''}.${el.className || ''}:${getComputedStyle(el).fontSize}`);
+                    const smallTargets = [...document.querySelectorAll('a,button')].filter(el => {
+                      if (el.offsetParent === null) return false;
+                      const r = el.getBoundingClientRect();
+                      return r.width > 0 && r.height > 0 && (r.width < 40 || r.height < 40);
+                    }).slice(0,12).map(el => `${el.tagName.toLowerCase()}#${el.id || ''}.${el.className || ''}:${Math.round(el.getBoundingClientRect().width)}x${Math.round(el.getBoundingClientRect().height)}`);
+                    const menuBtn = document.querySelector('#menuBtn,#mobileMenuBtn,#hostMenuBtn,#aboutMenuBtn,.menu-btn,.mobile-menu-btn');
+                    return {
+                      docW, vw,
+                      overflowers,
+                      imgs,
+                      smallInputs,
+                      smallTargets,
+                      menuButtonVisible: !!menuBtn && getComputedStyle(menuBtn).display !== 'none' && menuBtn.getBoundingClientRect().width > 0
+                    };
+                  });
+                  const overflow = audit.docW > audit.vw + 3;
+                  console.log(`${overflow ? 'FAIL' : 'PASS'} | ${name} | ${viewport.label} | width ${audit.docW}/${audit.vw} | menu ${audit.menuButtonVisible ? 'visible' : 'not-visible'}`);
+                  if (overflow) {
+                    hardFailures++;
+                    console.log('  overflowers:', JSON.stringify(audit.overflowers));
+                  }
+                  if (audit.imgs.length) console.log('  oversized images:', JSON.stringify(audit.imgs));
+                  if (audit.smallInputs.length) console.log('  input-font warnings:', JSON.stringify(audit.smallInputs));
+                  if (audit.smallTargets.length) console.log('  tap-target warnings:', JSON.stringify(audit.smallTargets));
+                  if (errors.length) console.log('  JS errors:', JSON.stringify(errors));
+                } catch (e) {
+                  console.log(`FAIL | ${name} | ${viewport.label} | ${e.message}`);
+                  hardFailures++;
+                }
+                await page.close();
+              }
+            }
+            await browser.close();
+            console.log(`MOBILE_AUDIT_HARD_FAILURES=${hardFailures}`);
+            process.exit(0);
+          })();
+          NODE
+      - name: Remove temporary audit workflow
+        if: always()
+        run: |
+          rm -f .github/workflows/phase2-mobile-audit.yml
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/phase2-mobile-audit.yml
+          git commit -m 'Remove temporary Phase 2 mobile audit workflow'
+          git push origin HEAD:fix/phase-2-mobile-consistency

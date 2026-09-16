@@ -26,10 +26,7 @@
 
   function installBookingButton() {
     const pathname = window.location.pathname.replace(/\/+$/, '');
-    const isExperienceDetail =
-      pathname === '/experiences/detail' ||
-      /\/experience-detail-v2\.html$/i.test(pathname);
-    if (!isExperienceDetail) return;
+    if (pathname !== '/experiences/detail') return;
 
     const card = document.querySelector('.booking-card');
     const whatsapp = document.getElementById('whatsappBtn');

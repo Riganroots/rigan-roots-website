@@ -434,6 +434,44 @@
       ],
       goodToKnow: ["Paragliding depends on wind and weather", "Flight duration varies with thermal conditions", "Follow the pilot's take-off and landing instructions exactly", "Age, weight, and medical restrictions are confirmed by the operating company"]
     }
+,
+
+    "bird-watching-nepal": {
+      highlights: ["Early-morning birding with local naturalist guidance", "Forests, wetlands, foothills, or grassland habitats selected by season", "Small-group, low-impact wildlife observation", "Flexible pace for birders, photographers, and nature lovers"],
+      bestFor: ["Birdwatchers and wildlife photographers", "Nature-focused travellers", "Beginners who want guided birding in Nepal"],
+      itinerary: [
+        { day: "Sample Day 1 — Dawn Birding & Habitat Walk", text: "Start early at a selected birding site, walk slowly with a local naturalist, learn about habitat and behaviour, and take a relaxed midday break before an optional late-afternoon session." },
+        { day: "Sample Day 2 — Forest, Wetland or Foothill Route", text: "Visit a contrasting habitat chosen for the season and current conditions, with time for observation, photography, and local nature interpretation." },
+        { day: "Optional Days 3–5 — Extended Birding", text: "Add another valley, wetland, forest, or Chitwan-area birding section when your schedule allows. The exact route is confirmed according to season and access." }
+      ],
+      goodToKnow: ["Bird and wildlife sightings are never guaranteed", "Early starts usually give the best birding conditions", "Bring binoculars if you have them", "Sites and timing change with season, weather, access, and migration patterns"]
+    },
+
+    "nepal-motorbike-adventure": {
+      highlights: ["Guided riding through Nepal's hill roads and valleys", "Village, viewpoint, and cultural stops along the route", "Flexible 5–10 day road-trip format", "Route planning adapted to rider experience and road conditions"],
+      bestFor: ["Experienced motorcycle travellers", "Adventure riders seeking a guided Nepal road journey", "Small groups comfortable with changing road conditions"],
+      itinerary: [
+        { day: "Sample Day 1 — Rider Briefing & Bike Check", text: "Meet the road team, review the route, riding rules, documents, weather, safety gear, luggage setup, and complete a short familiarization ride." },
+        { day: "Sample Day 2 — Kathmandu to Hill Country", text: "Leave the city and ride into Nepal's middle hills, stopping at viewpoints, villages, and local tea houses while keeping the first day at a comfortable pace." },
+        { day: "Sample Day 3 — Mountain Roads & Village Stops", text: "Continue on a scenic route chosen for the season, with regular rest stops and time to experience local communities." },
+        { day: "Sample Day 4 — Ride toward Pokhara or Selected Region", text: "Follow the confirmed road route toward the next major destination, adjusting the day to traffic, weather, and road conditions." },
+        { day: "Sample Day 5 — Scenic Loop / Rest Day", text: "Choose a shorter local ride, viewpoint route, cultural stop, or rest day before continuing the journey." },
+        { day: "Sample Days 6–9 — Extended Himalayan Road Journey", text: "Continue through the selected region on a route suited to the riders, season, and current road access." },
+        { day: "Final Day — Return & Ride Finish", text: "Complete the final riding section, return the motorcycle according to the operator arrangement, and finish with onward travel support." }
+      ],
+      goodToKnow: ["Self-riding is subject to valid licence, documentation, local rules, and operator eligibility requirements", "A helmet and appropriate protective riding gear are essential", "Road and weather conditions can change the route", "The guide or road captain may change the plan for safety"]
+    },
+
+    "nepal-cycling-adventure": {
+      highlights: ["Valley trails, forest roads, villages, and Himalayan foothills", "Routes for leisure riders through experienced mountain bikers", "Flexible day rides or multi-day cycling journeys", "Local guide support and route selection based on fitness"],
+      bestFor: ["Active travellers", "Mountain bikers and recreational cyclists", "Guests wanting slower, human-powered exploration"],
+      itinerary: [
+        { day: "Sample Day 1 — Bike Fit, Briefing & Valley Ride", text: "Set up the bicycle, review trail safety and route options, then begin with a ride through a suitable valley, village, or forest-road section." },
+        { day: "Sample Day 2 — Ridge, Village & Scenic Trails", text: "Ride a longer route with climbs, descents, cultural stops, and viewpoints chosen for the group's ability." },
+        { day: "Sample Day 3 — Trail Loop or Point-to-Point Ride", text: "Complete another selected route and finish at the planned roadhead or city. Longer 4–7 day versions continue into additional regions." }
+      ],
+      goodToKnow: ["Routes are selected according to riding ability and current trail conditions", "Helmet use is required and additional protective gear is recommended for technical riding", "Weather and local access can change the route", "E-bikes, support vehicles, and bike specifications depend on the confirmed quotation"]
+    }
   };
 
   window.experienceEnhancementsV3 = details;

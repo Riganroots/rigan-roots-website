@@ -1,0 +1,45 @@
+name: Update website logo
+
+on:
+  push:
+    paths:
+      - '.github/workflows/update-logo.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-logo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Replace old logo reference
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          old = 'https://i.postimg.cc/G2m13ZZh/logo.jpg'
+          new = 'rigan-logo.svg'
+          changed = []
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              if old in text:
+                  path.write_text(text.replace(old, new), encoding='utf-8')
+                  changed.append(str(path))
+          print('Updated:', ', '.join(changed) if changed else 'no files')
+          PY
+
+      - name: Commit logo update
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No logo references needed updating.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html'
+          git commit -m 'Update website logo'
+          git push

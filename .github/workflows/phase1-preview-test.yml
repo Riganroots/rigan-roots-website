@@ -1,0 +1,153 @@
+name: Phase 1 preview browser test
+
+on:
+  push:
+    branches:
+      - fix/phase-1-followup-clean
+    paths:
+      - '.github/workflows/phase1-preview-test.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  browser-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/phase-1-followup-clean
+
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install chromium >/dev/null 2>&1
+
+      - name: Test Netlify deploy preview
+        shell: bash
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          (async () => {
+            const base = 'https://deploy-preview-3--rigan.netlify.app';
+            const results = [];
+            const failures = [];
+            const warnings = [];
+            const pass = n => results.push('PASS: ' + n);
+            const fail = (n,d='') => failures.push('FAIL: ' + n + (d ? ' — ' + d : ''));
+            const browser = await chromium.launch({headless:true});
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            const pageErrors = [];
+            page.on('pageerror', e => pageErrors.push(e.message));
+            page.on('console', m => { if (m.type()==='error') warnings.push(m.text()); });
+
+            async function visit(path,name){
+              try {
+                const r = await page.goto(base+path,{waitUntil:'networkidle',timeout:45000});
+                if (!r || r.status() >= 400) { fail(name,'HTTP '+(r?r.status():'none')); return false; }
+                pass(name+' loads'); return true;
+              } catch(e) { fail(name,e.message); return false; }
+            }
+
+            for (const [path,name] of [['/','Home'],['/experience-v2.html','Experiences'],['/regions.html','Regions'],['/about.html','About'],['/plan.html','Plan'],['/contact.html','Contact'],['/work-with-us.html','Work With Us']]) await visit(path,name);
+
+            await page.setViewportSize({width:390,height:844});
+            if (await visit('/about.html','About mobile')) {
+              const btn=page.locator('#aboutMenuBtn');
+              if (await btn.count()) {
+                await btn.click();
+                const open=await page.locator('#aboutNavLinks').evaluate(el=>el.classList.contains('active')&&getComputedStyle(el).display!=='none');
+                const expanded=await btn.getAttribute('aria-expanded');
+                open&&expanded==='true'?pass('About mobile menu opens'):fail('About mobile menu opens');
+                await page.keyboard.press('Escape');
+                const closed=await page.locator('#aboutNavLinks').evaluate(el=>!el.classList.contains('active'));
+                closed?pass('About mobile menu closes with Escape'):fail('About mobile menu closes with Escape');
+              } else fail('About mobile menu button exists');
+            }
+
+            if (await visit('/work-with-us.html','Work With Us mobile')) {
+              const btn=page.locator('#hostMenuBtn');
+              if (await btn.count()) {
+                await btn.click();
+                (await page.locator('#hostNavLinks').evaluate(el=>el.classList.contains('active')))?pass('Work With Us mobile menu opens'):fail('Work With Us mobile menu opens');
+              } else fail('Work With Us mobile menu button exists');
+            }
+
+            await page.setViewportSize({width:1280,height:900});
+            if (await visit('/plan.html?experience=mardi-himal-trek','Plan Mardi query')) {
+              const val=await page.locator('#experience').inputValue();
+              const text=((await page.locator('#experienceText').textContent())||'').trim();
+              val==='mardi-himal-trek'?pass('Plan preserves Mardi Himal slug'):fail('Plan preserves Mardi Himal slug',val);
+              /Mardi Himal/i.test(text)&&!/Live Like a Nepali/i.test(text)?pass('Plan shows Mardi Himal instead of wrong default'):fail('Plan shows Mardi Himal instead of wrong default',text);
+            }
+
+            if (await visit('/plan.html?experience=annapurna-base-camp-trek','Plan Annapurna query')) {
+              const val=await page.locator('#experience').inputValue();
+              const text=((await page.locator('#experienceText').textContent())||'').trim();
+              val==='annapurna-base-camp-trek'?pass('Plan preserves Annapurna slug'):fail('Plan preserves Annapurna slug',val);
+              /Annapurna Base Camp Trek/i.test(text)?pass('Plan shows Annapurna title'):fail('Plan shows Annapurna title',text);
+            }
+
+            if (await visit('/plan.html','Plan mountain selector')) {
+              const btn=page.locator('.mood[data-exp="everest-base-camp-trek"]');
+              if (await btn.count()) {
+                await btn.click();
+                (await page.locator('#experience').inputValue())==='everest-base-camp-trek'?pass('Mountains mood selects canonical Everest ID'):fail('Mountains mood selects canonical Everest ID');
+              } else fail('Canonical Everest mountains mood exists');
+            }
+
+            for (const slug of ['annapurna-base-camp-trek','mardi-himal-trek','shey-phoksundo-trek']) {
+              if (await visit('/experience-detail-v2.html?experience='+slug,'Detail '+slug)) {
+                const body=await page.locator('body').innerText();
+                !/Experience Not Found|could not be loaded/i.test(body)?pass('Detail resolves '+slug):fail('Detail resolves '+slug);
+              }
+            }
+
+            if (await visit('/plan.html?experience=annapurna-base-camp-trek','Plan WhatsApp setup')) {
+              await page.evaluate(()=>{window.open=(url)=>{window.__opened=url;return null;};});
+              await page.fill('#name','Preview Test');
+              await page.fill('#email','preview@example.com');
+              await page.fill('#phone','9800000000');
+              await page.selectOption('#duration','7');
+              await page.selectOption('#group','2');
+              await page.click('#waBtn');
+              const wa=await page.evaluate(()=>window.__opened||'');
+              wa.startsWith('https://wa.me/9779843322695?text=')?pass('Plan WhatsApp builds correct destination'):fail('Plan WhatsApp builds correct destination',wa);
+              (await page.locator('#planForm').getAttribute('action'))==='https://formspree.io/f/mbdpwkoz'?pass('Plan form endpoint correct'):fail('Plan form endpoint correct');
+            }
+
+            if (await visit('/contact.html','Contact form check')) {
+              const actions=await page.locator('form').evaluateAll(fs=>fs.map(f=>f.getAttribute('action')||''));
+              actions.some(a=>a.includes('formspree.io/f/mbdpwkoz'))?pass('Contact form endpoint correct'):fail('Contact form endpoint correct',JSON.stringify(actions));
+            }
+
+            for (const p of ['index.html','experience-v2.html','experience-detail-v2.html?experience=annapurna-base-camp-trek','regions.html','about.html','plan.html','contact.html','work-with-us.html']) {
+              try {
+                const r=await context.request.get(base+'/'+p,{timeout:30000});
+                r.status()<400?pass('HTTP '+r.status()+' '+p):fail('Local page responds '+p,'HTTP '+r.status());
+              } catch(e) { fail('Local page responds '+p,e.message); }
+            }
+
+            pageErrors.length?fail('No uncaught page JavaScript errors',pageErrors.join(' | ')):pass('No uncaught page JavaScript errors during tested flows');
+            await browser.close();
+            console.log(results.join('\n'));
+            if (warnings.length) console.log('\nWARNINGS:\n'+[...new Set(warnings)].slice(0,20).join('\n'));
+            if (failures.length) { console.error('\nFAILURES:\n'+failures.join('\n')); process.exit(1); }
+            console.log('\nALL PREVIEW TESTS PASSED');
+          })().catch(err => { console.error(err); process.exit(1); });
+          NODE
+
+      - name: Remove temporary test workflow
+        if: always()
+        shell: bash
+        run: |
+          rm -f .github/workflows/phase1-preview-test.yml
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/phase1-preview-test.yml
+          git commit -m 'Remove temporary Phase 1 preview test workflow'
+          git push origin HEAD:fix/phase-1-followup-clean

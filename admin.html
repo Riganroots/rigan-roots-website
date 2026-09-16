@@ -38,7 +38,7 @@
 
   <main class="admin-shell dashboard" id="dashboardView">
     <div class="dashboard-head">
-      <div><h1>Booking requests</h1><p>Review customer requests, contact travellers, prepare quotes, record payments, and update booking status.</p></div>
+      <div><h1>Booking requests</h1><p>Review customer requests, contact travellers, prepare quotes, and update booking status.</p></div>
       <div class="head-actions">
         <button class="btn btn-outline" id="exportBtn" type="button">Export CSV</button>
         <button class="btn btn-outline" id="refreshBtn" type="button">Refresh</button>
@@ -146,54 +146,6 @@
         <div class="notice" id="quoteNotice" role="status"></div>
       </section>
 
-      <section class="payment-box" id="paymentPanel">
-        <div class="payment-head">
-          <div>
-            <p class="eyebrow">Payments & receipts</p>
-            <h3>Record received payment</h3>
-            <p>This records money already received. It does not charge the customer or process a card/payment gateway.</p>
-          </div>
-          <span class="payment-state" id="paymentState">Open confirmed booking</span>
-        </div>
-
-        <div class="payment-summary">
-          <div><span>Quote total</span><strong id="paymentQuoteTotal">—</strong></div>
-          <div><span>Total received</span><strong id="paymentTotalPaid">—</strong></div>
-          <div><span>Balance</span><strong id="paymentBalance">—</strong></div>
-        </div>
-
-        <div class="payment-grid">
-          <label>Amount received
-            <input id="paymentAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
-          </label>
-          <label>Method
-            <select id="paymentMethod">
-              <option>Bank transfer</option>
-              <option>Cash</option>
-              <option>eSewa</option>
-              <option>Khalti</option>
-              <option>Card / payment link</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label>Received date
-            <input id="paymentDate" type="date">
-          </label>
-          <label>Transaction / reference
-            <input id="paymentReference" type="text" maxlength="120" placeholder="Optional bank or payment reference">
-          </label>
-        </div>
-
-        <label class="payment-notes-label" for="paymentNote">Receipt note</label>
-        <textarea id="paymentNote" rows="3" maxlength="500" placeholder="Optional short note shown on the receipt"></textarea>
-
-        <div class="payment-actions">
-          <button class="btn btn-primary" id="recordPaymentBtn" type="button">Record Payment & Create Receipt</button>
-        </div>
-        <div class="payment-history" id="paymentHistory"></div>
-        <div class="notice" id="paymentNotice" role="status"></div>
-      </section>
-
       <section class="followup-box">
         <div class="followup-head">
           <div>
@@ -218,6 +170,5 @@
   <script src="experience-data-v2.js"></script>
   <script type="module" src="admin.js"></script>
   <script type="module" src="quote-admin.js"></script>
-  <script type="module" src="payment-admin.js"></script>
 </body>
 </html>

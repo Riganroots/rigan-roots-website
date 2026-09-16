@@ -1,0 +1,210 @@
+name: Add new experience packages
+
+on:
+  push:
+    branches:
+      - feature/add-birding-motorbike-cycling
+    paths:
+      - '.github/workflows/add-new-experiences.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/add-birding-motorbike-cycling
+
+      - name: Add Bird Watching, Motorbike and Cycling experiences
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          data_path = Path('experience-data-v2.js')
+          data = data_path.read_text(encoding='utf-8')
+
+          bird = '''
+      exp({
+        id: "bird-watching-nepal",
+        name: "Bird Watching Nepal",
+        subtitle: "Discover Nepal's remarkable birdlife with local naturalist guidance in forests, wetlands, and foothills.",
+        overview: "A flexible birding journey focused on ethical wildlife viewing, local habitats, and seasonal birdlife across selected Nepal birding areas.",
+        duration: "2–5 Days",
+        location: "Kathmandu Valley / Chitwan / Selected Birding Areas",
+        style: "Birding, Nature & Conservation",
+        groupSize: "1–8 Guests",
+        difficulty: "Easy",
+        season: "October–April",
+        image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=1200&q=80",
+        badge: "Nature Signature"
+      })'''
+
+          motorbike = '''
+      exp({
+        id: "nepal-motorbike-adventure",
+        name: "Nepal Motorbike Adventure",
+        subtitle: "Ride Nepal's hill roads, valleys, villages, and Himalayan landscapes on a guided motorbike journey.",
+        overview: "A flexible road adventure combining scenic riding, local stops, village culture, and changing Himalayan landscapes.",
+        duration: "5–10 Days",
+        location: "Kathmandu / Pokhara / Selected Himalayan Routes",
+        style: "Guided Motorbike Touring",
+        groupSize: "2–8 Riders",
+        difficulty: "Moderate",
+        season: "October–May",
+        image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=80",
+        badge: "Road Adventure"
+      })'''
+
+          cycling = '''
+      exp({
+        id: "nepal-cycling-adventure",
+        name: "Nepal Cycling Adventure",
+        subtitle: "Cycle through valley trails, villages, forest roads, and scenic Himalayan foothills.",
+        overview: "A customizable cycling journey for riders who want active travel, local encounters, and Nepal's varied landscapes.",
+        duration: "1–7 Days",
+        location: "Kathmandu Valley / Pokhara / Selected Trails",
+        style: "Cycling & Mountain Biking",
+        groupSize: "1–10 Guests",
+        difficulty: "Easy to Challenging",
+        season: "October–May",
+        image: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=1200&q=80",
+        badge: "Active Adventure"
+      })'''
+
+          if 'id: "bird-watching-nepal"' not in data:
+              pat = re.compile(r'(  signature:\s*\{.*?items:\s*\[)(.*?)(\n    \]\n  \},\n\n  village:)', re.S)
+              m = pat.search(data)
+              if not m:
+                  raise SystemExit('Signature category anchor not found')
+              body = m.group(2).rstrip()
+              if not body.endswith('})'):
+                  raise SystemExit('Unexpected signature category ending')
+              body = body[:-2] + '}),' + bird
+              data = data[:m.start()] + m.group(1) + body + m.group(3) + data[m.end():]
+
+          if 'id: "nepal-motorbike-adventure"' not in data or 'id: "nepal-cycling-adventure"' not in data:
+              pat = re.compile(r'(  adventure:\s*\{.*?items:\s*\[)(.*?)(\n    \]\n  \}\n\n\};)', re.S)
+              m = pat.search(data)
+              if not m:
+                  raise SystemExit('Adventure category anchor not found')
+              body = m.group(2).rstrip()
+              additions = []
+              if 'id: "nepal-motorbike-adventure"' not in data:
+                  additions.append(motorbike)
+              if 'id: "nepal-cycling-adventure"' not in data:
+                  additions.append(cycling)
+              if additions:
+                  if not body.endswith('})'):
+                      raise SystemExit('Unexpected adventure category ending')
+                  body = body[:-2] + '}),' + (',\n'.join(additions))
+                  data = data[:m.start()] + m.group(1) + body + m.group(3) + data[m.end():]
+
+          data_path.write_text(data, encoding='utf-8')
+
+          enrich_path = Path('experience-enrichment-v3.js')
+          enrich = enrich_path.read_text(encoding='utf-8')
+          if '"bird-watching-nepal"' not in enrich:
+              insert = r''',
+
+    "bird-watching-nepal": {
+      highlights: ["Early-morning birding with local naturalist guidance", "Forests, wetlands, foothills, or grassland habitats selected by season", "Small-group, low-impact wildlife observation", "Flexible pace for birders, photographers, and nature lovers"],
+      bestFor: ["Birdwatchers and wildlife photographers", "Nature-focused travellers", "Beginners who want guided birding in Nepal"],
+      itinerary: [
+        { day: "Sample Day 1 — Dawn Birding & Habitat Walk", text: "Start early at a selected birding site, walk slowly with a local naturalist, learn about habitat and behaviour, and take a relaxed midday break before an optional late-afternoon session." },
+        { day: "Sample Day 2 — Forest, Wetland or Foothill Route", text: "Visit a contrasting habitat chosen for the season and current conditions, with time for observation, photography, and local nature interpretation." },
+        { day: "Optional Days 3–5 — Extended Birding", text: "Add another valley, wetland, forest, or Chitwan-area birding section when your schedule allows. The exact route is confirmed according to season and access." }
+      ],
+      goodToKnow: ["Bird and wildlife sightings are never guaranteed", "Early starts usually give the best birding conditions", "Bring binoculars if you have them; specialist optics can be discussed during planning", "Sites and timing change with season, weather, access, and migration patterns"]
+    },
+
+    "nepal-motorbike-adventure": {
+      highlights: ["Guided riding through Nepal's hill roads and valleys", "Village, viewpoint, and cultural stops along the route", "Flexible 5–10 day road-trip format", "Route planning adapted to rider experience and road conditions"],
+      bestFor: ["Experienced motorcycle travellers", "Adventure riders seeking a guided Nepal road journey", "Small groups comfortable with changing road conditions"],
+      itinerary: [
+        { day: "Sample Day 1 — Rider Briefing & Bike Check", text: "Meet the road team, review the route, riding rules, documents, weather, safety gear, luggage setup, and complete a short familiarization ride." },
+        { day: "Sample Day 2 — Kathmandu to Hill Country", text: "Leave the city and ride into Nepal's middle hills, stopping at viewpoints, villages, and local tea houses while keeping the first day at a comfortable pace." },
+        { day: "Sample Day 3 — Mountain Roads & Village Stops", text: "Continue on a scenic route chosen for the season, with regular rest stops and time to experience local communities." },
+        { day: "Sample Day 4 — Ride toward Pokhara or Selected Region", text: "Follow the confirmed road route toward the next major destination, adjusting the day to traffic, weather, and road conditions." },
+        { day: "Sample Day 5 — Scenic Loop / Rest Day", text: "Choose a shorter local ride, viewpoint route, cultural stop, or rest day before continuing the journey." },
+        { day: "Sample Days 6–9 — Extended Himalayan Road Journey", text: "Continue through the selected region on a route suited to the riders, season, and current road access." },
+        { day: "Final Day — Return & Ride Finish", text: "Complete the final riding section, return the motorcycle according to the operator arrangement, and finish with onward travel support." }
+      ],
+      goodToKnow: ["Self-riding is subject to valid licence, documentation, local rules, and operator eligibility requirements", "A helmet and appropriate protective riding gear are essential", "Road, weather, traffic, landslide, and construction conditions can change the route", "The guide or road captain may change the plan for safety"]
+    },
+
+    "nepal-cycling-adventure": {
+      highlights: ["Valley trails, forest roads, villages, and Himalayan foothills", "Routes for leisure riders through experienced mountain bikers", "Flexible day rides or multi-day cycling journeys", "Local guide support and route selection based on fitness"],
+      bestFor: ["Active travellers", "Mountain bikers and recreational cyclists", "Guests wanting slower, human-powered exploration"],
+      itinerary: [
+        { day: "Sample Day 1 — Bike Fit, Briefing & Valley Ride", text: "Set up the bicycle, review trail safety and route options, then begin with a ride through a suitable valley, village, or forest-road section." },
+        { day: "Sample Day 2 — Ridge, Village & Scenic Trails", text: "Ride a longer route with climbs, descents, cultural stops, and viewpoints chosen for the group's ability." },
+        { day: "Sample Day 3 — Trail Loop or Point-to-Point Ride", text: "Complete another selected route and finish at the planned roadhead or city. Longer 4–7 day versions continue into additional regions." }
+      ],
+      goodToKnow: ["Routes are selected according to riding ability and current trail conditions", "Helmet use is required and additional protective gear is recommended for technical riding", "Weather, traffic, trail repairs, and local access can change the planned route", "E-bikes, support vehicles, and bike specifications depend on the confirmed quotation"]
+    }'''
+              anchor = '\n  };\n\n  window.experienceEnhancementsV3 = details;'
+              if anchor not in enrich:
+                  raise SystemExit('Enrichment details anchor not found')
+              # Convert the final existing object close into a comma-separated continuation.
+              enrich = enrich.replace(anchor, insert + anchor, 1)
+              # The inserted block starts with a comma; preserve the previous object close before it.
+              enrich = enrich.replace('\n    "bird-watching-nepal":', '\n    "bird-watching-nepal":', 1)
+          enrich_path.write_text(enrich, encoding='utf-8')
+
+          sitemap_path = Path('sitemap.xml')
+          sitemap = sitemap_path.read_text(encoding='utf-8')
+          urls = [
+              'https://riganrootsroutes.com/experience-detail-v2.html?experience=bird-watching-nepal',
+              'https://riganrootsroutes.com/experience-detail-v2.html?experience=nepal-motorbike-adventure',
+              'https://riganrootsroutes.com/experience-detail-v2.html?experience=nepal-cycling-adventure',
+          ]
+          blocks = []
+          for url in urls:
+              if url not in sitemap:
+                  blocks.append(f'  <url>\n    <loc>{url.replace("&", "&amp;")}</loc>\n  </url>')
+          if blocks:
+              if '</urlset>' not in sitemap:
+                  raise SystemExit('Sitemap closing tag not found')
+              sitemap = sitemap.replace('</urlset>', '\n' + '\n'.join(blocks) + '\n</urlset>', 1)
+              sitemap_path.write_text(sitemap, encoding='utf-8')
+          PY
+
+      - name: Validate new experiences
+        shell: bash
+        run: |
+          node --check experience-data-v2.js
+          node --check experience-enrichment-v3.js
+          python - <<'PY'
+          from pathlib import Path
+          data = Path('experience-data-v2.js').read_text(encoding='utf-8')
+          enrich = Path('experience-enrichment-v3.js').read_text(encoding='utf-8')
+          sitemap = Path('sitemap.xml').read_text(encoding='utf-8')
+          ids = ['bird-watching-nepal','nepal-motorbike-adventure','nepal-cycling-adventure']
+          for item in ids:
+              if f'id: "{item}"' not in data:
+                  raise SystemExit(f'Missing data entry: {item}')
+              if f'"{item}"' not in enrich:
+                  raise SystemExit(f'Missing enrichment entry: {item}')
+              if f'experience={item}' not in sitemap:
+                  raise SystemExit(f'Missing sitemap URL: {item}')
+          if data.index('bird-watching-nepal') > data.index('  village:'):
+              raise SystemExit('Bird watching was not added to Signature')
+          if not (data.index('  adventure:') < data.index('nepal-motorbike-adventure') < data.index('nepal-cycling-adventure')):
+              raise SystemExit('Motorbike/Cycling were not added to Adventure')
+          print('Validated Bird Watching in Signature and Motorbike/Cycling in Adventure.')
+          PY
+
+      - name: Commit package additions
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experience-data-v2.js experience-enrichment-v3.js sitemap.xml
+          git commit -m 'Add bird watching, motorbike and cycling experiences'
+          git push

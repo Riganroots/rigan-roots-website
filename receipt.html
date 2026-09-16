@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Rigan Payment Receipt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="receipt.css">
+</head>
+<body>
+  <main class="receipt-shell">
+    <section class="receipt-card" id="receiptCard" hidden>
+      <header class="receipt-head">
+        <div>
+          <p class="brand">Rigan Roots & Routes</p>
+          <h1>Payment Receipt</h1>
+          <p class="muted">Meet Nepal Through Its People</p>
+        </div>
+        <div class="receipt-status">Payment received</div>
+      </header>
+
+      <section class="receipt-meta">
+        <div><span>Receipt number</span><strong id="receiptNumber">—</strong></div>
+        <div><span>Booking reference</span><strong id="bookingRef">—</strong></div>
+        <div><span>Received date</span><strong id="receivedDate">—</strong></div>
+        <div><span>Issued</span><strong id="issuedAt">—</strong></div>
+      </section>
+
+      <section class="customer-box">
+        <div><span>Received from</span><strong id="customerName">—</strong></div>
+        <div><span>Experience</span><strong id="experienceName">—</strong></div>
+        <div><span>Travel date</span><strong id="travelDate">—</strong></div>
+        <div><span>Travellers</span><strong id="travellers">—</strong></div>
+      </section>
+
+      <section class="amount-box">
+        <p>Amount received</p>
+        <strong id="paymentAmount">—</strong>
+        <span id="paymentMethod">—</span>
+      </section>
+
+      <section class="payment-detail-grid">
+        <div><span>Transaction / reference</span><strong id="paymentReference">—</strong></div>
+        <div><span>Quotation total</span><strong id="quoteTotal">—</strong></div>
+        <div><span>Total received to date</span><strong id="totalPaidAfter">—</strong></div>
+        <div><span>Balance after this payment</span><strong id="balanceAfter">—</strong></div>
+      </section>
+
+      <section class="receipt-note" id="receiptNoteWrap" hidden>
+        <span>Note</span>
+        <p id="receiptNote"></p>
+      </section>
+
+      <section class="receipt-disclaimer">
+        <strong>Receipt note</strong>
+        <p>This receipt confirms that Rigan Roots & Routes recorded the payment shown above for the referenced booking. It is not a tax invoice unless a separate tax invoice is issued.</p>
+      </section>
+
+      <div class="receipt-actions no-print">
+        <button id="printReceiptBtn" type="button">Print / Save PDF</button>
+        <a id="whatsAppSupport" href="https://wa.me/9779843322695" target="_blank" rel="noopener noreferrer">Contact on WhatsApp</a>
+      </div>
+    </section>
+
+    <section class="receipt-error" id="receiptError">
+      <h1>Receipt unavailable</h1>
+      <p id="receiptErrorMessage">Checking this receipt link…</p>
+      <a href="https://riganrootsroutes.com/">Return to Rigan Roots & Routes</a>
+    </section>
+  </main>
+
+  <script type="module" src="receipt.js"></script>
+</body>
+</html>

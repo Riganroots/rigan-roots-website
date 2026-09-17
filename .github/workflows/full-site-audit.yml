@@ -1,0 +1,251 @@
+name: Full site audit
+
+on:
+  push:
+    branches:
+      - fix/full-site-audit
+    paths:
+      - '.github/workflows/full-site-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Static source audit
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit, unquote
+          import re
+
+          root = Path('.')
+          problems = []
+          warnings = []
+
+          text_files = [p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.html','.js','.css'} and '.git' not in p.parts]
+          bad_patterns = {
+              'protocol-relative internal URL': re.compile(r'''(?:href|src)=["']//(?!cdn\.|fonts\.|cdnjs\.|unpkg\.)'''),
+              'slash before absolute http URL': re.compile(r'''(?:href|src)=["']/https?://'''),
+              'malformed template href': re.compile(r'''href=["']/\$\{'''),
+              'malformed template src': re.compile(r'''src=["']/\$\{'''),
+              'malformed template css url': re.compile(r'''url\(["']/\$\{'''),
+          }
+
+          for p in text_files:
+              text = p.read_text(encoding='utf-8', errors='replace')
+              for label, pattern in bad_patterns.items():
+                  for m in pattern.finditer(text):
+                      line = text.count('\n', 0, m.start()) + 1
+                      problems.append(f'{p}:{line}: {label}: {m.group(0)}')
+
+          class Parser(HTMLParser):
+              def __init__(self, path):
+                  super().__init__()
+                  self.path = path
+                  self.refs = []
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  for key in ('href','src'):
+                      v = attrs.get(key)
+                      if v:
+                          self.refs.append((tag,key,v))
+
+          def route_exists(url_path):
+              path = unquote(url_path).split('?',1)[0].split('#',1)[0]
+              if path == '/':
+                  return (root/'index.html').exists()
+              rel = path.lstrip('/')
+              candidates = [root/rel]
+              if path.endswith('/'):
+                  candidates.append(root/rel/'index.html')
+              else:
+                  candidates.extend([root/(rel+'.html'), root/rel/'index.html'])
+              return any(c.exists() for c in candidates)
+
+          for p in root.rglob('*.html'):
+              if '.git' in p.parts:
+                  continue
+              parser = Parser(p)
+              text = p.read_text(encoding='utf-8', errors='replace')
+              try:
+                  parser.feed(text)
+              except Exception as e:
+                  problems.append(f'{p}: HTML parser error: {e}')
+                  continue
+              for tag,key,v in parser.refs:
+                  if '${' in v or v.startswith(('http://','https://','mailto:','tel:','javascript:','data:','#')):
+                      continue
+                  if v.startswith('//'):
+                      problems.append(f'{p}: protocol-relative reference {v}')
+                      continue
+                  if v.startswith('/'):
+                      u = urlsplit(v)
+                      if not route_exists(u.path):
+                          problems.append(f'{p}: missing internal {key} target {v}')
+                  else:
+                      # Relative references are resolved from the HTML file directory.
+                      u = urlsplit(v)
+                      rel_target = (p.parent / u.path).resolve()
+                      try:
+                          rel_target.relative_to(root.resolve())
+                      except ValueError:
+                          continue
+                      candidates = [rel_target]
+                      if u.path.endswith('/'):
+                          candidates.append(rel_target/'index.html')
+                      else:
+                          candidates.extend([Path(str(rel_target)+'.html'), rel_target/'index.html'])
+                      if not any(c.exists() for c in candidates):
+                          problems.append(f'{p}: missing relative {key} target {v}')
+
+              if 'href="#"' in text or "href='#'" in text:
+                  warnings.append(f'{p}: placeholder href="#" remains')
+
+          print('STATIC AUDIT WARNINGS:')
+          for w in warnings:
+              print('WARN', w)
+          print('STATIC AUDIT PROBLEMS:')
+          for x in problems:
+              print('ERROR', x)
+          if problems:
+              raise SystemExit(f'{len(problems)} static audit problem(s) found')
+          print(f'Static audit passed across {len(text_files)} HTML/JS/CSS files.')
+          PY
+
+      - name: JavaScript syntax audit
+        shell: bash
+        run: |
+          set -e
+          for f in *.js; do
+            echo "Checking $f"
+            node --check "$f"
+          done
+
+      - name: Install Playwright
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+
+      - name: Start local site
+        shell: bash
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/rigan-server.log 2>&1 &
+          echo $! >/tmp/rigan-server.pid
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/rigan-server.log
+          exit 1
+
+      - name: Browser audit all public routes and experiences
+        shell: bash
+        run: |
+          cat > /tmp/audit.mjs <<'JS'
+          import { chromium } from 'playwright';
+
+          const base = 'http://127.0.0.1:4173';
+          const browser = await chromium.launch({headless:true});
+          const problems = [];
+          const warnings = [];
+
+          async function auditPage(path, viewport) {
+            const page = await browser.newPage({ viewport });
+            const sameOriginFailures = [];
+            const consoleErrors = [];
+            const pageErrors = [];
+
+            page.on('console', msg => {
+              if (msg.type() === 'error') consoleErrors.push(msg.text());
+            });
+            page.on('pageerror', err => pageErrors.push(err.message));
+            page.on('requestfailed', req => {
+              if (req.url().startsWith(base)) sameOriginFailures.push(`${req.method()} ${req.url()} :: ${req.failure()?.errorText || 'failed'}`);
+            });
+
+            let response;
+            try {
+              response = await page.goto(base + path, { waitUntil: 'networkidle', timeout: 30000 });
+            } catch (e) {
+              problems.push(`${path} ${viewport.width}px navigation failed: ${e.message}`);
+              await page.close();
+              return null;
+            }
+            if (!response || response.status() >= 400) {
+              problems.push(`${path} ${viewport.width}px HTTP ${response?.status() ?? 'no response'}`);
+            }
+            if (pageErrors.length) problems.push(`${path} ${viewport.width}px page errors: ${pageErrors.join(' | ')}`);
+            if (sameOriginFailures.length) problems.push(`${path} ${viewport.width}px failed internal requests: ${sameOriginFailures.join(' | ')}`);
+
+            // Ignore third-party/network-policy console noise but catch local JS/resource failures.
+            for (const e of consoleErrors) {
+              if (/Failed to load resource/.test(e)) continue;
+              if (/favicon/i.test(e)) continue;
+              problems.push(`${path} ${viewport.width}px console error: ${e}`);
+            }
+
+            const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+            if (overflow) problems.push(`${path} ${viewport.width}px horizontal overflow`);
+
+            const malformed = await page.$$eval('a[href],img[src],script[src],link[href]', els => els.map(el => el.getAttribute('href') || el.getAttribute('src')).filter(v => v && (v.startsWith('//') || v.startsWith('/http://') || v.startsWith('/https://'))));
+            if (malformed.length) problems.push(`${path} malformed DOM URLs: ${malformed.join(', ')}`);
+
+            return page;
+          }
+
+          const publicRoutes = ['/', '/experiences/', '/regions/', '/plan/', '/contact/', '/about/', '/work-with-us/', '/booking/'];
+          for (const route of publicRoutes) {
+            const p1 = await auditPage(route, {width:1366,height:900});
+            if (p1) await p1.close();
+            const p2 = await auditPage(route, {width:390,height:844});
+            if (p2) await p2.close();
+          }
+
+          // Experience catalogue links and all package detail pages.
+          const catalogue = await auditPage('/experiences/', {width:1366,height:900});
+          let ids = [];
+          if (catalogue) {
+            await catalogue.waitForSelector('.card', {timeout:10000}).catch(()=>{});
+            const detailLinks = await catalogue.$$eval('a.details-btn', els => els.map(a => a.getAttribute('href')));
+            if (!detailLinks.length) problems.push('No View Details links rendered on Experiences page');
+            for (const href of detailLinks) {
+              if (!href?.startsWith('/experiences/detail/?experience=')) problems.push(`Bad detail href rendered: ${href}`);
+            }
+            ids = await catalogue.evaluate(() => {
+              const d = window.experienceDataV2 || {};
+              return Object.values(d).flatMap(cat => Array.isArray(cat?.items) ? cat.items.map(x => x.id).filter(Boolean) : []);
+            });
+            if (ids.length < 30) problems.push(`Expected at least 30 experience IDs, found ${ids.length}`);
+            await catalogue.close();
+          }
+
+          for (const id of ids) {
+            const path = `/experiences/detail/?experience=${encodeURIComponent(id)}`;
+            const page = await auditPage(path, {width:390,height:844});
+            if (!page) continue;
+            const title = (await page.locator('#title').textContent().catch(()=>''))?.trim();
+            const body = await page.locator('body').innerText().catch(()=> '');
+            if (!title) problems.push(`${id}: detail title missing`);
+            if (/experience not found/i.test(body)) problems.push(`${id}: detail page says experience not found`);
+            const itineraryCount = await page.locator('#itinerary .itinerary-day').count().catch(()=>0);
+            if (itineraryCount === 0) warnings.push(`${id}: no rendered itinerary days`);
+            await page.close();
+          }
+
+          await browser.close();
+          console.log(`Audited ${publicRoutes.length} public routes at desktop/mobile and ${ids.length} experience detail pages.`);
+          for (const w of warnings) console.log('WARN', w);
+          for (const p of problems) console.log('ERROR', p);
+          if (problems.length) process.exit(1);
+          console.log('Browser audit passed.');
+          JS
+          node /tmp/audit.mjs

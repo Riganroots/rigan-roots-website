@@ -1,0 +1,163 @@
+name: Apply final QA fixes
+
+on:
+  push:
+    branches:
+      - qa/final-live-site-audit
+    paths:
+      - '.github/workflows/apply-final-qa-fixes.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: qa/final-live-site-audit
+
+      - name: Apply detail integration fixes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # 1) Activate the already-merged detail enhancement script.
+          detail_path = Path('experiences/detail/index.html')
+          detail = detail_path.read_text(encoding='utf-8')
+          if 'src="/booking-link.js"' not in detail:
+              anchor = '  </script>\n\n</body>\n</html>'
+              replacement = '  </script>\n\n  <script src="/booking-link.js"></script>\n\n</body>\n</html>'
+              if anchor not in detail:
+                  raise SystemExit('detail script insertion anchor not found')
+              detail = detail.replace(anchor, replacement, 1)
+              detail_path.write_text(detail, encoding='utf-8')
+
+          # 2) Make injected shortcut links respect IDs that already exist in the static page.
+          js_path = Path('booking-link.js')
+          js = js_path.read_text(encoding='utf-8')
+
+          old = '''  function installQuickNav() {\n    const infoBar = document.querySelector('.info-bar');\n    if (!infoBar || document.querySelector('.trip-quick-nav')) return;\n\n    const nav = document.createElement('nav');\n    nav.className = 'trip-quick-nav';\n    nav.setAttribute('aria-label', 'Trip detail shortcuts');\n    nav.innerHTML = `\n      <a href="#trip-overview"><i class="fa-regular fa-file-lines" aria-hidden="true"></i> Overview</a>\n      <a href="#trip-itinerary"><i class="fa-solid fa-route" aria-hidden="true"></i> Itinerary</a>\n      <a href="#trip-inclusions"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Included</a>\n      <a href="#trip-faq"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> FAQ</a>\n      <button class="quote-jump" type="button"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request Quote</button>\n    `;\n'''
+
+          new = '''  function installQuickNav() {\n    const infoBar = document.querySelector('.info-bar');\n    if (!infoBar || document.querySelector('.trip-quick-nav')) return;\n\n    const sectionId = (childId, fallbackId) => {\n      const section = document.getElementById(childId)?.closest('.section');\n      if (!section) return fallbackId;\n      if (!section.id) section.id = fallbackId;\n      return section.id;\n    };\n\n    const overviewId = sectionId('overview', 'trip-overview');\n    const itineraryId = sectionId('itinerary', 'trip-itinerary');\n    const inclusionsId = sectionId('includes', 'trip-inclusions');\n    const faqId = sectionId('faqBox', 'trip-faq');\n    const quoteCard = document.querySelector('.booking-card');\n    if (quoteCard && !quoteCard.id) quoteCard.id = 'trip-quote';\n    const quoteId = quoteCard?.id || 'trip-quote';\n\n    const nav = document.createElement('nav');\n    nav.className = 'trip-quick-nav';\n    nav.setAttribute('aria-label', 'Trip detail shortcuts');\n    nav.innerHTML = `\n      <a href="#${overviewId}"><i class="fa-regular fa-file-lines" aria-hidden="true"></i> Overview</a>\n      <a href="#${itineraryId}"><i class="fa-solid fa-route" aria-hidden="true"></i> Itinerary</a>\n      <a href="#${inclusionsId}"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Included</a>\n      <a href="#${faqId}"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> FAQ</a>\n      <button class="quote-jump" type="button"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request Quote</button>\n    `;\n'''
+
+          if old not in js:
+              raise SystemExit('installQuickNav anchor not found')
+          js = js.replace(old, new, 1)
+
+          old = '''    nav.querySelector('.quote-jump')?.addEventListener('click', () => {\n      scrollToElement(document.getElementById('trip-quote'));\n    });'''
+          new = '''    nav.querySelector('.quote-jump')?.addEventListener('click', () => {\n      scrollToElement(document.getElementById(quoteId));\n    });'''
+          if old not in js:
+              raise SystemExit('quote jump anchor not found')
+          js = js.replace(old, new, 1)
+
+          old = '''    bar.querySelector('.mobile-quote')?.addEventListener('click', () => {\n      scrollToElement(document.getElementById('trip-quote'));\n    });'''
+          new = '''    bar.querySelector('.mobile-quote')?.addEventListener('click', () => {\n      scrollToElement(\n        document.getElementById('bookingCard') ||\n        document.getElementById('trip-quote')\n      );\n    });'''
+          if old not in js:
+              raise SystemExit('mobile quote anchor not found')
+          js = js.replace(old, new, 1)
+
+          js_path.write_text(js, encoding='utf-8')
+          print('Applied detail integration fixes')
+          PY
+
+      - name: Syntax and static validation
+        shell: bash
+        run: |
+          node --check booking-link.js
+          python - <<'PY'
+          from pathlib import Path
+          detail = Path('experiences/detail/index.html').read_text(encoding='utf-8')
+          js = Path('booking-link.js').read_text(encoding='utf-8')
+          required = [
+              'src="/booking-link.js"',
+              'id="itinerarySection"',
+              'id="bookingCard"',
+              'id="inquiryForm"',
+              'id="whatsappBtn"'
+          ]
+          missing = [x for x in required if x not in detail]
+          if missing: raise SystemExit(f'Missing detail markers: {missing}')
+          for marker in ["sectionId('itinerary', 'trip-itinerary')", "document.getElementById(quoteId)", "document.getElementById('bookingCard')"]:
+              if marker not in js: raise SystemExit(f'Missing JS marker: {marker}')
+          print('Static validation passed')
+          PY
+
+      - name: Browser-like DOM integration test
+        shell: bash
+        run: |
+          npm install --no-save --silent jsdom@26
+          python -m http.server 8765 >/tmp/rigan-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          sleep 1
+          node - <<'NODE'
+          const { JSDOM, VirtualConsole } = require('jsdom');
+          const virtualConsole = new VirtualConsole();
+          const jsErrors = [];
+          virtualConsole.on('jsdomError', e => jsErrors.push(String(e.message || e)));
+          virtualConsole.on('error', e => jsErrors.push(String(e)));
+
+          (async () => {
+            const dom = await JSDOM.fromURL('http://127.0.0.1:8765/experiences/detail/?experience=annapurna-base-camp-trek', {
+              resources: 'usable',
+              runScripts: 'dangerously',
+              pretendToBeVisual: true,
+              virtualConsole,
+              beforeParse(window) {
+                window.HTMLElement.prototype.scrollIntoView = function () {
+                  this.dataset.qaScrolled = 'true';
+                };
+                window.open = () => null;
+                window.alert = () => {};
+              }
+            });
+
+            await new Promise(resolve => dom.window.addEventListener('load', () => setTimeout(resolve, 700), { once: true }));
+            const d = dom.window.document;
+            const failures = [];
+            const title = d.getElementById('title')?.textContent || '';
+            if (!/Annapurna/i.test(title)) failures.push(`dynamic title not populated: ${title}`);
+            if (!d.body.classList.contains('rigan-detail-premium')) failures.push('premium detail class not activated');
+            if (!d.querySelector('.trip-quick-nav')) failures.push('quick nav not injected');
+            if (!d.querySelector('.trip-mobile-cta')) failures.push('mobile conversion bar not injected');
+            if (!d.getElementById('firebaseBookingBtn')) failures.push('booking CTA not injected');
+
+            const itineraryLink = [...d.querySelectorAll('.trip-quick-nav a')].find(a => /Itinerary/i.test(a.textContent));
+            if (!itineraryLink || itineraryLink.getAttribute('href') !== '#itinerarySection') {
+              failures.push(`itinerary shortcut target is ${itineraryLink?.getAttribute('href')}`);
+            }
+
+            const quoteBtn = d.querySelector('.trip-quick-nav .quote-jump');
+            quoteBtn?.click();
+            if (d.getElementById('bookingCard')?.dataset.qaScrolled !== 'true') failures.push('quote shortcut did not scroll to bookingCard');
+
+            const ids = [...d.querySelectorAll('[id]')].map(el => el.id);
+            const dupes = [...new Set(ids.filter((id, i) => ids.indexOf(id) !== i))];
+            if (dupes.length) failures.push('duplicate rendered ids: ' + dupes.join(', '));
+
+            const realErrors = jsErrors.filter(x => !/Not implemented: navigation/.test(x));
+            if (realErrors.length) failures.push('jsdom errors: ' + realErrors.join(' | '));
+
+            if (failures.length) {
+              console.error(failures.join('\n'));
+              process.exit(1);
+            }
+            console.log('DOM integration test passed:', title);
+          })().catch(err => { console.error(err); process.exit(1); });
+          NODE
+
+      - name: Commit production fixes
+        shell: bash
+        run: |
+          git config user.name "Rigan Roots QA"
+          git config user.email "actions@users.noreply.github.com"
+          git add experiences/detail/index.html booking-link.js
+          if git diff --cached --quiet; then
+            echo "No production changes"
+          else
+            git commit -m "Fix detail enhancement integration after recent merges"
+            git push
+          fi

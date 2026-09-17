@@ -1,5 +1,6 @@
 name: Full site audit
 
+# Rerun after applying site fixes.
 on:
   push:
     branches:
@@ -37,7 +38,6 @@ jobs:
               if '${' in raw or '{{' in raw:
                   return True
               if raw.startswith('//'):
-                  # Protocol-relative URLs are valid only for real external hosts, not site routes.
                   host = urlsplit('https:' + raw).netloc
                   if host in {'experiences', 'plan', 'about', 'contact', 'regions', 'booking', 'admin', 'work-with-us'}:
                       return False
@@ -78,7 +78,6 @@ jobs:
                   if not local_target_exists(p, raw):
                       issues.append(f'{p}: missing local target {raw}')
 
-          # Check common malformed dynamic URL patterns.
           bad_patterns = [
               'href="/${', "href='/${", 'src="/${', "src='/${", "url('/${", 'url("/${'
           ]
@@ -90,12 +89,10 @@ jobs:
                   if pat in text:
                       issues.append(f'{p}: malformed dynamic URL pattern {pat}')
 
-          # Check JavaScript syntax.
           js_files = [p for p in root.rglob('*.js') if '.git' not in p.parts]
           print(f'HTML files scanned: {len(html_files)}')
           print(f'JS files found: {len(js_files)}')
 
-          # Check redirects point to existing internal targets.
           for p in html_files:
               text = p.read_text(encoding='utf-8', errors='replace')
               m = re.search(r'<meta\s+http-equiv=["\']refresh["\'][^>]*content=["\'][^;]+;\s*url=([^"\']+)', text, re.I)
@@ -111,9 +108,6 @@ jobs:
           print('\nISSUES')
           for i in sorted(set(issues)):
               print('ERROR:', i)
-
-          Path('/tmp/audit_issues.txt').write_text('\n'.join(sorted(set(issues))), encoding='utf-8')
-          Path('/tmp/audit_warnings.txt').write_text('\n'.join(sorted(set(warnings))), encoding='utf-8')
 
           if issues:
               raise SystemExit(f'Found {len(set(issues))} blocking static issues')

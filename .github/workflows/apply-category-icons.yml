@@ -1,0 +1,88 @@
+name: Apply category icons
+
+on:
+  push:
+    branches:
+      - design/category-icons
+    paths:
+      - '.github/workflows/apply-category-icons.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: design/category-icons
+
+      - name: Replace emoji category icons with consistent Font Awesome icons
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('experiences/index.html')
+          text = path.read_text(encoding='utf-8')
+
+          css_old = '''    .cat small {\n      display: block;\n      margin-bottom: 5px;\n      font-size: 22px;\n    }'''
+          css_new = '''    .cat {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      justify-content: center;\n      gap: 8px;\n      text-align: center;\n    }\n\n    .cat .cat-icon {\n      width: 46px;\n      height: 46px;\n      display: inline-flex;\n      align-items: center;\n      justify-content: center;\n      border: 1px solid rgba(23, 77, 47, 0.12);\n      border-radius: 50%;\n      background: rgba(23, 77, 47, 0.08);\n      color: var(--green);\n      font-size: 19px;\n      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);\n      transition:\n        transform 0.3s ease,\n        background 0.3s ease,\n        color 0.3s ease;\n    }\n\n    .cat:hover .cat-icon {\n      transform: translateY(-2px) scale(1.06);\n      background: rgba(159, 186, 107, 0.22);\n    }\n\n    .cat.active .cat-icon {\n      border-color: rgba(255, 255, 255, 0.3);\n      background: rgba(255, 255, 255, 0.2);\n      color: var(--white);\n    }'''
+          if css_old not in text:
+              raise SystemExit('Category icon CSS anchor not found')
+          text = text.replace(css_old, css_new, 1)
+
+          replacements = {
+              '<small>⭐</small>': '<span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-star"></i></span>',
+              '<small>🏡</small>': '<span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-house"></i></span>',
+              '<small>🍲</small>': '<span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-bowl-food"></i></span>',
+              '<small>🎉</small>': '<span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-music"></i></span>',
+              '<small>🛕</small>': '<span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-landmark"></i></span>',
+              '<small>🧘</small>': '<span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-spa"></i></span>',
+              '<small>🏔️</small>': '<span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-mountain-sun"></i></span>',
+              '<small>🌊</small>': '<span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-compass"></i></span>',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'Expected icon markup not found: {old}')
+              text = text.replace(old, new, 1)
+
+          mobile_old = '''      .cat {\n        height: 88px;\n        padding: 8px;\n        font-size: 12px;\n      }'''
+          mobile_new = '''      .cat {\n        height: 96px;\n        padding: 8px;\n        gap: 6px;\n        font-size: 12px;\n      }\n\n      .cat .cat-icon {\n        width: 38px;\n        height: 38px;\n        font-size: 16px;\n      }'''
+          if mobile_old not in text:
+              raise SystemExit('Mobile category CSS anchor not found')
+          text = text.replace(mobile_old, mobile_new, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate icon update
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path('experiences/index.html').read_text(encoding='utf-8')
+          expected = [
+              'fa-star', 'fa-house', 'fa-bowl-food', 'fa-music',
+              'fa-landmark', 'fa-spa', 'fa-mountain-sun', 'fa-compass'
+          ]
+          for item in expected:
+              if item not in text:
+                  raise SystemExit(f'Missing category icon: {item}')
+          for emoji in ['⭐','🏡','🍲','🎉','🛕','🧘','🏔️','🌊']:
+              if emoji in text:
+                  raise SystemExit(f'Old emoji remains: {emoji}')
+          if text.count('class="cat-icon"') != 8:
+              raise SystemExit('Expected exactly 8 category icon containers')
+          print('Eight category icons validated.')
+          PY
+
+      - name: Commit category icon update
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiences/index.html
+          git commit -m 'Replace experience category emojis with styled icons'
+          git push

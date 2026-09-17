@@ -1,0 +1,127 @@
+name: Apply homepage hero motion refinement
+
+on:
+  push:
+    branches: [design/home-hero-motion-cleanup]
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: design/home-hero-motion-cleanup
+
+      - name: Refine homepage hero and highlighted information
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+          original = text
+
+          # Add gentle movement to the existing original prayer-flag garland.
+          pattern = r'(\.hero::before\{[^\n]*?)(\}\n\.hero::after)'
+          replacement = (r'\1;transform-origin:50% 0;animation:prayerFlagSway 7.5s ease-in-out infinite;'
+                         r'will-change:transform;filter:drop-shadow(0 5px 8px rgba(0,0,0,.12)) saturate(1.08)\2')
+          text, n = re.subn(pattern, replacement, text, count=1)
+          if n != 1:
+              raise SystemExit('Could not update hero prayer flags')
+
+          old = ".hero-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:20px;padding:9px 14px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(7,22,17,.28);backdrop-filter:blur(10px);font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}"
+          new = ".hero-eyebrow{display:inline-flex;align-items:center;gap:8px;max-width:100%;margin-bottom:22px;padding:8px 13px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(7,22,17,.42);backdrop-filter:blur(10px);box-shadow:0 8px 22px rgba(0,0,0,.12);font-size:11.5px;font-weight:900;line-height:1.2;letter-spacing:.065em;text-transform:uppercase}"
+          if old not in text: raise SystemExit('hero eyebrow CSS not found')
+          text = text.replace(old, new, 1)
+
+          old = ".hero-proof{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}"
+          new = ".hero-proof{display:flex;gap:8px;flex-wrap:wrap;max-width:680px;margin-top:20px}"
+          if old not in text: raise SystemExit('hero proof CSS not found')
+          text = text.replace(old, new, 1)
+
+          old = ".hero-proof span{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.11);color:rgba(255,255,255,.94);font-size:12px;font-weight:800;backdrop-filter:blur(8px)}"
+          new = ".hero-proof span{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid rgba(255,255,255,.19);border-radius:999px;background:rgba(7,22,17,.34);color:rgba(255,255,255,.94);font-size:11.5px;font-weight:800;backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}"
+          if old not in text: raise SystemExit('hero proof item CSS not found')
+          text = text.replace(old, new, 1)
+
+          anchor = ".hero-buttons{display:flex;gap:18px;flex-wrap:wrap}\n"
+          motion = """.hero-buttons{display:flex;gap:18px;flex-wrap:wrap}
+@keyframes prayerFlagSway{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg) scaleY(1)}
+  25%{transform:translate3d(3px,2px,0) rotate(.16deg) scaleY(.99)}
+  50%{transform:translate3d(-2px,4px,0) rotate(-.14deg) scaleY(.985)}
+  75%{transform:translate3d(2px,1px,0) rotate(.11deg) scaleY(.995)}
+}
+"""
+          if anchor not in text: raise SystemExit('hero buttons CSS anchor not found')
+          text = text.replace(anchor, motion, 1)
+
+          old = ".payments{text-align:center;padding:30px 20px 80px;background:white}"
+          new = ".payments{text-align:center;padding:38px 20px 68px;background:linear-gradient(180deg,#fff 0%,#fffdf8 100%);border-top:1px solid rgba(23,77,47,.06)}"
+          if old not in text: raise SystemExit('payments CSS not found')
+          text = text.replace(old, new, 1)
+
+          old = ".payments h3{color:var(--green);margin-bottom:20px;font-family:'Inter',sans-serif}"
+          new = ".payments h3{color:var(--green);margin-bottom:10px;font-family:'Inter',sans-serif;font-size:24px}"
+          if old not in text: raise SystemExit('payments heading CSS not found')
+          text = text.replace(old, new, 1)
+
+          old = ".booking-clarity{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:22px}"
+          new = ".booking-clarity{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px}"
+          if old not in text: raise SystemExit('booking clarity CSS not found')
+          text = text.replace(old, new, 1)
+
+          old = ".booking-clarity span{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid rgba(23,77,47,.1);border-radius:999px;background:#fffaf2;color:var(--green);font-size:13px;font-weight:800}"
+          new = ".booking-clarity span{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(23,77,47,.1);border-radius:999px;background:rgba(250,247,239,.86);color:var(--green);font-size:12.5px;font-weight:800;box-shadow:0 7px 18px rgba(23,77,47,.045)}"
+          if old not in text: raise SystemExit('booking clarity item CSS not found')
+          text = text.replace(old, new, 1)
+
+          old = ".payments p{max-width:760px;margin:0 auto;color:var(--muted);line-height:1.75}"
+          new = ".payments p{max-width:720px;margin:0 auto;color:var(--muted);font-size:15px;line-height:1.7}"
+          if old not in text: raise SystemExit('payments paragraph CSS not found')
+          text = text.replace(old, new, 1)
+
+          # Respect visitors who prefer reduced motion.
+          media_anchor = "@media(max-width:1100px){"
+          reduced = """@media(prefers-reduced-motion:reduce){
+  .hero::before{animation:none}
+  .slider{animation:none}
+}
+
+@media(max-width:1100px){"""
+          if media_anchor not in text: raise SystemExit('media anchor not found')
+          text = text.replace(media_anchor, reduced, 1)
+
+          # Small-screen refinements so the new glass labels stay light and readable.
+          old = "  .hero-proof{gap:8px}\n"
+          new = "  .hero-proof{gap:7px;margin-top:18px}\n  .hero-proof span{font-size:11px;padding:7px 10px}\n  .hero-eyebrow{font-size:10.5px;padding:8px 12px}\n"
+          if old not in text: raise SystemExit('mobile hero proof CSS not found')
+          text = text.replace(old, new, 1)
+
+          if text == original:
+              raise SystemExit('No changes made')
+
+          p.write_text(text, encoding='utf-8')
+          PY
+
+          git diff --check
+          grep -q '@keyframes prayerFlagSway' index.html
+          grep -q 'prefers-reduced-motion' index.html
+
+      - name: Commit homepage refinement and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/apply-home-hero-motion.yml
+          git config user.name "Rigan Roots QA"
+          git config user.email "riganrootsroutes@gmail.com"
+          git add index.html .github/workflows/apply-home-hero-motion.yml
+          git commit -m "Design: refine homepage hero and animate prayer flags"
+          git push origin HEAD:design/home-hero-motion-cleanup

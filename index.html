@@ -64,8 +64,13 @@ button,select{font:inherit}
 .nav-links a:hover{color:var(--olive)}
 .menu-btn{display:none;color:white;font-size:26px;cursor:pointer;border:0;background:transparent}
 
-.hero{min-height:100vh;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.35)),url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;display:flex;align-items:center;padding:150px 70px 70px;color:white}
-.hero-content{max-width:760px}
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.35)),url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;display:flex;align-items:center;padding:150px 70px 70px;color:white}
+.hero::before{content:"";position:absolute;top:88px;left:2.5%;z-index:1;width:95%;height:82px;pointer-events:none;opacity:.72;background:center/100% 100% no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 100'%3E%3Cpath d='M10 18 Q450 90 890 18' fill='none' stroke='rgba(255,255,255,.5)' stroke-width='2'/%3E%3Cg%3E%3Cpath d='M55 28h36v39l-18 12-18-12z' fill='%233157a4'/%3E%3Cpath d='M110 36h36v39l-18 12-18-12z' fill='%23f4efd9'/%3E%3Cpath d='M165 43h36v39l-18 12-18-12z' fill='%23b83a32'/%3E%3Cpath d='M220 50h36v39l-18 12-18-12z' fill='%233d7b50'/%3E%3Cpath d='M275 56h36v39l-18 5-18-5z' fill='%23d5ad38'/%3E%3Cpath d='M330 61h36v34l-18 5-18-5z' fill='%233157a4'/%3E%3Cpath d='M385 64h36v31l-18 5-18-5z' fill='%23f4efd9'/%3E%3Cpath d='M440 66h36v29l-18 5-18-5z' fill='%23b83a32'/%3E%3Cpath d='M495 64h36v31l-18 5-18-5z' fill='%233d7b50'/%3E%3Cpath d='M550 61h36v34l-18 5-18-5z' fill='%23d5ad38'/%3E%3Cpath d='M605 56h36v39l-18 5-18-5z' fill='%233157a4'/%3E%3Cpath d='M660 50h36v39l-18 12-18-12z' fill='%23f4efd9'/%3E%3Cpath d='M715 43h36v39l-18 12-18-12z' fill='%23b83a32'/%3E%3Cpath d='M770 36h36v39l-18 12-18-12z' fill='%233d7b50'/%3E%3Cpath d='M825 28h36v39l-18 12-18-12z' fill='%23d5ad38'/%3E%3C/g%3E%3C/svg%3E")}
+.hero::after{content:"";position:absolute;right:3%;bottom:7%;z-index:1;width:min(46vw,620px);height:245px;pointer-events:none;opacity:.11;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 280'%3E%3Cpath d='M44 151L91 129 136 133 175 109 222 119 264 91 307 103 344 83 390 94 429 75 474 92 513 72 558 91 598 67 641 83 683 64 728 82 770 70 810 88 852 82 870 108 846 124 812 122 780 139 744 132 706 151 666 143 627 164 589 153 548 174 504 165 464 183 421 172 382 190 341 180 299 194 258 183 217 194 178 180 140 184 107 166 74 171Z' fill='none' stroke='white' stroke-width='12' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.hero-content{position:relative;z-index:2;max-width:760px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:20px;padding:9px 14px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(7,22,17,.28);backdrop-filter:blur(10px);font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.hero-proof{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.hero-proof span{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.11);color:rgba(255,255,255,.94);font-size:12px;font-weight:800;backdrop-filter:blur(8px)}
 .hero h1{font-size:clamp(3rem,6vw,5.8rem);line-height:1.05;margin-bottom:22px;color:white}
 .hero h1 span{color:var(--olive)}
 .hero-line{width:80px;height:3px;background:var(--olive);margin-bottom:24px}
@@ -160,6 +165,11 @@ button,select{font:inherit}
 .review-card{padding:30px}
 .review-stars{color:var(--gold);font-size:18px;margin-bottom:16px}
 .review-card h4{margin-top:18px;color:var(--green);font-family:'Inter',sans-serif}
+.process-icon{width:54px;height:54px;display:grid;place-items:center;margin-bottom:18px;border-radius:18px;background:#edf5eb;color:var(--green);font-size:22px}
+.booking-clarity{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.booking-clarity span{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid rgba(23,77,47,.1);border-radius:999px;background:#fffaf2;color:var(--green);font-size:13px;font-weight:800}
+.payments p{max-width:760px;margin:0 auto;color:var(--muted);line-height:1.75}
+.cta-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 
 .cta-banner{margin:0 70px 80px;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,.35)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;border-radius:28px;padding:42px 48px;display:flex;justify-content:space-between;align-items:center;color:white;box-shadow:0 24px 70px rgba(0,0,0,.15)}
 .cta-banner h2{font-size:32px;color:white}
@@ -187,6 +197,9 @@ button,select{font:inherit}
   .nav-links.active{display:flex}
   .logo img{height:56px}
   .hero{padding:140px 25px 70px}
+  .hero::before{top:74px;left:1%;width:98%;height:58px;opacity:.5}
+  .hero::after{display:none}
+  .hero-proof{gap:8px}
   .story-grid,.exp-grid,.region-grid,.footer-grid,.philosophy-grid,.host-grid,.review-grid,.trip-grid,.know-grid{grid-template-columns:1fr}
   .stories,.signature,.region-preview,.why-rigan,.rigan-philosophy,.hosts,.reviews,.featured-trips,.know-nepal{padding:65px 25px}
   .know-image img{height:430px}
@@ -197,7 +210,10 @@ button,select{font:inherit}
   .partner-logos{gap:35px}
   .partner-logos img{height:62px}
   .payment-icons{font-size:44px;gap:22px}
+  .booking-clarity{flex-direction:column;align-items:stretch;max-width:420px;margin-left:auto;margin-right:auto}
+  .cta-actions{width:100%}
 }
+
 @media(max-width:700px){
   .discover{padding:55px 0 35px}
   .slider-wrap{padding:0 18px;overflow-x:auto}
@@ -233,12 +249,14 @@ button,select{font:inherit}
     <a href="/regions/">Regions</a>
     <a href="/work-with-us/">Work With Us</a>
     <a href="/about/">Our Story</a>
+    <a href="/plan/">Plan</a>
     <a href="/contact/">Contact</a>
   </div>
 </nav>
 
 <section class="hero">
   <div class="hero-content">
+    <div class="hero-eyebrow"><i class="fa-solid fa-location-dot"></i> Meaningful journeys through Nepal</div>
     <h1>You don’t come<br>to Nepal to see.<br><span>You come to feel.</span></h1>
     <div class="hero-line"></div>
     <p>Live with locals. Eat real food.<br>Share real stories. Create real memories.</p>
@@ -246,6 +264,11 @@ button,select{font:inherit}
       <a href="/experiences/" class="btn btn-green">Explore Experiences</a>
       <a href="/plan/" class="btn btn-brown">Plan My Trip</a>
       <a href="/work-with-us/" class="btn btn-outline">Become a Host</a>
+    </div>
+    <div class="hero-proof" aria-label="Rigan trip planning features">
+      <span><i class="fa-solid fa-route"></i> Custom trip planning</span>
+      <span><i class="fa-solid fa-comments"></i> Direct WhatsApp support</span>
+      <span><i class="fa-solid fa-file-lines"></i> Clear quotation</span>
     </div>
   </div>
 </section>
@@ -303,7 +326,7 @@ button,select{font:inherit}
         <div class="know-icon"><i class="fa-solid fa-people-group"></i></div>
         <div>
           <h4>Community Hosts</h4>
-          <p>Verified hosts and local partners across villages, cities, and mountain regions.</p>
+          <p>Local hosts and partners across villages, cities, and mountain regions help shape more personal journeys.</p>
         </div>
       </div>
 
@@ -377,7 +400,7 @@ button,select{font:inherit}
   <div class="trip-grid">
     <div class="trip-card">
       <div class="trip-img" style="background-image:url('https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg')">
-        <span class="trip-badge">Best Seller</span>
+        <span class="trip-badge">Himalayan Classic</span>
       </div>
 
       <div class="trip-content">
@@ -461,34 +484,34 @@ button,select{font:inherit}
 <div class="mandala-divider">✺ ✧ ✺</div>
 
 <section class="hosts">
-  <h2 class="section-title">Meet Your Local Hosts</h2>
-  <p class="section-subtitle">The heart of Rigan is the people who welcome you into their homes, villages, and stories.</p>
+  <h2 class="section-title">Meet Nepal Through Its People</h2>
+  <p class="section-subtitle">Meaningful journeys are shaped by the homes, kitchens, villages, guides, and communities you encounter along the way.</p>
 
   <div class="host-grid">
     <div class="host-card">
-      <img src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg" alt="Local host in Nepal">
+      <img loading="lazy" src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg" alt="Village life experience in Nepal">
       <div class="host-content">
-        <span>Bandipur / Village Life</span>
-        <h3>Maya Gurung</h3>
-        <p>Sharing village life, local food, family stories, and the warmth of Nepali hospitality.</p>
+        <span>Village Life &amp; Homestays</span>
+        <h3>Share Everyday Nepal</h3>
+        <p>Slow down, spend time with local families, and experience food, routines, stories, and hospitality beyond the usual sightseeing route.</p>
       </div>
     </div>
 
     <div class="host-card">
-      <img src="https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg" alt="Mountain host in Nepal">
+      <img loading="lazy" src="https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg" alt="Mountain community journey in Nepal">
       <div class="host-content">
-        <span>Mustang / Mountain Culture</span>
-        <h3>Tashi Lama</h3>
-        <p>Introducing travelers to ancient trails, monasteries, Tibetan culture, and mountain life.</p>
+        <span>Mountain Culture &amp; Trails</span>
+        <h3>Walk With Local Knowledge</h3>
+        <p>Connect mountain landscapes with the communities, traditions, monasteries, and local knowledge that give each route its character.</p>
       </div>
     </div>
 
     <div class="host-card">
-      <img src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg" alt="Food host in Nepal">
+      <img loading="lazy" src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg" alt="Nepali food and home kitchen experience">
       <div class="host-content">
-        <span>Kathmandu / Food & Culture</span>
-        <h3>Sita Shrestha</h3>
-        <p>Welcoming guests into the kitchen to cook, eat, laugh, and experience Nepal through food.</p>
+        <span>Food &amp; Culture</span>
+        <h3>Experience Nepal Around the Table</h3>
+        <p>Discover regional food through markets, home kitchens, shared meals, and the stories behind what people cook and eat.</p>
       </div>
     </div>
   </div>
@@ -534,46 +557,46 @@ button,select{font:inherit}
 </section>
 
 <section class="stories">
-  <h2 class="section-title">Travel Stories You Can Feel</h2>
-  <p class="section-subtitle">Real journeys. Real people. Real emotions.</p>
+  <h2 class="section-title">Moments That Make Nepal Personal</h2>
+  <p class="section-subtitle">Build your journey around connection, culture, nature, food, and the pace that feels right for you.</p>
 
   <div class="story-grid">
     <div class="story-card">
-      <img src="https://i.postimg.cc/RqrfKnFJ/julie-pittevils-u-Lr9ZOFU4GM-unsplash.jpg" alt="Traveler story in Nepal">
+      <img loading="lazy" src="https://i.postimg.cc/RqrfKnFJ/julie-pittevils-u-Lr9ZOFU4GM-unsplash.jpg" alt="Local connection in Nepal">
       <div class="story-content">
-        <span class="story-tag">The Connection</span>
-        <h3>“I came as a guest, left as family.”</h3>
-        <p>A solo traveler shares how a Nepali family became part of her story.</p>
+        <span class="story-tag">Connection</span>
+        <h3>Share a Meal, Share a Story</h3>
+        <p>Spend time in homes and neighborhoods where conversation and everyday life become part of the journey.</p>
         <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu Valley</div>
       </div>
     </div>
 
     <div class="story-card">
-      <img src="https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg" alt="Annapurna travel story">
+      <img loading="lazy" src="https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg" alt="Annapurna trekking experience">
       <div class="story-content">
-        <span class="story-tag" style="background:var(--brown)">The Adventure</span>
-        <h3>“The Himalayas changed me.”</h3>
-        <p>A trek that became more than a hike — a journey within.</p>
+        <span class="story-tag" style="background:var(--brown)">Adventure</span>
+        <h3>Walk Into the Himalayas</h3>
+        <p>Choose classic base camps, short ridge walks, or quieter trails according to your time and trekking style.</p>
         <div class="location"><i class="fa-solid fa-location-dot"></i> Annapurna Region</div>
       </div>
     </div>
 
     <div class="story-card">
-      <img src="https://i.postimg.cc/Xq2N6RRs/sanjeev-shakya-t-CKtz-Yih-Gkw-unsplash.jpg" alt="Rural Nepal travel">
+      <img loading="lazy" src="https://i.postimg.cc/Xq2N6RRs/sanjeev-shakya-t-CKtz-Yih-Gkw-unsplash.jpg" alt="Rural Nepal experience">
       <div class="story-content">
-        <span class="story-tag">The Moments</span>
-        <h3>“Small moments, biggest memories.”</h3>
-        <p>Laughter, stories, and simple moments that stay forever.</p>
+        <span class="story-tag">Slow Travel</span>
+        <h3>Slow Down in Rural Nepal</h3>
+        <p>Make room for village walks, tea, local routines, conversations, and small moments that fixed itineraries often miss.</p>
         <div class="location"><i class="fa-solid fa-location-dot"></i> Rural Nepal</div>
       </div>
     </div>
 
     <div class="story-card">
-      <img src="https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg" alt="Cultural journey Nepal">
+      <img loading="lazy" src="https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg" alt="Nepal cultural and festival experience">
       <div class="story-content">
-        <span class="story-tag" style="background:var(--brown)">The Culture</span>
-        <h3>“Celebrated festival like never before.”</h3>
-        <p>Experience festivals not as a tourist, but as part of the family.</p>
+        <span class="story-tag" style="background:var(--brown)">Culture</span>
+        <h3>Celebrate Living Traditions</h3>
+        <p>Time a journey around festivals, heritage neighborhoods, crafts, food, and traditions that are still part of everyday life.</p>
         <div class="location"><i class="fa-solid fa-location-dot"></i> Across Nepal</div>
       </div>
     </div>
@@ -614,59 +637,62 @@ button,select{font:inherit}
 <div class="mandala-divider">✺ ✧ ✺</div>
 
 <section class="reviews">
-  <h2 class="section-title">Reflections From The Road</h2>
-  <p class="section-subtitle">Not just reviews — memories carried home by travelers.</p>
+  <h2 class="section-title">From Idea to Nepal</h2>
+  <p class="section-subtitle">A simple planning process, with direct communication from the first message to the final itinerary.</p>
 
   <div class="review-grid">
     <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>“I came for the mountains, but I left remembering the people. Rigan made Nepal feel personal.”</p>
-      <h4>— Sarah, Australia</h4>
+      <div class="process-icon"><i class="fa-solid fa-comments"></i></div>
+      <h3>1. Tell Us Your Style</h3>
+      <p>Share your dates, group size, interests, pace, comfort level, and the kind of Nepal you want to experience.</p>
     </div>
 
     <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>“The village stay was the most meaningful part of our trip. We felt like family, not tourists.”</p>
-      <h4>— James & Emily, UK</h4>
+      <div class="process-icon"><i class="fa-solid fa-route"></i></div>
+      <h3>2. We Shape the Route</h3>
+      <p>We match your ideas with suitable regions and experiences, then prepare an itinerary and quotation you can review.</p>
     </div>
 
     <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p>“Everything felt calm, authentic, and beautifully arranged. This was more than travel.”</p>
-      <h4>— Mina, Japan</h4>
+      <div class="process-icon"><i class="fa-solid fa-headset"></i></div>
+      <h3>3. Travel With Support</h3>
+      <p>Once the details are agreed, we coordinate the confirmed services and stay available for practical support around your journey.</p>
     </div>
   </div>
 </section>
 
 <section class="partners">
-  <h2 class="section-title">Trusted & Recognized</h2>
-  <p class="section-subtitle">Registered and affiliated with Nepal's leading tourism organizations.</p>
+  <h2 class="section-title">What You Can Expect From Rigan</h2>
+  <p class="section-subtitle">Clear planning, flexible journeys, and local connections shaped around your travel style.</p>
 
-  <div class="partner-logos" aria-label="Tourism organizations">
-    <span class="partner-name">Government of Nepal</span>
-    <span class="partner-name">Nepal Tourism Board</span>
-    <span class="partner-name">Nepal Mountaineering Association</span>
-    <span class="partner-name">TAAN Nepal</span>
+  <div class="partner-logos" aria-label="Rigan travel planning features">
+    <span class="partner-name"><i class="fa-solid fa-map-location-dot"></i>&nbsp; Local trip planning</span>
+    <span class="partner-name"><i class="fa-solid fa-sliders"></i>&nbsp; Flexible itineraries</span>
+    <span class="partner-name"><i class="fa-solid fa-people-group"></i>&nbsp; Community connections</span>
+    <span class="partner-name"><i class="fa-brands fa-whatsapp"></i>&nbsp; Direct support</span>
   </div>
 </section>
 
 <section class="payments">
-  <h3>Secure Payment Options</h3>
-  <div class="payment-icons">
-    <i class="fa-brands fa-cc-visa"></i>
-    <i class="fa-brands fa-cc-mastercard"></i>
-    <i class="fa-brands fa-cc-amex"></i>
-    <i class="fa-brands fa-cc-paypal"></i>
+  <h3>Simple, Clear Booking</h3>
+  <p>Availability, final inclusions, payment schedule, and payment instructions are confirmed in your quotation before you commit.</p>
+  <div class="booking-clarity" aria-label="Booking process">
+    <span><i class="fa-solid fa-file-lines"></i> Review your quotation</span>
+    <span><i class="fa-solid fa-calendar-check"></i> Confirm availability</span>
+    <span><i class="fa-solid fa-receipt"></i> Receive payment instructions</span>
   </div>
 </section>
 
 <section class="cta-banner">
   <div>
     <h2>Your story in Nepal is waiting.</h2>
-    <p>Let us help you create memories that last a lifetime.</p>
+    <p>Start with a few ideas. We will help turn them into a route that fits you.</p>
   </div>
 
-  <a href="/plan/" class="btn btn-green">Plan My Trip Now</a>
+  <div class="cta-actions">
+    <a href="/plan/" class="btn btn-green">Plan My Trip</a>
+    <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots%20%26%20Routes,%20I%20want%20help%20planning%20a%20Nepal%20trip." class="btn btn-outline" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+  </div>
 </section>
 
 <footer class="footer">

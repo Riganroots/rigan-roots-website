@@ -1,0 +1,90 @@
+name: Fix experience links
+
+on:
+  push:
+    branches:
+      - fix/experience-detail-links
+    paths:
+      - '.github/workflows/fix-experience-links.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/experience-detail-links
+
+      - name: Fix malformed dynamic URLs
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('experiences/index.html')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = {
+              "url('/${image}')": "url('${image}')",
+              'href="/${detailLink}"': 'href="${detailLink}"',
+              'src="/${safeImage}"': 'src="${safeImage}"',
+              'href="/${planLink}"': 'href="${planLink}"',
+              'href="/${whatsappLink}"': 'href="${whatsappLink}"',
+          }
+
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'Expected pattern not found: {old}')
+              text = text.replace(old, new)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate generated links
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path('experiences/index.html').read_text(encoding='utf-8')
+
+          forbidden = [
+              'href="/${detailLink}"',
+              'src="/${safeImage}"',
+              'href="/${planLink}"',
+              'href="/${whatsappLink}"',
+              "url('/${image}')",
+          ]
+          for item in forbidden:
+              if item in text:
+                  raise SystemExit(f'Malformed URL pattern remains: {item}')
+
+          required = [
+              'href="${detailLink}"',
+              'src="${safeImage}"',
+              'href="${planLink}"',
+              'href="${whatsappLink}"',
+              "url('${image}')",
+          ]
+          for item in required:
+              if item not in text:
+                  raise SystemExit(f'Fixed URL pattern missing: {item}')
+
+          if '`/experiences/detail/?experience=${encodeURIComponent(slug)}`' not in text:
+              raise SystemExit('Detail route target changed unexpectedly')
+          if '`/plan/?experience=${encodeURIComponent(slug)}`' not in text:
+              raise SystemExit('Plan route target changed unexpectedly')
+
+          print('Experience detail, plan, image, background and WhatsApp URLs validated.')
+          PY
+
+      - name: Commit fix
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiences/index.html
+          git commit -m 'Fix experience detail and action links'
+          git push

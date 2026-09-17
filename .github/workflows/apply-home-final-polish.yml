@@ -1,0 +1,146 @@
+name: Apply homepage final polish
+
+on:
+  push:
+    branches:
+      - design/home-final-polish
+    paths:
+      - '.github/workflows/apply-home-final-polish.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: design/home-final-polish
+
+      - name: Apply homepage polish
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          def replace_once(old, new, label):
+              global text
+              if old not in text:
+                  raise SystemExit(f'{label} anchor not found')
+              text = text.replace(old, new, 1)
+
+          # Premium Nepal-specific hero identity.
+          old = '''.hero{min-height:100vh;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.35)),url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;display:flex;align-items:center;padding:150px 70px 70px;color:white}\n.hero-content{max-width:760px}'''
+          new = '''.hero{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.35)),url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;display:flex;align-items:center;padding:150px 70px 70px;color:white}\n.hero::before{content:"";position:absolute;top:88px;left:2.5%;z-index:1;width:95%;height:82px;pointer-events:none;opacity:.72;background:center/100% 100% no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 100'%3E%3Cpath d='M10 18 Q450 90 890 18' fill='none' stroke='rgba(255,255,255,.5)' stroke-width='2'/%3E%3Cg%3E%3Cpath d='M55 28h36v39l-18 12-18-12z' fill='%233157a4'/%3E%3Cpath d='M110 36h36v39l-18 12-18-12z' fill='%23f4efd9'/%3E%3Cpath d='M165 43h36v39l-18 12-18-12z' fill='%23b83a32'/%3E%3Cpath d='M220 50h36v39l-18 12-18-12z' fill='%233d7b50'/%3E%3Cpath d='M275 56h36v39l-18 5-18-5z' fill='%23d5ad38'/%3E%3Cpath d='M330 61h36v34l-18 5-18-5z' fill='%233157a4'/%3E%3Cpath d='M385 64h36v31l-18 5-18-5z' fill='%23f4efd9'/%3E%3Cpath d='M440 66h36v29l-18 5-18-5z' fill='%23b83a32'/%3E%3Cpath d='M495 64h36v31l-18 5-18-5z' fill='%233d7b50'/%3E%3Cpath d='M550 61h36v34l-18 5-18-5z' fill='%23d5ad38'/%3E%3Cpath d='M605 56h36v39l-18 5-18-5z' fill='%233157a4'/%3E%3Cpath d='M660 50h36v39l-18 12-18-12z' fill='%23f4efd9'/%3E%3Cpath d='M715 43h36v39l-18 12-18-12z' fill='%23b83a32'/%3E%3Cpath d='M770 36h36v39l-18 12-18-12z' fill='%233d7b50'/%3E%3Cpath d='M825 28h36v39l-18 12-18-12z' fill='%23d5ad38'/%3E%3C/g%3E%3C/svg%3E")}\n.hero::after{content:"";position:absolute;right:3%;bottom:7%;z-index:1;width:min(46vw,620px);height:245px;pointer-events:none;opacity:.11;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 280'%3E%3Cpath d='M44 151L91 129 136 133 175 109 222 119 264 91 307 103 344 83 390 94 429 75 474 92 513 72 558 91 598 67 641 83 683 64 728 82 770 70 810 88 852 82 870 108 846 124 812 122 780 139 744 132 706 151 666 143 627 164 589 153 548 174 504 165 464 183 421 172 382 190 341 180 299 194 258 183 217 194 178 180 140 184 107 166 74 171Z' fill='none' stroke='white' stroke-width='12' stroke-linejoin='round'/%3E%3C/svg%3E")}\n.hero-content{position:relative;z-index:2;max-width:760px}\n.hero-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:20px;padding:9px 14px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(7,22,17,.28);backdrop-filter:blur(10px);font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}\n.hero-proof{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}\n.hero-proof span{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.11);color:rgba(255,255,255,.94);font-size:12px;font-weight:800;backdrop-filter:blur(8px)}'''
+          replace_once(old, new, 'hero css')
+
+          # Honest process / booking UI styles.
+          old = '''.review-card{padding:30px}\n.review-stars{color:var(--gold);font-size:18px;margin-bottom:16px}\n.review-card h4{margin-top:18px;color:var(--green);font-family:'Inter',sans-serif}'''
+          new = '''.review-card{padding:30px}\n.review-stars{color:var(--gold);font-size:18px;margin-bottom:16px}\n.review-card h4{margin-top:18px;color:var(--green);font-family:'Inter',sans-serif}\n.process-icon{width:54px;height:54px;display:grid;place-items:center;margin-bottom:18px;border-radius:18px;background:#edf5eb;color:var(--green);font-size:22px}\n.booking-clarity{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:22px}\n.booking-clarity span{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid rgba(23,77,47,.1);border-radius:999px;background:#fffaf2;color:var(--green);font-size:13px;font-weight:800}\n.payments p{max-width:760px;margin:0 auto;color:var(--muted);line-height:1.75}\n.cta-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}'''
+          replace_once(old, new, 'process css')
+
+          # Responsive tuning for hero motifs and new UI.
+          old = '''  .hero{padding:140px 25px 70px}\n  .story-grid,.exp-grid,.region-grid,.footer-grid,.philosophy-grid,.host-grid,.review-grid,.trip-grid,.know-grid{grid-template-columns:1fr}'''
+          new = '''  .hero{padding:140px 25px 70px}\n  .hero::before{top:74px;left:1%;width:98%;height:58px;opacity:.5}\n  .hero::after{display:none}\n  .hero-proof{gap:8px}\n  .story-grid,.exp-grid,.region-grid,.footer-grid,.philosophy-grid,.host-grid,.review-grid,.trip-grid,.know-grid{grid-template-columns:1fr}'''
+          replace_once(old, new, 'tablet hero css')
+
+          old = '''  .payment-icons{font-size:44px;gap:22px}\n}'''
+          new = '''  .payment-icons{font-size:44px;gap:22px}\n  .booking-clarity{flex-direction:column;align-items:stretch;max-width:420px;margin-left:auto;margin-right:auto}\n  .cta-actions{width:100%}\n}\n'''
+          replace_once(old, new, 'tablet booking css')
+
+          # Keep primary navigation consistent with the rest of the site.
+          old = '''    <a href="/work-with-us/">Work With Us</a>\n    <a href="/about/">Our Story</a>\n    <a href="/contact/">Contact</a>'''
+          new = '''    <a href="/work-with-us/">Work With Us</a>\n    <a href="/about/">Our Story</a>\n    <a href="/plan/">Plan</a>\n    <a href="/contact/">Contact</a>'''
+          replace_once(old, new, 'plan nav link')
+
+          # Strengthen the hero conversion message without changing the core brand line.
+          old = '''<section class="hero">\n  <div class="hero-content">\n    <h1>You don’t come<br>to Nepal to see.<br><span>You come to feel.</span></h1>\n    <div class="hero-line"></div>\n    <p>Live with locals. Eat real food.<br>Share real stories. Create real memories.</p>\n    <div class="hero-buttons">\n      <a href="/experiences/" class="btn btn-green">Explore Experiences</a>\n      <a href="/plan/" class="btn btn-brown">Plan My Trip</a>\n      <a href="/work-with-us/" class="btn btn-outline">Become a Host</a>\n    </div>\n  </div>\n</section>'''
+          new = '''<section class="hero">\n  <div class="hero-content">\n    <div class="hero-eyebrow"><i class="fa-solid fa-location-dot"></i> Meaningful journeys through Nepal</div>\n    <h1>You don’t come<br>to Nepal to see.<br><span>You come to feel.</span></h1>\n    <div class="hero-line"></div>\n    <p>Live with locals. Eat real food.<br>Share real stories. Create real memories.</p>\n    <div class="hero-buttons">\n      <a href="/experiences/" class="btn btn-green">Explore Experiences</a>\n      <a href="/plan/" class="btn btn-brown">Plan My Trip</a>\n      <a href="/work-with-us/" class="btn btn-outline">Become a Host</a>\n    </div>\n    <div class="hero-proof" aria-label="Rigan trip planning features">\n      <span><i class="fa-solid fa-route"></i> Custom trip planning</span>\n      <span><i class="fa-solid fa-comments"></i> Direct WhatsApp support</span>\n      <span><i class="fa-solid fa-file-lines"></i> Clear quotation</span>\n    </div>\n  </div>\n</section>'''
+          replace_once(old, new, 'hero html')
+
+          # Remove a specific verification claim until host credentials are intentionally published.
+          text = text.replace(
+              'Verified hosts and local partners across villages, cities, and mountain regions.',
+              'Local hosts and partners across villages, cities, and mountain regions help shape more personal journeys.'
+          )
+          text = text.replace('<span class="trip-badge">Best Seller</span>', '<span class="trip-badge">Himalayan Classic</span>', 1)
+
+          # Replace placeholder-style named hosts with accurate role-based storytelling.
+          old = '''<section class="hosts">\n  <h2 class="section-title">Meet Your Local Hosts</h2>\n  <p class="section-subtitle">The heart of Rigan is the people who welcome you into their homes, villages, and stories.</p>\n\n  <div class="host-grid">\n    <div class="host-card">\n      <img src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg" alt="Local host in Nepal">\n      <div class="host-content">\n        <span>Bandipur / Village Life</span>\n        <h3>Maya Gurung</h3>\n        <p>Sharing village life, local food, family stories, and the warmth of Nepali hospitality.</p>\n      </div>\n    </div>\n\n    <div class="host-card">\n      <img src="https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg" alt="Mountain host in Nepal">\n      <div class="host-content">\n        <span>Mustang / Mountain Culture</span>\n        <h3>Tashi Lama</h3>\n        <p>Introducing travelers to ancient trails, monasteries, Tibetan culture, and mountain life.</p>\n      </div>\n    </div>\n\n    <div class="host-card">\n      <img src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg" alt="Food host in Nepal">\n      <div class="host-content">\n        <span>Kathmandu / Food & Culture</span>\n        <h3>Sita Shrestha</h3>\n        <p>Welcoming guests into the kitchen to cook, eat, laugh, and experience Nepal through food.</p>\n      </div>\n    </div>\n  </div>\n</section>'''
+          new = '''<section class="hosts">\n  <h2 class="section-title">Meet Nepal Through Its People</h2>\n  <p class="section-subtitle">Meaningful journeys are shaped by the homes, kitchens, villages, guides, and communities you encounter along the way.</p>\n\n  <div class="host-grid">\n    <div class="host-card">\n      <img loading="lazy" src="https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg" alt="Village life experience in Nepal">\n      <div class="host-content">\n        <span>Village Life &amp; Homestays</span>\n        <h3>Share Everyday Nepal</h3>\n        <p>Slow down, spend time with local families, and experience food, routines, stories, and hospitality beyond the usual sightseeing route.</p>\n      </div>\n    </div>\n\n    <div class="host-card">\n      <img loading="lazy" src="https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg" alt="Mountain community journey in Nepal">\n      <div class="host-content">\n        <span>Mountain Culture &amp; Trails</span>\n        <h3>Walk With Local Knowledge</h3>\n        <p>Connect mountain landscapes with the communities, traditions, monasteries, and local knowledge that give each route its character.</p>\n      </div>\n    </div>\n\n    <div class="host-card">\n      <img loading="lazy" src="https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg" alt="Nepali food and home kitchen experience">\n      <div class="host-content">\n        <span>Food &amp; Culture</span>\n        <h3>Experience Nepal Around the Table</h3>\n        <p>Discover regional food through markets, home kitchens, shared meals, and the stories behind what people cook and eat.</p>\n      </div>\n    </div>\n  </div>\n</section>'''
+          replace_once(old, new, 'hosts section')
+
+          # Turn illustrative quotes into clearly descriptive travel moments.
+          old = '''<section class="stories">\n  <h2 class="section-title">Travel Stories You Can Feel</h2>\n  <p class="section-subtitle">Real journeys. Real people. Real emotions.</p>\n\n  <div class="story-grid">\n    <div class="story-card">\n      <img src="https://i.postimg.cc/RqrfKnFJ/julie-pittevils-u-Lr9ZOFU4GM-unsplash.jpg" alt="Traveler story in Nepal">\n      <div class="story-content">\n        <span class="story-tag">The Connection</span>\n        <h3>“I came as a guest, left as family.”</h3>\n        <p>A solo traveler shares how a Nepali family became part of her story.</p>\n        <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu Valley</div>\n      </div>\n    </div>\n\n    <div class="story-card">\n      <img src="https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg" alt="Annapurna travel story">\n      <div class="story-content">\n        <span class="story-tag" style="background:var(--brown)">The Adventure</span>\n        <h3>“The Himalayas changed me.”</h3>\n        <p>A trek that became more than a hike — a journey within.</p>\n        <div class="location"><i class="fa-solid fa-location-dot"></i> Annapurna Region</div>\n      </div>\n    </div>\n\n    <div class="story-card">\n      <img src="https://i.postimg.cc/Xq2N6RRs/sanjeev-shakya-t-CKtz-Yih-Gkw-unsplash.jpg" alt="Rural Nepal travel">\n      <div class="story-content">\n        <span class="story-tag">The Moments</span>\n        <h3>“Small moments, biggest memories.”</h3>\n        <p>Laughter, stories, and simple moments that stay forever.</p>\n        <div class="location"><i class="fa-solid fa-location-dot"></i> Rural Nepal</div>\n      </div>\n    </div>\n\n    <div class="story-card">\n      <img src="https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg" alt="Cultural journey Nepal">\n      <div class="story-content">\n        <span class="story-tag" style="background:var(--brown)">The Culture</span>\n        <h3>“Celebrated festival like never before.”</h3>\n        <p>Experience festivals not as a tourist, but as part of the family.</p>\n        <div class="location"><i class="fa-solid fa-location-dot"></i> Across Nepal</div>\n      </div>\n    </div>\n  </div>\n</section>'''
+          new = '''<section class="stories">\n  <h2 class="section-title">Moments That Make Nepal Personal</h2>\n  <p class="section-subtitle">Build your journey around connection, culture, nature, food, and the pace that feels right for you.</p>\n\n  <div class="story-grid">\n    <div class="story-card">\n      <img loading="lazy" src="https://i.postimg.cc/RqrfKnFJ/julie-pittevils-u-Lr9ZOFU4GM-unsplash.jpg" alt="Local connection in Nepal">\n      <div class="story-content">\n        <span class="story-tag">Connection</span>\n        <h3>Share a Meal, Share a Story</h3>\n        <p>Spend time in homes and neighborhoods where conversation and everyday life become part of the journey.</p>\n        <div class="location"><i class="fa-solid fa-location-dot"></i> Kathmandu Valley</div>\n      </div>\n    </div>\n\n    <div class="story-card">\n      <img loading="lazy" src="https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg" alt="Annapurna trekking experience">\n      <div class="story-content">\n        <span class="story-tag" style="background:var(--brown)">Adventure</span>\n        <h3>Walk Into the Himalayas</h3>\n        <p>Choose classic base camps, short ridge walks, or quieter trails according to your time and trekking style.</p>\n        <div class="location"><i class="fa-solid fa-location-dot"></i> Annapurna Region</div>\n      </div>\n    </div>\n\n    <div class="story-card">\n      <img loading="lazy" src="https://i.postimg.cc/Xq2N6RRs/sanjeev-shakya-t-CKtz-Yih-Gkw-unsplash.jpg" alt="Rural Nepal experience">\n      <div class="story-content">\n        <span class="story-tag">Slow Travel</span>\n        <h3>Slow Down in Rural Nepal</h3>\n        <p>Make room for village walks, tea, local routines, conversations, and small moments that fixed itineraries often miss.</p>\n        <div class="location"><i class="fa-solid fa-location-dot"></i> Rural Nepal</div>\n      </div>\n    </div>\n\n    <div class="story-card">\n      <img loading="lazy" src="https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg" alt="Nepal cultural and festival experience">\n      <div class="story-content">\n        <span class="story-tag" style="background:var(--brown)">Culture</span>\n        <h3>Celebrate Living Traditions</h3>\n        <p>Time a journey around festivals, heritage neighborhoods, crafts, food, and traditions that are still part of everyday life.</p>\n        <div class="location"><i class="fa-solid fa-location-dot"></i> Across Nepal</div>\n      </div>\n    </div>\n  </div>\n</section>'''
+          replace_once(old, new, 'stories section')
+
+          # Replace placeholder testimonials and unverified affiliation/payment claims with a transparent planning flow.
+          old = '''<section class="reviews">\n  <h2 class="section-title">Reflections From The Road</h2>\n  <p class="section-subtitle">Not just reviews — memories carried home by travelers.</p>\n\n  <div class="review-grid">\n    <div class="review-card">\n      <div class="review-stars">★★★★★</div>\n      <p>“I came for the mountains, but I left remembering the people. Rigan made Nepal feel personal.”</p>\n      <h4>— Sarah, Australia</h4>\n    </div>\n\n    <div class="review-card">\n      <div class="review-stars">★★★★★</div>\n      <p>“The village stay was the most meaningful part of our trip. We felt like family, not tourists.”</p>\n      <h4>— James & Emily, UK</h4>\n    </div>\n\n    <div class="review-card">\n      <div class="review-stars">★★★★★</div>\n      <p>“Everything felt calm, authentic, and beautifully arranged. This was more than travel.”</p>\n      <h4>— Mina, Japan</h4>\n    </div>\n  </div>\n</section>\n\n<section class="partners">\n  <h2 class="section-title">Trusted & Recognized</h2>\n  <p class="section-subtitle">Registered and affiliated with Nepal's leading tourism organizations.</p>\n\n  <div class="partner-logos" aria-label="Tourism organizations">\n    <span class="partner-name">Government of Nepal</span>\n    <span class="partner-name">Nepal Tourism Board</span>\n    <span class="partner-name">Nepal Mountaineering Association</span>\n    <span class="partner-name">TAAN Nepal</span>\n  </div>\n</section>\n\n<section class="payments">\n  <h3>Secure Payment Options</h3>\n  <div class="payment-icons">\n    <i class="fa-brands fa-cc-visa"></i>\n    <i class="fa-brands fa-cc-mastercard"></i>\n    <i class="fa-brands fa-cc-amex"></i>\n    <i class="fa-brands fa-cc-paypal"></i>\n  </div>\n</section>'''
+          new = '''<section class="reviews">\n  <h2 class="section-title">From Idea to Nepal</h2>\n  <p class="section-subtitle">A simple planning process, with direct communication from the first message to the final itinerary.</p>\n\n  <div class="review-grid">\n    <div class="review-card">\n      <div class="process-icon"><i class="fa-solid fa-comments"></i></div>\n      <h3>1. Tell Us Your Style</h3>\n      <p>Share your dates, group size, interests, pace, comfort level, and the kind of Nepal you want to experience.</p>\n    </div>\n\n    <div class="review-card">\n      <div class="process-icon"><i class="fa-solid fa-route"></i></div>\n      <h3>2. We Shape the Route</h3>\n      <p>We match your ideas with suitable regions and experiences, then prepare an itinerary and quotation you can review.</p>\n    </div>\n\n    <div class="review-card">\n      <div class="process-icon"><i class="fa-solid fa-headset"></i></div>\n      <h3>3. Travel With Support</h3>\n      <p>Once the details are agreed, we coordinate the confirmed services and stay available for practical support around your journey.</p>\n    </div>\n  </div>\n</section>\n\n<section class="partners">\n  <h2 class="section-title">What You Can Expect From Rigan</h2>\n  <p class="section-subtitle">Clear planning, flexible journeys, and local connections shaped around your travel style.</p>\n\n  <div class="partner-logos" aria-label="Rigan travel planning features">\n    <span class="partner-name"><i class="fa-solid fa-map-location-dot"></i>&nbsp; Local trip planning</span>\n    <span class="partner-name"><i class="fa-solid fa-sliders"></i>&nbsp; Flexible itineraries</span>\n    <span class="partner-name"><i class="fa-solid fa-people-group"></i>&nbsp; Community connections</span>\n    <span class="partner-name"><i class="fa-brands fa-whatsapp"></i>&nbsp; Direct support</span>\n  </div>\n</section>\n\n<section class="payments">\n  <h3>Simple, Clear Booking</h3>\n  <p>Availability, final inclusions, payment schedule, and payment instructions are confirmed in your quotation before you commit.</p>\n  <div class="booking-clarity" aria-label="Booking process">\n    <span><i class="fa-solid fa-file-lines"></i> Review your quotation</span>\n    <span><i class="fa-solid fa-calendar-check"></i> Confirm availability</span>\n    <span><i class="fa-solid fa-receipt"></i> Receive payment instructions</span>\n  </div>\n</section>'''
+          replace_once(old, new, 'trust sections')
+
+          # Give the closing CTA a fast WhatsApp option as well as the structured planner.
+          old = '''<section class="cta-banner">\n  <div>\n    <h2>Your story in Nepal is waiting.</h2>\n    <p>Let us help you create memories that last a lifetime.</p>\n  </div>\n\n  <a href="/plan/" class="btn btn-green">Plan My Trip Now</a>\n</section>'''
+          new = '''<section class="cta-banner">\n  <div>\n    <h2>Your story in Nepal is waiting.</h2>\n    <p>Start with a few ideas. We will help turn them into a route that fits you.</p>\n  </div>\n\n  <div class="cta-actions">\n    <a href="/plan/" class="btn btn-green">Plan My Trip</a>\n    <a href="https://wa.me/9779843322695?text=Hi%20Rigan%20Roots%20%26%20Routes,%20I%20want%20help%20planning%20a%20Nepal%20trip." class="btn btn-outline" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>\n  </div>\n</section>'''
+          replace_once(old, new, 'cta banner')
+
+          path.write_text(text, encoding='utf-8')
+          print('homepage polish applied')
+          PY
+
+      - name: Validate homepage essentials
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path('index.html').read_text(encoding='utf-8')
+          required = [
+              'Meaningful journeys through Nepal',
+              'Custom trip planning',
+              '<a href="/plan/">Plan</a>',
+              'Meet Nepal Through Its People',
+              'Moments That Make Nepal Personal',
+              'From Idea to Nepal',
+              'What You Can Expect From Rigan',
+              'Simple, Clear Booking',
+              'Chat on WhatsApp',
+              '/experiences/detail/?experience=annapurna-base-camp-trek',
+              'id="currencySelect"'
+          ]
+          forbidden = [
+              'Maya Gurung',
+              'Tashi Lama',
+              'Sita Shrestha',
+              'Sarah, Australia',
+              'James & Emily, UK',
+              'Mina, Japan',
+              'Registered and affiliated with Nepal',
+              'fa-cc-visa',
+              'Best Seller'
+          ]
+          missing = [x for x in required if x not in text]
+          present_forbidden = [x for x in forbidden if x in text]
+          if missing:
+              raise SystemExit(f'Missing required markers: {missing}')
+          if present_forbidden:
+              raise SystemExit(f'Old placeholder/unverified markers remain: {present_forbidden}')
+          print('homepage validation passed')
+          PY
+
+      - name: Commit production change
+        shell: bash
+        run: |
+          git config user.name "Rigan Roots Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No production changes"
+          else
+            git commit -m "Design: final homepage Nepal polish and trust cleanup"
+            git push
+          fi

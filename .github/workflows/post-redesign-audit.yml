@@ -1,0 +1,211 @@
+name: Post-redesign QA audit
+
+on:
+  push:
+    branches:
+      - qa/post-redesign-audit
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Static site audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit
+          import re, sys
+
+          root = Path('.')
+          html_files = sorted(p for p in root.rglob('*.html') if '.git' not in p.parts)
+          all_files = {p.as_posix().lstrip('./') for p in root.rglob('*') if p.is_file() and '.git' not in p.parts}
+          errors = []
+          warnings = []
+
+          class Parser(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.refs=[]; self.ids=[]; self.forms=[]
+              def handle_starttag(self, tag, attrs):
+                  d=dict(attrs)
+                  if d.get('id'): self.ids.append(d['id'])
+                  for a in ('href','src'):
+                      if d.get(a): self.refs.append((tag,a,d[a]))
+                  if tag=='form' and d.get('action'): self.refs.append((tag,'action',d['action']))
+
+          def local_candidates(page, raw):
+              if not raw or raw.startswith(('#','mailto:','tel:','javascript:','data:')):
+                  return []
+              if '${' in raw or '{{' in raw:
+                  return []
+              if raw.startswith('//'):
+                  return []
+              parts=urlsplit(raw)
+              if parts.scheme or parts.netloc:
+                  return []
+              path=parts.path
+              if not path:
+                  return []
+              if path.startswith('/'):
+                  rel=path.lstrip('/')
+              else:
+                  rel=(page.parent / path).as_posix()
+                  rel=str(Path(rel))
+              rel=rel.lstrip('./')
+              if rel.endswith('/'):
+                  return [rel+'index.html']
+              suffix=Path(rel).suffix
+              if suffix:
+                  return [rel]
+              return [rel, rel+'.html', rel+'/index.html']
+
+          for page in html_files:
+              text=page.read_text(encoding='utf-8', errors='replace')
+              p=Parser(); p.feed(text)
+              seen=set(); dup=[]
+              for ident in p.ids:
+                  if ident in seen: dup.append(ident)
+                  seen.add(ident)
+              if dup:
+                  errors.append(f'{page}: duplicate id(s): {sorted(set(dup))}')
+              for tag,attr,raw in p.refs:
+                  if raw.strip() == '#':
+                      warnings.append(f'{page}: placeholder {attr}="#"')
+                      continue
+                  cands=local_candidates(page, raw.strip())
+                  if cands and not any(c in all_files for c in cands):
+                      errors.append(f'{page}: broken local {attr}={raw!r} -> tried {cands}')
+
+          critical = {
+              'index.html','experiences/index.html','regions/index.html','plan/index.html',
+              'experiences/detail/index.html','experience-data-v2.js','experience-enrichment-v3.js',
+              'experience-localizer.js','booking-link.js','analytics.js','i18n.js','sitemap.xml','CNAME'
+          }
+          for item in critical:
+              if item not in all_files:
+                  errors.append(f'missing critical file: {item}')
+
+          detail=(root/'experiences/detail/index.html').read_text(encoding='utf-8')
+          loc=(root/'experience-localizer.js').read_text(encoding='utf-8')
+          data=(root/'experience-data-v2.js').read_text(encoding='utf-8')
+          checks={
+              'detail loads localizer': '/experience-localizer.js' in detail,
+              'detail loads booking enhancement': '/booking-link.js' in detail,
+              'localizer supports directory route': "'/experiences/detail'" in loc,
+              'localizer loads root locale files': '`/experience-locale-${lang}.js`' in loc,
+              'localizer ensures enrichment': '/experience-enrichment-v3.js' in loc,
+              'detail enrichment shim exists': 'experiences/detail/experience-enrichment-v3.js' in all_files,
+              'experiences enrichment shim exists': 'experiences/experience-enrichment-v3.js' in all_files,
+              'experience database present': 'window.experienceDataV2' in data,
+          }
+          for name, ok in checks.items():
+              if not ok: errors.append('critical integration failed: '+name)
+
+          # Basic SEO checks on public index pages.
+          public_pages=['index.html','experiences/index.html','regions/index.html','plan/index.html','about/index.html','contact/index.html']
+          for rel in public_pages:
+              if rel not in all_files: continue
+              text=(root/rel).read_text(encoding='utf-8',errors='replace').lower()
+              if '<title' not in text: errors.append(f'{rel}: missing title')
+              if 'name="description"' not in text and "name='description'" not in text: warnings.append(f'{rel}: missing meta description')
+              if 'rel="canonical"' not in text and "rel='canonical'" not in text: warnings.append(f'{rel}: missing canonical')
+
+          print(f'HTML files audited: {len(html_files)}')
+          print(f'Repository files indexed: {len(all_files)}')
+          if warnings:
+              print('\nWARNINGS:')
+              for w in warnings: print(' -',w)
+          if errors:
+              print('\nERRORS:')
+              for e in errors: print(' -',e)
+              sys.exit(1)
+          print('\nSTATIC AUDIT PASSED')
+          PY
+
+      - name: JavaScript syntax audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -type f -name '*.js' -not -path './node_modules/*' -not -path './.git/*' -print0 | while IFS= read -r -d '' file; do
+            node --check "$file"
+          done
+          echo "JAVASCRIPT SYNTAX PASSED"
+
+      - name: DOM smoke test for experience routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --silent jsdom@26
+          python -m http.server 8765 >/tmp/rigan-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          sleep 1
+          node - <<'NODE'
+          const { JSDOM, ResourceLoader, VirtualConsole } = require('jsdom');
+
+          class LocalOnlyLoader extends ResourceLoader {
+            fetch(url, options) {
+              if (url.startsWith('http://127.0.0.1:8765/')) return super.fetch(url, options);
+              return Promise.resolve(Buffer.from(''));
+            }
+          }
+
+          async function load(url) {
+            const errors=[];
+            const vc=new VirtualConsole();
+            vc.on('jsdomError', e => {
+              const m=String(e.message || e);
+              if (!/Could not load|Not implemented: navigation|Could not parse CSS/i.test(m)) errors.push(m);
+            });
+            vc.on('error', e => errors.push(String(e)));
+            const dom=await JSDOM.fromURL(url, {
+              resources:new LocalOnlyLoader(),
+              runScripts:'dangerously',
+              pretendToBeVisual:true,
+              virtualConsole:vc,
+              beforeParse(window){
+                window.HTMLElement.prototype.scrollIntoView=function(){this.dataset.qaScrolled='true';};
+                window.open=()=>null;
+                window.alert=()=>{};
+              }
+            });
+            await new Promise(r=>setTimeout(r,1800));
+            return {dom,errors};
+          }
+
+          (async()=>{
+            const failures=[];
+            const listing=await load('http://127.0.0.1:8765/experiences/');
+            const ld=listing.dom.window.document;
+            if (ld.querySelectorAll('#cards .experience-card, #cards > *').length < 1) failures.push('experience listing did not render cards');
+
+            const en=await load('http://127.0.0.1:8765/experiences/detail/?experience=annapurna-base-camp-trek');
+            const d=en.dom.window.document;
+            const title=d.getElementById('title')?.textContent || '';
+            if (!/Annapurna/i.test(title)) failures.push('detail title did not render: '+title);
+            const days=d.querySelectorAll('#itinerary .itinerary-day').length;
+            if (days < 10) failures.push('enriched ABC itinerary has only '+days+' days');
+            if (!d.querySelector('.trek-facts-panel')) failures.push('Trek Essentials panel missing');
+            if (!d.querySelector('.trip-quick-nav')) failures.push('premium quick nav missing');
+            if (!d.getElementById('bookingCard')) failures.push('booking card missing');
+
+            const ja=await load('http://127.0.0.1:8765/experiences/detail/?experience=annapurna-base-camp-trek&lang=ja');
+            const jd=ja.dom.window.document;
+            const jtitle=jd.getElementById('title')?.textContent || '';
+            if (!/アンナプルナ/.test(jtitle)) failures.push('Japanese localization did not apply: '+jtitle);
+
+            const realErrors=[...listing.errors,...en.errors,...ja.errors];
+            if (realErrors.length) failures.push('DOM errors: '+realErrors.join(' | '));
+            if (failures.length){ console.error(failures.join('\n')); process.exit(1); }
+            console.log('DOM SMOKE PASSED:', title, '| days:',days,'|',jtitle);
+          })().catch(e=>{console.error(e);process.exit(1);});
+          NODE

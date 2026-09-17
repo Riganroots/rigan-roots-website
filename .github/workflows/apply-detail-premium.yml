@@ -1,0 +1,54 @@
+name: Apply detail premium enhancement
+
+on:
+  push:
+    branches:
+      - design/detail-premium-conversion
+    paths:
+      - '.github/workflows/apply-detail-premium.yml'
+      - 'tools/apply_detail_premium.py'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: design/detail-premium-conversion
+      - name: Apply detail enhancements
+        run: python tools/apply_detail_premium.py
+      - name: Validate required detail anchors
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path('experiences/detail/index.html').read_text(encoding='utf-8')
+          required = [
+              'id="bookingCard"',
+              'id="itinerarySection"',
+              'hero-actions',
+              'detail-hero::before',
+              'Request a Quote',
+              'View Itinerary',
+              'id="inquiryForm"',
+              'id="whatsappBtn"',
+              'id="galleryGrid"'
+          ]
+          missing = [x for x in required if x not in text]
+          if missing:
+              raise SystemExit(f'Missing: {missing}')
+          print('detail page validation passed')
+          PY
+      - name: Commit production change
+        run: |
+          git config user.name "Rigan Roots Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add experiences/detail/index.html
+          if git diff --cached --quiet; then
+            echo "No production changes"
+          else
+            git commit -m "Design: premium experience detail page"
+            git push
+          fi

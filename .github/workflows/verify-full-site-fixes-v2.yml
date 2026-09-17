@@ -1,0 +1,106 @@
+name: Verify full site fixes v2
+
+on:
+  push:
+    branches:
+      - fix/full-site-audit
+    paths:
+      - '.github/workflows/verify-full-site-fixes-v2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify source URLs and JavaScript
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          files=[p for p in Path('.').rglob('*') if p.is_file() and p.suffix.lower() in {'.html','.js','.css'} and '.git' not in p.parts]
+          bad=[]
+          pats=[r'href=["\']/\$\{',r'src=["\']/\$\{',r'url\(["\']/\$\{',r'(?:href|src)=["\']/https?://']
+          for p in files:
+            t=p.read_text(encoding='utf-8',errors='replace')
+            for pat in pats:
+              if re.search(pat,t): bad.append(f'{p}: {pat}')
+            if p.suffix=='.html' and ('href="#"' in t or "href='#'" in t): bad.append(f'{p}: dead placeholder href')
+          for x in ['/images/nepal-gov.png','/images/ntb.png','/images/nma.png','/images/taan.png']:
+            if x in Path('index.html').read_text(encoding='utf-8'): bad.append(f'index.html: missing asset {x}')
+          if bad:
+            print('\n'.join('ERROR '+x for x in bad)); raise SystemExit(1)
+          print(f'Source URL checks passed across {len(files)} files.')
+          PY
+          for f in *.js; do node --check "$f"; done
+
+      - name: Install Playwright and start site
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null 2>&1
+          npx playwright install --with-deps chromium >/dev/null 2>&1
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/server.log 2>&1 &
+          for i in {1..20}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/server.log; exit 1
+
+      - name: Browser audit
+        shell: bash
+        run: |
+          cat > verify.mjs <<'JS'
+          import { chromium } from 'playwright';
+          const base='http://127.0.0.1:4173';
+          const browser=await chromium.launch({headless:true});
+          const errors=[];
+          async function visit(path,width=390){
+            const page=await browser.newPage({viewport:{width,height:width===390?844:900}});
+            const pageErrors=[]; const failed=[];
+            page.on('pageerror',e=>pageErrors.push(e.message));
+            page.on('requestfailed',r=>{if(r.url().startsWith(base)) failed.push(r.url())});
+            let r;
+            try{r=await page.goto(base+path,{waitUntil:'networkidle',timeout:30000})}
+            catch(e){errors.push(`${path}: navigation ${e.message}`);await page.close();return null}
+            if(!r||r.status()>=400) errors.push(`${path}: HTTP ${r?.status()}`);
+            if(pageErrors.length) errors.push(`${path}: page error ${pageErrors.join(' | ')}`);
+            if(failed.length) errors.push(`${path}: failed internal ${failed.join(', ')}`);
+            const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+2);
+            if(overflow) errors.push(`${path}: horizontal overflow ${width}px`);
+            const bad=await page.$$eval('a[href],img[src],script[src],link[href]',els=>els.map(e=>e.getAttribute('href')||e.getAttribute('src')).filter(v=>v&&(v.startsWith('//')||v.startsWith('/http://')||v.startsWith('/https://'))));
+            if(bad.length) errors.push(`${path}: malformed rendered URL ${bad.join(', ')}`);
+            return page;
+          }
+          const routes=['/','/experiences/','/regions/','/plan/','/contact/','/about/','/work-with-us/','/booking/'];
+          for(const route of routes){for(const width of [1366,390]){const p=await visit(route,width);if(p)await p.close()}}
+          const cat=await visit('/experiences/',1366);let ids=[];
+          if(cat){
+            ids=await cat.evaluate(()=>Object.values(window.experienceDataV2||{}).flatMap(c=>(c.items||[]).map(x=>x.id).filter(Boolean)));
+            const hrefs=await cat.$$eval('a.details-btn',els=>els.map(x=>x.getAttribute('href')));
+            if(!hrefs.length)errors.push('No detail links rendered');
+            for(const h of hrefs)if(!h?.startsWith('/experiences/detail/?experience='))errors.push(`Bad detail href ${h}`);
+            await cat.close();
+          }
+          if(ids.length<30)errors.push(`Only ${ids.length} experience IDs found`);
+          for(const id of ids){
+            const p=await visit(`/experiences/detail/?experience=${encodeURIComponent(id)}`,390);if(!p)continue;
+            const title=(await p.locator('#title').textContent().catch(()=>''))?.trim();
+            const body=await p.locator('body').innerText().catch(()=>'');
+            if(!title)errors.push(`${id}: missing title`);
+            if(/experience not found/i.test(body))errors.push(`${id}: experience not found`);
+            const hero=await p.locator('#hero').evaluate(el=>getComputedStyle(el).backgroundImage).catch(()=>'');
+            if(hero.includes('/https://'))errors.push(`${id}: bad hero URL`);
+            const imgs=await p.$$eval('#galleryGrid img, #relatedTrips img',els=>els.map(i=>i.currentSrc||i.src));
+            for(const src of imgs)if(src.includes('/https://'))errors.push(`${id}: bad image ${src}`);
+            await p.close();
+          }
+          await browser.close();
+          console.log(`Checked ${routes.length} public routes desktop/mobile and ${ids.length} experience detail pages.`);
+          for(const e of errors)console.log('ERROR',e);
+          if(errors.length)process.exit(1);
+          console.log('Full browser verification passed.');
+          JS
+          node verify.mjs
+          rm verify.mjs

@@ -1,0 +1,127 @@
+name: Post-redesign QA audit v2
+
+on:
+  push:
+    branches: [qa/post-redesign-audit]
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Static and JavaScript audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit
+          import sys
+          root=Path('.')
+          htmls=sorted(p for p in root.rglob('*.html') if '.git' not in p.parts)
+          files={p.as_posix().lstrip('./') for p in root.rglob('*') if p.is_file() and '.git' not in p.parts}
+          errors=[]; warnings=[]
+          class P(HTMLParser):
+            def __init__(self): super().__init__(convert_charrefs=True); self.refs=[]; self.ids=[]
+            def handle_starttag(self,tag,attrs):
+              d=dict(attrs)
+              if d.get('id'): self.ids.append(d['id'])
+              for a in ('href','src'):
+                if d.get(a): self.refs.append((a,d[a]))
+              if tag=='form' and d.get('action'): self.refs.append(('action',d['action']))
+          def candidates(page,raw):
+            raw=raw.strip()
+            if not raw or raw.startswith(('#','mailto:','tel:','javascript:','data:','//')) or '${' in raw or '{{' in raw: return []
+            u=urlsplit(raw)
+            if u.scheme or u.netloc: return []
+            path=u.path
+            if path=='/': return ['index.html']
+            if not path: return []
+            rel=path.lstrip('/') if path.startswith('/') else (page.parent/path).as_posix()
+            rel=rel.lstrip('./')
+            if rel.endswith('/'): return [rel+'index.html']
+            if Path(rel).suffix: return [rel]
+            return [rel,rel+'.html',rel+'/index.html']
+          for page in htmls:
+            parser=P(); parser.feed(page.read_text(encoding='utf-8',errors='replace'))
+            seen=set(); dup=[]
+            for i in parser.ids:
+              if i in seen: dup.append(i)
+              seen.add(i)
+            if dup: errors.append(f'{page}: duplicate id(s) {sorted(set(dup))}')
+            for attr,raw in parser.refs:
+              if raw.strip()=='#': warnings.append(f'{page}: placeholder {attr}="#"'); continue
+              c=candidates(page,raw)
+              if c and not any(x in files for x in c): errors.append(f'{page}: broken local {attr}={raw!r} -> {c}')
+          critical=['index.html','experiences/index.html','regions/index.html','plan/index.html','about/index.html','contact/index.html','experiences/detail/index.html','experience-data-v2.js','experience-enrichment-v3.js','experience-localizer.js','booking-link.js','analytics.js','i18n.js','sitemap.xml','CNAME','experiences/experience-enrichment-v3.js','experiences/detail/experience-enrichment-v3.js']
+          for x in critical:
+            if x not in files: errors.append('missing critical file: '+x)
+          detail=(root/'experiences/detail/index.html').read_text(encoding='utf-8')
+          loc=(root/'experience-localizer.js').read_text(encoding='utf-8')
+          checks={
+            'detail localizer':'/experience-localizer.js' in detail,
+            'detail booking enhancement':'/booking-link.js' in detail,
+            'directory localization':"'/experiences/detail'" in loc,
+            'root locale loader':'`/experience-locale-${lang}.js`' in loc,
+            'root enrichment loader':'/experience-enrichment-v3.js' in loc,
+          }
+          for n,ok in checks.items():
+            if not ok: errors.append('integration check failed: '+n)
+          for rel in ['index.html','experiences/index.html','regions/index.html','plan/index.html','about/index.html','contact/index.html']:
+            t=(root/rel).read_text(encoding='utf-8',errors='replace').lower()
+            if '<title' not in t: errors.append(rel+': missing title')
+            if 'name="description"' not in t and "name='description'" not in t: warnings.append(rel+': missing meta description')
+            if 'rel="canonical"' not in t and "rel='canonical'" not in t: warnings.append(rel+': missing canonical')
+          print('HTML audited:',len(htmls),'files indexed:',len(files))
+          if warnings:
+            print('WARNINGS:'); [print(' -',w) for w in warnings]
+          if errors:
+            print('ERRORS:'); [print(' -',e) for e in errors]; sys.exit(1)
+          print('STATIC AUDIT PASSED')
+          PY
+          find . -type f -name '*.js' -not -path './node_modules/*' -not -path './.git/*' -print0 | while IFS= read -r -d '' file; do node --check "$file"; done
+          echo "JAVASCRIPT SYNTAX PASSED"
+
+      - name: DOM smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save --silent jsdom@26
+          python -m http.server 8765 >/tmp/rigan-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          sleep 1
+          node - <<'NODE'
+          const {JSDOM,ResourceLoader,VirtualConsole}=require('jsdom');
+          class LocalLoader extends ResourceLoader{fetch(url,o){if(url.startsWith('http://127.0.0.1:8765/')) return super.fetch(url,o);return Promise.resolve(Buffer.from(''));}}
+          async function load(url){
+            const errors=[]; const vc=new VirtualConsole();
+            vc.on('jsdomError',e=>{const m=String(e.message||e);if(!/Could not load|Not implemented: navigation|Could not parse CSS/i.test(m))errors.push(m)});
+            const dom=await JSDOM.fromURL(url,{resources:new LocalLoader(),runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc,beforeParse(w){w.HTMLElement.prototype.scrollIntoView=function(){};w.open=()=>null;w.alert=()=>{}}});
+            await new Promise(r=>setTimeout(r,2200)); return {dom,errors};
+          }
+          (async()=>{
+            const f=[];
+            const list=await load('http://127.0.0.1:8765/experiences/');
+            const cardCount=list.dom.window.document.querySelectorAll('#cards > *').length;
+            if(cardCount<1)f.push('experience cards did not render');
+            const en=await load('http://127.0.0.1:8765/experiences/detail/?experience=annapurna-base-camp-trek');
+            const d=en.dom.window.document; const title=d.getElementById('title')?.textContent||''; const days=d.querySelectorAll('#itinerary .itinerary-day').length;
+            if(!/Annapurna/i.test(title))f.push('English title: '+title);
+            if(days<10)f.push('ABC itinerary days: '+days);
+            if(!d.querySelector('.trek-facts-panel'))f.push('Trek Essentials missing');
+            if(!d.querySelector('.trip-quick-nav'))f.push('quick nav missing');
+            if(!d.getElementById('bookingCard'))f.push('booking card missing');
+            const ja=await load('http://127.0.0.1:8765/experiences/detail/?experience=annapurna-base-camp-trek&lang=ja');
+            const jt=ja.dom.window.document.getElementById('title')?.textContent||'';
+            if(!/アンナプルナ/.test(jt))f.push('Japanese title: '+jt);
+            const errs=[...list.errors,...en.errors,...ja.errors]; if(errs.length)f.push('DOM errors: '+errs.join(' | '));
+            if(f.length){console.error(f.join('\n'));process.exit(1)}
+            console.log('DOM SMOKE PASSED | cards:',cardCount,'| days:',days,'|',title,'|',jt);
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE

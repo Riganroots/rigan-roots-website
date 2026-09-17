@@ -1939,7 +1939,7 @@ Please send me more information about availability, itinerary, inclusions, and p
       }
 
       hero.style.backgroundImage =
-        `url('/${heroImage}')`;
+        `url('${heroImage}')`;
 
       document.getElementById(
         "badge"
@@ -2040,24 +2040,24 @@ Please send me more information about availability, itinerary, inclusions, and p
       ).innerHTML = `
         <img
           class="gallery-main"
-          src="/${escapeHTML(gallery[0] || heroImage)}"
+          src="${escapeHTML(gallery[0] || heroImage)}"
           alt="${escapeHTML(selected.name)}"
-          onerror="this.src='/${fallbackImage}'"
+          onerror="this.src='${fallbackImage}'"
         >
 
         <div class="gallery-side">
           <img
-            src="/${escapeHTML(gallery[1] || gallery[0] || heroImage)}"
+            src="${escapeHTML(gallery[1] || gallery[0] || heroImage)}"
             alt="${escapeHTML(selected.name)}"
             loading="lazy"
-            onerror="this.src='/${fallbackImage}'"
+            onerror="this.src='${fallbackImage}'"
           >
 
           <img
-            src="/${escapeHTML(gallery[2] || gallery[0] || heroImage)}"
+            src="${escapeHTML(gallery[2] || gallery[0] || heroImage)}"
             alt="${escapeHTML(selected.name)}"
             loading="lazy"
-            onerror="this.src='/${fallbackImage}'"
+            onerror="this.src='${fallbackImage}'"
           >
         </div>
       `;
@@ -2244,10 +2244,10 @@ Please send me more information about availability, itinerary, inclusions, and p
                   href="/experiences/detail/?experience=${relatedSlug}"
                 >
                   <img
-                    src="/${escapeHTML(item.image || fallbackImage)}"
+                    src="${escapeHTML(item.image || fallbackImage)}"
                     alt="${escapeHTML(item.name)}"
                     loading="lazy"
-                    onerror="this.src='/${fallbackImage}'"
+                    onerror="this.src='${fallbackImage}'"
                   >
 
                   <div>

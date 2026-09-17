@@ -57,10 +57,10 @@
     if (!SUPPORTED.has(lang)) return;
 
     if (!(window.RiganExperienceLocales && window.RiganExperienceLocales[lang])) {
-      await loadScriptOnce(`${lang}:base`, `experience-locale-${lang}.js`);
+      await loadScriptOnce(`${lang}:base`, `/experience-locale-${lang}.js`);
     }
 
-    await loadScriptOnce(`${lang}:extra`, `experience-locale-${lang}-extra.js`);
+    await loadScriptOnce(`${lang}:extra`, `/experience-locale-${lang}-extra.js`);
   }
 
   function setText(id, value) {
@@ -82,7 +82,8 @@
   }
 
   async function applyExperienceLocale() {
-    if (!/experience-detail-v2\.html$/i.test(window.location.pathname)) return;
+    const pathname = window.location.pathname.replace(/\/+$/, '');
+    if (pathname !== '/experiences/detail' && !/experience-detail-v2\.html$/i.test(pathname)) return;
 
     const id = getExperienceId();
     const base = findBaseExperience(id);

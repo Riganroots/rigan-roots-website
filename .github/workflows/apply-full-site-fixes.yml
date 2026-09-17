@@ -1,0 +1,114 @@
+name: Apply full site audit fixes
+
+on:
+  push:
+    branches:
+      - fix/full-site-audit
+    paths:
+      - '.github/workflows/apply-full-site-fixes.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/full-site-audit
+
+      - name: Fix malformed routes, images and dead placeholders
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          # Regions: generated links already begin with '/'.
+          path = Path('regions/index.html')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('href="/${planLink}"', 'href="${planLink}"')
+          text = text.replace('href="/${whatsappLink}"', 'href="${whatsappLink}"')
+          text = re.sub(
+              r'<div class="social-links">\s*<a href="#" aria-label="Facebook">.*?</a>\s*<a href="#" aria-label="Instagram">.*?</a>\s*</div>',
+              '<p class="social-note">Social channels coming soon.</p>',
+              text,
+              flags=re.S,
+          )
+          path.write_text(text, encoding='utf-8')
+
+          # Plan: image values are already absolute URLs.
+          path = Path('plan/index.html')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace("url('/${r?r[2]:e[2]}')", "url('${r?r[2]:e[2]}')")
+          path.write_text(text, encoding='utf-8')
+
+          # Experience detail: hero/gallery data contain absolute URLs already.
+          path = Path('experiences/detail/index.html')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace("`url('/${heroImage}')`", "`url('${heroImage}')`")
+          text = text.replace('src="/${escapeHTML(gallery[0] || heroImage)}"', 'src="${escapeHTML(gallery[0] || heroImage)}"')
+          text = text.replace('src="/${escapeHTML(gallery[1] || gallery[0] || heroImage)}"', 'src="${escapeHTML(gallery[1] || gallery[0] || heroImage)}"')
+          text = text.replace('src="/${escapeHTML(gallery[2] || gallery[0] || heroImage)}"', 'src="${escapeHTML(gallery[2] || gallery[0] || heroImage)}"')
+          text = text.replace('src="/${escapeHTML(item.image || fallbackImage)}"', 'src="${escapeHTML(item.image || fallbackImage)}"')
+          text = text.replace("this.src='/${fallbackImage}'", "this.src='${fallbackImage}'")
+          path.write_text(text, encoding='utf-8')
+
+          # Home: remove unverified/missing partner-logo block instead of shipping broken assets.
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+          text, count = re.subn(r'\n<section class="partners">.*?</section>\n', '\n', text, count=1, flags=re.S)
+          if count != 1:
+              raise SystemExit('Expected partner section was not found exactly once')
+          text = re.sub(
+              r'<div class="socials">\s*<a href="#" aria-label="Facebook">.*?</a>\s*<a href="#" aria-label="Instagram">.*?</a>\s*</div>',
+              '<p>Social channels coming soon.</p>',
+              text,
+              flags=re.S,
+          )
+          path.write_text(text, encoding='utf-8')
+
+          # Experiences: remove dead social placeholders until real URLs are supplied.
+          path = Path('experiences/index.html')
+          text = path.read_text(encoding='utf-8')
+          text = re.sub(
+              r'<div class="socials">\s*<a\s+href="#"\s+aria-label="Facebook"\s*>.*?</a>\s*<a\s+href="#"\s+aria-label="Instagram"\s*>.*?</a>\s*<a\s+href="#"\s+aria-label="YouTube"\s*>.*?</a>\s*</div>',
+              '<p>Social channels coming soon.</p>',
+              text,
+              flags=re.S,
+          )
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate fixes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          checks = {
+              'regions/index.html': ['href="/${planLink}"','href="/${whatsappLink}"','href="#"'],
+              'plan/index.html': ["url('/${r?r[2]:e[2]}')"],
+              'experiences/detail/index.html': ["url('/${heroImage}')", 'src="/${', "this.src='/${fallbackImage}'"],
+              'index.html': ['/images/nepal-gov.png','/images/ntb.png','/images/nma.png','/images/taan.png','href="#"'],
+              'experiences/index.html': ['href="#"'],
+          }
+          failures = []
+          for filename, forbidden in checks.items():
+              text = Path(filename).read_text(encoding='utf-8')
+              for item in forbidden:
+                  if item in text:
+                      failures.append(f'{filename}: forbidden pattern remains: {item}')
+          if failures:
+              raise SystemExit('\n'.join(failures))
+          print('Known audit issues fixed and validated.')
+          PY
+
+      - name: Commit fixes
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html regions/index.html plan/index.html experiences/index.html experiences/detail/index.html
+          git commit -m 'Fix remaining site URL and broken asset issues'
+          git push

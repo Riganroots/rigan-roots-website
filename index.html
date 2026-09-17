@@ -152,6 +152,7 @@ button,select{font:inherit}
 .partner-logos{display:flex;justify-content:center;align-items:center;gap:70px;flex-wrap:wrap;margin-top:40px}
 .partner-logos img{height:80px;width:auto;object-fit:contain;filter:grayscale(10%);transition:.3s}
 .partner-logos img:hover{transform:scale(1.08)}
+.partner-name{display:inline-flex;align-items:center;justify-content:center;min-height:64px;padding:14px 20px;border:1px solid rgba(23,77,47,.12);border-radius:18px;background:#fffaf2;color:var(--green);font-weight:800;box-shadow:0 10px 28px rgba(0,0,0,.06);text-align:center}
 .payments{text-align:center;padding:30px 20px 80px;background:white}
 .payments h3{color:var(--green);margin-bottom:20px;font-family:'Inter',sans-serif}
 .payment-icons{display:flex;justify-content:center;gap:30px;font-size:52px;color:#555;flex-wrap:wrap}
@@ -641,11 +642,11 @@ button,select{font:inherit}
   <h2 class="section-title">Trusted & Recognized</h2>
   <p class="section-subtitle">Registered and affiliated with Nepal's leading tourism organizations.</p>
 
-  <div class="partner-logos">
-    <img src="/images/nepal-gov.png" onerror="this.style.display='none'" alt="Government of Nepal">
-    <img src="/images/ntb.png" onerror="this.style.display='none'" alt="Nepal Tourism Board">
-    <img src="/images/nma.png" onerror="this.style.display='none'" alt="Nepal Mountaineering Association">
-    <img src="/images/taan.png" onerror="this.style.display='none'" alt="TAAN Nepal">
+  <div class="partner-logos" aria-label="Tourism organizations">
+    <span class="partner-name">Government of Nepal</span>
+    <span class="partner-name">Nepal Tourism Board</span>
+    <span class="partner-name">Nepal Mountaineering Association</span>
+    <span class="partner-name">TAAN Nepal</span>
   </div>
 </section>
 
@@ -698,8 +699,8 @@ button,select{font:inherit}
     <div>
       <h3>Follow Us</h3>
       <div class="socials">
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a aria-disabled="true" title="Social profile coming soon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a aria-disabled="true" title="Social profile coming soon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
       </div>
     </div>
   </div>

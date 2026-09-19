@@ -41,6 +41,11 @@ const copyCustomerMessage = document.getElementById('copyCustomerMessage');
 const openWhatsAppDraft = document.getElementById('openWhatsAppDraft');
 const openEmailDraft = document.getElementById('openEmailDraft');
 const regenerateMessageBtn = document.getElementById('regenerateMessageBtn');
+const detailStatus = document.getElementById('detailStatus');
+const saveStatusBtn = document.getElementById('saveStatusBtn');
+const nextActionHint = document.getElementById('nextActionHint');
+const resultCount = document.getElementById('resultCount');
+const statFilters = document.querySelectorAll('.stat-filter');
 
 const STATUSES = ['New', 'Contacted', 'Quoted', 'Confirmed', 'Paid', 'Completed', 'Cancelled'];
 let bookings = [];
@@ -111,8 +116,18 @@ function currentFilteredBookings() {
 function renderStats() {
   document.getElementById('statTotal').textContent = bookings.length;
   document.getElementById('statNew').textContent = bookings.filter(b => b.status === 'New').length;
+  document.getElementById('statQuoted').textContent = bookings.filter(b => b.status === 'Quoted').length;
   document.getElementById('statConfirmed').textContent = bookings.filter(b => b.status === 'Confirmed').length;
   document.getElementById('statPaid').textContent = bookings.filter(b => b.status === 'Paid').length;
+  updateStatFilterState();
+}
+
+function updateStatFilterState() {
+  statFilters.forEach(button => {
+    const active = button.dataset.status === statusFilter.value;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
 }
 
 function bookingWhatsApp(item, message) {
@@ -124,6 +139,20 @@ function bookingWhatsApp(item, message) {
 
 function selectedBooking() {
   return bookings.find(item => item.id === selectedBookingId) || null;
+}
+
+const STATUS_NEXT_ACTION = {
+  New: 'Contact the traveller and confirm the request details.',
+  Contacted: 'Prepare the itinerary and quotation.',
+  Quoted: 'Follow up for the customer decision or requested changes.',
+  Confirmed: 'Confirm payment instructions and final service arrangements.',
+  Paid: 'Prepare operations, supplier confirmations, and pre-departure details.',
+  Completed: 'Trip closed. Record feedback or future-trip notes if useful.',
+  Cancelled: 'Booking closed. Keep any cancellation notes for the team.'
+};
+
+function nextActionFor(item) {
+  return STATUS_NEXT_ACTION[item?.status] || 'Review this booking and choose the next step.';
 }
 
 function customerFirstName(item) {
@@ -182,6 +211,61 @@ function regenerateCustomerMessage() {
   customerMessage.value = buildCustomerFollowup(item);
 }
 
+async function updateBookingStatus(id, newStatus, control = null) {
+  const booking = bookings.find(item => item.id === id);
+  if (!booking || !STATUSES.includes(newStatus)) return false;
+
+  const previousStatus = booking.status || 'New';
+  if (previousStatus === newStatus) {
+    if (selectedBookingId === id) {
+      nextActionHint.textContent = nextActionFor(booking);
+    }
+    return true;
+  }
+
+  if (control) control.disabled = true;
+  try {
+    await updateDoc(doc(db, 'bookings', id), {
+      status: newStatus,
+      updatedAt: serverTimestamp(),
+      statusHistory: arrayUnion({
+        from: previousStatus,
+        to: newStatus,
+        changedAt: new Date().toISOString(),
+        changedBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin'
+      })
+    });
+
+    booking.status = newStatus;
+    renderStats();
+    renderBookings();
+    clearNotice(dashboardNotice);
+
+    if (selectedBookingId === id) {
+      detailStatus.value = newStatus;
+      nextActionHint.textContent = nextActionFor(booking);
+      regenerateCustomerMessage();
+      setNotice(detailNotice, `Status updated to ${newStatus}.`, 'success');
+    }
+
+    document.dispatchEvent(new CustomEvent('rigan:booking-status-changed', {
+      detail: { id, status: newStatus }
+    }));
+    return true;
+  } catch (error) {
+    console.error(error);
+    if (selectedBookingId === id) detailStatus.value = previousStatus;
+    setNotice(
+      selectedBookingId === id ? detailNotice : dashboardNotice,
+      'Could not update booking status. Check Firestore rules and admin access.',
+      'error'
+    );
+    return false;
+  } finally {
+    if (control) control.disabled = false;
+  }
+}
+
 function renderBookings() {
   const filtered = currentFilteredBookings();
 
@@ -201,42 +285,22 @@ function renderBookings() {
           ${email ? `<a class="email-link" href="mailto:${encodeURIComponent(email)}">Email</a>` : ''}
         </td>
         <td><select class="status-select" data-booking-id="${escapeHtml(item.id)}">${options}</select></td>
+        <td><span class="next-action">${escapeHtml(nextActionFor(item))}</span></td>
         <td>${escapeHtml(formatDate(item.createdAt))}</td>
         <td><button class="btn btn-outline btn-small view-booking" type="button" data-booking-id="${escapeHtml(item.id)}">View details</button></td>
       </tr>`;
   }).join('');
 
   emptyState.classList.toggle('show', filtered.length === 0);
+  resultCount.textContent = `Showing ${filtered.length} of ${bookings.length} booking${bookings.length === 1 ? '' : 's'}`;
+  updateStatFilterState();
 
   document.querySelectorAll('.status-select').forEach(select => {
     select.addEventListener('change', async () => {
       const id = select.dataset.bookingId;
-      const booking = bookings.find(item => item.id === id);
-      const previousStatus = booking?.status || 'New';
-      const newStatus = select.value;
-      select.disabled = true;
-      try {
-        await updateDoc(doc(db, 'bookings', id), {
-          status: newStatus,
-          updatedAt: serverTimestamp(),
-          statusHistory: arrayUnion({
-            from: previousStatus,
-            to: newStatus,
-            changedAt: new Date().toISOString(),
-            changedBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin'
-          })
-        });
-        if (booking) booking.status = newStatus;
-        renderStats();
-        clearNotice(dashboardNotice);
-        if (selectedBookingId === id) regenerateCustomerMessage();
-      } catch (error) {
-        console.error(error);
-        select.value = previousStatus;
-        setNotice(dashboardNotice, 'Could not update booking status. Check Firestore rules and admin access.', 'error');
-      } finally {
-        select.disabled = false;
-      }
+      const previousStatus = bookings.find(item => item.id === id)?.status || 'New';
+      const success = await updateBookingStatus(id, select.value, select);
+      if (!success) select.value = previousStatus;
     });
   });
 
@@ -261,7 +325,6 @@ function openBookingDetails(id) {
     detailItem('Phone / WhatsApp', item.phone),
     detailItem('Email', item.email),
     detailItem('Experience', item.experienceName),
-    detailItem('Status', item.status),
     detailItem('Travel date', item.travelDate),
     detailItem('Travellers', item.travellers),
     detailItem('Trip type', item.tripType),
@@ -277,6 +340,8 @@ function openBookingDetails(id) {
   if (item.sourceUrl) links.push(`<a class="btn btn-outline btn-small" href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">Source page</a>`);
   detailActions.innerHTML = links.join('');
 
+  detailStatus.value = item.status || 'New';
+  nextActionHint.textContent = nextActionFor(item);
   quotedAmount.value = item.quotedAmount ?? '';
   quotedCurrency.value = item.quotedCurrency || 'USD';
   internalNotes.value = item.internalNotes || '';
@@ -436,6 +501,16 @@ document.addEventListener('keydown', event => {
 });
 searchInput.addEventListener('input', renderBookings);
 statusFilter.addEventListener('change', renderBookings);
+statFilters.forEach(button => {
+  button.addEventListener('click', () => {
+    statusFilter.value = button.dataset.status || 'All';
+    renderBookings();
+  });
+});
+saveStatusBtn.addEventListener('click', async () => {
+  if (!selectedBookingId) return;
+  await updateBookingStatus(selectedBookingId, detailStatus.value, saveStatusBtn);
+});
 document.getElementById('clearFilters').addEventListener('click', () => {
   searchInput.value = '';
   statusFilter.value = 'All';
@@ -458,10 +533,11 @@ onAuthStateChanged(auth, async user => {
 
   try {
     const adminDoc = await getDoc(doc(db, 'admins', user.uid));
-    if (!adminDoc.exists()) {
+    const adminData = adminDoc.exists() ? adminDoc.data() : null;
+    if (!adminData || adminData.role !== 'admin' || adminData.active !== true) {
       loginView.style.display = '';
       dashboardView.classList.remove('show');
-      setNotice(loginNotice, `Signed in, but this account does not have admin access. Create Firestore document admins/${user.uid} and then sign in again.`, 'error');
+      setNotice(loginNotice, `Signed in, but this account does not have active admin access. Confirm admins/${user.uid} has role = admin and active = true.`, 'error');
       return;
     }
 

@@ -702,7 +702,8 @@
 
     const card = document.querySelector('.booking-card');
     const whatsapp = document.getElementById('whatsappBtn');
-    if (!card || !whatsapp || document.getElementById('firebaseBookingBtn')) return;
+    const inquiryForm = document.getElementById('inquiryForm');
+    if (inquiryForm || !card || !whatsapp || document.getElementById('firebaseBookingBtn')) return;
 
     const style = document.createElement('style');
     style.textContent = `

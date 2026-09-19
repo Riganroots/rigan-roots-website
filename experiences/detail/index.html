@@ -1526,50 +1526,43 @@
         <form
           class="form"
           id="inquiryForm"
-          action="https://formspree.io/f/mbdpwkoz"
-          method="POST"
+          action="/booking/"
+          method="GET"
         >
 
           <input
             type="hidden"
-            name="_subject"
             id="subjectInput"
             value="New Experience Inquiry — Rigan Roots & Routes"
           >
 
           <input
             type="hidden"
-            name="experience"
             id="experienceInput"
           >
 
           <input
             type="hidden"
-            name="booking_mode"
             id="modeInput"
           >
 
           <input
             type="hidden"
-            name="travel_date"
             id="dateInput"
           >
 
           <input
             type="hidden"
-            name="number_of_travellers"
             id="travellersInput"
           >
 
           <input
             type="hidden"
-            name="trip_type"
             id="tripTypeInput"
           >
 
           <input
             type="hidden"
-            name="displayed_price"
             id="priceInput"
           >
 
@@ -1578,7 +1571,6 @@
           <input
             type="text"
             id="name"
-            name="name"
             placeholder="Enter your full name"
             autocomplete="name"
             required
@@ -1589,7 +1581,6 @@
           <input
             type="tel"
             id="phone"
-            name="phone"
             placeholder="+977..."
             autocomplete="tel"
             required
@@ -1600,7 +1591,6 @@
           <input
             type="email"
             id="email"
-            name="email"
             placeholder="Enter your email"
             autocomplete="email"
           >
@@ -1609,7 +1599,6 @@
 
           <select
             id="contactMethod"
-            name="preferred_contact_method"
           >
             <option value="WhatsApp">WhatsApp</option>
             <option value="Email">Email</option>
@@ -1620,17 +1609,16 @@
 
           <textarea
             id="message"
-            name="message"
             placeholder="Tell us your interests, budget, accommodation preference, dietary requirements, or special requests."
           ></textarea>
 
           <button type="submit" class="inquiry-btn">
             <i class="fa-solid fa-paper-plane"></i>
-            Request Detailed Quote
+            Continue to Booking Request
           </button>
 
           <div class="form-status" id="formStatus">
-            Your inquiry is being submitted.
+            Opening your secure booking request…
           </div>
 
         </form>
@@ -2568,12 +2556,96 @@ Please send me more information about availability, itinerary, inclusions, and p
 
       inquiryForm.addEventListener(
         "submit",
-        function () {
+        function (event) {
+          event.preventDefault();
+
+          if (!inquiryForm.checkValidity()) {
+            inquiryForm.reportValidity();
+            return;
+          }
+
           updateHiddenFormFields();
+
+          const bookingDraft = {
+            experienceId: selected.id || createSafeSlug(selected),
+            fullName: document.getElementById("name").value.trim().slice(0, 120),
+            phone: document.getElementById("phone").value.trim().slice(0, 40),
+            email: document.getElementById("email").value.trim().slice(0, 160),
+            preferredContact: document.getElementById("contactMethod").value,
+            specialRequests: document.getElementById("message").value.trim().slice(0, 3000),
+            travelDate: travelDateInput.value,
+            travellers: travelersInput.value,
+            tripType: tripTypeSelect.value,
+            savedAt: Date.now()
+          };
+
+          try {
+            sessionStorage.setItem(
+              "rigan-booking-draft",
+              JSON.stringify(bookingDraft)
+            );
+          } catch (error) {
+            console.warn("Could not save booking draft:", error);
+          }
+
+          const bookingUrl = new URL("/booking/", window.location.href);
+          bookingUrl.searchParams.set(
+            "experience",
+            selected.id || createSafeSlug(selected)
+          );
+
+          if (travelDateInput.value) {
+            bookingUrl.searchParams.set(
+              "travelDate",
+              travelDateInput.value
+            );
+          }
+
+          if (travelersInput.value) {
+            bookingUrl.searchParams.set(
+              "travellers",
+              travelersInput.value
+            );
+          }
+
+          if (tripTypeSelect.value) {
+            bookingUrl.searchParams.set(
+              "tripType",
+              tripTypeSelect.value
+            );
+          }
+
+          const currentLanguage =
+            params.get("lang") ||
+            localStorage.getItem("rigan-language") ||
+            "en";
+
+          if (currentLanguage !== "en") {
+            bookingUrl.searchParams.set(
+              "lang",
+              currentLanguage
+            );
+          }
 
           document.getElementById(
             "formStatus"
           ).style.display = "block";
+
+          if (typeof window.gtag === "function") {
+            window.gtag(
+              "event",
+              "booking_handoff_from_detail",
+              {
+                experience_id:
+                  selected.id ||
+                  createSafeSlug(selected)
+              }
+            );
+          }
+
+          window.location.href =
+            bookingUrl.pathname +
+            bookingUrl.search;
         }
       );
 

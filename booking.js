@@ -65,6 +65,58 @@ function prefillFromQuery() {
   }
 }
 
+function restoreDetailBookingDraft() {
+  let draft = null;
+  try {
+    const raw = sessionStorage.getItem('rigan-booking-draft');
+    if (!raw) return;
+    draft = JSON.parse(raw);
+  } catch (error) {
+    console.warn('Could not read booking draft:', error);
+    sessionStorage.removeItem('rigan-booking-draft');
+    return;
+  }
+
+  const savedAt = Number(draft?.savedAt || 0);
+  const isFresh = savedAt > 0 && Date.now() - savedAt < 30 * 60 * 1000;
+  const sameExperience = !draft?.experienceId || draft.experienceId === selected.id || draft.experienceId === experienceId;
+
+  sessionStorage.removeItem('rigan-booking-draft');
+  if (!isFresh || !sameExperience) return;
+
+  const setValue = (id, value, max) => {
+    const input = document.getElementById(id);
+    if (!input || value === null || value === undefined) return;
+    input.value = String(value).trim().slice(0, max);
+  };
+
+  setValue('fullName', draft.fullName, 120);
+  setValue('phone', draft.phone, 40);
+  setValue('email', draft.email, 160);
+  setValue('specialRequests', draft.specialRequests, 3000);
+
+  if (!params.get('travelDate') && /^\d{4}-\d{2}-\d{2}$/.test(String(draft.travelDate || ''))) {
+    setValue('travelDate', draft.travelDate, 20);
+  }
+
+  if (!params.get('travellers') && /^\d+$/.test(String(draft.travellers || ''))) {
+    const count = Number.parseInt(draft.travellers, 10);
+    if (count >= 1 && count <= 100) setValue('travellers', String(count), 3);
+  }
+
+  if (!params.get('tripType')) {
+    const tripTypeSelect = document.getElementById('tripType');
+    if (tripTypeSelect && [...tripTypeSelect.options].some(option => option.value === draft.tripType)) {
+      tripTypeSelect.value = draft.tripType;
+    }
+  }
+
+  const contactSelect = document.getElementById('preferredContact');
+  if (contactSelect && [...contactSelect.options].some(option => option.value === draft.preferredContact)) {
+    contactSelect.value = draft.preferredContact;
+  }
+}
+
 function renderSummary() {
   document.getElementById('experienceName').value = selected.name;
   document.getElementById('summaryTitle').textContent = selected.name;
@@ -348,4 +400,5 @@ form.addEventListener('submit', async event => {
 
 setMinimumDate();
 prefillFromQuery();
+restoreDetailBookingDraft();
 renderSummary();

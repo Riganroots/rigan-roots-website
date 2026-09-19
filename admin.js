@@ -46,6 +46,8 @@ const regenerateMessageBtn = document.getElementById('regenerateMessageBtn');
 const detailStatus = document.getElementById('detailStatus');
 const saveStatusBtn = document.getElementById('saveStatusBtn');
 const nextActionHint = document.getElementById('nextActionHint');
+const statusHistoryList = document.getElementById('statusHistoryList');
+const statusHistoryCurrent = document.getElementById('statusHistoryCurrent');
 const resultCount = document.getElementById('resultCount');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const paginationNote = document.getElementById('paginationNote');
@@ -74,6 +76,99 @@ function formatDate(timestamp) {
   if (!timestamp) return '—';
   const date = typeof timestamp.toDate === 'function' ? timestamp.toDate() : new Date(timestamp);
   return Number.isNaN(date.getTime()) ? '—' : date.toLocaleString();
+}
+
+function timestampMs(timestamp) {
+  if (!timestamp) return 0;
+  const date = typeof timestamp.toDate === 'function' ? timestamp.toDate() : new Date(timestamp);
+  const value = date.getTime();
+  return Number.isNaN(value) ? 0 : value;
+}
+
+function renderStatusHistory(item) {
+  if (!item || !statusHistoryList || !statusHistoryCurrent) return;
+
+  const currentStatus = item.status || 'New';
+  statusHistoryCurrent.textContent = `Current: ${currentStatus}`;
+
+  const entries = [];
+  if (item.createdAt) {
+    entries.push({
+      from: '',
+      to: 'New',
+      changedAt: item.createdAt,
+      changedBy: 'Booking form',
+      reason: 'Booking request created',
+      kind: 'created'
+    });
+  }
+
+  const storedHistory = Array.isArray(item.statusHistory)
+    ? item.statusHistory.filter(entry => entry && typeof entry === 'object')
+    : [];
+
+  storedHistory.forEach(entry => {
+    entries.push({
+      from: String(entry.from || ''),
+      to: String(entry.to || ''),
+      changedAt: entry.changedAt || null,
+      changedBy: String(entry.changedBy || 'Admin'),
+      reason: String(entry.reason || ''),
+      kind: 'change'
+    });
+  });
+
+  entries.sort((a, b) => timestampMs(a.changedAt) - timestampMs(b.changedAt));
+
+  const lastRecordedStatus = [...entries]
+    .reverse()
+    .find(entry => entry.to)?.to || '';
+
+  if (currentStatus && currentStatus !== lastRecordedStatus) {
+    entries.push({
+      from: lastRecordedStatus,
+      to: currentStatus,
+      changedAt: item.updatedAt || null,
+      changedBy: 'Current booking state',
+      reason: 'Latest status recorded outside the admin status control',
+      kind: 'current'
+    });
+  }
+
+  if (!entries.length) {
+    statusHistoryList.innerHTML =
+      '<p class="status-history-empty">No status history is available for this booking yet.</p>';
+    return;
+  }
+
+  statusHistoryList.innerHTML = entries.map((entry, index) => {
+    const status = entry.to || 'Status update';
+    const transition = entry.from && entry.from !== entry.to
+      ? `${entry.from} → ${entry.to}`
+      : status;
+    const reason = entry.reason
+      ? `<span class="status-history-reason">${escapeHtml(entry.reason)}</span>`
+      : '';
+    const actor = entry.changedBy
+      ? `<span>${escapeHtml(entry.changedBy)}</span>`
+      : '';
+    const latestClass = index === entries.length - 1 ? ' is-latest' : '';
+
+    return `
+      <div class="status-history-item${latestClass}">
+        <span class="status-history-dot" aria-hidden="true"></span>
+        <div class="status-history-body">
+          <div class="status-history-row">
+            <strong>${escapeHtml(transition)}</strong>
+            <time>${escapeHtml(formatDate(entry.changedAt))}</time>
+          </div>
+          <div class="status-history-meta">
+            ${actor}
+            ${reason}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
 }
 
 function safePhone(phone) {
@@ -233,26 +328,45 @@ async function updateBookingStatus(id, newStatus, control = null) {
   }
 
   if (control) control.disabled = true;
+  const historyEntry = {
+    from: previousStatus,
+    to: newStatus,
+    changedAt: new Date().toISOString(),
+    changedBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin'
+  };
+
   try {
     await updateDoc(doc(db, 'bookings', id), {
       status: newStatus,
       updatedAt: serverTimestamp(),
-      statusHistory: arrayUnion({
-        from: previousStatus,
-        to: newStatus,
-        changedAt: new Date().toISOString(),
-        changedBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin'
-      })
+      statusHistory: arrayUnion(historyEntry)
     });
 
     booking.status = newStatus;
+    booking.updatedAt = historyEntry.changedAt;
+    booking.statusHistory = [
+      ...(Array.isArray(booking.statusHistory) ? booking.statusHistory : []),
+      historyEntry
+    ];
     renderStats();
     renderBookings();
+
+    if (selectedBookingId) {
+      const refreshedSelected = selectedBooking();
+      if (refreshedSelected) {
+        detailStatus.value = refreshedSelected.status || 'New';
+        nextActionHint.textContent = nextActionFor(refreshedSelected);
+        renderStatusHistory(refreshedSelected);
+        customerMessage.value = buildCustomerFollowup(refreshedSelected);
+      }
+    }
+
     clearNotice(dashboardNotice);
 
     if (selectedBookingId === id) {
       detailStatus.value = newStatus;
       nextActionHint.textContent = nextActionFor(booking);
+      renderStatusHistory(booking);
       regenerateCustomerMessage();
       setNotice(detailNotice, `Status updated to ${newStatus}.`, 'success');
     }
@@ -397,6 +511,7 @@ function openBookingDetails(id) {
 
   detailStatus.value = item.status || 'New';
   nextActionHint.textContent = nextActionFor(item);
+  renderStatusHistory(item);
   quotedAmount.value = item.quotedAmount ?? '';
   quotedCurrency.value = item.quotedCurrency || 'USD';
   internalNotes.value = item.internalNotes || '';

@@ -287,6 +287,131 @@ td { font-size: 13px; }
   min-height: 44px;
 }
 
+
+.status-history-panel {
+  margin: 0 0 22px;
+  padding: 20px;
+  border: 1px solid rgba(23, 77, 47, 0.12);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.status-history-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.status-history-head h3 {
+  margin: 3px 0 0;
+  color: var(--green);
+  font-size: 18px;
+}
+
+.status-history-current {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #edf5eb;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.status-history-list {
+  position: relative;
+  display: grid;
+  gap: 0;
+}
+
+.status-history-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+  padding: 0 0 18px;
+}
+
+.status-history-item:last-child {
+  padding-bottom: 0;
+}
+
+.status-history-item::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 14px;
+  bottom: -2px;
+  width: 2px;
+  background: #dce8dc;
+}
+
+.status-history-item:last-child::before {
+  display: none;
+}
+
+.status-history-dot {
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  margin-top: 4px;
+  border: 3px solid #dce8dc;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.status-history-item.is-latest .status-history-dot {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.status-history-body {
+  min-width: 0;
+}
+
+.status-history-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.status-history-row strong {
+  color: #27352d;
+  font-size: 13px;
+}
+
+.status-history-row time,
+.status-history-meta {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.status-history-row time {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.status-history-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+  margin-top: 3px;
+}
+
+.status-history-reason {
+  color: #526158;
+}
+
+.status-history-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 @media (max-width: 1150px) {
   .stats {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -308,6 +433,20 @@ td { font-size: 13px; }
 
   .workflow-controls label {
     grid-column: auto;
+  }
+
+  .status-history-head,
+  .status-history-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .status-history-current {
+    align-self: flex-start;
+  }
+
+  .status-history-row time {
+    white-space: normal;
   }
 
   .result-count {

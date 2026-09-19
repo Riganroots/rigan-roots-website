@@ -32,7 +32,7 @@
       <input id="adminLoginPassword" type="password" autocomplete="current-password" required>
       <button class="btn btn-primary" type="submit">Sign in</button>
       <div class="notice" id="loginNotice" role="status"></div>
-      <div class="admin-access-note">Only authenticated users whose UID exists in the Firestore <strong>admins</strong> collection can read or update bookings.</div>
+      <div class="admin-access-note">Only active Firebase users with an <strong>admins/{UID}</strong> document containing <strong>role = admin</strong> and <strong>active = true</strong> can read or update bookings.</div>
     </form>
   </section>
 
@@ -45,23 +45,25 @@
       </div>
     </div>
 
-    <section class="stats">
-      <div class="stat card"><span>Total</span><strong id="statTotal">0</strong></div>
-      <div class="stat card"><span>New</span><strong id="statNew">0</strong></div>
-      <div class="stat card"><span>Confirmed</span><strong id="statConfirmed">0</strong></div>
-      <div class="stat card"><span>Paid</span><strong id="statPaid">0</strong></div>
+    <section class="stats" aria-label="Booking pipeline filters">
+      <button class="stat card stat-filter is-active" type="button" data-status="All"><span>Total</span><strong id="statTotal">0</strong><small>All requests</small></button>
+      <button class="stat card stat-filter" type="button" data-status="New"><span>New</span><strong id="statNew">0</strong><small>Needs first contact</small></button>
+      <button class="stat card stat-filter" type="button" data-status="Quoted"><span>Quoted</span><strong id="statQuoted">0</strong><small>Awaiting decision</small></button>
+      <button class="stat card stat-filter" type="button" data-status="Confirmed"><span>Confirmed</span><strong id="statConfirmed">0</strong><small>Approved trips</small></button>
+      <button class="stat card stat-filter" type="button" data-status="Paid"><span>Paid</span><strong id="statPaid">0</strong><small>Ready for operations</small></button>
     </section>
 
     <section class="controls card">
       <input id="searchInput" type="search" placeholder="Search name, booking ref, phone, package…">
-      <select id="statusFilter"><option value="All">All statuses</option><option>New</option><option>Contacted</option><option>Quoted</option><option>Confirmed</option><option>Paid</option><option>Completed</option><option>Cancelled</option></select>
+      <select id="statusFilter" aria-label="Filter bookings by status"><option value="All">All statuses</option><option>New</option><option>Contacted</option><option>Quoted</option><option>Confirmed</option><option>Paid</option><option>Completed</option><option>Cancelled</option></select>
       <button class="btn btn-outline" id="clearFilters" type="button">Clear</button>
+      <span class="result-count" id="resultCount">Showing 0 bookings</span>
     </section>
 
     <section class="table-card card">
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Reference</th><th>Traveller</th><th>Experience</th><th>Travel</th><th>Contact</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Reference</th><th>Traveller</th><th>Experience</th><th>Travel</th><th>Contact</th><th>Status</th><th>Next action</th><th>Created</th><th>Actions</th></tr></thead>
           <tbody id="bookingRows"></tbody>
         </table>
       </div>
@@ -78,6 +80,20 @@
       </div>
       <div class="detail-grid" id="detailGrid"></div>
       <div class="detail-actions" id="detailActions"></div>
+
+      <section class="workflow-panel" aria-label="Booking workflow">
+        <div>
+          <p class="eyebrow">Workflow</p>
+          <h3>Move this booking forward</h3>
+          <p id="nextActionHint" class="workflow-hint">Choose the next booking status after completing the current action.</p>
+        </div>
+        <div class="workflow-controls">
+          <label for="detailStatus">Status</label>
+          <select id="detailStatus"><option>New</option><option>Contacted</option><option>Quoted</option><option>Confirmed</option><option>Paid</option><option>Completed</option><option>Cancelled</option></select>
+          <button class="btn btn-primary" id="saveStatusBtn" type="button">Update status</button>
+        </div>
+      </section>
+
       <div class="ops-grid">
         <label>Quoted amount
           <input id="quotedAmount" type="number" min="0" step="0.01" placeholder="0.00">

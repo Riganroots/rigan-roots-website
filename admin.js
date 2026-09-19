@@ -30,6 +30,7 @@ const emptyState = document.getElementById('emptyState');
 const searchInput = document.getElementById('searchInput');
 const statusFilter = document.getElementById('statusFilter');
 const detailModal = document.getElementById('detailModal');
+const closeDetailBtn = document.getElementById('closeDetailBtn');
 const detailGrid = document.getElementById('detailGrid');
 const detailActions = document.getElementById('detailActions');
 const detailTitle = document.getElementById('detailTitle');
@@ -57,6 +58,7 @@ let selectedBookingId = null;
 let lastBookingDoc = null;
 let hasMoreBookings = false;
 let isLoadingBookings = false;
+let previouslyFocusedElement = null;
 
 function setNotice(el, text, type = 'info') {
   el.textContent = text;
@@ -327,9 +329,48 @@ function detailItem(label, value, full = false) {
   return `<div class="detail-item ${full ? 'full' : ''}"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value || '—')}</strong></div>`;
 }
 
+function modalFocusableElements() {
+  const selector = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
+
+  return [...detailModal.querySelectorAll(selector)].filter(element => {
+    return !element.hidden && element.offsetParent !== null;
+  });
+}
+
+function keepFocusInsideDetailModal(event) {
+  if (event.key !== 'Tab' || detailModal.hidden) return;
+
+  const focusable = modalFocusableElements();
+  if (!focusable.length) {
+    event.preventDefault();
+    closeDetailBtn.focus();
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const active = document.activeElement;
+
+  if (event.shiftKey && (active === first || !detailModal.contains(active))) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && active === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
 function openBookingDetails(id) {
   const item = bookings.find(booking => booking.id === id);
   if (!item) return;
+  previouslyFocusedElement = document.activeElement;
   selectedBookingId = id;
   clearNotice(detailNotice);
   detailTitle.textContent = item.bookingRef || 'Booking';
@@ -363,15 +404,32 @@ function openBookingDetails(id) {
   openWhatsAppDraft.disabled = !item.phone;
   openEmailDraft.disabled = !item.email;
   detailModal.hidden = false;
+  detailModal.scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  window.requestAnimationFrame(() => {
+    closeDetailBtn.focus({ preventScroll: true });
+  });
 }
 
 function closeBookingDetails() {
+  if (detailModal.hidden) return;
+
   detailModal.hidden = true;
   selectedBookingId = null;
   customerMessage.value = '';
   document.body.style.overflow = '';
   clearNotice(detailNotice);
+
+  const focusTarget = previouslyFocusedElement;
+  previouslyFocusedElement = null;
+  if (
+    focusTarget &&
+    focusTarget.isConnected &&
+    focusTarget.offsetParent !== null &&
+    typeof focusTarget.focus === 'function'
+  ) {
+    focusTarget.focus({ preventScroll: true });
+  }
 }
 
 async function saveBookingOperations() {
@@ -547,7 +605,7 @@ logoutBtn.addEventListener('click', () => signOut(auth));
 document.getElementById('refreshBtn').addEventListener('click', () => loadBookings(false));
 loadMoreBtn.addEventListener('click', () => loadBookings(true));
 document.getElementById('exportBtn').addEventListener('click', exportCsv);
-document.getElementById('closeDetailBtn').addEventListener('click', closeBookingDetails);
+closeDetailBtn.addEventListener('click', closeBookingDetails);
 document.getElementById('saveOpsBtn').addEventListener('click', saveBookingOperations);
 regenerateMessageBtn.addEventListener('click', regenerateCustomerMessage);
 copyCustomerMessage.addEventListener('click', copyFollowupMessage);
@@ -557,7 +615,13 @@ detailModal.addEventListener('click', event => {
   if (event.target === detailModal) closeBookingDetails();
 });
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !detailModal.hidden) closeBookingDetails();
+  if (detailModal.hidden) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeBookingDetails();
+    return;
+  }
+  keepFocusInsideDetailModal(event);
 });
 searchInput.addEventListener('input', renderBookings);
 statusFilter.addEventListener('change', renderBookings);

@@ -46,7 +46,7 @@
     </div>
 
     <section class="stats" aria-label="Booking pipeline filters">
-      <button class="stat card stat-filter is-active" type="button" data-status="All"><span>Total</span><strong id="statTotal">0</strong><small>All requests</small></button>
+      <button class="stat card stat-filter is-active" type="button" data-status="All"><span>Loaded</span><strong id="statTotal">0</strong><small>Bookings in view</small></button>
       <button class="stat card stat-filter" type="button" data-status="New"><span>New</span><strong id="statNew">0</strong><small>Needs first contact</small></button>
       <button class="stat card stat-filter" type="button" data-status="Quoted"><span>Quoted</span><strong id="statQuoted">0</strong><small>Awaiting decision</small></button>
       <button class="stat card stat-filter" type="button" data-status="Confirmed"><span>Confirmed</span><strong id="statConfirmed">0</strong><small>Approved trips</small></button>
@@ -68,6 +68,10 @@
         </table>
       </div>
       <div class="empty-state" id="emptyState">No bookings match the current filter.</div>
+      <div class="pagination-bar" id="paginationBar">
+        <span id="paginationNote">Showing the newest bookings first.</span>
+        <button class="btn btn-outline" id="loadMoreBtn" type="button" hidden>Load older bookings</button>
+      </div>
     </section>
     <div class="notice" id="dashboardNotice" role="status"></div>
   </main>

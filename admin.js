@@ -14,6 +14,7 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  startAfter,
   updateDoc
 } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
@@ -45,11 +46,17 @@ const detailStatus = document.getElementById('detailStatus');
 const saveStatusBtn = document.getElementById('saveStatusBtn');
 const nextActionHint = document.getElementById('nextActionHint');
 const resultCount = document.getElementById('resultCount');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const paginationNote = document.getElementById('paginationNote');
 const statFilters = document.querySelectorAll('.stat-filter');
 
 const STATUSES = ['New', 'Contacted', 'Quoted', 'Confirmed', 'Paid', 'Completed', 'Cancelled'];
+const PAGE_SIZE = 100;
 let bookings = [];
 let selectedBookingId = null;
+let lastBookingDoc = null;
+let hasMoreBookings = false;
+let isLoadingBookings = false;
 
 function setNotice(el, text, type = 'info') {
   el.textContent = text;
@@ -292,7 +299,14 @@ function renderBookings() {
   }).join('');
 
   emptyState.classList.toggle('show', filtered.length === 0);
-  resultCount.textContent = `Showing ${filtered.length} of ${bookings.length} booking${bookings.length === 1 ? '' : 's'}`;
+  const loadedLabel = bookings.length === 1 ? 'booking' : 'bookings';
+  resultCount.textContent = `Showing ${filtered.length} of ${bookings.length} loaded ${loadedLabel}`;
+  paginationNote.textContent = hasMoreBookings
+    ? 'Newest bookings loaded first. Load older bookings to search or export more history.'
+    : bookings.length
+      ? 'All currently available bookings are loaded.'
+      : 'No bookings loaded.';
+  loadMoreBtn.hidden = !hasMoreBookings;
   updateStatFilterState();
 
   document.querySelectorAll('.status-select').forEach(select => {
@@ -455,17 +469,62 @@ function exportCsv() {
   URL.revokeObjectURL(url);
 }
 
-async function loadBookings() {
-  setNotice(dashboardNotice, 'Loading bookings…');
+async function loadBookings(append = false) {
+  if (isLoadingBookings) return;
+  isLoadingBookings = true;
+
+  const buttonText = loadMoreBtn.textContent;
+  if (append) {
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.textContent = 'Loading…';
+    setNotice(dashboardNotice, 'Loading older bookings…');
+  } else {
+    setNotice(dashboardNotice, 'Loading bookings…');
+    lastBookingDoc = null;
+    hasMoreBookings = false;
+  }
+
   try {
-    const snapshot = await getDocs(query(collection(db, 'bookings'), orderBy('createdAt', 'desc'), limit(250)));
-    bookings = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    const constraints = [
+      orderBy('createdAt', 'desc'),
+      limit(PAGE_SIZE)
+    ];
+
+    if (append && lastBookingDoc) {
+      constraints.splice(1, 0, startAfter(lastBookingDoc));
+    }
+
+    const snapshot = await getDocs(query(collection(db, 'bookings'), ...constraints));
+    const page = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    if (append) {
+      const existingIds = new Set(bookings.map(item => item.id));
+      bookings = bookings.concat(page.filter(item => !existingIds.has(item.id)));
+    } else {
+      bookings = page;
+    }
+
+    lastBookingDoc = snapshot.docs.length
+      ? snapshot.docs[snapshot.docs.length - 1]
+      : lastBookingDoc;
+    hasMoreBookings = snapshot.docs.length === PAGE_SIZE;
+
     renderStats();
     renderBookings();
     clearNotice(dashboardNotice);
   } catch (error) {
     console.error(error);
-    setNotice(dashboardNotice, 'Could not load bookings. Confirm this user has an admins/{UID} document and that the Firestore rules are published.', 'error');
+    setNotice(
+      dashboardNotice,
+      append
+        ? 'Could not load older bookings. Please try again.'
+        : 'Could not load bookings. Confirm this user has an admins/{UID} document and that the Firestore rules are published.',
+      'error'
+    );
+  } finally {
+    isLoadingBookings = false;
+    loadMoreBtn.disabled = false;
+    loadMoreBtn.textContent = buttonText;
   }
 }
 
@@ -485,7 +544,8 @@ loginForm.addEventListener('submit', async event => {
 });
 
 logoutBtn.addEventListener('click', () => signOut(auth));
-document.getElementById('refreshBtn').addEventListener('click', loadBookings);
+document.getElementById('refreshBtn').addEventListener('click', () => loadBookings(false));
+loadMoreBtn.addEventListener('click', () => loadBookings(true));
 document.getElementById('exportBtn').addEventListener('click', exportCsv);
 document.getElementById('closeDetailBtn').addEventListener('click', closeBookingDetails);
 document.getElementById('saveOpsBtn').addEventListener('click', saveBookingOperations);
@@ -544,7 +604,7 @@ onAuthStateChanged(auth, async user => {
     loginView.style.display = 'none';
     dashboardView.classList.add('show');
     clearNotice(loginNotice);
-    await loadBookings();
+    await loadBookings(false);
   } catch (error) {
     console.error(error);
     loginView.style.display = '';

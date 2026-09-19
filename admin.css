@@ -321,3 +321,35 @@ td { font-size: 13px; }
     font-size: 10px;
   }
 }
+
+
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px 16px;
+  border-top: 1px solid rgba(23, 77, 47, 0.08);
+  color: #6d776f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pagination-bar .btn {
+  flex: 0 0 auto;
+}
+
+.pagination-bar .btn[hidden] {
+  display: none;
+}
+
+@media (max-width: 680px) {
+  .pagination-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pagination-bar .btn {
+    width: 100%;
+  }
+}

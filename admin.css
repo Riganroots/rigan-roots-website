@@ -13,6 +13,15 @@
 body { margin: 0; font-family: Inter, Arial, sans-serif; background: #f5f7f5; color: var(--text); }
 button, input, select, textarea { font: inherit; }
 
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(159, 186, 107, .95);
+  outline-offset: 3px;
+}
+
 .admin-topbar {
   min-height: 72px;
   display: flex;

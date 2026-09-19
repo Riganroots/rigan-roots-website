@@ -41,6 +41,13 @@ let currentBooking = null;
 let currentBookingId = null;
 let currentQuoteUrl = '';
 
+document.addEventListener('rigan:booking-status-changed', event => {
+  if (!currentBooking || !currentBookingId) return;
+  if (event.detail?.id === currentBookingId && event.detail?.status) {
+    currentBooking.status = event.detail.status;
+  }
+});
+
 const DEFAULT_PAYMENT_TERMS = 'A deposit is required to confirm services. The exact payment schedule, payment method, and any applicable bank or card charges will be confirmed in writing before payment.';
 const DEFAULT_CANCELLATION_TERMS = 'Cancellation and amendment conditions depend on the confirmed suppliers and services. Any non-refundable permits, flights, hotels, transport, or third-party charges will be identified before payment.';
 

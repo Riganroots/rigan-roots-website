@@ -1,32 +1,42 @@
 # Firebase setup for Rigan booking/admin
 
-The website code is connected to Firebase project `rigan-9d5cc`, but the Firebase console still needs a few one-time settings before bookings can be stored and the admin dashboard can be used.
+The website code is connected to Firebase project `rigan-9d5cc`. The customer booking form, admin dashboard, quotation builder, public quote link and booking status workflow are already present in the repository. Firebase still needs the one-time console settings below before the system can be used safely in production.
 
-## 1. Create Firestore
+## 1. Create Firestore and publish the repository rules
 
 Firebase Console → Build → Firestore Database → Create database.
 
-Use production mode, then publish the rules from this repository's `firestore.rules` file in Firestore → Rules.
+Use production mode. Then open Firestore → Rules and replace the editor contents with this repository's `firestore.rules` file, then click **Publish**.
 
-The rules intentionally allow the public website to **create** booking requests, but public visitors cannot read bookings. Only users listed in the `admins` collection can read/update booking data.
+The rules are intentionally designed so that:
+
+- public visitors may create a new booking request only in the approved booking schema;
+- public visitors cannot list or read booking records;
+- only active admin accounts with `role = admin` may read or manage bookings and quotations;
+- public quotation links can be opened only through their long random token;
+- quotation acceptance can update only the small set of fields required for acceptance.
+
+Important: changing `firestore.rules` in GitHub does **not** automatically publish those rules to Firebase. The rules must also be published in the Firebase Console unless a Firebase deployment workflow is added later.
 
 ## 2. Enable admin authentication
 
 Firebase Console → Build → Authentication → Sign-in method → enable **Email/Password**.
 
-Then Authentication → Users → Add user and create the admin email/password you want to use at `/admin.html`.
+Then Authentication → Users → Add user and create the admin email/password you want to use at:
 
-Do not add a public sign-up page.
+- `https://riganrootsroutes.com/admin/`
 
-## 3. Authorize website domains
+Do not add a public admin sign-up page.
+
+## 3. Authorize the website domains
 
 Authentication → Settings → Authorized domains. Add the production domains you use, including:
 
 - `riganrootsroutes.com`
 - `www.riganrootsroutes.com` if the site uses it
-- `riganroots.github.io` if you want to test authentication on the GitHub Pages URL
+- `riganroots.github.io` only if you want to test authentication on the GitHub Pages URL
 
-## 4. Grant the user admin access
+## 4. Grant an account admin access
 
 Copy the UID of the admin user from Firebase Authentication.
 
@@ -35,28 +45,74 @@ Firestore → Data → Start collection:
 - Collection ID: `admins`
 - Document ID: **the admin user's Firebase UID**
 
-Suggested fields:
+Create these fields exactly:
 
-- `role` = `admin`
-- `name` = admin name
-- `active` = `true`
+- `role` = `admin` (string)
+- `name` = the team member's name (string)
+- `active` = `true` (boolean)
 
-The security rule checks for the existence of `admins/{UID}`. It does not rely on a hidden frontend password.
+The production security rules require both `role = admin` and `active = true`. Merely having a document in the `admins` collection is not enough.
 
-## 5. Test a booking
+To revoke an admin account without deleting the Firebase Authentication user, set that admin document's `active` field to `false`.
 
-Open any experience detail page and click **Book / Request Booking**. Submit a test request. A new document should appear under the `bookings` collection with a reference such as `RIG-20260916-ABC123` and status `New`.
+## 5. Test the customer booking flow
+
+Open an experience detail page and use the booking/request-booking action, or open:
+
+- `https://riganrootsroutes.com/booking/`
+
+Submit a test request. A new document should appear under the Firestore `bookings` collection with a reference such as `RIG-20260917-ABC123` and status `New`.
+
+The public form stores the request in Firestore and separately attempts to notify the team through the configured notification endpoint. No payment data is collected by the booking form.
 
 ## 6. Test the admin dashboard
 
-Open `/admin.html`, sign in using the Firebase Authentication admin account, and confirm the booking appears. You can search/filter requests, open the traveller in WhatsApp, and change status through:
+Open:
 
-`New → Contacted → Quoted → Confirmed → Paid → Completed / Cancelled`
+- `https://riganrootsroutes.com/admin/`
+
+Sign in using the Firebase Authentication admin account. Confirm that the test booking appears.
+
+Current admin functions include:
+
+- search and filter booking requests;
+- booking status updates;
+- WhatsApp and email follow-up drafts;
+- internal notes;
+- quoted amount and currency;
+- CSV export;
+- professional quotation creation;
+- private customer quotation links;
+- quote version history;
+- customer quote acceptance.
+
+The normal booking workflow is:
+
+`New → Contacted → Quoted → Confirmed → Paid → Completed`
+
+`Cancelled` can be used when a request does not proceed.
+
+## 7. Test a quotation
+
+From the admin dashboard:
+
+1. Open the test booking.
+2. Enter a quoted amount and currency.
+3. Review or load the package itinerary.
+4. Add inclusions, exclusions, payment terms and cancellation notes.
+5. Choose a quote-valid-until date.
+6. Publish the quotation.
+7. Open the generated customer link in a private/incognito browser window.
+8. Confirm that the quotation can be viewed without admin access and that no private admin notes are exposed.
 
 ## Security notes
 
-The Firebase web `apiKey`, `projectId`, and app configuration in `firebase-config.js` are client configuration and are expected to be present in browser code. They do **not** replace Firestore Security Rules.
+The Firebase web `apiKey`, `projectId`, and app configuration in `firebase-config.js` are browser-side Firebase configuration and are expected to be present in frontend code. They do **not** grant admin access and do not replace Firestore Security Rules.
 
-Never put a Firebase service-account private key, Google Cloud private key, password, or server credential in this repository.
+Never put a Firebase service-account private key, Google Cloud private key, admin password, payment secret, webhook secret or other server credential in this public repository.
 
-The booking form currently collects no card/payment details. Payments should be added later through a proper payment provider and server-verified workflow.
+The customer booking page currently collects contact and trip-planning details only. It does not collect card/payment credentials. If online payments are added later, use a proper payment provider with server-side verification rather than storing payment credentials in Firestore.
+
+## Recommended production follow-up
+
+After the first end-to-end test succeeds, the next hardening step should be Firebase App Check / bot protection for the public booking form and a server-backed notification/payment workflow if booking volume grows.

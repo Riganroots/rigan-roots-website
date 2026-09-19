@@ -350,17 +350,6 @@ async function updateBookingStatus(id, newStatus, control = null) {
     ];
     renderStats();
     renderBookings();
-
-    if (selectedBookingId) {
-      const refreshedSelected = selectedBooking();
-      if (refreshedSelected) {
-        detailStatus.value = refreshedSelected.status || 'New';
-        nextActionHint.textContent = nextActionFor(refreshedSelected);
-        renderStatusHistory(refreshedSelected);
-        customerMessage.value = buildCustomerFollowup(refreshedSelected);
-      }
-    }
-
     clearNotice(dashboardNotice);
 
     if (selectedBookingId === id) {
@@ -684,6 +673,17 @@ async function loadBookings(append = false) {
 
     renderStats();
     renderBookings();
+
+    if (selectedBookingId) {
+      const refreshedSelected = selectedBooking();
+      if (refreshedSelected) {
+        detailStatus.value = refreshedSelected.status || 'New';
+        nextActionHint.textContent = nextActionFor(refreshedSelected);
+        renderStatusHistory(refreshedSelected);
+        customerMessage.value = buildCustomerFollowup(refreshedSelected);
+      }
+    }
+
     clearNotice(dashboardNotice);
   } catch (error) {
     console.error(error);

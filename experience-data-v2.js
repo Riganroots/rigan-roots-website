@@ -222,7 +222,7 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Moderate",
         season: "March–May and September–November",
-        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
         badge: "Near Kathmandu"
       }),
       exp({
@@ -358,7 +358,7 @@ exp({
         price: "From US$95",
         location: "Kathmandu Valley",
         style: "Traditional Newari Cuisine",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+        image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
         badge: "Cultural Favorite"
       }),
       exp({
@@ -370,7 +370,7 @@ exp({
         price: "From US$180",
         location: "Chitwan & Terai Region",
         style: "Food & Village Culture",
-        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+        image: "https://i.postimg.cc/8kHWQF12/chitwan_national_park.jpg",
         badge: "Authentic"
       }),
       exp({
@@ -425,7 +425,7 @@ exp({
         price: "From US$120",
         location: "Bhaktapur",
         style: "Living Heritage",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+        image: "https://i.postimg.cc/8Pzv11cF/kathmandu_valley.jpg",
         badge: "Heritage Favorite"
       })
     ]

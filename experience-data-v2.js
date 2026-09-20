@@ -282,7 +282,7 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Easy to Moderate",
         season: "All Trekking Seasons",
-        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
         badge: "Short Trek"
       }),
       exp({
@@ -312,7 +312,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Moderate",
         season: "May–October",
-        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        image: "https://i.postimg.cc/xjRHDkfn/shey_phoksundo.jpg",
         badge: "Hidden Nepal"
       }),
       exp({
@@ -327,7 +327,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Advanced",
         season: "May–October",
-        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        image: "https://i.postimg.cc/xjRHDkfn/shey_phoksundo.jpg",
         badge: "Expedition"
       })
     ]

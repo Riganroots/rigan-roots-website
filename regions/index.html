@@ -464,6 +464,18 @@
       border-radius: 2px 2px 4px 4px;
       box-shadow: 0 4px 12px rgba(19, 32, 24, 0.09);
       clip-path: polygon(0 0, 100% 0, 100% 86%, 50% 100%, 0 86%);
+      transform-origin: 50% 0;
+      animation: regionFlagFlutter 2.8s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .prayer-flags span:nth-child(2n) { animation-delay: -1.1s; animation-duration: 3.35s; }
+    .prayer-flags span:nth-child(3n) { animation-delay: -2.2s; animation-duration: 2.45s; }
+
+    @keyframes regionFlagFlutter {
+      from { rotate: -2deg; scale: 1 1; filter: brightness(1); }
+      45% { rotate: 2.5deg; scale: .94 1.02; filter: brightness(1.05); }
+      to { rotate: -1deg; scale: 1.04 .97; filter: brightness(.97); }
     }
 
     .prayer-flags span:nth-child(1), .prayer-flags span:nth-child(6), .prayer-flags span:nth-child(11) { background: #3157a4; }
@@ -2310,16 +2322,46 @@
       farwest: "https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg"
     };
 
+    /* One real-photography treatment per destination. This avoids the repeated,
+       generated-template look caused by the old category-level fallbacks. */
     const regionImageOverrides = {
       "kathmandu-valley": "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
       "pokhara-annapurna": "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
       "everest-region": "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
-      "bandipur": "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+      "chitwan-national-park": "https://i.postimg.cc/8kHWQF12/chitwan_national_park.jpg",
+      "lumbini": "https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=1200&q=82",
+      "bandipur": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=82",
       "everest-base-camp": "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
       "annapurna-base-camp": "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
-      "mardi-himal-base-camp": "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+      "makalu-base-camp": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=82",
+      "kanchenjunga-base-camp": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=82",
+      "manaslu-base-camp-circuit": "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&w=1200&q=82",
+      "dhaulagiri-base-camp": "https://images.unsplash.com/photo-1486911278844-a81c5267e227?auto=format&fit=crop&w=1200&q=82",
+      "mardi-himal-base-camp": "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=82",
+      "upper-dolpo": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=82",
+      "shey-phoksundo": "https://i.postimg.cc/xjRHDkfn/shey_phoksundo.jpg",
+      "tsum-valley": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=82",
+      "nar-phu-valley": "https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=82",
+      "ruby-valley": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=82&sat=-10",
+      "numbur-cheese-circuit": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=82",
+      "dhorpatan": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=82",
+      "panch-pokhari": "https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=1200&q=82",
+      "limi-valley": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=82&sat=-18",
+      "janakpur-mithila": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=82",
+      "tansen-palpa": "https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1200&q=82",
+      "ghalegaun-ghanpokhara": "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+      "ilam-mai-pokhari": "https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?auto=format&fit=crop&w=1200&q=82",
+      "kirtipur-newari-towns": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=82",
+      "gorkha": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=82&sat=-12",
+      "bardiya-national-park": "https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1200&q=82",
+      "koshi-tappu": "https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=1200&q=82",
+      "parsa-wildlife-region": "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=82",
+      "tharu-villages": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=82",
+      "khaptad-national-park": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=82",
+      "badimalika": "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1200&q=82",
+      "api-nampa-darchula": "https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1200&q=82&sat=-22",
       "rara-lake-mugu": "https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg",
-      "ghalegaun-ghanpokhara": "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"
+      "jumla-sinja-valley": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=82&sat=-14"
     };
 
     const regionCards =

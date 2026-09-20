@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,13 +13,13 @@
 
   <title>Nepal Experiences &amp; Trekking | Rigan Roots &amp; Routes</title>
 <!-- SEO FOUNDATION START -->
-<link rel="canonical" href="https://riganrootsroutes.com/experience-v2.html">
+<link rel="canonical" href="https://riganrootsroutes.com/experiences/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rigan Roots & Routes">
 <meta property="og:title" content="Nepal Experiences &amp; Trekking | Rigan Roots &amp; Routes">
 <meta property="og:description" content="Explore Nepal trekking, village life, food, festivals, culture, wellness and adventure experiences designed by Rigan Roots &amp; Routes.">
-<meta property="og:url" content="https://riganrootsroutes.com/experience-v2.html">
+<meta property="og:url" content="https://riganrootsroutes.com/experiences/">
 <meta property="og:image" content="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nepal Experiences &amp; Trekking | Rigan Roots &amp; Routes">
@@ -285,6 +286,7 @@
     /* CATEGORY SELECTOR */
     .mandala-wrap {
       position: relative;
+      isolation: isolate;
       max-width: 900px;
       height: 520px;
       margin: 30px auto 55px;
@@ -293,20 +295,114 @@
       border-radius: 36px;
       background:
         linear-gradient(
-          rgba(247, 240, 228, 0.85),
-          rgba(247, 240, 228, 0.9)
+          rgba(247, 240, 228, 0.7),
+          rgba(247, 240, 228, 0.84)
         ),
         url("https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg")
         center / cover no-repeat;
-      box-shadow: 0 25px 80px rgba(23, 77, 47, 0.12);
+      box-shadow:
+        0 25px 80px rgba(23, 77, 47, 0.12),
+        inset 0 0 90px rgba(255, 255, 255, 0.25);
       transition: background 0.45s ease;
+    }
+
+    .mandala-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 20% 18%, rgba(255,255,255,.22) 0 1px, transparent 1px),
+        radial-gradient(circle at 78% 72%, rgba(23,77,47,.07) 0 1px, transparent 1px);
+      background-size: 24px 24px, 32px 32px;
+      mix-blend-mode: soft-light;
+      opacity: .55;
+    }
+
+    .experience-prayer-flags {
+      position: absolute;
+      top: 14px;
+      left: 3%;
+      z-index: 1;
+      width: 94%;
+      height: 62px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 0 24px;
+      pointer-events: none;
+      opacity: .72;
+    }
+
+    .experience-prayer-flags::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 0;
+      width: 100%;
+      height: 42px;
+      border-top: 2px solid rgba(69, 57, 42, .34);
+      border-radius: 50%;
+    }
+
+    .experience-prayer-flags span {
+      position: relative;
+      z-index: 1;
+      width: 22px;
+      height: 31px;
+      border-radius: 2px 2px 4px 4px;
+      clip-path: polygon(0 0, 100% 0, 100% 86%, 50% 100%, 0 86%);
+      box-shadow: 0 5px 12px rgba(19, 32, 24, .08);
+    }
+
+    .experience-prayer-flags span:nth-child(5n + 1) { background: #3157a4; }
+    .experience-prayer-flags span:nth-child(5n + 2) { background: #f4efd9; }
+    .experience-prayer-flags span:nth-child(5n + 3) { background: #b83a32; }
+    .experience-prayer-flags span:nth-child(5n + 4) { background: #3d7b50; }
+    .experience-prayer-flags span:nth-child(5n + 5) { background: #d5ad38; }
+    .experience-prayer-flags span:nth-child(1),
+    .experience-prayer-flags span:nth-child(15) { transform: translateY(0); }
+    .experience-prayer-flags span:nth-child(2),
+    .experience-prayer-flags span:nth-child(14) { transform: translateY(5px); }
+    .experience-prayer-flags span:nth-child(3),
+    .experience-prayer-flags span:nth-child(13) { transform: translateY(10px); }
+    .experience-prayer-flags span:nth-child(4),
+    .experience-prayer-flags span:nth-child(12) { transform: translateY(15px); }
+    .experience-prayer-flags span:nth-child(5),
+    .experience-prayer-flags span:nth-child(11) { transform: translateY(19px); }
+    .experience-prayer-flags span:nth-child(6),
+    .experience-prayer-flags span:nth-child(10) { transform: translateY(23px); }
+    .experience-prayer-flags span:nth-child(7),
+    .experience-prayer-flags span:nth-child(9) { transform: translateY(26px); }
+    .experience-prayer-flags span:nth-child(8) { transform: translateY(28px); }
+
+    .experience-nepal-map {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 1;
+      width: 76%;
+      height: auto;
+      color: var(--green);
+      opacity: .11;
+      pointer-events: none;
+      transform: translate(-50%, -50%) rotate(-2deg);
+      filter: drop-shadow(0 9px 20px rgba(23, 77, 47, .09));
+    }
+
+    .experience-nepal-map path {
+      fill: rgba(247, 240, 228, .44);
+      stroke: currentColor;
+      stroke-width: 7;
+      stroke-linejoin: round;
     }
 
     .center-orb {
       position: absolute;
       top: 50%;
       left: 50%;
-      z-index: 2;
+      z-index: 4;
       width: 210px;
       height: 210px;
       display: flex;
@@ -349,6 +445,7 @@
 
     .ring {
       position: absolute;
+      z-index: 2;
       inset: 60px 230px;
       border: 1px dashed rgba(23, 77, 47, 0.22);
       border-radius: 50%;
@@ -356,6 +453,7 @@
 
     .cat {
       position: absolute;
+      z-index: 3;
       width: 135px;
       height: 135px;
       border: 0;
@@ -384,10 +482,42 @@
       box-shadow: 0 20px 60px rgba(159, 186, 107, 0.5);
     }
 
-    .cat small {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 22px;
+    .cat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .cat .cat-icon {
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(23, 77, 47, 0.12);
+      border-radius: 50%;
+      background: rgba(23, 77, 47, 0.08);
+      color: var(--green);
+      font-size: 19px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+    }
+
+    .cat:hover .cat-icon {
+      transform: translateY(-2px) scale(1.06);
+      background: rgba(159, 186, 107, 0.22);
+    }
+
+    .cat.active .cat-icon {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
     }
 
     .c1 {
@@ -945,8 +1075,23 @@
       }
 
       .center-orb,
-      .ring {
+      .ring,
+      .experience-nepal-map {
         display: none;
+      }
+
+      .experience-prayer-flags {
+        top: 4px;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        padding: 0 10px;
+        opacity: .48;
+      }
+
+      .experience-prayer-flags span {
+        width: 13px;
+        height: 19px;
       }
 
       .cat {
@@ -1017,9 +1162,16 @@
       }
 
       .cat {
-        height: 88px;
+        height: 96px;
         padding: 8px;
+        gap: 6px;
         font-size: 12px;
+      }
+
+      .cat .cat-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
       }
 
       .result-title h2 {
@@ -1073,8 +1225,11 @@
       }
     }
   </style>
-<link rel="stylesheet" href="mobile-consistency.css">
-<script src="analytics.js" defer></script>
+<link rel="stylesheet" href="/mobile-consistency.css">
+<script defer src="/analytics.js"></script>
+<!-- MULTILINGUAL SUPPORT -->
+<link rel="stylesheet" href="/i18n.css">
+<script src="/i18n.js" defer></script>
 </head>
 
 <body>
@@ -1083,12 +1238,12 @@
   <nav class="navbar" aria-label="Main navigation">
 
     <a
-      href="index.html"
+      href="/"
       class="logo"
       aria-label="Rigan Roots and Routes home"
     >
       <img
-        src="rigan-logo.svg"
+        src="/rigan-logo.svg"
         alt="Rigan Roots and Routes logo"
       >
     </a>
@@ -1105,21 +1260,21 @@
     </button>
 
     <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
+      <a href="/">Home</a>
 
       <a
-        href="experience-v2.html"
+        href="/experiences/"
         class="active"
         aria-current="page"
       >
         Experiences
       </a>
 
-      <a href="regions.html">Regions</a>
-<a href="work-with-us.html">Work With Us</a>
-      <a href="about.html">Our Story</a>
-      <a href="plan.html">Plan</a>
-      <a href="contact.html">Contact</a>
+      <a href="/regions/">Regions</a>
+<a href="/work-with-us/">Work With Us</a>
+      <a href="/about/">Our Story</a>
+      <a href="/plan/">Plan</a>
+      <a href="/contact/">Contact</a>
     </div>
 
   </nav>
@@ -1181,6 +1336,16 @@
       class="mandala-wrap"
       aria-label="Experience categories"
     >
+      <div class="experience-prayer-flags" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <svg class="experience-nepal-map" viewBox="0 0 900 280" aria-hidden="true" focusable="false">
+        <path d="M44 151 L91 129 L136 133 L175 109 L222 119 L264 91 L307 103 L344 83 L390 94 L429 75 L474 92 L513 72 L558 91 L598 67 L641 83 L683 64 L728 82 L770 70 L810 88 L852 82 L870 108 L846 124 L812 122 L780 139 L744 132 L706 151 L666 143 L627 164 L589 153 L548 174 L504 165 L464 183 L421 172 L382 190 L341 180 L299 194 L258 183 L217 194 L178 180 L140 184 L107 166 L74 171 Z"/>
+      </svg>
+
       <div class="ring"></div>
 
       <div class="center-orb">
@@ -1193,7 +1358,7 @@
         type="button"
         data-cat="signature"
       >
-        <small>⭐</small>
+        <span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-star"></i></span>
         Signature
       </button>
 
@@ -1202,7 +1367,7 @@
         type="button"
         data-cat="village"
       >
-        <small>🏡</small>
+        <span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-house"></i></span>
         Village Life
       </button>
 
@@ -1211,7 +1376,7 @@
         type="button"
         data-cat="food"
       >
-        <small>🍲</small>
+        <span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-bowl-food"></i></span>
         Taste Nepal
       </button>
 
@@ -1220,7 +1385,7 @@
         type="button"
         data-cat="festival"
       >
-        <small>🎉</small>
+        <span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-music"></i></span>
         Festivals
       </button>
 
@@ -1229,7 +1394,7 @@
         type="button"
         data-cat="culture"
       >
-        <small>🛕</small>
+        <span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-landmark"></i></span>
         Culture
       </button>
 
@@ -1238,7 +1403,7 @@
         type="button"
         data-cat="wellness"
       >
-        <small>🧘</small>
+        <span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-spa"></i></span>
         Wellness
       </button>
 
@@ -1247,7 +1412,7 @@
         type="button"
         data-cat="trek"
       >
-        <small>🏔️</small>
+        <span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-mountain-sun"></i></span>
         Mountains
       </button>
 
@@ -1256,7 +1421,7 @@
         type="button"
         data-cat="adventure"
       >
-        <small>🌊</small>
+        <span class="cat-icon" aria-hidden="true"><i class="fa-solid fa-compass"></i></span>
         Adventure
       </button>
     </section>
@@ -1369,7 +1534,7 @@
         </p>
       </div>
 
-      <a href="plan.html">
+      <a href="/plan/">
         Start Planning →
       </a>
     </section>
@@ -1394,14 +1559,14 @@
         <h3>Quick Links</h3>
 
         <div class="footer-links">
-          <a href="index.html">Home</a>
-          <a href="experience-v2.html">Experiences</a>
-          <a href="regions.html">Regions</a>
+          <a href="/">Home</a>
+          <a href="/experiences/">Experiences</a>
+          <a href="/regions/">Regions</a>
 
-<a href="plan.html">Plan My Trip</a>
-          <a href="work-with-us.html">Work With Us</a>
-          <a href="about.html">Our Story</a>
-          <a href="contact.html">Contact</a>
+<a href="/plan/">Plan My Trip</a>
+          <a href="/work-with-us/">Work With Us</a>
+          <a href="/about/">Our Story</a>
+          <a href="/contact/">Contact</a>
         </div>
       </div>
 
@@ -1441,21 +1606,21 @@
 
         <div class="socials">
           <a
-            href="#"
+            aria-disabled="true" title="Social profile coming soon"
             aria-label="Facebook"
           >
             <i class="fa-brands fa-facebook-f"></i>
           </a>
 
           <a
-            href="#"
+            aria-disabled="true" title="Social profile coming soon"
             aria-label="Instagram"
           >
             <i class="fa-brands fa-instagram"></i>
           </a>
 
           <a
-            href="#"
+            aria-disabled="true" title="Social profile coming soon"
             aria-label="YouTube"
           >
             <i class="fa-brands fa-youtube"></i>
@@ -1487,16 +1652,755 @@
   </div>
 
   <!-- EXPERIENCE DATABASE -->
-  <script src="experience-data-v2.js"></script>
+  <script src="/experience-data-v2.js"></script>
 
   <script>
-    (function () {
-      var target = "/experiences/";
-      window.location.replace(target + window.location.search + window.location.hash);
-    })();
+    const bgImages = {
+      signature:
+        "https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg",
+
+      village:
+        "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+
+      food:
+        "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
+
+      festival:
+        "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
+
+      culture:
+        "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+
+      wellness:
+        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1400&q=82",
+
+      trek:
+        "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+
+      adventure:
+        "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg"
+    };
+
+    const categorySubtitles = {
+      signature:
+        "Luxury, emotional, and deeply authentic journeys across Nepal.",
+
+      village:
+        "Slow travel built around homes, fields, food, and real human connection.",
+
+      food:
+        "Food journeys through local kitchens, family homes, markets, and ethnic traditions.",
+
+      festival:
+        "Celebrate Nepal through rituals, jatras, music, colours, food, dance, and living traditions.",
+
+      culture:
+        "Temples, courtyards, artisans, old towns, spirituality, and living traditions.",
+
+      wellness:
+        "Quiet retreats for healing, meditation, yoga, mindfulness, and inner peace.",
+
+      trek:
+        "Epic Himalayan adventures, hidden trails, high passes, and mountain culture.",
+
+      adventure:
+        "Sky, rivers, cliffs, jungles, speed, adrenaline, and outdoor experiences."
+    };
+
+    const categoryNames = {
+      signature: "Signature",
+      village: "Village Life",
+      food: "Taste Nepal",
+      festival: "Festival",
+      culture: "Culture",
+      wellness: "Wellness",
+      trek: "Mountain",
+      adventure: "Adventure"
+    };
+
+    const buttons =
+      document.querySelectorAll(".cat");
+
+    const cards =
+      document.getElementById("cards");
+
+    const sectionTitle =
+      document.getElementById("sectionTitle");
+
+    const sectionSub =
+      document.getElementById("sectionSub");
+
+    const searchBox =
+      document.getElementById("searchBox");
+
+    const currencySelect =
+      document.getElementById("currencySelect");
+
+    const showMoreBtn =
+      document.getElementById("showMoreBtn");
+
+    const mandalaWrap =
+      document.querySelector(".mandala-wrap");
+
+    const menuBtn =
+      document.getElementById("menuBtn");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+    const trekFilters =
+      document.getElementById("trekFilters");
+
+    let currentCategory = "signature";
+    let currentItems = [];
+    let visibleCount = 12;
+    let currentCurrency = "USD";
+    let currentTrekFilter = "all";
+
+    /*
+      These rates are display estimates only.
+      Update them manually when required or connect a live exchange-rate
+      service later.
+    */
+    const currencyRates = {
+      USD: {
+        rate: 1,
+        symbol: "US$"
+      },
+
+      NPR: {
+        rate: 133,
+        symbol: "रू"
+      },
+
+      GBP: {
+        rate: 0.79,
+        symbol: "£"
+      },
+
+      AUD: {
+        rate: 1.52,
+        symbol: "A$"
+      },
+
+      EUR: {
+        rate: 0.92,
+        symbol: "€"
+      },
+
+      INR: {
+        rate: 83,
+        symbol: "₹"
+      },
+
+      JPY: {
+        rate: 157,
+        symbol: "¥"
+      }
+    };
+
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function createSafeSlug(item) {
+      const originalSlug =
+        item.id ||
+        item.slug ||
+        item.name ||
+        "custom-trip";
+
+      return String(originalSlug)
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function buildWhatsAppLink(item) {
+      const experienceName =
+        item.name || "a Nepal experience";
+
+      const duration =
+        item.duration || "Flexible";
+
+      const message = encodeURIComponent(
+        `Hello Rigan Roots & Routes!
+
+I am interested in this Nepal experience:
+
+Experience: ${experienceName}
+Duration: ${duration}
+Category: ${categoryNames[currentCategory] || currentCategory}
+
+Please send me more information about availability, itinerary, inclusions, and price.`
+      );
+
+      return `https://wa.me/9779843322695?text=${message}`;
+    }
+
+    function extractUsd(priceText) {
+      if (!priceText) {
+        return null;
+      }
+
+      const cleanPrice = String(priceText);
+
+      if (
+        cleanPrice.toLowerCase().includes("custom") ||
+        cleanPrice.toLowerCase().includes("request")
+      ) {
+        return null;
+      }
+
+      const match = cleanPrice.match(/[\d,]+/);
+
+      if (!match) {
+        return null;
+      }
+
+      return Number(
+        match[0].replaceAll(",", "")
+      );
+    }
+
+    function formatPrice(priceText) {
+      const usd = extractUsd(priceText);
+
+      if (!usd) {
+        return priceText || "Request Quote";
+      }
+
+      const currency =
+        currencyRates[currentCurrency];
+
+      const value = Math.round(
+        usd * currency.rate
+      );
+
+      if (currentCurrency === "USD") {
+        return `US$${value.toLocaleString()}`;
+      }
+
+      return `${currency.symbol}${value.toLocaleString()}`;
+    }
+
+    function updateMandalaBackground(category) {
+      const image =
+        bgImages[category] || bgImages.signature;
+
+      mandalaWrap.style.background =
+        `linear-gradient(
+          rgba(247,240,228,.7),
+          rgba(247,240,228,.84)
+        ),
+        url('${image}') center/cover no-repeat`;
+    }
+
+    function getDifficultyFilter(item) {
+      const combinedText = `
+        ${item.name || ""}
+        ${item.difficulty || ""}
+        ${item.style || ""}
+        ${item.subtitle || ""}
+        ${item.overview || ""}
+      `.toLowerCase();
+
+      if (
+        combinedText.includes("luxury") ||
+        combinedText.includes("helicopter") ||
+        combinedText.includes("breakfast")
+      ) {
+        return "luxury";
+      }
+
+      if (
+        combinedText.includes("hidden") ||
+        combinedText.includes("dolpo") ||
+        combinedText.includes("phoksundo") ||
+        combinedText.includes("tsum")
+      ) {
+        return "hidden";
+      }
+
+      if (
+        combinedText.includes("family") ||
+        combinedText.includes("easy") ||
+        combinedText.includes("poon hill")
+      ) {
+        return "family";
+      }
+
+      if (
+        combinedText.includes("challenging") ||
+        combinedText.includes("strenuous") ||
+        combinedText.includes("high pass")
+      ) {
+        return "advanced";
+      }
+
+      if (
+        combinedText.includes("moderate")
+      ) {
+        return "moderate";
+      }
+
+      return "easy";
+    }
+
+    function getFilteredItems() {
+      const data =
+        window.experienceDataV2;
+
+      if (
+        !data ||
+        !data[currentCategory]
+      ) {
+        return [];
+      }
+
+      let items =
+        data[currentCategory].items || [];
+
+      if (
+        currentCategory === "trek" &&
+        currentTrekFilter !== "all"
+      ) {
+        items = items.filter(function (item) {
+          return (
+            getDifficultyFilter(item) ===
+            currentTrekFilter
+          );
+        });
+      }
+
+      const term =
+        searchBox.value
+          .toLowerCase()
+          .trim();
+
+      if (term) {
+        items = items.filter(function (item) {
+          const searchableText = `
+            ${item.name || ""}
+            ${item.subtitle || ""}
+            ${item.overview || ""}
+            ${item.duration || ""}
+            ${item.location || ""}
+            ${item.style || ""}
+            ${item.difficulty || ""}
+          `.toLowerCase();
+
+          return searchableText.includes(term);
+        });
+      }
+
+      return items;
+    }
+
+    function createCards(items, reset = false) {
+      if (reset) {
+        currentItems = items;
+        visibleCount = 12;
+      }
+
+      if (!currentItems.length) {
+        cards.innerHTML = `
+          <div class="empty-state">
+            <h3>No matching experiences found</h3>
+            <p>
+              Try another search or contact us to create a custom Nepal
+              journey.
+            </p>
+          </div>
+        `;
+
+        showMoreBtn.classList.add("hidden");
+        return;
+      }
+
+      const visibleItems =
+        currentItems.slice(0, visibleCount);
+
+      cards.innerHTML = visibleItems
+        .map(function (item) {
+          const price =
+            formatPrice(item.price);
+
+          const image =
+            item.image ||
+            "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80";
+
+          const duration =
+            item.duration || "Flexible";
+
+          const slug =
+            createSafeSlug(item);
+
+          const difficulty =
+            item.difficulty ||
+            item.style ||
+            categoryNames[currentCategory] ||
+            "Custom";
+
+          const name =
+            escapeHTML(
+              item.name || "Nepal Experience"
+            );
+
+          const description =
+            escapeHTML(
+              item.subtitle ||
+              item.overview ||
+              "A meaningful Nepal experience designed around local people, culture, and landscapes."
+            );
+
+          const safeImage =
+            escapeHTML(image);
+
+          const safeDuration =
+            escapeHTML(duration);
+
+          const safeDifficulty =
+            escapeHTML(difficulty);
+
+          const safePrice =
+            escapeHTML(price);
+
+          const categoryLabel =
+            escapeHTML(
+              categoryNames[currentCategory] ||
+              currentCategory
+            );
+
+          const detailLink =
+            `/experiences/detail/?experience=${encodeURIComponent(slug)}`;
+
+          const planLink =
+            `/plan/?experience=${encodeURIComponent(slug)}`;
+
+          const whatsappLink =
+            buildWhatsAppLink(item);
+
+          return `
+            <article class="card">
+
+              <a
+                class="card-image-link"
+                href="${detailLink}"
+                aria-label="View details for ${name}"
+              >
+                <img
+                  loading="lazy"
+                  src="${safeImage}"
+                  alt="${name}"
+                  onerror="this.src='https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80';"
+                >
+
+                <span class="card-category">
+                  ${categoryLabel}
+                </span>
+              </a>
+
+              <div class="card-body">
+
+                <a
+                  class="card-title-link"
+                  href="${detailLink}"
+                >
+                  <h3>${name}</h3>
+                </a>
+
+                <p class="card-description">
+                  ${description}
+                </p>
+
+                <div class="meta">
+                  <span>
+                    <i class="fa-regular fa-clock"></i>
+                    ${safeDuration}
+                  </span>
+
+                  <span>
+                    <i class="fa-solid fa-route"></i>
+                    ${safeDifficulty}
+                  </span>
+                </div>
+
+                <div class="card-price-row">
+
+                  <div class="price-box">
+                    <small>FROM / ESTIMATE</small>
+
+                    <div class="card-price">
+                      ${safePrice}
+                    </div>
+                  </div>
+
+                  <div class="price-disclaimer">
+                    Final quotation depends on dates, group size, and
+                    inclusions.
+                  </div>
+
+                </div>
+
+                <div class="card-actions">
+
+                  <a
+                    class="card-action details-btn"
+                    href="${detailLink}"
+                  >
+                    <i class="fa-regular fa-eye"></i>
+                    View Details
+                  </a>
+
+                  <a
+                    class="card-action plan-btn"
+                    href="${planLink}"
+                  >
+                    <i class="fa-solid fa-route"></i>
+                    Plan This Trip
+                  </a>
+
+                  <a
+                    class="card-action whatsapp-btn"
+                    href="${whatsappLink}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Ask About This Experience
+                  </a>
+
+                </div>
+
+              </div>
+
+            </article>
+          `;
+        })
+        .join("");
+
+      if (
+        currentItems.length > visibleCount
+      ) {
+        showMoreBtn.classList.remove("hidden");
+      } else {
+        showMoreBtn.classList.add("hidden");
+      }
+    }
+
+    function render(category) {
+      const data =
+        window.experienceDataV2;
+
+      currentCategory = category;
+      currentTrekFilter = "all";
+
+      document
+        .querySelectorAll(".trek-filter")
+        .forEach(function (button) {
+          button.classList.toggle(
+            "active",
+            button.dataset.filter === "all"
+          );
+        });
+
+      sectionTitle.textContent =
+        data?.[category]?.title ||
+        category.charAt(0).toUpperCase() +
+        category.slice(1);
+
+      sectionSub.textContent =
+        data?.[category]?.sub ||
+        categorySubtitles[category] ||
+        "Choose your Nepal experience.";
+
+      searchBox.value = "";
+
+      trekFilters.style.display =
+        category === "trek"
+          ? "flex"
+          : "none";
+
+      updateMandalaBackground(category);
+
+      createCards(
+        getFilteredItems(),
+        true
+      );
+    }
+
+    function closeMobileMenu() {
+      navLinks.classList.remove("active");
+      document.body.classList.remove("menu-open");
+
+      menuBtn.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      menuBtn.innerHTML =
+        '<i class="fa-solid fa-bars" aria-hidden="true"></i>';
+    }
+
+    menuBtn.addEventListener(
+      "click",
+      function () {
+        const isOpen =
+          navLinks.classList.toggle("active");
+
+        document.body.classList.toggle(
+          "menu-open",
+          isOpen
+        );
+
+        menuBtn.setAttribute(
+          "aria-expanded",
+          String(isOpen)
+        );
+
+        menuBtn.innerHTML = isOpen
+          ? '<i class="fa-solid fa-xmark" aria-hidden="true"></i>'
+          : '<i class="fa-solid fa-bars" aria-hidden="true"></i>';
+      }
+    );
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach(function (link) {
+        link.addEventListener(
+          "click",
+          closeMobileMenu
+        );
+      });
+
+    document.addEventListener(
+      "click",
+      function (event) {
+        const clickedInsideMenu =
+          navLinks.contains(event.target) ||
+          menuBtn.contains(event.target);
+
+        if (
+          !clickedInsideMenu &&
+          navLinks.classList.contains("active")
+        ) {
+          closeMobileMenu();
+        }
+      }
+    );
+
+    buttons.forEach(function (button) {
+      button.addEventListener(
+        "click",
+        function () {
+          buttons.forEach(function (item) {
+            item.classList.remove("active");
+          });
+
+          button.classList.add("active");
+
+          render(button.dataset.cat);
+
+          document
+            .querySelector(".result-section")
+            .scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+        }
+      );
+    });
+
+    searchBox.addEventListener(
+      "input",
+      function () {
+        createCards(
+          getFilteredItems(),
+          true
+        );
+      }
+    );
+
+    showMoreBtn.addEventListener(
+      "click",
+      function () {
+        visibleCount += 12;
+        createCards(currentItems);
+      }
+    );
+
+    currencySelect.addEventListener(
+      "change",
+      function () {
+        currentCurrency =
+          currencySelect.value;
+
+        createCards(currentItems);
+      }
+    );
+
+    document
+      .querySelectorAll(".trek-filter")
+      .forEach(function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            document
+              .querySelectorAll(".trek-filter")
+              .forEach(function (item) {
+                item.classList.remove("active");
+              });
+
+            button.classList.add("active");
+
+            currentTrekFilter =
+              button.dataset.filter;
+
+            createCards(
+              getFilteredItems(),
+              true
+            );
+          }
+        );
+      });
+
+    document.getElementById(
+      "currentYear"
+    ).textContent =
+      new Date().getFullYear();
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+        if (!window.experienceDataV2) {
+          cards.innerHTML = `
+            <div class="empty-state">
+              <h3>Experience data could not be loaded</h3>
+
+              <p>
+                Keep the file
+                <strong>experience-data-v2.js</strong>
+                in the same folder as
+                <strong>/experiences/</strong>.
+              </p>
+            </div>
+          `;
+
+          showMoreBtn.classList.add("hidden");
+          return;
+        }
+
+        render("signature");
+      }
+    );
   </script>
-</head>
-<body>
-  <p>This page has moved. <a href="/experiences/">Continue to the new address</a>.</p>
+
 </body>
 </html>

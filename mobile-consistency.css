@@ -131,3 +131,329 @@ textarea:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Clean URL + responsive navigation refinements */
+.navbar,
+.top-nav {
+  max-width: 100%;
+  padding-left: clamp(16px, 4vw, 55px) !important;
+  padding-right: clamp(16px, 4vw, 55px) !important;
+}
+
+.nav-links {
+  gap: clamp(14px, 2vw, 26px);
+}
+
+.nav-links a {
+  line-height: 1.25;
+}
+
+@media (max-width: 1024px) and (min-width: 901px) {
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar,
+  .top-nav {
+    min-height: 72px;
+    padding: 10px 16px !important;
+  }
+
+  .logo img,
+  .navbar .logo img,
+  .top-nav .logo img {
+    max-height: 56px;
+    width: auto;
+  }
+
+  .menu-btn,
+  .mobile-menu-btn,
+  .menu-toggle {
+    flex: 0 0 44px;
+  }
+
+  .nav-links {
+    max-width: 100vw;
+    max-height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-links a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+}
+
+@media (max-width: 430px) {
+  .navbar,
+  .top-nav {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .logo img,
+  .navbar .logo img,
+  .top-nav .logo img {
+    max-height: 48px;
+  }
+}
+
+/* Plan page — Nepal visual identity */
+#mandala.mandala {
+  --plan-bg: url("https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg");
+  isolation: isolate;
+  border: 1px solid rgba(23, 77, 47, 0.1);
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.72), rgba(247, 240, 228, 0.86)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 280'%3E%3Cpath d='M44 151 L91 129 L136 133 L175 109 L222 119 L264 91 L307 103 L344 83 L390 94 L429 75 L474 92 L513 72 L558 91 L598 67 L641 83 L683 64 L728 82 L770 70 L810 88 L852 82 L870 108 L846 124 L812 122 L780 139 L744 132 L706 151 L666 143 L627 164 L589 153 L548 174 L504 165 L464 183 L421 172 L382 190 L341 180 L299 194 L258 183 L217 194 L178 180 L140 184 L107 166 L74 171 Z' fill='rgba(247,240,228,.22)' stroke='rgba(23,77,47,.18)' stroke-width='7' stroke-linejoin='round'/%3E%3C/svg%3E"),
+    var(--plan-bg) !important;
+  background-position: center, center, center !important;
+  background-repeat: no-repeat, no-repeat, no-repeat !important;
+  background-size: cover, 76% auto, cover !important;
+  box-shadow:
+    0 24px 70px rgba(19, 32, 24, 0.13),
+    inset 0 0 100px rgba(255, 255, 255, 0.22);
+  transition: background-image 0.45s ease, box-shadow 0.35s ease;
+}
+
+#mandala.mandala::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 2.5%;
+  z-index: 1;
+  width: 95%;
+  height: 82px;
+  pointer-events: none;
+  opacity: 0.78;
+  background: center / 100% 100% no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 100'%3E%3Cpath d='M10 18 Q450 92 890 18' fill='none' stroke='rgba(78,64,45,.45)' stroke-width='2'/%3E%3Cg%3E%3Cpath d='M55 28 h36 v39 l-18 12 -18-12z' fill='%233157a4'/%3E%3Cpath d='M110 36 h36 v39 l-18 12 -18-12z' fill='%23f4efd9'/%3E%3Cpath d='M165 43 h36 v39 l-18 12 -18-12z' fill='%23b83a32'/%3E%3Cpath d='M220 50 h36 v39 l-18 12 -18-12z' fill='%233d7b50'/%3E%3Cpath d='M275 56 h36 v39 l-18 5 -18-5z' fill='%23d5ad38'/%3E%3Cpath d='M330 61 h36 v34 l-18 5 -18-5z' fill='%233157a4'/%3E%3Cpath d='M385 64 h36 v31 l-18 5 -18-5z' fill='%23f4efd9'/%3E%3Cpath d='M440 66 h36 v29 l-18 5 -18-5z' fill='%23b83a32'/%3E%3Cpath d='M495 64 h36 v31 l-18 5 -18-5z' fill='%233d7b50'/%3E%3Cpath d='M550 61 h36 v34 l-18 5 -18-5z' fill='%23d5ad38'/%3E%3Cpath d='M605 56 h36 v39 l-18 5 -18-5z' fill='%233157a4'/%3E%3Cpath d='M660 50 h36 v39 l-18 12 -18-12z' fill='%23f4efd9'/%3E%3Cpath d='M715 43 h36 v39 l-18 12 -18-12z' fill='%23b83a32'/%3E%3Cpath d='M770 36 h36 v39 l-18 12 -18-12z' fill='%233d7b50'/%3E%3Cpath d='M825 28 h36 v39 l-18 12 -18-12z' fill='%23d5ad38'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+#mandala .center {
+  z-index: 3;
+  box-shadow: 0 28px 70px rgba(23, 77, 47, 0.3);
+}
+
+#mandala .mood {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(23, 77, 47, 0.08);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+#mandala .mood:hover {
+  border-color: rgba(159, 186, 107, 0.45);
+  box-shadow: 0 24px 58px rgba(19, 32, 24, 0.16);
+}
+
+#mandala .mood.active {
+  border-color: rgba(255, 255, 255, 0.24);
+  background: var(--olive);
+  color: #fff;
+  box-shadow: 0 22px 58px rgba(159, 186, 107, 0.44);
+}
+
+#mandala .mood small {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(23, 77, 47, 0.12);
+  border-radius: 50%;
+  background: rgba(23, 77, 47, 0.08);
+  color: var(--green);
+  font-family: "Font Awesome 6 Free";
+  font-size: 0;
+  font-weight: 900;
+  line-height: 1;
+}
+
+#mandala .mood small::before {
+  font-size: 18px;
+}
+
+#mandala .mood.active small {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+#mandala .mood[data-exp="live-like-a-nepali"] small::before { content: "\f005"; }
+#mandala .mood[data-exp="everest-base-camp-trek"] small::before { content: "\f6fc"; }
+#mandala .mood[data-exp="kathmandu-heritage-tour"] small::before { content: "\f66f"; }
+#mandala .mood[data-exp="taste-of-nepal"] small::before { content: "\f2e7"; }
+#mandala .mood[data-exp="dashain-experience"] small::before { content: "\f001"; }
+#mandala .mood[data-exp="paragliding-pokhara"] small::before { content: "\f14e"; }
+
+#mandala:has(.mood.active[data-exp="live-like-a-nepali"]) {
+  --plan-bg: url("https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg");
+}
+
+#mandala:has(.mood.active[data-exp="everest-base-camp-trek"]) {
+  --plan-bg: url("https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg");
+}
+
+#mandala:has(.mood.active[data-exp="kathmandu-heritage-tour"]) {
+  --plan-bg: url("https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg");
+}
+
+#mandala:has(.mood.active[data-exp="taste-of-nepal"]) {
+  --plan-bg: url("https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg");
+}
+
+#mandala:has(.mood.active[data-exp="dashain-experience"]) {
+  --plan-bg: url("https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg");
+}
+
+#mandala:has(.mood.active[data-exp="paragliding-pokhara"]) {
+  --plan-bg: url("https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg");
+}
+
+@media (max-width: 800px) {
+  #mandala.mandala {
+    padding: 52px 18px 18px;
+    background-image:
+      linear-gradient(rgba(247, 240, 228, 0.78), rgba(247, 240, 228, 0.9)),
+      var(--plan-bg) !important;
+    background-position: center, center !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-size: cover, cover !important;
+  }
+
+  #mandala.mandala::before {
+    top: 7px;
+    left: 1%;
+    width: 98%;
+    height: 42px;
+    opacity: 0.6;
+  }
+
+  #mandala .mood small {
+    width: 38px;
+    height: 38px;
+  }
+
+  #mandala .mood small::before {
+    font-size: 16px;
+  }
+}
+
+/* Homepage — refine highlighted information and add subtle prayer-flag movement */
+.hero:has(.hero-eyebrow)::before {
+  transform-origin: 50% 0;
+  animation: homePrayerFlagSway 7.5s ease-in-out infinite;
+  will-change: transform;
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.12)) saturate(1.08);
+}
+
+@keyframes homePrayerFlagSway {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scaleY(1);
+  }
+  25% {
+    transform: translate3d(3px, 2px, 0) rotate(0.16deg) scaleY(0.99);
+  }
+  50% {
+    transform: translate3d(-2px, 4px, 0) rotate(-0.14deg) scaleY(0.985);
+  }
+  75% {
+    transform: translate3d(2px, 1px, 0) rotate(0.11deg) scaleY(0.995);
+  }
+}
+
+.hero:has(.hero-eyebrow) .hero-eyebrow {
+  max-width: 100%;
+  gap: 8px;
+  margin-bottom: 22px;
+  padding: 8px 13px;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(7, 22, 17, 0.42);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  font-size: 11.5px;
+  line-height: 1.2;
+  letter-spacing: 0.065em;
+}
+
+.hero:has(.hero-eyebrow) .hero-proof {
+  max-width: 680px;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.hero:has(.hero-eyebrow) .hero-proof span {
+  gap: 7px;
+  padding: 8px 11px;
+  border-color: rgba(255, 255, 255, 0.19);
+  background: rgba(7, 22, 17, 0.34);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-size: 11.5px;
+}
+
+.payments {
+  padding: 38px 20px 68px;
+  border-top: 1px solid rgba(23, 77, 47, 0.06);
+  background: linear-gradient(180deg, #fff 0%, #fffdf8 100%);
+}
+
+.payments h3 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.payments p {
+  max-width: 720px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.booking-clarity {
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.booking-clarity span {
+  padding: 10px 14px;
+  background: rgba(250, 247, 239, 0.86);
+  box-shadow: 0 7px 18px rgba(23, 77, 47, 0.045);
+  font-size: 12.5px;
+}
+
+@media (max-width: 900px) {
+  .hero:has(.hero-eyebrow) .hero-proof {
+    gap: 7px;
+    margin-top: 18px;
+  }
+
+  .hero:has(.hero-eyebrow) .hero-proof span {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+
+  .hero:has(.hero-eyebrow) .hero-eyebrow {
+    padding: 8px 12px;
+    font-size: 10.5px;
+  }
+}

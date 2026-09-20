@@ -1,0 +1,151 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role == 'admin'
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.active == true;
+    }
+
+    function validPublicBooking() {
+      let allowedKeys = [
+        'schemaVersion',
+        'bookingRef',
+        'status',
+        'experienceId',
+        'experienceName',
+        'displayedPrice',
+        'duration',
+        'location',
+        'fullName',
+        'phone',
+        'email',
+        'nationality',
+        'travelDate',
+        'travellers',
+        'preferredContact',
+        'tripType',
+        'specialRequests',
+        'language',
+        'sourceUrl',
+        'pageUrl',
+        'consent',
+        'createdAt',
+        'updatedAt'
+      ];
+
+      return request.resource.data.keys().hasAll(allowedKeys)
+        && request.resource.data.keys().hasOnly(allowedKeys)
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.status == 'New'
+        && request.resource.data.bookingRef is string
+        && request.resource.data.bookingRef.matches('^RIG-[0-9]{8}-[A-Z0-9]{6}$')
+        && request.resource.data.experienceId is string
+        && request.resource.data.experienceId.size() >= 1
+        && request.resource.data.experienceId.size() <= 120
+        && request.resource.data.experienceName is string
+        && request.resource.data.experienceName.size() >= 1
+        && request.resource.data.experienceName.size() <= 160
+        && request.resource.data.displayedPrice is string
+        && request.resource.data.displayedPrice.size() <= 120
+        && request.resource.data.duration is string
+        && request.resource.data.duration.size() <= 120
+        && request.resource.data.location is string
+        && request.resource.data.location.size() <= 160
+        && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() >= 2
+        && request.resource.data.fullName.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() >= 5
+        && request.resource.data.phone.size() <= 40
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 160
+        && request.resource.data.nationality is string
+        && request.resource.data.nationality.size() <= 80
+        && request.resource.data.travelDate is string
+        && request.resource.data.travelDate.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && request.resource.data.travellers is int
+        && request.resource.data.travellers >= 1
+        && request.resource.data.travellers <= 100
+        && request.resource.data.preferredContact in ['WhatsApp', 'Email', 'Phone Call']
+        && request.resource.data.tripType in ['Private Trip', 'Group Joining', 'Family Trip', 'Custom Trip']
+        && request.resource.data.specialRequests is string
+        && request.resource.data.specialRequests.size() <= 3000
+        && request.resource.data.language in ['en', 'ja', 'de', 'hi', 'es']
+        && request.resource.data.sourceUrl is string
+        && request.resource.data.sourceUrl.size() <= 500
+        && request.resource.data.pageUrl is string
+        && request.resource.data.pageUrl.size() <= 500
+        && request.resource.data.consent == true
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function validQuoteAcceptance() {
+      return resource.data.status == 'Quoted'
+        && resource.data.publicQuoteToken is string
+        && resource.data.quoteVersion is int
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'status',
+          'quoteAcceptedName',
+          'quoteAcceptedToken',
+          'quoteAcceptedVersion',
+          'quoteAcceptedAt',
+          'updatedAt'
+        ])
+        && request.resource.data.status == 'Confirmed'
+        && request.resource.data.quoteAcceptedName is string
+        && request.resource.data.quoteAcceptedName.size() >= 2
+        && request.resource.data.quoteAcceptedName.size() <= 120
+        && request.resource.data.quoteAcceptedToken == resource.data.publicQuoteToken
+        && request.resource.data.quoteAcceptedVersion == resource.data.quoteVersion
+        && request.resource.data.quoteAcceptedAt == request.time
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    function validPublicQuoteAcceptance() {
+      return resource.data.status == 'active'
+        && resource.data.validUntilAt is timestamp
+        && resource.data.validUntilAt >= request.time
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'status',
+          'acceptedName',
+          'acceptedAt',
+          'updatedAt'
+        ])
+        && request.resource.data.status == 'accepted'
+        && request.resource.data.acceptedName is string
+        && request.resource.data.acceptedName.size() >= 2
+        && request.resource.data.acceptedName.size() <= 120
+        && request.resource.data.acceptedAt == request.time
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    match /bookings/{bookingId} {
+      allow create: if validPublicBooking();
+      allow read, delete: if isAdmin();
+      allow update: if isAdmin() || validQuoteAcceptance();
+    }
+
+    match /publicQuotes/{quoteToken} {
+      allow get: if true;
+      allow list: if isAdmin();
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || validPublicQuoteAcceptance();
+    }
+
+    match /admins/{userId} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

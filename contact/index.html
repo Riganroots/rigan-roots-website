@@ -12,13 +12,13 @@
 
   <title>Contact Rigan Roots &amp; Routes | Plan Your Nepal Journey</title>
 <!-- SEO FOUNDATION START -->
-<link rel="canonical" href="https://riganrootsroutes.com/contact.html">
+<link rel="canonical" href="https://riganrootsroutes.com/contact/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rigan Roots & Routes">
 <meta property="og:title" content="Contact Rigan Roots &amp; Routes | Plan Your Nepal Journey">
 <meta property="og:description" content="Contact Rigan Roots &amp; Routes to plan a Nepal trek, cultural journey, family holiday, village experience or personalised tour.">
-<meta property="og:url" content="https://riganrootsroutes.com/contact.html">
+<meta property="og:url" content="https://riganrootsroutes.com/contact/">
 <meta property="og:image" content="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact Rigan Roots &amp; Routes | Plan Your Nepal Journey">
@@ -630,8 +630,11 @@
       }
     }
   </style>
-<link rel="stylesheet" href="mobile-consistency.css">
-<script src="analytics.js" defer></script>
+<link rel="stylesheet" href="/mobile-consistency.css">
+<script defer src="/analytics.js"></script>
+<!-- MULTILINGUAL SUPPORT -->
+<link rel="stylesheet" href="/i18n.css">
+<script src="/i18n.js" defer></script>
 </head>
 
 <body>
@@ -641,7 +644,7 @@
     <div class="nav-container">
 
       <a
-        href="index.html"
+        href="/"
         class="brand"
         aria-label="Rigan Roots and Routes home"
       >
@@ -665,12 +668,12 @@
       </button>
 
       <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="experience-v2.html">Experiences</a>
-        <a href="regions.html">Regions</a>
-        <a href="about.html">Our Story</a>
-        <a href="plan.html">Plan</a>
-        <a href="contact.html" class="active" aria-current="page">
+        <a href="/">Home</a>
+        <a href="/experiences/">Experiences</a>
+        <a href="/regions/">Regions</a>
+        <a href="/about/">Our Story</a>
+        <a href="/plan/">Plan</a>
+        <a href="/contact/" class="active" aria-current="page">
           Contact
         </a>
       </div>
@@ -1008,12 +1011,12 @@
           <h4>Quick Links</h4>
 
           <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="experience-v2.html">Experiences</a>
-            <a href="regions.html">Regions</a>
-            <a href="about.html">Our Story</a>
-            <a href="plan.html">Plan Your Trip</a>
-            <a href="contact.html">Contact</a>
+            <a href="/">Home</a>
+            <a href="/experiences/">Experiences</a>
+            <a href="/regions/">Regions</a>
+            <a href="/about/">Our Story</a>
+            <a href="/plan/">Plan Your Trip</a>
+            <a href="/contact/">Contact</a>
           </div>
         </div>
 
@@ -1057,13 +1060,49 @@
   </div>
 
   <script>
-    (function () {
-      var target = "/contact/";
-      window.location.replace(target + window.location.search + window.location.hash);
-    })();
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+      menuToggle.innerHTML = isOpen
+        ? '<i class="fas fa-xmark" aria-hidden="true"></i>'
+        : '<i class="fas fa-bars" aria-hidden="true"></i>';
+    });
+
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML =
+          '<i class="fas fa-bars" aria-hidden="true"></i>';
+      });
+    });
+
+    document.addEventListener("click", function (event) {
+      const clickedInsideNavigation =
+        navLinks.contains(event.target) ||
+        menuToggle.contains(event.target) || event.composedPath().includes(menuToggle);
+
+      if (!clickedInsideNavigation) {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML =
+          '<i class="fas fa-bars" aria-hidden="true"></i>';
+      }
+    });
+
+    const arrivalDate = document.getElementById("arrival-date");
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    arrivalDate.min = `${year}-${month}-${day}`;
   </script>
-</head>
-<body>
-  <p>This page has moved. <a href="/contact/">Continue to the new address</a>.</p>
+
 </body>
 </html>

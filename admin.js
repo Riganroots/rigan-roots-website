@@ -14,6 +14,7 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  startAfter,
   updateDoc
 } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
@@ -29,6 +30,7 @@ const emptyState = document.getElementById('emptyState');
 const searchInput = document.getElementById('searchInput');
 const statusFilter = document.getElementById('statusFilter');
 const detailModal = document.getElementById('detailModal');
+const closeDetailBtn = document.getElementById('closeDetailBtn');
 const detailGrid = document.getElementById('detailGrid');
 const detailActions = document.getElementById('detailActions');
 const detailTitle = document.getElementById('detailTitle');
@@ -41,10 +43,24 @@ const copyCustomerMessage = document.getElementById('copyCustomerMessage');
 const openWhatsAppDraft = document.getElementById('openWhatsAppDraft');
 const openEmailDraft = document.getElementById('openEmailDraft');
 const regenerateMessageBtn = document.getElementById('regenerateMessageBtn');
+const detailStatus = document.getElementById('detailStatus');
+const saveStatusBtn = document.getElementById('saveStatusBtn');
+const nextActionHint = document.getElementById('nextActionHint');
+const statusHistoryList = document.getElementById('statusHistoryList');
+const statusHistoryCurrent = document.getElementById('statusHistoryCurrent');
+const resultCount = document.getElementById('resultCount');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const paginationNote = document.getElementById('paginationNote');
+const statFilters = document.querySelectorAll('.stat-filter');
 
 const STATUSES = ['New', 'Contacted', 'Quoted', 'Confirmed', 'Paid', 'Completed', 'Cancelled'];
+const PAGE_SIZE = 100;
 let bookings = [];
 let selectedBookingId = null;
+let lastBookingDoc = null;
+let hasMoreBookings = false;
+let isLoadingBookings = false;
+let previouslyFocusedElement = null;
 
 function setNotice(el, text, type = 'info') {
   el.textContent = text;
@@ -60,6 +76,99 @@ function formatDate(timestamp) {
   if (!timestamp) return '—';
   const date = typeof timestamp.toDate === 'function' ? timestamp.toDate() : new Date(timestamp);
   return Number.isNaN(date.getTime()) ? '—' : date.toLocaleString();
+}
+
+function timestampMs(timestamp) {
+  if (!timestamp) return 0;
+  const date = typeof timestamp.toDate === 'function' ? timestamp.toDate() : new Date(timestamp);
+  const value = date.getTime();
+  return Number.isNaN(value) ? 0 : value;
+}
+
+function renderStatusHistory(item) {
+  if (!item || !statusHistoryList || !statusHistoryCurrent) return;
+
+  const currentStatus = item.status || 'New';
+  statusHistoryCurrent.textContent = `Current: ${currentStatus}`;
+
+  const entries = [];
+  if (item.createdAt) {
+    entries.push({
+      from: '',
+      to: 'New',
+      changedAt: item.createdAt,
+      changedBy: 'Booking form',
+      reason: 'Booking request created',
+      kind: 'created'
+    });
+  }
+
+  const storedHistory = Array.isArray(item.statusHistory)
+    ? item.statusHistory.filter(entry => entry && typeof entry === 'object')
+    : [];
+
+  storedHistory.forEach(entry => {
+    entries.push({
+      from: String(entry.from || ''),
+      to: String(entry.to || ''),
+      changedAt: entry.changedAt || null,
+      changedBy: String(entry.changedBy || 'Admin'),
+      reason: String(entry.reason || ''),
+      kind: 'change'
+    });
+  });
+
+  entries.sort((a, b) => timestampMs(a.changedAt) - timestampMs(b.changedAt));
+
+  const lastRecordedStatus = [...entries]
+    .reverse()
+    .find(entry => entry.to)?.to || '';
+
+  if (currentStatus && currentStatus !== lastRecordedStatus) {
+    entries.push({
+      from: lastRecordedStatus,
+      to: currentStatus,
+      changedAt: item.updatedAt || null,
+      changedBy: 'Current booking state',
+      reason: 'Latest status recorded outside the admin status control',
+      kind: 'current'
+    });
+  }
+
+  if (!entries.length) {
+    statusHistoryList.innerHTML =
+      '<p class="status-history-empty">No status history is available for this booking yet.</p>';
+    return;
+  }
+
+  statusHistoryList.innerHTML = entries.map((entry, index) => {
+    const status = entry.to || 'Status update';
+    const transition = entry.from && entry.from !== entry.to
+      ? `${entry.from} → ${entry.to}`
+      : status;
+    const reason = entry.reason
+      ? `<span class="status-history-reason">${escapeHtml(entry.reason)}</span>`
+      : '';
+    const actor = entry.changedBy
+      ? `<span>${escapeHtml(entry.changedBy)}</span>`
+      : '';
+    const latestClass = index === entries.length - 1 ? ' is-latest' : '';
+
+    return `
+      <div class="status-history-item${latestClass}">
+        <span class="status-history-dot" aria-hidden="true"></span>
+        <div class="status-history-body">
+          <div class="status-history-row">
+            <strong>${escapeHtml(transition)}</strong>
+            <time>${escapeHtml(formatDate(entry.changedAt))}</time>
+          </div>
+          <div class="status-history-meta">
+            ${actor}
+            ${reason}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
 }
 
 function safePhone(phone) {
@@ -111,8 +220,18 @@ function currentFilteredBookings() {
 function renderStats() {
   document.getElementById('statTotal').textContent = bookings.length;
   document.getElementById('statNew').textContent = bookings.filter(b => b.status === 'New').length;
+  document.getElementById('statQuoted').textContent = bookings.filter(b => b.status === 'Quoted').length;
   document.getElementById('statConfirmed').textContent = bookings.filter(b => b.status === 'Confirmed').length;
   document.getElementById('statPaid').textContent = bookings.filter(b => b.status === 'Paid').length;
+  updateStatFilterState();
+}
+
+function updateStatFilterState() {
+  statFilters.forEach(button => {
+    const active = button.dataset.status === statusFilter.value;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
 }
 
 function bookingWhatsApp(item, message) {
@@ -124,6 +243,20 @@ function bookingWhatsApp(item, message) {
 
 function selectedBooking() {
   return bookings.find(item => item.id === selectedBookingId) || null;
+}
+
+const STATUS_NEXT_ACTION = {
+  New: 'Contact the traveller and confirm the request details.',
+  Contacted: 'Prepare the itinerary and quotation.',
+  Quoted: 'Follow up for the customer decision or requested changes.',
+  Confirmed: 'Confirm payment instructions and final service arrangements.',
+  Paid: 'Prepare operations, supplier confirmations, and pre-departure details.',
+  Completed: 'Trip closed. Record feedback or future-trip notes if useful.',
+  Cancelled: 'Booking closed. Keep any cancellation notes for the team.'
+};
+
+function nextActionFor(item) {
+  return STATUS_NEXT_ACTION[item?.status] || 'Review this booking and choose the next step.';
 }
 
 function customerFirstName(item) {
@@ -182,6 +315,69 @@ function regenerateCustomerMessage() {
   customerMessage.value = buildCustomerFollowup(item);
 }
 
+async function updateBookingStatus(id, newStatus, control = null) {
+  const booking = bookings.find(item => item.id === id);
+  if (!booking || !STATUSES.includes(newStatus)) return false;
+
+  const previousStatus = booking.status || 'New';
+  if (previousStatus === newStatus) {
+    if (selectedBookingId === id) {
+      nextActionHint.textContent = nextActionFor(booking);
+    }
+    return true;
+  }
+
+  if (control) control.disabled = true;
+  const historyEntry = {
+    from: previousStatus,
+    to: newStatus,
+    changedAt: new Date().toISOString(),
+    changedBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin'
+  };
+
+  try {
+    await updateDoc(doc(db, 'bookings', id), {
+      status: newStatus,
+      updatedAt: serverTimestamp(),
+      statusHistory: arrayUnion(historyEntry)
+    });
+
+    booking.status = newStatus;
+    booking.updatedAt = historyEntry.changedAt;
+    booking.statusHistory = [
+      ...(Array.isArray(booking.statusHistory) ? booking.statusHistory : []),
+      historyEntry
+    ];
+    renderStats();
+    renderBookings();
+    clearNotice(dashboardNotice);
+
+    if (selectedBookingId === id) {
+      detailStatus.value = newStatus;
+      nextActionHint.textContent = nextActionFor(booking);
+      renderStatusHistory(booking);
+      regenerateCustomerMessage();
+      setNotice(detailNotice, `Status updated to ${newStatus}.`, 'success');
+    }
+
+    document.dispatchEvent(new CustomEvent('rigan:booking-status-changed', {
+      detail: { id, status: newStatus }
+    }));
+    return true;
+  } catch (error) {
+    console.error(error);
+    if (selectedBookingId === id) detailStatus.value = previousStatus;
+    setNotice(
+      selectedBookingId === id ? detailNotice : dashboardNotice,
+      'Could not update booking status. Check Firestore rules and admin access.',
+      'error'
+    );
+    return false;
+  } finally {
+    if (control) control.disabled = false;
+  }
+}
+
 function renderBookings() {
   const filtered = currentFilteredBookings();
 
@@ -201,42 +397,29 @@ function renderBookings() {
           ${email ? `<a class="email-link" href="mailto:${encodeURIComponent(email)}">Email</a>` : ''}
         </td>
         <td><select class="status-select" data-booking-id="${escapeHtml(item.id)}">${options}</select></td>
+        <td><span class="next-action">${escapeHtml(nextActionFor(item))}</span></td>
         <td>${escapeHtml(formatDate(item.createdAt))}</td>
         <td><button class="btn btn-outline btn-small view-booking" type="button" data-booking-id="${escapeHtml(item.id)}">View details</button></td>
       </tr>`;
   }).join('');
 
   emptyState.classList.toggle('show', filtered.length === 0);
+  const loadedLabel = bookings.length === 1 ? 'booking' : 'bookings';
+  resultCount.textContent = `Showing ${filtered.length} of ${bookings.length} loaded ${loadedLabel}`;
+  paginationNote.textContent = hasMoreBookings
+    ? 'Newest bookings loaded first. Load older bookings to search or export more history.'
+    : bookings.length
+      ? 'All currently available bookings are loaded.'
+      : 'No bookings loaded.';
+  loadMoreBtn.hidden = !hasMoreBookings;
+  updateStatFilterState();
 
   document.querySelectorAll('.status-select').forEach(select => {
     select.addEventListener('change', async () => {
       const id = select.dataset.bookingId;
-      const booking = bookings.find(item => item.id === id);
-      const previousStatus = booking?.status || 'New';
-      const newStatus = select.value;
-      select.disabled = true;
-      try {
-        await updateDoc(doc(db, 'bookings', id), {
-          status: newStatus,
-          updatedAt: serverTimestamp(),
-          statusHistory: arrayUnion({
-            from: previousStatus,
-            to: newStatus,
-            changedAt: new Date().toISOString(),
-            changedBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin'
-          })
-        });
-        if (booking) booking.status = newStatus;
-        renderStats();
-        clearNotice(dashboardNotice);
-        if (selectedBookingId === id) regenerateCustomerMessage();
-      } catch (error) {
-        console.error(error);
-        select.value = previousStatus;
-        setNotice(dashboardNotice, 'Could not update booking status. Check Firestore rules and admin access.', 'error');
-      } finally {
-        select.disabled = false;
-      }
+      const previousStatus = bookings.find(item => item.id === id)?.status || 'New';
+      const success = await updateBookingStatus(id, select.value, select);
+      if (!success) select.value = previousStatus;
     });
   });
 
@@ -249,9 +432,48 @@ function detailItem(label, value, full = false) {
   return `<div class="detail-item ${full ? 'full' : ''}"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value || '—')}</strong></div>`;
 }
 
+function modalFocusableElements() {
+  const selector = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
+
+  return [...detailModal.querySelectorAll(selector)].filter(element => {
+    return !element.hidden && element.offsetParent !== null;
+  });
+}
+
+function keepFocusInsideDetailModal(event) {
+  if (event.key !== 'Tab' || detailModal.hidden) return;
+
+  const focusable = modalFocusableElements();
+  if (!focusable.length) {
+    event.preventDefault();
+    closeDetailBtn.focus();
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const active = document.activeElement;
+
+  if (event.shiftKey && (active === first || !detailModal.contains(active))) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && active === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
 function openBookingDetails(id) {
   const item = bookings.find(booking => booking.id === id);
   if (!item) return;
+  previouslyFocusedElement = document.activeElement;
   selectedBookingId = id;
   clearNotice(detailNotice);
   detailTitle.textContent = item.bookingRef || 'Booking';
@@ -261,7 +483,6 @@ function openBookingDetails(id) {
     detailItem('Phone / WhatsApp', item.phone),
     detailItem('Email', item.email),
     detailItem('Experience', item.experienceName),
-    detailItem('Status', item.status),
     detailItem('Travel date', item.travelDate),
     detailItem('Travellers', item.travellers),
     detailItem('Trip type', item.tripType),
@@ -277,6 +498,9 @@ function openBookingDetails(id) {
   if (item.sourceUrl) links.push(`<a class="btn btn-outline btn-small" href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">Source page</a>`);
   detailActions.innerHTML = links.join('');
 
+  detailStatus.value = item.status || 'New';
+  nextActionHint.textContent = nextActionFor(item);
+  renderStatusHistory(item);
   quotedAmount.value = item.quotedAmount ?? '';
   quotedCurrency.value = item.quotedCurrency || 'USD';
   internalNotes.value = item.internalNotes || '';
@@ -284,15 +508,32 @@ function openBookingDetails(id) {
   openWhatsAppDraft.disabled = !item.phone;
   openEmailDraft.disabled = !item.email;
   detailModal.hidden = false;
+  detailModal.scrollTop = 0;
   document.body.style.overflow = 'hidden';
+  window.requestAnimationFrame(() => {
+    closeDetailBtn.focus({ preventScroll: true });
+  });
 }
 
 function closeBookingDetails() {
+  if (detailModal.hidden) return;
+
   detailModal.hidden = true;
   selectedBookingId = null;
   customerMessage.value = '';
   document.body.style.overflow = '';
   clearNotice(detailNotice);
+
+  const focusTarget = previouslyFocusedElement;
+  previouslyFocusedElement = null;
+  if (
+    focusTarget &&
+    focusTarget.isConnected &&
+    focusTarget.offsetParent !== null &&
+    typeof focusTarget.focus === 'function'
+  ) {
+    focusTarget.focus({ preventScroll: true });
+  }
 }
 
 async function saveBookingOperations() {
@@ -390,17 +631,73 @@ function exportCsv() {
   URL.revokeObjectURL(url);
 }
 
-async function loadBookings() {
-  setNotice(dashboardNotice, 'Loading bookings…');
+async function loadBookings(append = false) {
+  if (isLoadingBookings) return;
+  isLoadingBookings = true;
+
+  const buttonText = loadMoreBtn.textContent;
+  if (append) {
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.textContent = 'Loading…';
+    setNotice(dashboardNotice, 'Loading older bookings…');
+  } else {
+    setNotice(dashboardNotice, 'Loading bookings…');
+    lastBookingDoc = null;
+    hasMoreBookings = false;
+  }
+
   try {
-    const snapshot = await getDocs(query(collection(db, 'bookings'), orderBy('createdAt', 'desc'), limit(250)));
-    bookings = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    const constraints = [
+      orderBy('createdAt', 'desc'),
+      limit(PAGE_SIZE)
+    ];
+
+    if (append && lastBookingDoc) {
+      constraints.splice(1, 0, startAfter(lastBookingDoc));
+    }
+
+    const snapshot = await getDocs(query(collection(db, 'bookings'), ...constraints));
+    const page = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    if (append) {
+      const existingIds = new Set(bookings.map(item => item.id));
+      bookings = bookings.concat(page.filter(item => !existingIds.has(item.id)));
+    } else {
+      bookings = page;
+    }
+
+    lastBookingDoc = snapshot.docs.length
+      ? snapshot.docs[snapshot.docs.length - 1]
+      : lastBookingDoc;
+    hasMoreBookings = snapshot.docs.length === PAGE_SIZE;
+
     renderStats();
     renderBookings();
+
+    if (selectedBookingId) {
+      const refreshedSelected = selectedBooking();
+      if (refreshedSelected) {
+        detailStatus.value = refreshedSelected.status || 'New';
+        nextActionHint.textContent = nextActionFor(refreshedSelected);
+        renderStatusHistory(refreshedSelected);
+        customerMessage.value = buildCustomerFollowup(refreshedSelected);
+      }
+    }
+
     clearNotice(dashboardNotice);
   } catch (error) {
     console.error(error);
-    setNotice(dashboardNotice, 'Could not load bookings. Confirm this user has an admins/{UID} document and that the Firestore rules are published.', 'error');
+    setNotice(
+      dashboardNotice,
+      append
+        ? 'Could not load older bookings. Please try again.'
+        : 'Could not load bookings. Confirm this user has an admins/{UID} document and that the Firestore rules are published.',
+      'error'
+    );
+  } finally {
+    isLoadingBookings = false;
+    loadMoreBtn.disabled = false;
+    loadMoreBtn.textContent = buttonText;
   }
 }
 
@@ -420,9 +717,10 @@ loginForm.addEventListener('submit', async event => {
 });
 
 logoutBtn.addEventListener('click', () => signOut(auth));
-document.getElementById('refreshBtn').addEventListener('click', loadBookings);
+document.getElementById('refreshBtn').addEventListener('click', () => loadBookings(false));
+loadMoreBtn.addEventListener('click', () => loadBookings(true));
 document.getElementById('exportBtn').addEventListener('click', exportCsv);
-document.getElementById('closeDetailBtn').addEventListener('click', closeBookingDetails);
+closeDetailBtn.addEventListener('click', closeBookingDetails);
 document.getElementById('saveOpsBtn').addEventListener('click', saveBookingOperations);
 regenerateMessageBtn.addEventListener('click', regenerateCustomerMessage);
 copyCustomerMessage.addEventListener('click', copyFollowupMessage);
@@ -432,10 +730,26 @@ detailModal.addEventListener('click', event => {
   if (event.target === detailModal) closeBookingDetails();
 });
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !detailModal.hidden) closeBookingDetails();
+  if (detailModal.hidden) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeBookingDetails();
+    return;
+  }
+  keepFocusInsideDetailModal(event);
 });
 searchInput.addEventListener('input', renderBookings);
 statusFilter.addEventListener('change', renderBookings);
+statFilters.forEach(button => {
+  button.addEventListener('click', () => {
+    statusFilter.value = button.dataset.status || 'All';
+    renderBookings();
+  });
+});
+saveStatusBtn.addEventListener('click', async () => {
+  if (!selectedBookingId) return;
+  await updateBookingStatus(selectedBookingId, detailStatus.value, saveStatusBtn);
+});
 document.getElementById('clearFilters').addEventListener('click', () => {
   searchInput.value = '';
   statusFilter.value = 'All';
@@ -458,17 +772,18 @@ onAuthStateChanged(auth, async user => {
 
   try {
     const adminDoc = await getDoc(doc(db, 'admins', user.uid));
-    if (!adminDoc.exists()) {
+    const adminData = adminDoc.exists() ? adminDoc.data() : null;
+    if (!adminData || adminData.role !== 'admin' || adminData.active !== true) {
       loginView.style.display = '';
       dashboardView.classList.remove('show');
-      setNotice(loginNotice, `Signed in, but this account does not have admin access. Create Firestore document admins/${user.uid} and then sign in again.`, 'error');
+      setNotice(loginNotice, `Signed in, but this account does not have active admin access. Confirm admins/${user.uid} has role = admin and active = true.`, 'error');
       return;
     }
 
     loginView.style.display = 'none';
     dashboardView.classList.add('show');
     clearNotice(loginNotice);
-    await loadBookings();
+    await loadBookings(false);
   } catch (error) {
     console.error(error);
     loginView.style.display = '';

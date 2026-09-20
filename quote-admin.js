@@ -3,14 +3,12 @@ import {
   arrayUnion,
   collection,
   doc,
-  getDoc,
   getDocs,
   limit,
   query,
+  runTransaction,
   serverTimestamp,
-  setDoc,
   Timestamp,
-  updateDoc,
   where
 } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
@@ -40,6 +38,13 @@ const loadPackageItineraryBtn = document.getElementById('loadPackageItinerary');
 let currentBooking = null;
 let currentBookingId = null;
 let currentQuoteUrl = '';
+
+document.addEventListener('rigan:booking-status-changed', event => {
+  if (!currentBooking || !currentBookingId) return;
+  if (event.detail?.id === currentBookingId && event.detail?.status) {
+    currentBooking.status = event.detail.status;
+  }
+});
 
 const DEFAULT_PAYMENT_TERMS = 'A deposit is required to confirm services. The exact payment schedule, payment method, and any applicable bank or card charges will be confirmed in writing before payment.';
 const DEFAULT_CANCELLATION_TERMS = 'Cancellation and amendment conditions depend on the confirmed suppliers and services. Any non-refundable permits, flights, hotels, transport, or third-party charges will be identified before payment.';
@@ -201,15 +206,6 @@ async function loadCurrentBooking() {
   }
 }
 
-async function supersedeOldQuote(token) {
-  if (!token) return;
-  const oldRef = doc(db, 'publicQuotes', token);
-  const oldSnapshot = await getDoc(oldRef);
-  if (!oldSnapshot.exists()) return;
-  if (oldSnapshot.data().status === 'accepted') return;
-  await updateDoc(oldRef, { status: 'superseded', updatedAt: serverTimestamp() });
-}
-
 function validateQuote() {
   const total = Number(quotedAmount.value);
   const deposit = Number(quoteDeposit.value || 0);
@@ -247,75 +243,85 @@ async function publishQuote() {
     const depositAmount = Number(quoteDeposit.value || 0);
     const currency = quotedCurrency.value || 'USD';
     const balanceAmount = Math.max(0, totalAmount - depositAmount);
-    const version = Number(currentBooking.quoteVersion || 0) + 1;
     const token = secureToken();
-    const number = quoteNumber(currentBooking.bookingRef, version);
     const validUntil = quoteValidUntil.value;
     const validUntilAt = Timestamp.fromDate(new Date(`${validUntil}T23:59:59`));
     const nowIso = new Date().toISOString();
+    const bookingDocRef = doc(db, 'bookings', currentBookingId);
+    const newQuoteRef = doc(db, 'publicQuotes', token);
 
-    const quoteDraft = {
-      quoteNumber: number,
-      version,
-      currency,
-      totalAmount,
-      depositAmount,
-      balanceAmount,
-      validUntil,
-      itinerary: clean(quoteItinerary.value),
-      inclusions: clean(quoteIncludes.value),
-      exclusions: clean(quoteExcludes.value),
-      paymentTerms: clean(quotePaymentTerms.value),
-      cancellationTerms: clean(quoteCancellationTerms.value),
-      createdAt: nowIso
-    };
+    const transactionResult = await runTransaction(db, async transaction => {
+      const bookingSnapshot = await transaction.get(bookingDocRef);
+      if (!bookingSnapshot.exists()) {
+        throw new Error('BOOKING_NOT_FOUND');
+      }
 
-    await supersedeOldQuote(currentBooking.publicQuoteToken);
+      const liveBooking = { id: bookingSnapshot.id, ...bookingSnapshot.data() };
+      if (['Paid', 'Completed', 'Cancelled'].includes(liveBooking.status)) {
+        throw new Error(`BOOKING_LOCKED:${liveBooking.status}`);
+      }
 
-    const publicQuote = {
-      schemaVersion: 1,
-      status: 'active',
-      token,
-      bookingId: currentBookingId,
-      bookingRef: clean(currentBooking.bookingRef, 40),
-      quoteNumber: number,
-      version,
-      customerName: clean(currentBooking.fullName, 120),
-      experienceName: clean(currentBooking.experienceName, 160),
-      experienceId: clean(currentBooking.experienceId, 120),
-      travelDate: clean(currentBooking.travelDate, 20),
-      travellers: Number(currentBooking.travellers || 1),
-      tripType: clean(currentBooking.tripType, 60),
-      duration: clean(currentBooking.duration || '', 120),
-      location: clean(currentBooking.location || 'Nepal', 160),
-      language: clean(currentBooking.language || 'en', 10),
-      currency,
-      totalAmount,
-      depositAmount,
-      balanceAmount,
-      validUntil,
-      validUntilAt,
-      itinerary: quoteDraft.itinerary,
-      inclusions: quoteDraft.inclusions,
-      exclusions: quoteDraft.exclusions,
-      paymentTerms: quoteDraft.paymentTerms,
-      cancellationTerms: quoteDraft.cancellationTerms,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp()
-    };
+      let oldQuoteRef = null;
+      let oldQuoteSnapshot = null;
+      if (liveBooking.publicQuoteToken) {
+        oldQuoteRef = doc(db, 'publicQuotes', liveBooking.publicQuoteToken);
+        oldQuoteSnapshot = await transaction.get(oldQuoteRef);
+        if (oldQuoteSnapshot.exists() && oldQuoteSnapshot.data().status === 'accepted') {
+          throw new Error('QUOTE_ALREADY_ACCEPTED');
+        }
+      }
 
-    await setDoc(doc(db, 'publicQuotes', token), publicQuote);
+      const version = Number(liveBooking.quoteVersion || 0) + 1;
+      const number = quoteNumber(liveBooking.bookingRef, version);
+      const quoteDraft = {
+        quoteNumber: number,
+        version,
+        currency,
+        totalAmount,
+        depositAmount,
+        balanceAmount,
+        validUntil,
+        itinerary: clean(quoteItinerary.value),
+        inclusions: clean(quoteIncludes.value),
+        exclusions: clean(quoteExcludes.value),
+        paymentTerms: clean(quotePaymentTerms.value),
+        cancellationTerms: clean(quoteCancellationTerms.value),
+        createdAt: nowIso
+      };
 
-    const update = {
-      quotedAmount: totalAmount,
-      quotedCurrency: currency,
-      quoteDraft,
-      quoteVersion: version,
-      publicQuoteToken: token,
-      publicQuoteUrl: publicQuoteUrl(token),
-      status: 'Quoted',
-      updatedAt: serverTimestamp(),
-      quoteHistory: arrayUnion({
+      const publicQuote = {
+        schemaVersion: 1,
+        status: 'active',
+        token,
+        bookingId: currentBookingId,
+        bookingRef: clean(liveBooking.bookingRef, 40),
+        quoteNumber: number,
+        version,
+        customerName: clean(liveBooking.fullName, 120),
+        experienceName: clean(liveBooking.experienceName, 160),
+        experienceId: clean(liveBooking.experienceId, 120),
+        travelDate: clean(liveBooking.travelDate, 20),
+        travellers: Number(liveBooking.travellers || 1),
+        tripType: clean(liveBooking.tripType, 60),
+        duration: clean(liveBooking.duration || '', 120),
+        location: clean(liveBooking.location || 'Nepal', 160),
+        language: clean(liveBooking.language || 'en', 10),
+        currency,
+        totalAmount,
+        depositAmount,
+        balanceAmount,
+        validUntil,
+        validUntilAt,
+        itinerary: quoteDraft.itinerary,
+        inclusions: quoteDraft.inclusions,
+        exclusions: quoteDraft.exclusions,
+        paymentTerms: quoteDraft.paymentTerms,
+        cancellationTerms: quoteDraft.cancellationTerms,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      };
+
+      const historyEntry = {
         quoteNumber: number,
         version,
         totalAmount,
@@ -325,23 +331,47 @@ async function publishQuote() {
         token,
         createdAt: nowIso,
         createdBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin'
-      })
-    };
+      };
 
-    if (currentBooking.status !== 'Quoted') {
-      update.statusHistory = arrayUnion({
-        from: currentBooking.status || 'New',
-        to: 'Quoted',
-        changedAt: nowIso,
-        changedBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin',
-        reason: 'Quotation published'
-      });
-    }
+      const update = {
+        quotedAmount: totalAmount,
+        quotedCurrency: currency,
+        quoteDraft,
+        quoteVersion: version,
+        publicQuoteToken: token,
+        publicQuoteUrl: publicQuoteUrl(token),
+        status: 'Quoted',
+        updatedAt: serverTimestamp(),
+        quoteHistory: arrayUnion(historyEntry)
+      };
 
-    await updateDoc(doc(db, 'bookings', currentBookingId), update);
+      if (liveBooking.status !== 'Quoted') {
+        update.statusHistory = arrayUnion({
+          from: liveBooking.status || 'New',
+          to: 'Quoted',
+          changedAt: nowIso,
+          changedBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin',
+          reason: 'Quotation published'
+        });
+      }
+
+      if (oldQuoteRef && oldQuoteSnapshot?.exists() && oldQuoteSnapshot.data().status !== 'superseded') {
+        transaction.update(oldQuoteRef, {
+          status: 'superseded',
+          updatedAt: serverTimestamp()
+        });
+      }
+
+      transaction.set(newQuoteRef, publicQuote);
+      transaction.update(bookingDocRef, update);
+
+      return { liveBooking, version, number, quoteDraft, update, historyEntry };
+    });
+
+    const { liveBooking, version, number, quoteDraft, update, historyEntry } = transactionResult;
 
     currentBooking = {
-      ...currentBooking,
+      ...liveBooking,
       ...update,
       quoteDraft,
       quoteVersion: version,
@@ -350,17 +380,7 @@ async function publishQuote() {
       status: 'Quoted',
       quotedAmount: totalAmount,
       quotedCurrency: currency,
-      quoteHistory: [...(currentBooking.quoteHistory || []), {
-        quoteNumber: number,
-        version,
-        totalAmount,
-        currency,
-        depositAmount,
-        validUntil,
-        token,
-        createdAt: nowIso,
-        createdBy: auth.currentUser?.email || auth.currentUser?.uid || 'admin'
-      }]
+      quoteHistory: [...(liveBooking.quoteHistory || []), historyEntry]
     };
 
     quotedAmount.value = String(totalAmount);
@@ -373,7 +393,17 @@ async function publishQuote() {
     document.getElementById('refreshBtn')?.click();
   } catch (error) {
     console.error('Quote publish failed:', error);
-    setQuoteNotice('Could not publish the quotation. Confirm Firestore rules are updated for Phase 7D and try again.', 'error');
+    const code = String(error?.message || '');
+    if (code === 'QUOTE_ALREADY_ACCEPTED') {
+      setQuoteNotice('The current quotation has already been accepted. Refresh the booking before making any further changes.', 'error');
+    } else if (code === 'BOOKING_NOT_FOUND') {
+      setQuoteNotice('This booking no longer exists. Refresh the dashboard.', 'error');
+    } else if (code.startsWith('BOOKING_LOCKED:')) {
+      const status = code.split(':')[1] || 'locked';
+      setQuoteNotice(`This booking changed to ${status} in another session. Refresh before publishing another quotation.`, 'error');
+    } else {
+      setQuoteNotice('Could not publish the quotation. Confirm Firestore rules are published and try again.', 'error');
+    }
   } finally {
     publishQuoteBtn.disabled = false;
   }

@@ -370,6 +370,15 @@
         background: linear-gradient(180deg, #fff 0%, #fff 78%, #f7faf5 100%);
       }
 
+      .rigan-detail-premium .trip-quote-anchor {
+        position: absolute;
+        top: -18px;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+      }
+
       .rigan-detail-premium .booking-card::before {
         content: "";
         position: absolute;
@@ -600,7 +609,19 @@
     });
 
     const bookingCard = document.querySelector('.booking-card');
-    if (bookingCard && !bookingCard.id) bookingCard.id = 'trip-quote';
+    if (bookingCard && !document.getElementById('trip-quote')) {
+      const quoteAnchor = document.createElement('span');
+      quoteAnchor.id = 'trip-quote';
+      quoteAnchor.className = 'trip-quote-anchor';
+      quoteAnchor.setAttribute('aria-hidden', 'true');
+      bookingCard.prepend(quoteAnchor);
+    }
+  }
+
+  function bookingSectionTarget() {
+    return document.getElementById('trip-quote')
+      || document.getElementById('bookingCard')
+      || document.querySelector('.booking-card');
   }
 
   function scrollToElement(element) {
@@ -699,7 +720,8 @@
 
     const card = document.querySelector('.booking-card');
     const whatsapp = document.getElementById('whatsappBtn');
-    if (!card || !whatsapp || document.getElementById('firebaseBookingBtn')) return;
+    const inquiryForm = document.getElementById('inquiryForm');
+    if (inquiryForm || !card || !whatsapp || document.getElementById('firebaseBookingBtn')) return;
 
     const style = document.createElement('style');
     style.textContent = `

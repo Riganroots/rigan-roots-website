@@ -33,7 +33,7 @@ function exp(data){
       "Private customization is available",
       "Itinerary can be adjusted based on your travel style"
     ],
-    gallery: data.gallery || [data.image, data.image, data.image],
+    gallery: data.gallery || [data.image],
     ...data
   };
 }

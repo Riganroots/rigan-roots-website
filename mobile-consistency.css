@@ -457,3 +457,268 @@ textarea:focus-visible {
     font-size: 10.5px;
   }
 }
+
+
+/* 2026 responsive polish — keep the public site natural, readable and touch friendly */
+img {
+  height: auto;
+}
+
+main,
+section,
+article,
+aside,
+header,
+footer,
+.container,
+.page,
+.hero-content,
+.hero-inner,
+.card,
+.region-card,
+.trip-card,
+.story-card,
+.exp-card {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero-content,
+  .hero-inner,
+  .container,
+  .page {
+    max-width: 100%;
+  }
+
+  .hero-actions,
+  .cta-actions,
+  .trip-actions,
+  .card-actions,
+  .region-actions,
+  .buttons {
+    max-width: 100%;
+  }
+
+  .story-card img,
+  .exp-card img,
+  .host-card img,
+  .card-image-link,
+  .trip-img,
+  .region-card-top,
+  .gallery-main,
+  .gallery-side img,
+  .preview-img-wrap {
+    max-width: 100%;
+  }
+
+  .nav-links {
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .floating-whatsapp,
+  .floating,
+  .whatsapp {
+    right: max(14px, env(safe-area-inset-right));
+    z-index: 1200;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero h1,
+  .hero-title {
+    font-size: clamp(34px, 11vw, 46px) !important;
+    line-height: 1.06 !important;
+    text-wrap: balance;
+  }
+
+  .section-title,
+  .result-title h2,
+  .mandala-heading h2,
+  .cta h2 {
+    font-size: clamp(28px, 8vw, 36px) !important;
+    line-height: 1.12 !important;
+    text-wrap: balance;
+  }
+
+  .hero p,
+  .hero-subtitle,
+  .section-subtitle,
+  .mandala-heading p {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+  }
+
+  .story-card,
+  .exp-card,
+  .trip-card,
+  .region-card,
+  .card,
+  .form-box,
+  .preview,
+  .info {
+    border-radius: 20px !important;
+  }
+
+  .story-card img,
+  .exp-card img,
+  .host-card img,
+  .card-image-link,
+  .trip-img,
+  .region-card-top {
+    min-height: 210px;
+    height: 52vw !important;
+    max-height: 270px;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .region-card {
+    height: 260px !important;
+  }
+
+  .story-content,
+  .exp-card-content,
+  .trip-content,
+  .region-content,
+  .card-body,
+  .preview-body {
+    padding: 20px !important;
+  }
+
+  .hero-actions,
+  .cta-actions,
+  .trip-actions,
+  .card-actions,
+  .region-actions,
+  .buttons {
+    gap: 10px !important;
+  }
+
+  .hero-actions > a,
+  .cta-actions > a,
+  .trip-actions > a,
+  .card-actions > a,
+  .region-actions > a,
+  .buttons > button {
+    min-height: 48px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .gallery-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .gallery-main,
+  .gallery-side img {
+    width: 100%;
+    height: 58vw !important;
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  .gallery-side img {
+    height: 34vw !important;
+    min-height: 120px;
+  }
+
+  .form-grid,
+  .grid,
+  .detail-grid,
+  .details-grid,
+  .meta-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  textarea,
+  .field.full,
+  .full-width {
+    grid-column: auto !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .container,
+  .page {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .hero-actions,
+  .cta-actions,
+  .trip-actions,
+  .card-actions,
+  .region-actions,
+  .buttons {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100%;
+  }
+
+  .hero-actions > a,
+  .cta-actions > a,
+  .trip-actions > a,
+  .card-actions > a,
+  .region-actions > a,
+  .buttons > button,
+  .show-more-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .mandala-wrap,
+  .region-mandala,
+  #mandala.mandala {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .cat,
+  .mandala-option,
+  #mandala .mood {
+    min-height: 94px;
+    height: auto !important;
+  }
+
+  .floating-whatsapp a,
+  .floating a,
+  .whatsapp {
+    width: 54px;
+    height: 54px;
+    min-height: 54px;
+    padding: 0 !important;
+    justify-content: center;
+    border-radius: 50% !important;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .card:hover,
+  .story-card:hover,
+  .exp-card:hover,
+  .trip-card:hover,
+  .host-card:hover,
+  .region-card:hover,
+  .mandala-option:hover,
+  .cat:hover {
+    transform: none !important;
+  }
+
+  .card:hover img,
+  .story-card:hover img,
+  .exp-card:hover img {
+    transform: none !important;
+  }
+}

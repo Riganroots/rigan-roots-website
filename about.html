@@ -1,18 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex,follow">
-  <title>About | Rigan Roots &amp; Routes</title>
-  <link rel="canonical" href="https://riganrootsroutes.com/about/">
-  <meta http-equiv="refresh" content="0; url=/about/">
-  <script>
-    (function () {
-      var target = "/about/";
-      window.location.replace(target + window.location.search + window.location.hash);
-    })();
-  </script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Story | Rigan Roots &amp; Routes</title>
+<!-- SEO FOUNDATION START -->
+<link rel="canonical" href="https://riganrootsroutes.com/about.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rigan Roots & Routes">
+<meta property="og:title" content="Our Story | Rigan Roots &amp; Routes">
+<meta property="og:description" content="Learn about Rigan Roots &amp; Routes and our approach to meaningful Nepal travel through local people, culture, communities and authentic experiences.">
+<meta property="og:url" content="https://riganrootsroutes.com/about.html">
+<meta property="og:image" content="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Our Story | Rigan Roots &amp; Routes">
+<meta name="twitter:description" content="Learn about Rigan Roots &amp; Routes and our approach to meaningful Nepal travel through local people, culture, communities and authentic experiences.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85">
+<!-- SEO FOUNDATION END -->
+<meta name="description" content="Learn about Rigan Roots &amp; Routes and our approach to meaningful Nepal travel through local people, culture, communities and authentic experiences.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Inter,sans-serif;
+  background:#f7f0e4;
+  color:#2f3a32;
+  line-height:1.7;
+}
+
+body.menu-open{overflow:hidden}
+
+h1,h2,h3{
+  font-family:"Playfair Display",serif;
+  color:#174d2f;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 24px;
+}
+
+/* NAVBAR */
+.navbar{
+  background:white;
+  border-bottom:1px solid rgba(0,0,0,.05);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 24px;
+  position:relative;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+}
+
+.brand-logo{
+  width:48px;
+  height:48px;
+  background:#174d2f;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-family:"Playfair Display",serif;
+  font-size:28px;
+  font-weight:800;
+}
+
+.brand-name{
+  font-size:1.3rem;
+  font-weight:800;
+  color:#174d2f;
+}
+
+.brand-tagline{
+  font-size:.85rem;
+  color:#9b6238;
+}
+
+.menu-btn{
+  display:none;
+  border:0;
+  background:transparent;
+  color:#174d2f;
+  font-size:26px;
+  cursor:pointer;
+}
+
+.nav-links{
+  display:flex;
+  gap:24px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#2f3a32;
+  font-weight:600;
+}
+
+.nav-links a.active{
+  color:#174d2f;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:80px 20px;
+}
+
+.hero h1{
+  font-size:clamp(2.5rem,5vw,4rem);
+  margin-bottom:16px;
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:#5c6a61;
+}
+
+/* SECTION */
+.section{
+  padding:70px 0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.grid img{
+  width:100%;
+  border-radius:20px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:30px;
+}
+
+.card{
+  background:white;
+  padding:26px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.card i{
+  font-size:28px;
+  color:#174d2f;
+  margin-bottom:12px;
+}
+
+/* CTA */
+.cta{
+  background:#174d2f;
+  color:white;
+  padding:50px;
+  text-align:center;
+  border-radius:30px;
+  margin-top:60px;
+}
+
+.cta a{
+  display:inline-block;
+  margin-top:20px;
+  background:white;
+  color:#174d2f;
+  padding:14px 26px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+/* FOOTER */
+.footer{
+  background:#132018;
+  color:white;
+  padding:50px 0;
+  margin-top:80px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:30px;
+}
+
+.footer a{
+  color:#cbd5c0;
+  text-decoration:none;
+}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:30px;
+  opacity:.7;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .menu-btn{display:block}
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:16px;
+    right:16px;
+    flex-direction:column;
+    gap:0;
+    padding:14px 20px;
+    background:white;
+    border:1px solid rgba(0,0,0,.06);
+    border-radius:0 0 18px 18px;
+    box-shadow:0 20px 35px rgba(0,0,0,.12);
+  }
+  .nav-links.active{display:flex}
+  .nav-links a{padding:12px 0}
+  .grid,.cards,.footer-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+<link rel="stylesheet" href="mobile-consistency.css">
+<script src="analytics.js" defer></script>
 </head>
 <body>
   <p>This page has moved. <a href="/about/">Continue to the new address</a>.</p>

@@ -633,14 +633,29 @@
     const infoBar = document.querySelector('.info-bar');
     if (!infoBar || document.querySelector('.trip-quick-nav')) return;
 
+    const sectionId = (childId, fallbackId) => {
+      const section = document.getElementById(childId)?.closest('.section');
+      if (!section) return fallbackId;
+      if (!section.id) section.id = fallbackId;
+      return section.id;
+    };
+
+    const overviewId = sectionId('overview', 'trip-overview');
+    const itineraryId = sectionId('itinerary', 'trip-itinerary');
+    const inclusionsId = sectionId('includes', 'trip-inclusions');
+    const faqId = sectionId('faqBox', 'trip-faq');
+    const quoteCard = document.querySelector('.booking-card');
+    if (quoteCard && !quoteCard.id) quoteCard.id = 'trip-quote';
+    const quoteId = quoteCard?.id || 'trip-quote';
+
     const nav = document.createElement('nav');
     nav.className = 'trip-quick-nav';
     nav.setAttribute('aria-label', 'Trip detail shortcuts');
     nav.innerHTML = `
-      <a href="#trip-overview"><i class="fa-regular fa-file-lines" aria-hidden="true"></i> Overview</a>
-      <a href="#trip-itinerary"><i class="fa-solid fa-route" aria-hidden="true"></i> Itinerary</a>
-      <a href="#trip-inclusions"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Included</a>
-      <a href="#trip-faq"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> FAQ</a>
+      <a href="#${overviewId}"><i class="fa-regular fa-file-lines" aria-hidden="true"></i> Overview</a>
+      <a href="#${itineraryId}"><i class="fa-solid fa-route" aria-hidden="true"></i> Itinerary</a>
+      <a href="#${inclusionsId}"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Included</a>
+      <a href="#${faqId}"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> FAQ</a>
       <button class="quote-jump" type="button"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request Quote</button>
     `;
 
@@ -654,7 +669,7 @@
     });
 
     nav.querySelector('.quote-jump')?.addEventListener('click', () => {
-      scrollToElement(bookingSectionTarget());
+      scrollToElement(document.getElementById(quoteId));
     });
 
     infoBar.insertAdjacentElement('afterend', nav);
@@ -681,7 +696,10 @@
     });
 
     bar.querySelector('.mobile-quote')?.addEventListener('click', () => {
-      scrollToElement(bookingSectionTarget());
+      scrollToElement(
+        document.getElementById('bookingCard') ||
+        document.getElementById('trip-quote')
+      );
     });
 
     document.body.appendChild(bar);

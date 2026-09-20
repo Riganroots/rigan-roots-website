@@ -1,0 +1,182 @@
+name: Apply final QA fixes v3
+
+on:
+  push:
+    branches:
+      - qa/final-live-site-audit
+    paths:
+      - '.github/workflows/apply-final-qa-fixes-v3.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: qa/final-live-site-audit
+
+      - name: Apply production fixes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # Load enrichment explicitly on the directory-based detail route instead of using document.write.
+          data_path = Path('experience-data-v2.js')
+          data = data_path.read_text(encoding='utf-8')
+          marker = '''\n// Load richer package details and proper itineraries before the page renderer runs.\nif (typeof document !== "undefined" && document.readyState === "loading") {\n  document.write('<script src="experience-enrichment-v3.js"></' + 'script>');\n}\n'''
+          if marker in data:
+              data = data.replace(marker, '\n', 1)
+          data_path.write_text(data, encoding='utf-8')
+
+          detail_path = Path('experiences/detail/index.html')
+          detail = detail_path.read_text(encoding='utf-8')
+          old = '  <script src="/experience-data-v2.js"></script>\n\n  <script>'
+          new = '  <script src="/experience-data-v2.js"></script>\n  <script src="/experience-enrichment-v3.js"></script>\n\n  <script>'
+          if '/experience-enrichment-v3.js' not in detail:
+              if old not in detail:
+                  raise SystemExit('detail enrichment insertion anchor not found')
+              detail = detail.replace(old, new, 1)
+          detail_path.write_text(detail, encoding='utf-8')
+
+          # Update localization for the migrated directory route and root-level locale files.
+          loc_path = Path('experience-localizer.js')
+          loc = loc_path.read_text(encoding='utf-8')
+          loc = loc.replace(
+              "await loadScriptOnce(`${lang}:base`, `experience-locale-${lang}.js`);",
+              "await loadScriptOnce(`${lang}:base`, `/experience-locale-${lang}.js`);"
+          )
+          loc = loc.replace(
+              "await loadScriptOnce(`${lang}:extra`, `experience-locale-${lang}-extra.js`);",
+              "await loadScriptOnce(`${lang}:extra`, `/experience-locale-${lang}-extra.js`);"
+          )
+          old_route = "    if (!/experience-detail-v2\\.html$/i.test(window.location.pathname)) return;"
+          new_route = "    const pathname = window.location.pathname.replace(/\\/+$/, '');\n    if (pathname !== '/experiences/detail' && !/experience-detail-v2\\.html$/i.test(pathname)) return;"
+          if old_route in loc:
+              loc = loc.replace(old_route, new_route, 1)
+          elif "pathname !== '/experiences/detail'" not in loc:
+              raise SystemExit('localizer route anchor not found')
+          loc_path.write_text(loc, encoding='utf-8')
+
+          # Make premium quick navigation target IDs that already exist in the static page.
+          js_path = Path('booking-link.js')
+          js = js_path.read_text(encoding='utf-8')
+          old = '''  function installQuickNav() {\n    const infoBar = document.querySelector('.info-bar');\n    if (!infoBar || document.querySelector('.trip-quick-nav')) return;\n\n    const nav = document.createElement('nav');\n    nav.className = 'trip-quick-nav';\n    nav.setAttribute('aria-label', 'Trip detail shortcuts');\n    nav.innerHTML = `\n      <a href="#trip-overview"><i class="fa-regular fa-file-lines" aria-hidden="true"></i> Overview</a>\n      <a href="#trip-itinerary"><i class="fa-solid fa-route" aria-hidden="true"></i> Itinerary</a>\n      <a href="#trip-inclusions"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Included</a>\n      <a href="#trip-faq"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> FAQ</a>\n      <button class="quote-jump" type="button"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request Quote</button>\n    `;\n'''
+          new = '''  function installQuickNav() {\n    const infoBar = document.querySelector('.info-bar');\n    if (!infoBar || document.querySelector('.trip-quick-nav')) return;\n\n    const sectionId = (childId, fallbackId) => {\n      const section = document.getElementById(childId)?.closest('.section');\n      if (!section) return fallbackId;\n      if (!section.id) section.id = fallbackId;\n      return section.id;\n    };\n\n    const overviewId = sectionId('overview', 'trip-overview');\n    const itineraryId = sectionId('itinerary', 'trip-itinerary');\n    const inclusionsId = sectionId('includes', 'trip-inclusions');\n    const faqId = sectionId('faqBox', 'trip-faq');\n    const quoteCard = document.querySelector('.booking-card');\n    if (quoteCard && !quoteCard.id) quoteCard.id = 'trip-quote';\n    const quoteId = quoteCard?.id || 'trip-quote';\n\n    const nav = document.createElement('nav');\n    nav.className = 'trip-quick-nav';\n    nav.setAttribute('aria-label', 'Trip detail shortcuts');\n    nav.innerHTML = `\n      <a href="#${overviewId}"><i class="fa-regular fa-file-lines" aria-hidden="true"></i> Overview</a>\n      <a href="#${itineraryId}"><i class="fa-solid fa-route" aria-hidden="true"></i> Itinerary</a>\n      <a href="#${inclusionsId}"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Included</a>\n      <a href="#${faqId}"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> FAQ</a>\n      <button class="quote-jump" type="button"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request Quote</button>\n    `;\n'''
+          if old in js:
+              js = js.replace(old, new, 1)
+          elif "const itineraryId = sectionId('itinerary', 'trip-itinerary');" not in js:
+              raise SystemExit('quick nav anchor not found')
+
+          old = '''    nav.querySelector('.quote-jump')?.addEventListener('click', () => {\n      scrollToElement(document.getElementById('trip-quote'));\n    });'''
+          new = '''    nav.querySelector('.quote-jump')?.addEventListener('click', () => {\n      scrollToElement(document.getElementById(quoteId));\n    });'''
+          if old in js:
+              js = js.replace(old, new, 1)
+          elif 'document.getElementById(quoteId)' not in js:
+              raise SystemExit('quote nav anchor not found')
+
+          old = '''    bar.querySelector('.mobile-quote')?.addEventListener('click', () => {\n      scrollToElement(document.getElementById('trip-quote'));\n    });'''
+          new = '''    bar.querySelector('.mobile-quote')?.addEventListener('click', () => {\n      scrollToElement(\n        document.getElementById('bookingCard') ||\n        document.getElementById('trip-quote')\n      );\n    });'''
+          if old in js:
+              js = js.replace(old, new, 1)
+          elif "document.getElementById('bookingCard')" not in js:
+              raise SystemExit('mobile quote anchor not found')
+          js_path.write_text(js, encoding='utf-8')
+          PY
+
+      - name: Syntax and source validation
+        shell: bash
+        run: |
+          node --check booking-link.js
+          node --check experience-data-v2.js
+          node --check experience-localizer.js
+          node --check experience-enrichment-v3.js
+          python - <<'PY'
+          from pathlib import Path
+          data = Path('experience-data-v2.js').read_text(encoding='utf-8')
+          detail = Path('experiences/detail/index.html').read_text(encoding='utf-8')
+          loc = Path('experience-localizer.js').read_text(encoding='utf-8')
+          js = Path('booking-link.js').read_text(encoding='utf-8')
+          assert 'document.write(' not in data
+          assert '<script src="/experience-enrichment-v3.js"></script>' in detail
+          assert "pathname !== '/experiences/detail'" in loc
+          assert '`/experience-locale-${lang}.js`' in loc
+          assert '`/experience-locale-${lang}-extra.js`' in loc
+          assert "sectionId('itinerary', 'trip-itinerary')" in js
+          assert 'document.getElementById(quoteId)' in js
+          print('Source validation passed')
+          PY
+
+      - name: DOM integration test
+        shell: bash
+        run: |
+          npm install --no-save --silent jsdom@26
+          python -m http.server 8765 >/tmp/rigan-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          sleep 1
+          node - <<'NODE'
+          const { JSDOM, VirtualConsole } = require('jsdom');
+
+          async function load(url) {
+            const vc = new VirtualConsole();
+            const errors = [];
+            vc.on('jsdomError', e => errors.push(String(e.message || e)));
+            vc.on('error', e => errors.push(String(e)));
+            const dom = await JSDOM.fromURL(url, {
+              resources: 'usable',
+              runScripts: 'dangerously',
+              pretendToBeVisual: true,
+              virtualConsole: vc,
+              beforeParse(window) {
+                window.HTMLElement.prototype.scrollIntoView = function () { this.dataset.qaScrolled = 'true'; };
+                window.open = () => null;
+                window.alert = () => {};
+              }
+            });
+            await new Promise(resolve => dom.window.addEventListener('load', () => setTimeout(resolve, 1400), { once: true }));
+            return { dom, errors };
+          }
+
+          (async () => {
+            const failures = [];
+            const english = await load('http://127.0.0.1:8765/experiences/detail/?experience=annapurna-base-camp-trek');
+            const d = english.dom.window.document;
+            const title = d.getElementById('title')?.textContent || '';
+            if (!/Annapurna/i.test(title)) failures.push(`dynamic title missing: ${title}`);
+            const days = d.querySelectorAll('#itinerary .itinerary-day').length;
+            if (days !== 12) failures.push(`expected 12 ABC itinerary days, got ${days}`);
+            if (!d.querySelector('.trek-facts-panel')) failures.push('Trek Essentials panel missing');
+            if (!d.body.classList.contains('rigan-detail-premium')) failures.push('premium detail class missing');
+            if (!d.querySelector('.trip-quick-nav')) failures.push('quick nav missing');
+            if (!d.querySelector('.trip-mobile-cta')) failures.push('mobile CTA missing');
+            if (!d.getElementById('firebaseBookingBtn')) failures.push('booking CTA missing');
+            const itineraryLink = [...d.querySelectorAll('.trip-quick-nav a')].find(a => /Itinerary/i.test(a.textContent));
+            if (itineraryLink?.getAttribute('href') !== '#itinerarySection') failures.push(`bad itinerary target: ${itineraryLink?.getAttribute('href')}`);
+            d.querySelector('.trip-quick-nav .quote-jump')?.click();
+            if (d.getElementById('bookingCard')?.dataset.qaScrolled !== 'true') failures.push('quote shortcut failed');
+
+            const japanese = await load('http://127.0.0.1:8765/experiences/detail/?experience=annapurna-base-camp-trek&lang=ja');
+            const jd = japanese.dom.window.document;
+            const jTitle = jd.getElementById('title')?.textContent || '';
+            if (!/アンナプルナ/.test(jTitle)) failures.push(`Japanese locale missing: ${jTitle}`);
+
+            const ignore = /Could not load (link|style)|Not implemented: navigation/i;
+            const realErrors = [...english.errors, ...japanese.errors].filter(x => !ignore.test(x));
+            if (realErrors.length) failures.push('jsdom errors: ' + realErrors.join(' | '));
+            if (failures.length) { console.error(failures.join('\n')); process.exit(1); }
+            console.log('Integration passed:', title, '|', jTitle, '| days:', days);
+          })().catch(err => { console.error(err); process.exit(1); });
+          NODE
+
+      - name: Commit production fixes
+        shell: bash
+        run: |
+          git config user.name "Rigan Roots QA"
+          git config user.email "actions@users.noreply.github.com"
+          git add booking-link.js experience-data-v2.js experience-localizer.js experiences/detail/index.html
+          git commit -m "Fix detail route package data, localization and CTA navigation"
+          git push

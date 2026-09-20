@@ -206,13 +206,8 @@
   }
 
   async function applyExperienceLocale() {
-    if (!isDetailRoute()) return;
-
-    try {
-      await ensureEnrichment();
-    } catch (error) {
-      console.warn(error);
-    }
+    const pathname = window.location.pathname.replace(/\/+$/, '');
+    if (pathname !== '/experiences/detail' && !/experience-detail-v2\.html$/i.test(pathname)) return;
 
     const id = getExperienceId();
     const base = findBaseExperience(id);

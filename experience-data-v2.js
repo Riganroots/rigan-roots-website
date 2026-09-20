@@ -527,7 +527,3 @@ exp({
 
 };
 
-// Load richer package details and proper itineraries before the page renderer runs.
-if (typeof document !== "undefined" && document.readyState === "loading") {
-  document.write('<script src="experience-enrichment-v3.js"></' + 'script>');
-}

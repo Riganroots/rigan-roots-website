@@ -14,6 +14,36 @@ img,
 video,
 iframe {
   max-width: 100%;
+  height: auto;
+}
+
+body { min-width: 320px; }
+
+.container,
+main,
+section { min-width: 0; }
+
+/* Subtle cloth movement for the hand-built prayer flags. */
+.experience-prayer-flags span {
+  transform-origin: 50% 0;
+  animation: sharedFlagFlutter 3s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.experience-prayer-flags span:nth-child(2n) {
+  animation-delay: -1.25s;
+  animation-duration: 3.6s;
+}
+
+.experience-prayer-flags span:nth-child(3n) {
+  animation-delay: -2.15s;
+  animation-duration: 2.55s;
+}
+
+@keyframes sharedFlagFlutter {
+  from { rotate: -2deg; scale: 1 1; }
+  50% { rotate: 2.8deg; scale: .94 1.025; }
+  to { rotate: -.8deg; scale: 1.04 .97; }
 }
 
 button,
@@ -52,6 +82,39 @@ textarea:focus-visible {
   .nav-links a {
     min-height: 44px;
   }
+
+  .hero,
+  .page-hero,
+  .experience-hero {
+    min-height: min(760px, 100svh);
+  }
+
+  .hero-buttons,
+  .trip-actions,
+  .cta-actions { width: 100%; }
+
+  .hero-buttons .btn,
+  .cta-actions .btn {
+    flex: 1 1 180px;
+    text-align: center;
+  }
+
+  .story-grid,
+  .exp-grid,
+  .host-grid,
+  .review-grid,
+  .trip-grid,
+  .region-grid,
+  .regions-grid,
+  .footer-grid,
+  .philosophy-grid,
+  .know-grid,
+  .story-card,
+  .exp-card,
+  .host-card,
+  .review-card,
+  .trip-card,
+  .region-card { min-width: 0; }
 
   .btn,
   .btn-primary,
@@ -115,6 +178,65 @@ textarea:focus-visible {
   .floating,
   .whatsapp {
     bottom: max(14px, env(safe-area-inset-bottom));
+  }
+
+  .section-title,
+  .hero-title { line-height: 1.08; }
+
+  .section-subtitle { margin-bottom: 26px; }
+
+  .region-card,
+  .trip-card,
+  .story-card,
+  .exp-card,
+  .host-card,
+  .review-card { border-radius: 20px; }
+
+  .region-card-top,
+  .trip-img,
+  .story-card img,
+  .exp-card img,
+  .host-card img { min-height: 210px; }
+
+  .currency-box,
+  .currency-box select { width: 100%; min-width: 0; }
+}
+
+@media (max-width: 430px) {
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .trip-book,
+  .book-btn { width: 100%; }
+
+  .hero-buttons,
+  .trip-actions,
+  .cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero h1,
+  .hero-title {
+    font-size: clamp(2.35rem, 12vw, 3.35rem) !important;
+  }
+
+  .hero p,
+  .hero-subtitle {
+    font-size: 16px !important;
+    line-height: 1.65;
+  }
+
+  .floating-whatsapp span,
+  .whatsapp span { display: none; }
+
+  .floating-whatsapp a,
+  .whatsapp {
+    width: 52px;
+    height: 52px;
+    padding: 0 !important;
+    justify-content: center;
+    border-radius: 50%;
   }
 }
 

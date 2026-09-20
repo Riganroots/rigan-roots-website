@@ -211,6 +211,21 @@ exp({
         badge: "Popular Trek"
       }),
       exp({
+        id: "poon-hill-trek",
+        name: "Poon Hill Sunrise Trek",
+        subtitle: "A short Himalayan journey crowned by an unforgettable Annapurna sunrise.",
+        overview: "Walk through Gurung villages and rhododendron forests before watching first light sweep across Dhaulagiri and the Annapurna range from Poon Hill.",
+        duration: "5 Days",
+        price: "From US$450",
+        location: "Annapurna Region",
+        style: "Short Scenic Trek",
+        groupSize: "2–12 Guests",
+        difficulty: "Easy to Moderate",
+        season: "March–May and September–November",
+        image: "/assets/images/treks/poon-hill.webp",
+        badge: "Sunrise Favourite"
+      }),
+      exp({
         id: "langtang-valley-trek",
         name: "Langtang Valley Trek",
         subtitle: "A beautiful Himalayan trek close to Kathmandu with Tamang culture and mountain views.",
@@ -297,7 +312,11 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Moderate",
         season: "March–May & September–November",
-        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        image: "/assets/images/treks/tilicho-lake.webp",
+        gallery: [
+          "/assets/images/treks/tilicho-lake.webp",
+          "/assets/images/treks/tilicho-lake-traveler.webp"
+        ],
         badge: "High Lake"
       }),
       exp({

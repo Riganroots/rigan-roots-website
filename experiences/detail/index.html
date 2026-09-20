@@ -491,6 +491,26 @@
       gap: 14px;
     }
 
+    .gallery-grid.single {
+      grid-template-columns: 1fr;
+    }
+
+    .gallery-grid.single .gallery-main {
+      height: 480px;
+    }
+
+    .gallery-grid.two {
+      grid-template-columns: 1.65fr 1fr;
+    }
+
+    .gallery-grid.two .gallery-side {
+      grid-template-rows: 1fr;
+    }
+
+    .gallery-grid.two .gallery-side img {
+      height: 420px;
+    }
+
     .gallery-main,
     .gallery-side img {
       width: 100%;
@@ -2215,41 +2235,47 @@ Please send me more information about availability, itinerary, inclusions, and p
         selected.style ||
         "A customizable Nepal experience designed around your interests, pace, and preferred comfort level.";
 
-      const gallery =
-        Array.isArray(selected.gallery) &&
-        selected.gallery.length
-          ? selected.gallery
-          : [
-              heroImage,
-              heroImage,
-              heroImage
-            ];
+      const gallery = [
+        ...(Array.isArray(selected.gallery) ? selected.gallery : []),
+        heroImage
+      ]
+        .map(function (image) {
+          return String(image || "").trim();
+        })
+        .filter(Boolean)
+        .filter(function (image, index, images) {
+          return images.indexOf(image) === index;
+        })
+        .slice(0, 3);
 
-      document.getElementById(
-        "galleryGrid"
-      ).innerHTML = `
+      if (!gallery.length) gallery.push(fallbackImage);
+
+      const galleryGrid = document.getElementById("galleryGrid");
+      galleryGrid.classList.toggle("single", gallery.length === 1);
+      galleryGrid.classList.toggle("two", gallery.length === 2);
+
+      const sideImages = gallery.slice(1).map(function (image, index) {
+        return `
+          <img
+            src="${escapeHTML(image)}"
+            alt="${escapeHTML(selected.name)} — photo ${index + 2}"
+            loading="lazy"
+            decoding="async"
+            onerror="this.remove()"
+          >
+        `;
+      }).join("");
+
+      galleryGrid.innerHTML = `
         <img
           class="gallery-main"
-          src="${escapeHTML(gallery[0] || heroImage)}"
+          src="${escapeHTML(gallery[0])}"
           alt="${escapeHTML(selected.name)}"
+          fetchpriority="high"
+          decoding="async"
           onerror="this.src='${fallbackImage}'"
         >
-
-        <div class="gallery-side">
-          <img
-            src="${escapeHTML(gallery[1] || gallery[0] || heroImage)}"
-            alt="${escapeHTML(selected.name)}"
-            loading="lazy"
-            onerror="this.src='${fallbackImage}'"
-          >
-
-          <img
-            src="${escapeHTML(gallery[2] || gallery[0] || heroImage)}"
-            alt="${escapeHTML(selected.name)}"
-            loading="lazy"
-            onerror="this.src='${fallbackImage}'"
-          >
-        </div>
+        ${sideImages ? `<div class="gallery-side">${sideImages}</div>` : ""}
       `;
 
       populateList(

@@ -519,6 +519,12 @@ footer,
     padding-bottom: max(24px, env(safe-area-inset-bottom));
   }
 
+  .nav-links,
+  .top-nav .nav-links,
+  .navbar .nav-links {
+    max-height: 100dvh;
+  }
+
   .floating-whatsapp,
   .floating,
   .whatsapp {
@@ -528,6 +534,11 @@ footer,
 }
 
 @media (max-width: 700px) {
+  .region-mandala,
+  .mandala-wrap {
+    padding-top: 46px !important;
+  }
+
   .hero h1,
   .hero-title {
     font-size: clamp(34px, 11vw, 46px) !important;

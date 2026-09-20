@@ -52,7 +52,7 @@ window.experienceDataV2 = {
         price: "From US$650",
         location: "Nepal",
         style: "Cultural Immersion & Village Life",
-        image: "https://i.postimg.cc/9M6dDyqv/live-like-nepali-jpg.jpg",
+        image: "/assets/images/signature/live-like-a-nepali.jpg",
         badge: "Top Seller"
       }),
       exp({
@@ -79,7 +79,7 @@ window.experienceDataV2 = {
         location: "Hidden Regions of Nepal",
         style: "Offbeat Cultural & Nature Expedition",
         difficulty: "Moderate",
-        image: "https://i.postimg.cc/FHpVTf2H/rara_lake_expeditions_jpg.jpg",
+        image: "/assets/images/regions/rara-lake.jpg",
         badge: "Hidden Nepal"
       }),
       exp({
@@ -92,7 +92,7 @@ window.experienceDataV2 = {
         location: "Kathmandu, Village Region, Pokhara / Mountains",
         style: "Complete Nepal Signature Journey",
         difficulty: "Easy to Moderate",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+        image: "/assets/images/culture/cultural-journey.jpg",
         badge: "Rigan Special"
       }),
       exp({
@@ -106,7 +106,7 @@ window.experienceDataV2 = {
         style: "Luxury Helicopter Experience",
         difficulty: "Easy",
         season: "March–May and September–November",
-        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+        image: "/assets/images/treks/everest-view-trek.jpg",
         badge: "Luxury"
       }),
 exp({
@@ -138,7 +138,7 @@ exp({
         price: "From US$160",
         location: "Rural Nepal",
         style: "Farming & Village Life",
-        image: "https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"
+        image: "/assets/images/experiences/nepali-farmers.jfif"
       }),
       exp({
         id: "rice-planting-experience",
@@ -150,7 +150,7 @@ exp({
         location: "Kathmandu Valley / Rural Nepal",
         style: "Seasonal Farming Festival",
         season: "June–July",
-        image: "https://i.postimg.cc/V6xprDjC/anjoe-paul-RANHGW3gv-Kk-unsplash.jpg"
+        image: "/assets/images/experiences/nepali-farmers.jfif"
       }),
       exp({
         id: "mountain-farming-experience",
@@ -161,7 +161,7 @@ exp({
         price: "From US$180",
         location: "Mid-Hill Nepal",
         style: "Mountain Village Farming",
-        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"
+        image: "/assets/images/experiences/himalayan-village.jpg"
       }),
       exp({
         id: "village-immersion",
@@ -172,7 +172,7 @@ exp({
         price: "From US$520",
         location: "Rural Nepal",
         style: "Community Life & Cultural Stay",
-        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg"
+        image: "/assets/images/experiences/himalayan-village.jpg"
       })
     ]
   },
@@ -192,7 +192,7 @@ exp({
         groupSize: "2–12 Guests",
         difficulty: "Moderate to Challenging",
         season: "March–May and September–November",
-        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+        image: "/assets/images/treks/everest-base-camp.jpg",
         badge: "Most Popular Trek"
       }),
       exp({
@@ -207,7 +207,7 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Moderate",
         season: "March–May and September–November",
-        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        image: "/assets/images/treks/annapurna-base-camp.jpg",
         badge: "Popular Trek"
       }),
       exp({
@@ -222,7 +222,7 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Moderate",
         season: "March–May and September–November",
-        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+        image: "/assets/images/treks/langtang-valley.jpg",
         badge: "Near Kathmandu"
       }),
       exp({
@@ -237,7 +237,7 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Advanced",
         season: "March–May & September–November",
-        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+        image: "/assets/images/regions/everest-region.jpg",
         badge: "Ultimate Everest"
       }),
       exp({
@@ -252,7 +252,7 @@ exp({
         groupSize: "2–12 Guests",
         difficulty: "Moderate",
         season: "March–May & September–November",
-        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        image: "/assets/images/treks/annapurna-north-base-camp.jfif",
         badge: "Classic Trek"
       }),
       exp({
@@ -267,7 +267,7 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Moderate to Challenging",
         season: "March–May & September–November",
-        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        image: "/assets/images/treks/annapurna-north-base-camp.jfif",
         badge: "High Pass"
       }),
       exp({
@@ -282,7 +282,7 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Easy to Moderate",
         season: "All Trekking Seasons",
-        image: "https://i.postimg.cc/VNHBcxsc/annapurna-base-camp-jpg.jpg",
+        image: "/assets/images/treks/mardi-himal.jpg",
         badge: "Short Trek"
       }),
       exp({
@@ -312,7 +312,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Moderate",
         season: "May–October",
-        image: "https://i.postimg.cc/xjRHDkfn/shey_phoksundo.jpg",
+        image: "/assets/images/regions/shey-phoksundo.jpg",
         badge: "Hidden Nepal"
       }),
       exp({
@@ -327,7 +327,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Advanced",
         season: "May–October",
-        image: "https://i.postimg.cc/xjRHDkfn/shey_phoksundo.jpg",
+        image: "/assets/images/regions/shey-phoksundo.jpg",
         badge: "Expedition"
       })
     ]
@@ -358,7 +358,7 @@ exp({
         price: "From US$95",
         location: "Kathmandu Valley",
         style: "Traditional Newari Cuisine",
-        image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
+        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
         badge: "Cultural Favorite"
       }),
       exp({
@@ -370,7 +370,7 @@ exp({
         price: "From US$180",
         location: "Chitwan & Terai Region",
         style: "Food & Village Culture",
-        image: "https://i.postimg.cc/8kHWQF12/chitwan_national_park.jpg",
+        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
         badge: "Authentic"
       }),
       exp({
@@ -425,7 +425,7 @@ exp({
         price: "From US$120",
         location: "Bhaktapur",
         style: "Living Heritage",
-        image: "https://i.postimg.cc/8Pzv11cF/kathmandu_valley.jpg",
+        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
         badge: "Heritage Favorite"
       })
     ]
@@ -443,7 +443,7 @@ exp({
         price: "From US$480",
         location: "Pokhara / Kathmandu Valley",
         style: "Yoga & Meditation",
-        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80",
+        image: "/assets/images/wellness/wellness-retreat.jpg",
         badge: "Most Popular"
       })
     ]
@@ -461,7 +461,7 @@ exp({
         price: "From US$280",
         location: "Kathmandu / Local Communities",
         style: "Festival Experience",
-        image: "https://i.postimg.cc/SsB6ncz1/festival-experience-jpg.jpg",
+        image: "/assets/images/culture/festival-experience.jpg",
         badge: "Biggest Festival"
       })
     ]
@@ -491,7 +491,7 @@ exp({
         price: "From US$120",
         location: "Pokhara",
         style: "Air Adventure",
-        image: "https://i.postimg.cc/RZ4T11b5/paraglidin-in-pokhara-jpg.jpg",
+        image: "/assets/images/adventures/paragliding-pokhara-wide.jpg",
         badge: "Popular"
       }),
 exp({
@@ -505,7 +505,7 @@ exp({
   groupSize: "2–8 Riders",
   difficulty: "Moderate",
   season: "October–May",
-  image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1200&q=80",
+  image: "/assets/images/adventures/motorbike-himalaya.jpg",
   badge: "Road Adventure"
 }),
 exp({
@@ -519,11 +519,10 @@ exp({
   groupSize: "1–10 Guests",
   difficulty: "Easy to Challenging",
   season: "October–May",
-  image: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=1200&q=80",
+  image: "/assets/images/adventures/biking-nepal.jpg",
   badge: "Active Adventure"
 })
     ]
   }
 
 };
-

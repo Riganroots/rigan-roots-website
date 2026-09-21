@@ -63,12 +63,13 @@ button,select{font:inherit}
 .nav-links{display:flex;align-items:center;gap:26px}
 .nav-links a{color:#fff;font-size:14px;font-weight:700;white-space:nowrap;transition:.3s}
 .nav-links a:hover{color:var(--olive)}
+.nav-links .nav-plan{padding:12px 20px;border-radius:999px;background:var(--olive);color:#102619}
+.nav-links .nav-plan:hover{background:#b7ce87;color:#102619}
 .menu-btn{display:none;color:white;font-size:26px;cursor:pointer;border:0;background:transparent}
 
 .hero{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;min-height:100svh;background-image:linear-gradient(90deg,rgba(3,17,25,.84) 0%,rgba(3,17,25,.58) 46%,rgba(3,17,25,.2) 100%),url("/assets/images/hero-boudhanath.webp");background-position:center;background-size:cover;background-repeat:no-repeat;display:flex;align-items:center;padding:150px 70px 70px;color:white}
-.hero::before{content:"";position:absolute;top:88px;left:2.5%;z-index:1;width:95%;height:82px;pointer-events:none;opacity:.72;background:center/100% 100% no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 100'%3E%3Cpath d='M10 18 Q450 90 890 18' fill='none' stroke='rgba(255,255,255,.5)' stroke-width='2'/%3E%3Cg%3E%3Cpath d='M55 28h36v39l-18 12-18-12z' fill='%233157a4'/%3E%3Cpath d='M110 36h36v39l-18 12-18-12z' fill='%23f4efd9'/%3E%3Cpath d='M165 43h36v39l-18 12-18-12z' fill='%23b83a32'/%3E%3Cpath d='M220 50h36v39l-18 12-18-12z' fill='%233d7b50'/%3E%3Cpath d='M275 56h36v39l-18 5-18-5z' fill='%23d5ad38'/%3E%3Cpath d='M330 61h36v34l-18 5-18-5z' fill='%233157a4'/%3E%3Cpath d='M385 64h36v31l-18 5-18-5z' fill='%23f4efd9'/%3E%3Cpath d='M440 66h36v29l-18 5-18-5z' fill='%23b83a32'/%3E%3Cpath d='M495 64h36v31l-18 5-18-5z' fill='%233d7b50'/%3E%3Cpath d='M550 61h36v34l-18 5-18-5z' fill='%23d5ad38'/%3E%3Cpath d='M605 56h36v39l-18 5-18-5z' fill='%233157a4'/%3E%3Cpath d='M660 50h36v39l-18 12-18-12z' fill='%23f4efd9'/%3E%3Cpath d='M715 43h36v39l-18 12-18-12z' fill='%23b83a32'/%3E%3Cpath d='M770 36h36v39l-18 12-18-12z' fill='%233d7b50'/%3E%3Cpath d='M825 28h36v39l-18 12-18-12z' fill='%23d5ad38'/%3E%3C/g%3E%3C/svg%3E")}
 .hero::after{content:"";position:absolute;right:3%;bottom:7%;z-index:1;width:min(46vw,620px);height:245px;pointer-events:none;opacity:.11;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 280'%3E%3Cpath d='M44 151L91 129 136 133 175 109 222 119 264 91 307 103 344 83 390 94 429 75 474 92 513 72 558 91 598 67 641 83 683 64 728 82 770 70 810 88 852 82 870 108 846 124 812 122 780 139 744 132 706 151 666 143 627 164 589 153 548 174 504 165 464 183 421 172 382 190 341 180 299 194 258 183 217 194 178 180 140 184 107 166 74 171Z' fill='none' stroke='white' stroke-width='12' stroke-linejoin='round'/%3E%3C/svg%3E")}
-.hero-content{position:relative;z-index:2;max-width:760px}
+.hero-content{position:relative;z-index:2;max-width:720px;padding:clamp(28px,4vw,52px);border:1px solid rgba(255,255,255,.18);border-radius:28px;background:linear-gradient(135deg,rgba(4,20,15,.72),rgba(4,20,15,.48));box-shadow:0 24px 70px rgba(0,0,0,.28);backdrop-filter:blur(10px)}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:20px;padding:9px 14px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(7,22,17,.28);backdrop-filter:blur(10px);font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
 .hero-proof{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
 .hero-proof span{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.11);color:rgba(255,255,255,.94);font-size:12px;font-weight:800;backdrop-filter:blur(8px)}
@@ -188,18 +189,18 @@ button,select{font:inherit}
 
 @media(max-width:1100px){
   .navbar{padding:14px 24px}
-  .nav-links{gap:18px}
+  .menu-btn{display:flex;align-items:center;justify-content:center;position:relative;z-index:1002;width:48px;height:48px}
+  .nav-links{position:fixed;inset:0 0 0 auto;width:min(420px,88vw);height:100dvh;background:#0b291b;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:4px;padding:112px 28px 36px;box-shadow:-24px 0 60px rgba(0,0,0,.3);transform:translateX(105%);visibility:hidden;transition:transform .3s ease,visibility .3s ease;z-index:1001}
+  .nav-links.active{display:flex;transform:translateX(0);visibility:visible}
+  .nav-links a{display:flex;align-items:center;min-height:52px;padding:10px 14px;border-radius:12px;font-size:16px}
+  .nav-links .nav-plan{justify-content:center;margin-top:14px;background:var(--olive);color:#102619}
   .story-grid,.exp-grid{grid-template-columns:repeat(2,1fr)}
   .philosophy-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:900px){
-  .menu-btn{display:block}
-  .nav-links{position:absolute;top:96px;left:0;width:100%;background:rgba(7,22,17,.95);flex-direction:column;padding:24px;display:none}
-  .nav-links.active{display:flex}
   .logo img{height:56px}
   .hero{padding:140px 25px 70px}
   .hero{background-image:linear-gradient(180deg,rgba(3,17,25,.76) 0%,rgba(3,17,25,.56) 48%,rgba(3,17,25,.74) 100%),url("/assets/images/hero-boudhanath.webp");background-position:58% center}
-  .hero::before{top:74px;left:1%;width:98%;height:58px;opacity:.5}
   .hero::after{display:none}
   .hero-proof{gap:8px}
   .story-grid,.exp-grid,.region-grid,.footer-grid,.philosophy-grid,.host-grid,.review-grid,.trip-grid,.know-grid{grid-template-columns:1fr}
@@ -218,7 +219,7 @@ button,select{font:inherit}
 
 @media(max-width:700px){
   .hero{min-height:100svh;padding:128px 20px 46px;background-position:59% center}
-  .hero-content{width:100%;max-width:560px}
+  .hero-content{width:100%;max-width:560px;padding:28px 22px;border-radius:22px}
   .hero-eyebrow{font-size:11px;line-height:1.4}
   .hero h1{font-size:clamp(2.45rem,12vw,3.65rem);line-height:1.02;margin-bottom:18px}
   .hero p{font-size:17px;line-height:1.55;margin-bottom:26px}
@@ -240,7 +241,7 @@ button,select{font:inherit}
 <link rel="stylesheet" href="mobile-consistency.css">
 <script src="analytics.js" defer></script>
 </head>
-<body>
+<body class="home-page">
 
 <nav class="navbar" aria-label="Main navigation">
   <a href="/" class="logo">
@@ -257,21 +258,20 @@ button,select{font:inherit}
     <a href="/regions/">Regions</a>
     <a href="/work-with-us/">Work With Us</a>
     <a href="/about/">Our Story</a>
-    <a href="/plan/">Plan</a>
     <a href="/contact/">Contact</a>
+    <a href="/plan/" class="nav-plan">Plan My Trip</a>
   </div>
 </nav>
 
 <section class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow"><i class="fa-solid fa-location-dot"></i> Meaningful journeys through Nepal</div>
-    <h1>You don’t come<br>to Nepal to see.<br><span>You come to feel.</span></h1>
+    <h1>Meet Nepal<br><span>Through Its People</span></h1>
     <div class="hero-line"></div>
-    <p>Live with locals. Eat real food.<br>Share real stories. Create real memories.</p>
+    <p>Real homes. Real food. Real stories.</p>
     <div class="hero-buttons">
-      <a href="/experiences/" class="btn btn-green">Explore Experiences</a>
-      <a href="/plan/" class="btn btn-brown">Plan My Trip</a>
-      <a href="/work-with-us/" class="btn btn-outline">Become a Host</a>
+      <a href="/plan/" class="btn btn-green">Plan My Nepal Trip</a>
+      <a href="/experiences/" class="btn btn-outline">Explore Experiences</a>
     </div>
     <div class="hero-proof" aria-label="Rigan trip planning features">
       <span><i class="fa-solid fa-route"></i> Custom trip planning</span>
@@ -760,6 +760,16 @@ menuBtn.addEventListener("click", () => {
   document.body.classList.toggle("menu-open", isOpen);
   menuBtn.setAttribute("aria-expanded", String(isOpen));
   menuIcon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && navLinks.classList.contains("active")) {
+    navLinks.classList.remove("active");
+    document.body.classList.remove("menu-open");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuIcon.className = "fa-solid fa-bars";
+    menuBtn.focus();
+  }
 });
 
 navLinks.querySelectorAll("a").forEach(link => {

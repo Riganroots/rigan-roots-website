@@ -2026,12 +2026,18 @@ Please send me more information about availability, itinerary, inclusions, and p
         ${item.badge || ""}
       `.toLowerCase();
       const tags = new Set();
-      const durationMatch = String(item.duration || "").match(/(\d+)/);
-      const days = durationMatch ? Number(durationMatch[1]) : 0;
+      const durationNumbers = (String(item.duration || "").match(/\d+/g) || [])
+        .map(Number)
+        .filter(Number.isFinite);
+      const days = durationNumbers.length > 1
+        ? (durationNumbers[0] + durationNumbers[1]) / 2
+        : (durationNumbers[0] || 0);
 
+      // Use the middle of a duration range so "10–14 Days" is treated as
+      // a medium trip instead of incorrectly being classified as 10 days.
       if (days >= 7 && days <= 10) tags.add("short");
-      if (days >= 11 && days <= 15) tags.add("medium-duration");
-      if (days >= 16) tags.add("long");
+      if (days > 10 && days <= 15) tags.add("medium-duration");
+      if (days > 15) tags.add("long");
       if (combinedText.includes("expedition") || combinedText.includes("traverse")) tags.add("expedition");
 
       if (

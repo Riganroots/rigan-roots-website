@@ -1411,22 +1411,7 @@
         >
       </div>
 
-      <div class="currency-switch">
-        <label for="currencySelect">Currency</label>
-
-        <select
-          id="currencySelect"
-          aria-label="Select display currency"
-        >
-          <option value="USD">USD $</option>
-          <option value="NPR">NPR रू</option>
-          <option value="GBP">GBP £</option>
-          <option value="AUD">AUD A$</option>
-          <option value="EUR">EUR €</option>
-          <option value="INR">INR ₹</option>
-          <option value="JPY">JPY ¥</option>
-        </select>
-      </div>
+      
 
     </div>
 
@@ -1847,9 +1832,6 @@
     const searchBox =
       document.getElementById("searchBox");
 
-    const currencySelect =
-      document.getElementById("currencySelect");
-
     const showMoreBtn =
       document.getElementById("showMoreBtn");
 
@@ -1868,50 +1850,7 @@
     let currentCategory = "signature";
     let currentItems = [];
     let visibleCount = 12;
-    let currentCurrency = "USD";
     let currentTrekFilter = "all";
-
-    /*
-      These rates are display estimates only.
-      Update them manually when required or connect a live exchange-rate
-      service later.
-    */
-    const currencyRates = {
-      USD: {
-        rate: 1,
-        symbol: "US$"
-      },
-
-      NPR: {
-        rate: 133,
-        symbol: "रू"
-      },
-
-      GBP: {
-        rate: 0.79,
-        symbol: "£"
-      },
-
-      AUD: {
-        rate: 1.52,
-        symbol: "A$"
-      },
-
-      EUR: {
-        rate: 0.92,
-        symbol: "€"
-      },
-
-      INR: {
-        rate: 83,
-        symbol: "₹"
-      },
-
-      JPY: {
-        rate: 157,
-        symbol: "¥"
-      }
-    };
 
     function escapeHTML(value) {
       return String(value ?? "")
@@ -1956,52 +1895,6 @@ Please send me more information about availability, itinerary, inclusions, and p
       );
 
       return `https://wa.me/9779843322695?text=${message}`;
-    }
-
-    function extractUsd(priceText) {
-      if (!priceText) {
-        return null;
-      }
-
-      const cleanPrice = String(priceText);
-
-      if (
-        cleanPrice.toLowerCase().includes("custom") ||
-        cleanPrice.toLowerCase().includes("request")
-      ) {
-        return null;
-      }
-
-      const match = cleanPrice.match(/[\d,]+/);
-
-      if (!match) {
-        return null;
-      }
-
-      return Number(
-        match[0].replaceAll(",", "")
-      );
-    }
-
-    function formatPrice(priceText) {
-      const usd = extractUsd(priceText);
-
-      if (!usd) {
-        return priceText || "Request Quote";
-      }
-
-      const currency =
-        currencyRates[currentCurrency];
-
-      const value = Math.round(
-        usd * currency.rate
-      );
-
-      if (currentCurrency === "USD") {
-        return `US$${value.toLocaleString()}`;
-      }
-
-      return `${currency.symbol}${value.toLocaleString()}`;
     }
 
     function updateMandalaBackground(category) {
@@ -2179,8 +2072,6 @@ Please send me more information about availability, itinerary, inclusions, and p
 
       cards.innerHTML = visibleItems
         .map(function (item) {
-          const price =
-            formatPrice(item.price);
 
           const image =
             item.image ||
@@ -2218,9 +2109,6 @@ Please send me more information about availability, itinerary, inclusions, and p
 
           const safeDifficulty =
             escapeHTML(difficulty);
-
-          const safePrice =
-            escapeHTML(price);
 
           const safeLocation =
             escapeHTML(item.location || "Nepal");

@@ -283,6 +283,12 @@ button,select{font:inherit}
 .top-nav .brand-mark,.navbar .brand-logo{background:linear-gradient(135deg,#a8bf6a,#d9bc58)!important;color:#174d2f!important}
 @media(max-width:900px){.navbar,.top-nav{top:8px!important;width:calc(100% - 16px)!important;margin:8px auto 0!important;padding:10px 14px!important;border-radius:22px!important}.navbar .logo img{height:43px!important}.navbar .nav-links,.top-nav .nav-links{gap:0!important}.menu-btn,.mobile-menu-btn{color:#174d2f!important;background:rgba(23,77,47,.08)!important}}
 </style>
+<style id="homepage-journey-path">
+.journey-path{padding:78px 70px;background:#fff;text-align:center}
+.journey-path-head{max-width:800px;margin:0 auto 36px}.journey-path-head small{color:var(--brown);font-size:12px;font-weight:900;letter-spacing:2px}.journey-path-head h2{margin:10px 0 12px;color:var(--green);font-size:clamp(32px,4vw,48px);line-height:1.12}.journey-path-head p{color:var(--muted);line-height:1.75}
+.journey-path-grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.journey-path-card{display:flex;min-height:260px;flex-direction:column;align-items:flex-start;text-align:left;padding:30px;border:1px solid rgba(23,77,47,.10);border-radius:26px;background:#fffaf2;box-shadow:0 16px 42px rgba(19,32,24,.07);transition:.3s}.journey-path-card:hover{transform:translateY(-6px);box-shadow:0 24px 55px rgba(23,77,47,.13)}.journey-path-featured{background:#174d2f}.journey-path-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:17px;background:#edf5eb;color:var(--green);font-size:21px;margin-bottom:22px}.journey-path-card strong{color:#132018;font-family:'Playfair Display',serif;font-size:24px}.journey-path-card p{margin:10px 0 22px;color:var(--muted);font-size:14px;line-height:1.7}.journey-path-link{margin-top:auto;color:var(--green);font-size:13px;font-weight:900}.journey-path-link i{margin-left:5px}.journey-path-featured .journey-path-icon{background:rgba(255,255,255,.13);color:#d8e7a8}.journey-path-featured strong,.journey-path-featured .journey-path-link{color:#fff}.journey-path-featured p{color:rgba(255,255,255,.78)}
+@media(max-width:850px){.journey-path{padding:58px 18px}.journey-path-grid{grid-template-columns:1fr}.journey-path-card{min-height:220px;padding:25px}}
+</style>
 </head>
 <body class="home-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -323,6 +329,34 @@ button,select{font:inherit}
       <span><i class="fa-solid fa-comments"></i> Direct WhatsApp support</span>
       <span><i class="fa-solid fa-file-lines"></i> Clear quotation</span>
     </div>
+  </div>
+</section>
+
+<section class="journey-path" aria-labelledby="journeyPathTitle">
+  <div class="journey-path-head">
+    <small>START YOUR JOURNEY</small>
+    <h2 id="journeyPathTitle">How do you want to discover Nepal?</h2>
+    <p>Start with what inspires you. Explore a journey, choose a region, or tell us what you have in mind and we will shape the route around you.</p>
+  </div>
+  <div class="journey-path-grid">
+    <a class="journey-path-card" href="/experiences/">
+      <span class="journey-path-icon"><i class="fa-solid fa-compass"></i></span>
+      <strong>Explore Experiences</strong>
+      <p>Trekking, culture, food, wildlife, wellness, festivals and local life.</p>
+      <span class="journey-path-link">Find my experience <i class="fa-solid fa-arrow-right"></i></span>
+    </a>
+    <a class="journey-path-card" href="/regions/">
+      <span class="journey-path-icon"><i class="fa-solid fa-map-location-dot"></i></span>
+      <strong>Choose a Region</strong>
+      <p>From classic Nepal to hidden valleys, remote trails and mountain regions.</p>
+      <span class="journey-path-link">Explore Nepal by region <i class="fa-solid fa-arrow-right"></i></span>
+    </a>
+    <a class="journey-path-card journey-path-featured" href="/plan/">
+      <span class="journey-path-icon"><i class="fa-solid fa-route"></i></span>
+      <strong>Build My Own Trip</strong>
+      <p>Share your dates, interests, group size and comfort level for a tailored proposal.</p>
+      <span class="journey-path-link">Plan my Nepal trip <i class="fa-solid fa-arrow-right"></i></span>
+    </a>
   </div>
 </section>
 

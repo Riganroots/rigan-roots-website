@@ -567,9 +567,13 @@
     /* TREK FILTERS */
     .trek-filters {
       display: none;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       margin: 0 0 25px;
+      padding: 12px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(23,77,47,.08);
     }
 
     .trek-filter {
@@ -1517,7 +1521,39 @@
           type="button"
           data-filter="advanced"
         >
-          Advanced
+          Challenging
+        </button>
+
+        <button
+          class="trek-filter"
+          type="button"
+          data-filter="short"
+        >
+          7–10 Days
+        </button>
+
+        <button
+          class="trek-filter"
+          type="button"
+          data-filter="medium-duration"
+        >
+          11–15 Days
+        </button>
+
+        <button
+          class="trek-filter"
+          type="button"
+          data-filter="long"
+        >
+          16+ Days
+        </button>
+
+        <button
+          class="trek-filter"
+          type="button"
+          data-filter="expedition"
+        >
+          Expedition
         </button>
 
         <button
@@ -1942,21 +1978,30 @@ Please send me more information about availability, itinerary, inclusions, and p
         url('${image}') center/cover no-repeat`;
     }
 
-    function getDifficultyFilter(item) {
+    function getTrekFilterTags(item) {
       const combinedText = `
         ${item.name || ""}
         ${item.difficulty || ""}
         ${item.style || ""}
         ${item.subtitle || ""}
         ${item.overview || ""}
+        ${item.badge || ""}
       `.toLowerCase();
+      const tags = new Set();
+      const durationMatch = String(item.duration || "").match(/(\d+)/);
+      const days = durationMatch ? Number(durationMatch[1]) : 0;
+
+      if (days >= 7 && days <= 10) tags.add("short");
+      if (days >= 11 && days <= 15) tags.add("medium-duration");
+      if (days >= 16) tags.add("long");
+      if (combinedText.includes("expedition") || combinedText.includes("traverse")) tags.add("expedition");
 
       if (
         combinedText.includes("luxury") ||
         combinedText.includes("helicopter") ||
         combinedText.includes("breakfast")
       ) {
-        return "luxury";
+        tags.add("luxury");
       }
 
       if (
@@ -1965,7 +2010,7 @@ Please send me more information about availability, itinerary, inclusions, and p
         combinedText.includes("phoksundo") ||
         combinedText.includes("tsum")
       ) {
-        return "hidden";
+        tags.add("hidden");
       }
 
       if (
@@ -1973,7 +2018,7 @@ Please send me more information about availability, itinerary, inclusions, and p
         combinedText.includes("easy") ||
         combinedText.includes("poon hill")
       ) {
-        return "family";
+        tags.add("family");
       }
 
       if (
@@ -1981,16 +2026,17 @@ Please send me more information about availability, itinerary, inclusions, and p
         combinedText.includes("strenuous") ||
         combinedText.includes("high pass")
       ) {
-        return "advanced";
+        tags.add("advanced");
       }
 
       if (
         combinedText.includes("moderate")
       ) {
-        return "moderate";
+        tags.add("moderate");
       }
 
-      return "easy";
+      if (!tags.has("advanced") && !tags.has("moderate")) tags.add("easy");
+      return tags;
     }
 
     function getFilteredItems() {
@@ -2013,8 +2059,9 @@ Please send me more information about availability, itinerary, inclusions, and p
       ) {
         items = items.filter(function (item) {
           return (
-            getDifficultyFilter(item) ===
-            currentTrekFilter
+            getTrekFilterTags(item).has(
+              currentTrekFilter
+            )
           );
         });
       }

@@ -137,14 +137,23 @@ button,select{font:inherit}
 .trip-img{height:235px;background-size:cover;background-position:center;position:relative}
 .trip-badge{position:absolute;top:18px;left:18px;background:var(--brown);color:white;padding:7px 13px;border-radius:999px;font-size:12px;font-weight:800}
 .trip-location{color:var(--green);font-size:13px;font-weight:800;margin-bottom:10px}
-.trip-meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
-.trip-meta span{background:#f4f1e8;padding:7px 10px;border-radius:8px;font-size:12px;color:#555;font-weight:700}
-.trip-price{border-top:1px solid #eee;padding-top:18px;margin-top:10px}
+.trip-grid{align-items:stretch}
+.trip-card{display:flex;flex-direction:column}
+.trip-content{display:flex;flex:1;flex-direction:column}
+.trip-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:18px}
+.trip-meta span{display:flex;align-items:center;gap:7px;background:#f4f1e8;padding:9px 10px;border-radius:10px;font-size:12px;color:#555;font-weight:700;line-height:1.35}
+.trip-meta i{width:14px;color:var(--brown);text-align:center}
+.currency-wrap{text-align:right}
+.currency-note{display:block;margin-top:7px;color:var(--muted);font-size:11px}
+.trip-price{border-top:1px solid #eee;padding-top:18px;margin-top:auto}
 .trip-price small{color:var(--muted);font-weight:800}
 .price-value{font-size:30px;font-weight:900;color:var(--green);margin-top:4px}
-.trip-actions{display:flex;gap:12px;align-items:center;margin-top:18px;flex-wrap:wrap}
-.trip-link{color:var(--green);font-weight:900}
-.trip-book{background:var(--green);color:white;padding:10px 16px;border-radius:999px;font-weight:800;font-size:13px}
+.trip-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch;margin-top:18px}
+.trip-link,.trip-book{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:999px;font-weight:800;font-size:13px;text-align:center;transition:.25s}
+.trip-link{color:var(--green);border:1px solid rgba(23,77,47,.25);background:white}
+.trip-book{background:var(--green);color:white}
+.trip-link:hover,.trip-book:hover{transform:translateY(-2px)}
+.trip-link:hover{border-color:var(--green);background:#edf5eb}
 
 .region-grid{display:grid;gap:24px;margin-top:40px}
 .region-card{position:relative;height:300px;border-radius:28px;overflow:hidden;color:white;display:flex;align-items:flex-end;padding:26px;text-align:left;background-size:cover;background-position:center;box-shadow:0 18px 45px rgba(0,0,0,.12)}
@@ -207,6 +216,8 @@ button,select{font:inherit}
   .stories,.signature,.region-preview,.why-rigan,.rigan-philosophy,.hosts,.reviews,.featured-trips,.know-nepal{padding:65px 25px}
   .know-image img{height:430px}
   .trip-top{flex-direction:column;align-items:flex-start;text-align:left}
+  .currency-wrap{width:100%;text-align:left}
+  .currency-note{text-align:left}
   .cta-banner{margin:0 25px 70px;flex-direction:column;gap:20px;align-items:flex-start}
   .footer{padding:55px 25px 25px}
   .partners{padding:65px 25px}
@@ -227,6 +238,8 @@ button,select{font:inherit}
   .hero-buttons .btn{width:100%;padding:14px 20px;text-align:center}
   .hero-proof{margin-top:18px}
   .hero-proof span{font-size:11px}
+  .trip-meta{grid-template-columns:1fr}
+  .trip-actions{grid-template-columns:1fr}
   .discover{padding:55px 0 35px}
   .slider-wrap{padding:0 18px;overflow-x:auto}
   .slider{animation:none;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px}
@@ -395,9 +408,10 @@ button,select{font:inherit}
       <p class="section-subtitle">Real journeys with clear starting prices, duration, and travel style.</p>
     </div>
 
-    <div class="currency-box">
+    <div class="currency-wrap">
+      <div class="currency-box">
       <label for="currencySelect">Currency</label>
-      <select id="currencySelect">
+      <select id="currencySelect" aria-describedby="currencyNote">
         <option value="USD">USD $</option>
         <option value="NPR">NPR रू</option>
         <option value="GBP">GBP £</option>
@@ -406,6 +420,8 @@ button,select{font:inherit}
         <option value="INR">INR ₹</option>
         <option value="JPY">JPY ¥</option>
       </select>
+      </div>
+      <small class="currency-note" id="currencyNote">Converted prices are estimates.</small>
     </div>
   </div>
 
@@ -419,10 +435,11 @@ button,select{font:inherit}
         <div class="trip-location"><i class="fa-solid fa-location-dot"></i> Annapurna Region</div>
         <h3>Annapurna Base Camp Trek</h3>
 
-        <div class="trip-meta">
-          <span>12 Days</span>
-          <span>Max 10</span>
-          <span>Moderate</span>
+        <div class="trip-meta" aria-label="Trip details">
+          <span><i class="fa-regular fa-clock"></i> 12 Days</span>
+          <span><i class="fa-solid fa-person-hiking"></i> Moderate</span>
+          <span><i class="fa-solid fa-users"></i> 2–10 Guests</span>
+          <span><i class="fa-regular fa-calendar"></i> Mar–May · Sep–Nov</span>
         </div>
 
         <div class="trip-price">
@@ -446,10 +463,11 @@ button,select{font:inherit}
         <div class="trip-location"><i class="fa-solid fa-location-dot"></i> Annapurna Region</div>
         <h3>Mardi Himal Trek</h3>
 
-        <div class="trip-meta">
-          <span>5 Days</span>
-          <span>Max 10</span>
-          <span>Easy–Moderate</span>
+        <div class="trip-meta" aria-label="Trip details">
+          <span><i class="fa-regular fa-clock"></i> 5 Days</span>
+          <span><i class="fa-solid fa-person-hiking"></i> Easy–Moderate</span>
+          <span><i class="fa-solid fa-users"></i> 2–10 Guests</span>
+          <span><i class="fa-regular fa-calendar"></i> Most trekking seasons</span>
         </div>
 
         <div class="trip-price">
@@ -473,10 +491,11 @@ button,select{font:inherit}
         <div class="trip-location"><i class="fa-solid fa-location-dot"></i> Dolpo Region</div>
         <h3>Shey Phoksundo Trek</h3>
 
-        <div class="trip-meta">
-          <span>12 Days</span>
-          <span>Max 8</span>
-          <span>Moderate</span>
+        <div class="trip-meta" aria-label="Trip details">
+          <span><i class="fa-regular fa-clock"></i> 12 Days</span>
+          <span><i class="fa-solid fa-person-hiking"></i> Moderate</span>
+          <span><i class="fa-solid fa-users"></i> 2–8 Guests</span>
+          <span><i class="fa-regular fa-calendar"></i> May–October</span>
         </div>
 
         <div class="trip-price">

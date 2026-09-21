@@ -1312,6 +1312,16 @@
 .top-nav .brand-mark,.navbar .brand-logo{background:linear-gradient(135deg,#a8bf6a,#d9bc58)!important;color:#174d2f!important}
 @media(max-width:900px){.navbar,.top-nav{top:8px!important;width:calc(100% - 16px)!important;margin:8px auto 0!important;padding:10px 14px!important;border-radius:22px!important}.navbar .logo img{height:43px!important}.navbar .nav-links,.top-nav .nav-links{gap:0!important}.menu-btn,.mobile-menu-btn{color:#174d2f!important;background:rgba(23,77,47,.08)!important}}
 </style>
+<style id="mandala-experience-polish">
+.mandala-wrap{outline:1px solid rgba(159,186,107,.10);outline-offset:-10px}
+.center-orb::before,.center-orb::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.center-orb::before{inset:-18px;border:1px solid rgba(159,186,107,.42)}
+.center-orb::after{inset:-34px;border:1px dashed rgba(23,77,47,.18)}
+.cat{border:1px solid rgba(23,77,47,.08)!important}
+.cat.active{box-shadow:0 18px 48px rgba(23,77,47,.22)!important}
+.result-section{scroll-margin-top:110px}
+@media(max-width:700px){.center-orb::after{inset:-25px}.center-orb::before{inset:-12px}}
+</style>
 </head>
 
 <body>
@@ -2539,7 +2549,29 @@ Please send me more information about availability, itinerary, inclusions, and p
           return;
         }
 
-        render("signature");
+        const params = new URLSearchParams(window.location.search);
+        const requestedCategory = params.get("category");
+        const requestedSearch = params.get("search") || params.get("region") || "";
+        const validCategories = new Set(["signature","village","food","festival","culture","wellness","trek","adventure"]);
+        let initialCategory = validCategories.has(requestedCategory) ? requestedCategory : "signature";
+
+        if (requestedSearch && !requestedCategory) {
+          const q = requestedSearch.toLowerCase();
+          const trekTerms = ["everest","annapurna","manaslu","makalu","kanchenjunga","dolpo","mustang","nar phu","langtang","mardi","tilicho","poon hill","base camp","trek","mountain"];
+          if (trekTerms.some(term => q.includes(term))) initialCategory = "trek";
+        }
+
+        render(initialCategory);
+
+        buttons.forEach(function (button) {
+          button.classList.toggle("active", button.dataset.cat === initialCategory);
+        });
+
+        if (requestedSearch) {
+          searchBox.value = requestedSearch.replaceAll("-", " ");
+          createCards(getFilteredItems(), true);
+          document.querySelector(".result-section")?.scrollIntoView({ block: "start" });
+        }
       }
     );
   </script>

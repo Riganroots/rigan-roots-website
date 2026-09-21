@@ -855,3 +855,75 @@ footer,
     transform: none !important;
   }
 }
+
+
+/* Homepage design system — senior review phase 1 */
+.home-page .story-card,
+.home-page .exp-card,
+.home-page .host-card,
+.home-page .review-card,
+.home-page .trip-card,
+.home-page .region-card,
+.home-page .philosophy-card {
+  border-radius: 22px;
+  border: 1px solid rgba(23,77,47,.08);
+  box-shadow: 0 14px 36px rgba(18,43,29,.08);
+}
+
+.home-page .story-card:hover,
+.home-page .exp-card:hover,
+.home-page .host-card:hover,
+.home-page .trip-card:hover,
+.home-page .region-card:hover,
+.home-page .philosophy-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 46px rgba(18,43,29,.14);
+}
+
+.home-page .story-card img,
+.home-page .exp-card img,
+.home-page .host-card img,
+.home-page .trip-img {
+  aspect-ratio: 4 / 3;
+  height: auto;
+  min-height: 0;
+  object-fit: cover;
+}
+
+.home-page .btn {
+  min-height: 50px;
+  padding: 14px 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1100px) {
+  .home-page .nav-links {
+    position: fixed !important;
+    inset: 0 0 0 auto !important;
+    width: min(420px, 88vw) !important;
+    height: 100dvh !important;
+    display: flex !important;
+    transform: translateX(105%) !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .home-page .nav-links.active {
+    transform: translateX(0) !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .home-page .hero-content {
+    background: linear-gradient(180deg,rgba(4,20,15,.76),rgba(4,20,15,.58));
+    backdrop-filter: blur(7px);
+  }
+
+  .home-page .hero-proof span:last-child {
+    display: none;
+  }
+}

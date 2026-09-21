@@ -320,34 +320,32 @@ exp({
         badge: "High Lake"
       }),
       exp({
-        id: "shey-phoksundo-trek",
-        name: "Shey Phoksundo Lake Trek",
-        subtitle: "Walk into Dolpo for turquoise Phoksundo Lake, Ringmo village, waterfalls, and living Bon traditions.",
-        overview: "A remote Himalayan journey through Shey Phoksundo National Park to the brilliant blue waters of Phoksundo Lake, designed for travellers who want Dolpo culture and wilderness without committing to a month-long expedition.",
-        duration: "11–12 Days",
-        price: "From US$1700",
-        location: "Lower Dolpo, Nepal",
-        style: "Remote Lake & Cultural Trek",
-        groupSize: "2–8 Guests",
-        difficulty: "Moderate",
-        season: "Spring & Autumn",
-        image: "/assets/images/regions/shey-phoksundo.jpg",
-        badge: "Dolpo Gateway"
-      }),
-      exp({
-        id: "lower-dolpo-trek",
-        name: "Lower Dolpo Circuit Trek",
-        subtitle: "Cross high passes between Dho Tarap and Phoksundo in one of western Nepal's great wilderness circuits.",
-        overview: "A demanding camping-style circuit linking remote Dolpo settlements, Dho Tarap, high mountain passes and Phoksundo Lake, with time to experience Tibetan-influenced culture and Bon heritage.",
-        duration: "17 Days",
+        id: "lower-dolpo-phoksundo-trek",
+        name: "Lower Dolpo & Shey Phoksundo Trek",
+        subtitle: "One complete Dolpo journey combining turquoise Phoksundo Lake, Ringmo village, Dho Tarap, remote settlements and dramatic high-pass landscapes.",
+        overview: "A more complete choice for travellers who want both the iconic beauty of Phoksundo Lake and a deeper experience of Lower Dolpo. The journey combines nature, village culture, Bon and Tibetan-influenced heritage, remote trails and high-altitude scenery instead of splitting the region into two similar trips.",
+        duration: "15–18 Days",
         price: "Price on Request",
-        location: "Lower Dolpo",
-        style: "High-Pass Camping Trek",
+        location: "Lower Dolpo & Shey Phoksundo, Nepal",
+        style: "Remote Trekking, Culture & High Passes",
         groupSize: "2–8 Guests",
         difficulty: "Challenging",
         season: "Spring & Autumn",
         image: "/assets/images/regions/shey-phoksundo.jpg",
-        badge: "Remote Circuit"
+        badge: "Best of Lower Dolpo",
+        goodToKnow: [
+          "This is a remote high-altitude journey and requires good fitness and acclimatization.",
+          "The final route and number of days can be adjusted to your pace, flight schedule and preferred cultural stops.",
+          "Restricted-area permits and licensed local support may be required depending on the final itinerary.",
+          "Weather can affect mountain flights and trail conditions, so keeping contingency time is recommended."
+        ],
+        packing: [
+          "Broken-in trekking boots",
+          "Warm layered clothing and insulated jacket",
+          "Rain and wind protection",
+          "Sun protection, reusable water bottle and personal medication",
+          "Trekking poles and a comfortable daypack"
+        ]
       }),
       exp({
         id: "upper-dolpo-trek",

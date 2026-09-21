@@ -744,6 +744,33 @@
       font-weight: 900;
     }
 
+    .tourist-fit {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tourist-fit span {
+      min-width: 0;
+      padding: 9px 8px;
+      border: 1px solid rgba(23,77,47,.08);
+      border-radius: 12px;
+      background: #faf8f2;
+      color: #53645a;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .tourist-fit strong {
+      display: block;
+      margin-top: 3px;
+      color: var(--green);
+      font-size: 11px;
+    }
+
     .card-price-row {
       display: flex;
       align-items: flex-end;
@@ -2159,6 +2186,15 @@ Please send me more information about availability, itinerary, inclusions, and p
           const safePrice =
             escapeHTML(price);
 
+          const safeLocation =
+            escapeHTML(item.location || "Nepal");
+
+          const safeSeason =
+            escapeHTML(item.season || "Ask us");
+
+          const safeGroupSize =
+            escapeHTML(item.groupSize || "Flexible");
+
           const categoryLabel =
             escapeHTML(
               categoryNames[currentCategory] ||
@@ -2216,6 +2252,21 @@ Please send me more information about availability, itinerary, inclusions, and p
                   <span>
                     <i class="fa-solid fa-route"></i>
                     ${safeDifficulty}
+                  </span>
+                </div>
+
+                <div class="tourist-fit" aria-label="Trip planning information">
+                  <span>
+                    Where
+                    <strong>${safeLocation}</strong>
+                  </span>
+                  <span>
+                    Best time
+                    <strong>${safeSeason}</strong>
+                  </span>
+                  <span>
+                    Group
+                    <strong>${safeGroupSize}</strong>
                   </span>
                 </div>
 

@@ -273,6 +273,7 @@ exp({
         difficulty: "Moderate",
         season: "March–May and September–November",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/annapurna.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/annapurna.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/poonhill.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/Tilicholake.jpg.JPG"],
         badge: "Popular Trek"
       }),
       exp({
@@ -288,6 +289,7 @@ exp({
         difficulty: "Easy to Moderate",
         season: "March–May and September–November",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/poonhill.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/poonhill.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/annapurna.jpg.jpg"],
         badge: "Sunrise Favourite"
       }),
       exp({
@@ -333,6 +335,7 @@ exp({
         difficulty: "Moderate",
         season: "March–May & September–November",
         image: "/assets/images/treks/annapurna-north-base-camp.jfif",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/annapurna.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/Tilicholake.jpg.JPG", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/mustang.jpg.jpg"],
         badge: "Classic Trek"
       }),
       exp({
@@ -348,6 +351,7 @@ exp({
         difficulty: "Moderate to Challenging",
         season: "March–May & September–November",
         image: "/assets/images/treks/annapurna-north-base-camp.jfif",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/annapurna.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/Tilicholake.jpg.JPG", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/mustang.jpg.jpg"],
         badge: "High Pass"
       }),
       exp({
@@ -462,6 +466,7 @@ exp({
         difficulty: "Challenging",
         season: "Spring & Autumn",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/phoksundo-lake.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/phoksundo-lake.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/mustang.jpg.jpg"],
         badge: "Best of Lower Dolpo",
         goodToKnow: [
           "This is a remote high-altitude journey and requires good fitness and acclimatization.",
@@ -490,6 +495,7 @@ exp({
         difficulty: "Advanced",
         season: "Spring & Autumn",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/phoksundo-lake.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/phoksundo-lake.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/mustang.jpg.jpg"],
         badge: "Complete Dolpo",
         goodToKnow: [
           "Best suited to experienced trekkers comfortable with long days, high altitude and basic facilities.",
@@ -520,6 +526,7 @@ exp({
         difficulty: "Advanced",
         season: "Spring & Autumn",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/mustang.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/mustang.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/phoksundo-lake.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1400,q-82,f-auto,fo-auto/rigan/treks/annapurna.jpg.jpg"],
         badge: "Grand Traverse",
         goodToKnow: [
           "Recommended for experienced high-altitude trekkers rather than first-time Himalayan visitors.",

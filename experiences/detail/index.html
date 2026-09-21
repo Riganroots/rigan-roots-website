@@ -567,6 +567,73 @@
       position: relative;
     }
 
+    .itinerary-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 18px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #f3f7f1;
+    }
+
+    .itinerary-tools p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .itinerary-tool-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .itinerary-tool {
+      padding: 8px 12px;
+      border: 1px solid rgba(23,77,47,.14);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .day-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .day-number-label {
+      flex: 0 0 auto;
+      color: var(--brown);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .day-title {
+      min-width: 0;
+    }
+
+    @media (max-width:700px) {
+      .itinerary-tools {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .itinerary-tool-actions { width: 100%; }
+      .itinerary-tool { flex: 1; }
+      .day-head { padding: 15px 15px; }
+      .day-body { padding: 0 15px 17px; }
+      .itinerary-day { margin-left: 18px; }
+    }
+
     .itinerary-day {
       counter-increment: rigan-day;
       position: relative;
@@ -1406,6 +1473,13 @@
 
         <section class="section" id="itinerarySection">
           <h2>Day-by-Day Itinerary</h2>
+          <div class="itinerary-tools">
+            <p id="itinerarySummary">Tap any day to see the details.</p>
+            <div class="itinerary-tool-actions">
+              <button class="itinerary-tool" id="expandItinerary" type="button">Expand All</button>
+              <button class="itinerary-tool" id="collapseItinerary" type="button">Collapse All</button>
+            </div>
+          </div>
           <div id="itinerary"></div>
         </section>
 
@@ -2388,8 +2462,11 @@ Please send me more information about availability, itinerary, inclusions, and p
                 type="button"
                 aria-expanded="${index === 0 ? "true" : "false"}"
               >
-                <span>${escapeHTML(item.day)}</span>
-                <span class="day-icon">+</span>
+                <span class="day-label">
+                  <span class="day-number-label">Day ${index + 1}</span>
+                  <span class="day-title">${escapeHTML(item.day)}</span>
+                </span>
+                <span class="day-icon" aria-hidden="true">+</span>
               </button>
 
               <div class="day-body">
@@ -2419,6 +2496,27 @@ Please send me more information about availability, itinerary, inclusions, and p
           }
         );
       });
+
+      document.getElementById("itinerarySummary").textContent =
+        itinerary.length > 1
+          ? `${itinerary.length}-day outline · Tap a day for details or expand the full itinerary.`
+          : "Tap to view the itinerary details.";
+
+      function setAllItineraryDays(open) {
+        document.querySelectorAll(".itinerary-day").forEach(function (day) {
+          day.classList.toggle("active", open);
+          const button = day.querySelector(".day-head");
+          if (button) button.setAttribute("aria-expanded", String(open));
+        });
+      }
+
+      document.getElementById("expandItinerary").onclick = function () {
+        setAllItineraryDays(true);
+      };
+
+      document.getElementById("collapseItinerary").onclick = function () {
+        setAllItineraryDays(false);
+      };
 
       document.getElementById(
         "faqBox"

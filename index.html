@@ -433,6 +433,34 @@ button,select{font:inherit}
  .home-page .moment,.home-page .moment-large,.home-page .moment-wide{min-height:0;aspect-ratio:1/1}
 }
 </style>
+
+<style id="rigan-home-reference-v3">
+.home-regions{padding:88px clamp(22px,6vw,86px);background:#fbf7ee}
+.home-section-row{max-width:1320px;margin:0 auto 32px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.home-section-row h2{font-family:'Playfair Display',serif;color:#082b1d;font-size:clamp(40px,5vw,64px);line-height:1.03;margin-top:9px}
+.home-region-strip{max-width:1320px;margin:auto;display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.home-region-strip a{position:relative;min-height:260px;border-radius:16px;overflow:hidden;background-size:cover;background-position:center;box-shadow:0 14px 36px rgba(9,42,29,.12);transition:.35s}
+.home-region-strip a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 42%,rgba(3,28,19,.82))}
+.home-region-strip a:hover{transform:translateY(-5px)}
+.home-region-strip span{position:absolute;z-index:1;left:14px;right:12px;bottom:15px;color:#fff;font-weight:900;font-size:14px;line-height:1.25}
+.home-page .moments-editorial{display:grid;grid-template-columns:minmax(260px,.65fr) minmax(0,1.35fr);gap:46px;align-items:center}
+.home-page .moments-editorial>.editorial-head{margin:0;align-self:center}
+.home-page .moments-editorial>.editorial-head h2{font-size:clamp(46px,5.2vw,70px)}
+.home-page .moments-grid{width:100%;grid-template-columns:1fr 1fr 1fr}
+.home-page .moment-large{grid-row:span 2;min-height:560px}
+.home-page .moment-wide{grid-column:span 2}
+@media(max-width:1100px){.home-region-strip{grid-template-columns:repeat(4,1fr)}.home-page .moments-editorial{grid-template-columns:1fr}.home-page .moments-editorial>.editorial-head{max-width:900px;margin:0}}
+@media(max-width:700px){
+ .home-regions{padding:62px 18px}.home-section-row{align-items:flex-start}.home-section-row .text-link{display:none}
+ .home-section-row h2{font-size:42px}
+ .home-region-strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:10px;scrollbar-width:none}.home-region-strip::-webkit-scrollbar{display:none}
+ .home-region-strip a{flex:0 0 150px;min-height:230px;scroll-snap-align:start}
+ .home-page .moments-editorial{display:block}
+ .home-page .moments-editorial>.editorial-head{margin-bottom:30px}
+ .home-page .moments-grid{grid-template-columns:1fr 1fr}
+ .home-page .moment-large,.home-page .moment-wide{grid-row:auto;grid-column:auto}
+}
+</style>
 <script src="/site-config.js"></script>
 <script src="/site-runtime.js" defer></script>
 </head>
@@ -504,6 +532,26 @@ button,select{font:inherit}
       <p>Mountains may bring you here, but the moments that stay are often smaller: tea in a family kitchen, a village path walked with a local guide, a festival shared rather than watched, and stories you could never find in a guidebook.</p>
       <a class="text-link" href="/about/">Discover the Rigan story <i class="fa-solid fa-arrow-right"></i></a>
     </div>
+  </div>
+</section>
+
+
+<section class="home-regions" aria-labelledby="homeRegionsTitle">
+  <div class="home-section-row">
+    <div>
+      <span class="editorial-kicker">Explore Nepal</span>
+      <h2 id="homeRegionsTitle">Unique Places, Deeper Stories</h2>
+    </div>
+    <a class="text-link" href="/regions/">View all regions <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <div class="home-region-strip">
+    <a href="/regions/?region=kathmandu" style="background-image:url('/assets/images/regions/kathmandu-valley.jpg')"><span>Kathmandu Valley</span></a>
+    <a href="/regions/?region=annapurna" style="background-image:url('/assets/images/treks/poon-hill.webp')"><span>Pokhara &amp; Annapurna</span></a>
+    <a href="/experiences/?search=everest" style="background-image:url('/assets/images/treks/everest-view-trek.jpg')"><span>Everest Region</span></a>
+    <a href="/regions/?region=chitwan" style="background-image:url('/assets/images/regions/chitwan.jpg')"><span>Chitwan</span></a>
+    <a href="/regions/?region=lumbini" style="background-image:url('/assets/images/regions/lumbini.jpg')"><span>Lumbini</span></a>
+    <a href="/regions/?region=mustang" style="background-image:url('/assets/images/regions/upper-mustang.jpg')"><span>Upper Mustang</span></a>
+    <a href="/regions/?region=dolpo" style="background-image:url('/assets/images/regions/shey-phoksundo.jpg')"><span>Dolpo &amp; Phoksundo</span></a>
   </div>
 </section>
 

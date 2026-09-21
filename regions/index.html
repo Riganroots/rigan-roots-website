@@ -860,6 +860,26 @@
       color: #53645a;
     }
 
+    .region-match {
+      margin-bottom: 16px;
+      padding: 13px 14px;
+      border-left: 3px solid var(--olive);
+      border-radius: 12px;
+      background: #fffaf0;
+      color: #53645a;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .region-match strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--brown);
+      font-size: 11px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
     .region-tags {
       display: flex;
       gap: 8px;
@@ -2546,6 +2566,32 @@ Please send me a suggested itinerary, estimated price, accommodation options, tr
       });
     }
 
+    function getRegionTravelMatch(region) {
+      const text = (region.name + " " + region.category + " " + region.bestFor).toLowerCase();
+
+      if (text.includes("dolpo") || text.includes("kanchenjunga") || text.includes("makalu") || text.includes("manaslu") || text.includes("mustang")) {
+        return "Choose this if remoteness, trekking and deeper Himalayan culture matter more than comfort or a fast itinerary.";
+      }
+
+      if (region.category === "wildlife") {
+        return "Choose this for wildlife, birdlife and lowland culture, or combine it with Kathmandu or a Himalayan region.";
+      }
+
+      if (region.category === "culture") {
+        return "Choose this for local people, food, heritage and slower cultural travel rather than a trek-focused holiday.";
+      }
+
+      if (region.category === "farwest" || region.category === "hidden") {
+        return "Choose this for less-visited Nepal and a more exploratory journey; allow extra flexibility for transport and local conditions.";
+      }
+
+      if (region.category === "basecamp") {
+        return "Choose this for a mountain-first itinerary with trekking days, altitude planning and a clear Himalayan objective.";
+      }
+
+      return "A strong choice for a first Nepal trip and easy to combine with other regions for a balanced itinerary.";
+    }
+
     function renderRegions() {
       const filteredRegions =
         getFilteredRegions();
@@ -2634,6 +2680,11 @@ Please send me a suggested itinerary, estimated price, accommodation options, tr
 
                   </div>
 
+                  <div class="region-match">
+                    <strong>Is this region right for you?</strong>
+                    ${escapeHTML(getRegionTravelMatch(region))}
+                  </div>
+
                   <div class="region-tags">
                     ${region.highlights
                       .map(function (highlight) {
@@ -2668,10 +2719,10 @@ Please send me a suggested itinerary, estimated price, accommodation options, tr
 
                     <a
                       class="region-action details-btn"
-                      href="${planLink}"
+                      href="/experiences/?search=${encodeURIComponent(region.name.replace(/\s*&.*$/, "").replace(/\s+Region$/, ""))}"
                     >
-                      <i class="fa-solid fa-map-location-dot"></i>
-                      Create a Detailed Regional Itinerary
+                      <i class="fa-solid fa-person-hiking"></i>
+                      Explore Related Experiences
                     </a>
 
                   </div>

@@ -927,3 +927,28 @@ footer,
     display: none;
   }
 }
+
+
+/* Shared keyboard accessibility */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10000;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #174d2f;
+  font-weight: 800;
+  box-shadow: 0 8px 28px rgba(0,0,0,.22);
+  transform: translateY(-160%);
+  transition: transform .2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+#main-content:focus {
+  outline: none;
+}

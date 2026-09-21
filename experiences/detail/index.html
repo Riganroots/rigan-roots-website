@@ -1325,6 +1325,14 @@
 @media(max-width:900px){.booking-card{position:relative;top:auto}.main-grid{grid-template-columns:1fr}.booking-card{order:-1}.booking-trust{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.container{padding:0 14px}.content-card,.booking-card{border-radius:22px}.content-card{padding:22px 18px}.booking-card{padding:27px 20px 22px}.booking-trust{grid-template-columns:1fr}.section h2,.custom-strip h2{font-size:27px}.gallery-grid,.gallery-grid.two{grid-template-columns:1fr}.gallery-main,.gallery-grid.single .gallery-main{height:280px}.gallery-side{grid-template-columns:1fr 1fr}.gallery-side img,.gallery-grid.two .gallery-side img{height:145px}}
 </style>
+<style id="booking-policy-style">
+.booking-policy-section{padding-top:6px}
+.booking-policy-list{margin-top:18px;padding-left:0!important;list-style:none}
+.booking-policy-list li{position:relative;margin-bottom:10px!important;padding:13px 14px 13px 42px;border:1px solid rgba(23,77,47,.08);border-radius:14px;background:#f8faf7}
+.booking-policy-list li::before{content:"✓";position:absolute;left:15px;top:13px;width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:rgba(159,186,107,.22);color:var(--green);font-size:11px;font-weight:900}
+.booking-policy-note{display:flex;gap:11px;margin-top:17px;padding:15px 16px;border-radius:16px;background:#fff8e9;color:#5f5545;font-size:12px;line-height:1.6}
+.booking-policy-note i{margin-top:3px;color:var(--brown)}
+</style>
 </head>
 
 <body>
@@ -1572,15 +1580,36 @@
           </ul>
         </section>
 
-        <section class="section">
-          <h2>Cancellation &amp; Payment</h2>
+        <section class="section booking-policy-section">
+          <h2>Booking Details</h2>
 
           <p>
-            Final prices and payment conditions are confirmed after
-            availability is checked. An advance payment may be required to
-            secure guides, local hosts, transport, accommodation, permits,
-            or activities.
+            Rigan Roots &amp; Routes follows booking policies that explain how a
+            journey is reserved, confirmed, changed, or cancelled. These terms
+            help both you and our team understand the booking process, payment
+            schedule, required documents, and responsibilities before the trip.
           </p>
+
+          <p>
+            By confirming a trekking trip with Rigan Roots &amp; Routes, you
+            agree to the applicable booking terms. Booking policies may be
+            updated when operational, legal, permit, supplier, or safety
+            requirements change.
+          </p>
+
+          <ul class="booking-policy-list">
+            <li>All trekking trips require an advance reservation.</li>
+            <li>We recommend booking at least 30 days before your preferred trekking date, especially for restricted-area or permit-dependent journeys.</li>
+            <li>After the booking application is completed and your itinerary is confirmed, a 25% first instalment is required to begin securing the trip. A payment receipt or invoice will be provided.</li>
+            <li>For trips requiring permits or other legal travel documents, we may request a clear passport copy and two passport-size photographs. Documents can be sent to <strong>riganrootsroutes@gmail.com</strong>.</li>
+            <li>Unless otherwise stated in your confirmed quotation, the remaining balance is due in Nepal on your arrival in Kathmandu before the trip begins.</li>
+            <li>Cancellation, refund, date-change, and modification conditions can vary depending on permits, flights, hotels, guides, transport, local suppliers, and the specific journey. The applicable terms will be provided with your booking confirmation.</li>
+          </ul>
+
+          <div class="booking-policy-note">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Please read the final quotation and booking confirmation carefully before making payment. Trip-specific terms in your confirmed booking take priority where they differ from this general guidance.</span>
+          </div>
         </section>
 
         <a href="/experiences/" class="back">

@@ -1322,6 +1322,20 @@
 .result-section{scroll-margin-top:110px}
 @media(max-width:700px){.center-orb::after{inset:-25px}.center-orb::before{inset:-12px}}
 </style>
+<style id="experience-card-premium">
+.card{border-color:rgba(23,77,47,.08);box-shadow:0 16px 46px rgba(19,32,24,.09)}
+.card-image-link{height:245px}.card-image-link::after{background:linear-gradient(to top,rgba(7,22,17,.42),transparent 62%)}
+.card-category{top:15px;left:15px;background:rgba(255,250,242,.94);backdrop-filter:blur(8px)}
+.card-badge{position:absolute;right:15px;bottom:15px;z-index:2;max-width:58%;padding:7px 11px;border-radius:999px;background:#174d2f;color:#fff;font-size:10px;font-weight:900;letter-spacing:.03em;box-shadow:0 8px 22px rgba(0,0,0,.18)}
+.card-body{padding:23px}.card-body h3{font-family:'Playfair Display',serif;font-size:24px;line-height:1.2}
+.card-description{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:67px}
+.meta{margin-top:16px}.meta span{padding:7px 10px;background:#edf5eb}
+.trip-glance-label{display:flex;align-items:center;gap:6px;margin-top:16px;color:#8a6a42;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.tourist-fit{margin-top:7px}.tourist-fit span{padding:10px 7px;background:#fffaf2}.tourist-fit strong{font-size:10.5px;line-height:1.3}
+.card-price-row{padding-top:18px;border-top:1px solid rgba(23,77,47,.08);margin-top:18px}.card-price{font-family:'Playfair Display',serif;font-size:25px}
+.card-actions{margin-top:15px;padding-top:15px}.details-btn{background:#fff;border-color:rgba(23,77,47,.2)}.plan-btn{box-shadow:0 8px 22px rgba(23,77,47,.15)}
+@media(max-width:640px){.card-grid{grid-template-columns:1fr;gap:18px}.card{border-radius:23px}.card-image-link{height:220px}.card-body{padding:19px}.card-body h3{font-size:22px}.card-description{min-height:auto}.tourist-fit{grid-template-columns:repeat(3,minmax(0,1fr))}.card-actions{grid-template-columns:1fr 1fr}.whatsapp-btn{grid-column:1/-1}}
+</style>
 </head>
 
 <body>
@@ -2242,6 +2256,7 @@ Please send me more information about availability, itinerary, inclusions, and p
                 <span class="card-category">
                   ${categoryLabel}
                 </span>
+                ${item.badge ? `<span class="card-badge">${escapeHTML(item.badge)}</span>` : ""}
               </a>
 
               <div class="card-body">
@@ -2269,6 +2284,7 @@ Please send me more information about availability, itinerary, inclusions, and p
                   </span>
                 </div>
 
+                <div class="trip-glance-label"><i class="fa-solid fa-circle-info"></i> At a glance</div>
                 <div class="tourist-fit" aria-label="Trip planning information">
                   <span>
                     Where
@@ -2287,7 +2303,7 @@ Please send me more information about availability, itinerary, inclusions, and p
                 <div class="card-price-row">
 
                   <div class="price-box">
-                    <small>FROM / ESTIMATE</small>
+                    <small>${extractUsd(item.price) ? "FROM / ESTIMATE" : "TAILORED TRIP"}</small>
 
                     <div class="card-price">
                       ${safePrice}

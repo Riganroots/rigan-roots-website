@@ -115,7 +115,7 @@ window.experienceDataV2 = {
         price: "From US$650",
         location: "Nepal",
         style: "Cultural Immersion & Village Life",
-        image: "/assets/images/signature/live-like-a-nepali.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/experiences/guidewithguest.jpg.jpg",
         badge: "Top Seller"
       }),
       exp({
@@ -235,7 +235,7 @@ exp({
         price: "From US$520",
         location: "Rural Nepal",
         style: "Community Life & Cultural Stay",
-        image: "/assets/images/experiences/himalayan-village.jpg"
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/experiences/guidewithguest.jpg.jpg",
       })
     ]
   },
@@ -554,7 +554,7 @@ exp({
         price: "From US$95",
         location: "Kathmandu Valley",
         style: "Traditional Newari Cuisine",
-        image: "/assets/images/culture/cultural-journey.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/Newari-dress.jpg.jpg",
         badge: "Cultural Favorite"
       }),
       exp({
@@ -609,7 +609,7 @@ exp({
         price: "From US$220",
         location: "Kathmandu Valley",
         style: "Culture & Heritage",
-        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/kathmandu-valley.jpg.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/Traditional-dress.jpg.jpg",
         badge: "Classic"
       }),
       exp({
@@ -621,7 +621,7 @@ exp({
         price: "From US$120",
         location: "Bhaktapur",
         style: "Living Heritage",
-        image: "/assets/images/culture/cultural-journey.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/cultural%20activities%20.jpg.jpg",
         badge: "Heritage Favorite"
       })
     ]
@@ -657,7 +657,7 @@ exp({
         price: "From US$280",
         location: "Kathmandu / Local Communities",
         style: "Festival Experience",
-        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/holi.jpg.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/dashian.jpg.jpg",
         badge: "Biggest Festival"
       })
     ]

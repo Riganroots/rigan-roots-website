@@ -1308,6 +1308,23 @@
 .top-nav .brand-mark,.navbar .brand-logo{background:linear-gradient(135deg,#a8bf6a,#d9bc58)!important;color:#174d2f!important}
 @media(max-width:900px){.navbar,.top-nav{top:8px!important;width:calc(100% - 16px)!important;margin:8px auto 0!important;padding:10px 14px!important;border-radius:22px!important}.navbar .logo img{height:43px!important}.navbar .nav-links,.top-nav .nav-links{gap:0!important}.menu-btn,.mobile-menu-btn{color:#174d2f!important;background:rgba(23,77,47,.08)!important}}
 </style>
+<style id="experience-detail-premium">
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(7,22,17,.22),transparent 55%)}
+.info-bar{border:1px solid rgba(23,77,47,.08)}
+.decision-guide{position:relative}
+.decision-card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.decision-card:hover{transform:translateY(-3px);border-color:rgba(159,186,107,.45);box-shadow:0 14px 32px rgba(23,77,47,.08)}
+.booking-card{background:linear-gradient(180deg,#fff 0%,#fffdf8 100%)}
+.booking-card .price{font-family:"Playfair Display",serif}
+.booking-trust{display:grid;gap:7px;margin:16px 0;padding:13px;border:1px solid rgba(23,77,47,.09);border-radius:16px;background:#f7faf5}
+.booking-trust span{display:flex;align-items:center;gap:8px;color:#475467;font-size:11px;font-weight:800}
+.booking-trust i{width:18px;color:var(--green);text-align:center}
+.gallery-grid{position:relative}
+.gallery-main,.gallery-side img{box-shadow:0 12px 28px rgba(19,32,24,.08)}
+.content-card{box-shadow:0 18px 50px rgba(19,32,24,.08)}
+@media(max-width:900px){.booking-card{position:relative;top:auto}.main-grid{grid-template-columns:1fr}.booking-card{order:-1}.booking-trust{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.container{padding:0 14px}.content-card,.booking-card{border-radius:22px}.content-card{padding:22px 18px}.booking-card{padding:27px 20px 22px}.booking-trust{grid-template-columns:1fr}.section h2,.custom-strip h2{font-size:27px}.gallery-grid,.gallery-grid.two{grid-template-columns:1fr}.gallery-main,.gallery-grid.single .gallery-main{height:280px}.gallery-side{grid-template-columns:1fr 1fr}.gallery-side img,.gallery-grid.two .gallery-side img{height:145px}}
+</style>
 </head>
 
 <body>
@@ -1605,6 +1622,12 @@
             Custom
           </button>
 
+        </div>
+
+        <div class="booking-trust">
+          <span><i class="fa-solid fa-shield-heart"></i> Local planning support</span>
+          <span><i class="fa-solid fa-sliders"></i> Fully customizable</span>
+          <span><i class="fa-regular fa-comments"></i> Direct WhatsApp help</span>
         </div>
 
         <div class="mini-list">

@@ -488,6 +488,25 @@ button,select{font:inherit}
  .home-page .home-final::before{left:20px;right:20px;bottom:38px;line-height:1.8}
 }
 </style>
+
+<style id="rigan-home-nepal-detail-v5">
+/* Subtle Nepal-inspired details: visual identity without sacrificing speed/readability. */
+.home-page .home-editorial::before,.home-page .home-regions::before,.home-page .editorial-feature::before{content:"";position:absolute;pointer-events:none;width:210px;height:210px;opacity:.075;background:repeating-conic-gradient(from 0deg,#8d6d38 0 3deg,transparent 3deg 12deg);border:1px solid rgba(141,109,56,.35);border-radius:50%}
+.home-page .home-editorial::before{left:-105px;top:70px}
+.home-page .home-regions{position:relative;overflow:hidden}
+.home-page .home-regions::before{right:-120px;bottom:-65px}
+.home-page .editorial-feature::before{left:-145px;bottom:-110px;width:260px;height:260px}
+.home-page .home-editorial::after,.home-page .home-regions::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:18px;pointer-events:none;background:linear-gradient(135deg,transparent 8px,#fbf7ee 0) 0 0/18px 18px repeat-x;opacity:.72}
+.home-page .moments-editorial::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.08;background-image:linear-gradient(30deg,transparent 48%,#d8e7a8 49%,#d8e7a8 51%,transparent 52%),linear-gradient(-30deg,transparent 48%,#d8e7a8 49%,#d8e7a8 51%,transparent 52%);background-size:46px 80px}
+.home-page .moments-editorial>*{position:relative;z-index:1}
+.home-page .home-final::after{content:"";position:absolute;left:0;right:0;bottom:0;width:auto;height:95px;border:0;border-radius:0;box-shadow:none;background:linear-gradient(to top,rgba(3,28,19,.78),transparent),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 150'%3E%3Cpath d='M0 135L95 82l45 28 95-75 68 61 70-38 70 44 90-83 80 78 75-45 75 52 95-71 74 66 92-49 126 65v35H0z' fill='%23d8e7a8' fill-opacity='.16'/%3E%3C/svg%3E") center bottom/cover no-repeat}
+.home-page .home-final>*{position:relative;z-index:1}
+.home-page .editorial-cat div,.home-page .home-region-strip span,.home-page .moment span{text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.home-page .editorial-cat::before{background:linear-gradient(to top,rgba(3,30,20,.84),rgba(3,30,20,.02) 72%)}
+.home-page .home-region-strip a::before{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.28);border-radius:inherit;z-index:2;pointer-events:none}
+@media(max-width:700px){.home-page .home-editorial::before,.home-page .home-regions::before,.home-page .editorial-feature::before{opacity:.045}.home-page .home-final::after{height:70px}}
+@media(prefers-reduced-motion:reduce){.home-page .editorial-cat,.home-page .moment,.home-page .home-region-strip a{transition:none!important}}
+</style>
 <script src="/site-config.js"></script>
 <script src="/site-runtime.js" defer></script>
 </head>

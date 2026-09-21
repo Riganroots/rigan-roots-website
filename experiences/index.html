@@ -2110,14 +2110,23 @@ Please send me more information about availability, itinerary, inclusions, and p
         });
       }
 
-      const term =
-        searchBox.value
+      const normalizeSearch = function (value) {
+        return String(value || "")
           .toLowerCase()
+          .replace(/[-_/]+/g, " ")
+          .replace(/[^a-z0-9\s]/g, " ")
+          .replace(/\s+/g, " ")
           .trim();
+      };
+
+      const term = normalizeSearch(searchBox.value);
 
       if (term) {
+        const queryWords = term.split(" ").filter(Boolean);
+
         items = items.filter(function (item) {
-          const searchableText = `
+          const searchableText = normalizeSearch(`
+            ${item.id || ""}
             ${item.name || ""}
             ${item.subtitle || ""}
             ${item.overview || ""}
@@ -2125,9 +2134,19 @@ Please send me more information about availability, itinerary, inclusions, and p
             ${item.location || ""}
             ${item.style || ""}
             ${item.difficulty || ""}
-          `.toLowerCase();
+            ${item.season || ""}
+            ${item.badge || ""}
+            ${Array.isArray(item.bestFor) ? item.bestFor.join(" ") : (item.bestFor || "")}
+            ${Array.isArray(item.highlights) ? item.highlights.join(" ") : ""}
+            ${Array.isArray(item.searchTerms) ? item.searchTerms.join(" ") : ""}
+          `);
 
-          return searchableText.includes(term);
+          // Every query word must be represented, but the words do not need
+          // to appear next to each other. This makes region links and searches
+          // such as "upper-dolpo" or "Everest base camp" much more reliable.
+          return queryWords.every(function (word) {
+            return searchableText.includes(word);
+          });
         });
       }
 

@@ -331,7 +331,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Challenging",
         season: "Spring & Autumn",
-        image: "/assets/images/regions/manaslu.jpg",
+        image: "/assets/images/regions/tsum-valley.jpg",
         badge: "Remote Classic",
         goodToKnow: [
           "A high-altitude trek requiring good fitness and proper acclimatization.",
@@ -351,7 +351,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Advanced",
         season: "Spring & Autumn",
-        image: "/assets/images/regions/kanchenjunga.jpg",
+        image: "/assets/images/regions/panch-pokhari.webp",
         badge: "Far East Nepal"
       }),
       exp({
@@ -366,7 +366,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Advanced",
         season: "Spring & Autumn",
-        image: "/assets/images/regions/makalu.jpg",
+        image: "/assets/images/treks/annapurna-north-base-camp.jfif",
         badge: "Wilderness"
       }),
       exp({
@@ -381,7 +381,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Challenging",
         season: "Spring & Autumn",
-        image: "/assets/images/regions/nar-phu.jpg",
+        image: "/assets/images/regions/upper-mustang.jpg",
         badge: "Hidden Valley"
       }),
       exp({

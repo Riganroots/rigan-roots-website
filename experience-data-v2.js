@@ -270,7 +270,7 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Moderate",
         season: "March–May and September–November",
-        image: "/assets/images/treks/annapurna-base-camp.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/annapurna.jpg.jpg",
         badge: "Popular Trek"
       }),
       exp({
@@ -285,7 +285,7 @@ exp({
         groupSize: "2–12 Guests",
         difficulty: "Easy to Moderate",
         season: "March–May and September–November",
-        image: "/assets/images/treks/poon-hill.webp",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/poonhill.jpg.jpg",
         badge: "Sunrise Favourite"
       }),
       exp({
@@ -375,10 +375,10 @@ exp({
         groupSize: "2–10 Guests",
         difficulty: "Moderate",
         season: "March–May & September–November",
-        image: "/assets/images/treks/tilicho-lake.webp",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/Tilicholake.jpg.JPG",
         gallery: [
-          "/assets/images/treks/tilicho-lake.webp",
-          "/assets/images/treks/tilicho-lake-traveler.webp"
+          "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/Tilicholake.jpg.JPG",
+          "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/Tilicholake.jpg.JPG"
         ],
         badge: "High Lake"
       }),
@@ -444,7 +444,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Challenging",
         season: "Spring & Autumn",
-        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/mustang.jpg.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/mustang.jpg.jpg",
         badge: "Hidden Valley"
       }),
       exp({
@@ -459,7 +459,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Challenging",
         season: "Spring & Autumn",
-        image: "/assets/images/regions/shey-phoksundo.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/phoksundo-lake.jpg.jpg",
         badge: "Best of Lower Dolpo",
         goodToKnow: [
           "This is a remote high-altitude journey and requires good fitness and acclimatization.",
@@ -487,7 +487,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Advanced",
         season: "Spring & Autumn",
-        image: "/assets/images/regions/shey-phoksundo.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/phoksundo-lake.jpg.jpg",
         badge: "Complete Dolpo",
         goodToKnow: [
           "Best suited to experienced trekkers comfortable with long days, high altitude and basic facilities.",
@@ -517,7 +517,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Advanced",
         season: "Spring & Autumn",
-        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/mustang.jpg.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/treks/mustang.jpg.jpg",
         badge: "Grand Traverse",
         goodToKnow: [
           "Recommended for experienced high-altitude trekkers rather than first-time Himalayan visitors.",
@@ -542,7 +542,7 @@ exp({
         price: "From US$65",
         location: "Kathmandu",
         style: "Street Food & Local Culture",
-        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/momo.jpg.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/experiences/momo.jpg.jpg",
         badge: "Most Popular"
       }),
       exp({
@@ -657,7 +657,7 @@ exp({
         price: "From US$280",
         location: "Kathmandu / Local Communities",
         style: "Festival Experience",
-        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/holi.jpg.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/holi.jpg.jpg",
         badge: "Biggest Festival"
       })
     ]

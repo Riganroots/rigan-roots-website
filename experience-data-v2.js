@@ -66,7 +66,7 @@ window.experienceDataV2 = {
         style: "Women-Led Trekking Experience",
         difficulty: "Easy to Moderate",
         season: "Spring and Autumn",
-        image: "https://i.postimg.cc/4NCPyR69/pokhara-experience-jpg.jpg",
+        image: "/assets/images/regions/pokhara.jpg",
         badge: "Women Led"
       }),
       exp({
@@ -365,7 +365,7 @@ exp({
         price: "From US$65",
         location: "Kathmandu",
         style: "Street Food & Local Culture",
-        image: "https://i.postimg.cc/9M6dDy7m/taste-of-nepal-jpg.jpg",
+        image: "/assets/images/experiences/momo.jpg",
         badge: "Most Popular"
       }),
       exp({
@@ -377,7 +377,7 @@ exp({
         price: "From US$95",
         location: "Kathmandu Valley",
         style: "Traditional Newari Cuisine",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+        image: "/assets/images/culture/cultural-journey.jpg",
         badge: "Cultural Favorite"
       }),
       exp({
@@ -389,7 +389,7 @@ exp({
         price: "From US$180",
         location: "Chitwan & Terai Region",
         style: "Food & Village Culture",
-        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+        image: "/assets/images/experiences/himalayan-village.jpg",
         badge: "Authentic"
       }),
       exp({
@@ -401,7 +401,7 @@ exp({
         price: "From US$110",
         location: "Kathmandu Hills",
         style: "Mountain Ethnic Cuisine",
-        image: "https://i.postimg.cc/sXQPfT1b/village-immersion-jpg.jpg",
+        image: "/assets/images/experiences/himalayan-village.jpg",
         badge: "Hidden Gem"
       }),
       exp({
@@ -413,7 +413,7 @@ exp({
         price: "From US$120",
         location: "Everest Region / Kathmandu",
         style: "Himalayan Food Experience",
-        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+        image: "/assets/images/treks/everest-view-trek.jpg",
         badge: "Himalayan Favorite"
       })
     ]
@@ -432,7 +432,7 @@ exp({
         price: "From US$220",
         location: "Kathmandu Valley",
         style: "Culture & Heritage",
-        image: "https://i.postimg.cc/xTr58Vvc/kathmandu-heritage-tour-jpg.jpg",
+        image: "/assets/images/regions/kathmandu-valley.jpg",
         badge: "Classic"
       }),
       exp({
@@ -444,7 +444,7 @@ exp({
         price: "From US$120",
         location: "Bhaktapur",
         style: "Living Heritage",
-        image: "https://i.postimg.cc/JzZmBkdB/cultural-journey.jpg",
+        image: "/assets/images/culture/cultural-journey.jpg",
         badge: "Heritage Favorite"
       })
     ]
@@ -498,7 +498,7 @@ exp({
         price: "From US$1350",
         location: "Everest Region",
         style: "Helicopter Adventure",
-        image: "https://i.postimg.cc/13BrvgLB/everest-view-trek-jpg.jpg",
+        image: "/assets/images/treks/everest-view-trek.jpg",
         badge: "Luxury"
       }),
       exp({

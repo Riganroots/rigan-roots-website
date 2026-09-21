@@ -471,6 +471,105 @@
         { day: "Sample Day 3 — Trail Loop or Point-to-Point Ride", text: "Complete another selected route and finish at the planned roadhead or city. Longer 4–7 day versions continue into additional regions." }
       ],
       goodToKnow: ["Routes are selected according to riding ability and current trail conditions", "Helmet use is required and additional protective gear is recommended for technical riding", "Weather and local access can change the route", "E-bikes, support vehicles, and bike specifications depend on the confirmed quotation"]
+    },
+
+    "manaslu-circuit-trek": {
+      highlights: ["Remote Himalayan circuit around Manaslu", "Larkya La high-pass crossing", "Stone villages, monasteries and changing mountain landscapes", "Quieter alternative to Nepal's busiest classic trekking routes"],
+      bestFor: ["Fit trekkers wanting a remote circuit", "Travellers interested in mountain culture as well as scenery", "Guests comfortable with long walking days and altitude"],
+      itinerary: [
+        { day: "Day 1 — Kathmandu to the Trail Region", text: "Travel toward the Manaslu trailhead and settle in for the start of the trek." },
+        { day: "Days 2–5 — River Valleys & Villages", text: "Walk gradually through river valleys, forest and traditional settlements while gaining altitude at a steady pace." },
+        { day: "Days 6–9 — Higher Manaslu Country", text: "Continue into higher villages with stronger mountain views and time built in for acclimatization." },
+        { day: "Days 10–12 — Samagaon & High Valley", text: "Explore the high valley, local monasteries and viewpoints while preparing for the pass." },
+        { day: "Days 13–15 — Larkya La Crossing", text: "Approach and cross Larkya La when conditions allow, then descend toward the Annapurna-side valleys." },
+        { day: "Days 16–18 — Descent & Return", text: "Complete the descent, meet road transport and return toward Kathmandu. Exact length depends on the chosen trailhead and pace." }
+      ],
+      trekFacts: { maxAltitude: "Around 5,100 m at Larkya La", walking: "Usually 5–8 hours on trekking days", accommodation: "Mountain teahouses / lodges", meals: "Teahouse meals; exact meal plan confirmed in quotation", transport: "Private/shared road transfer depending on itinerary", permits: "Restricted-area and conservation/trekking permits as required for the confirmed route", startEnd: "Manaslu trailhead → Annapurna-side roadhead", routeNote: "High-pass conditions, road access and acclimatization can change the exact day plan." },
+      goodToKnow: ["A licensed guide and applicable permits are arranged according to current rules", "Acclimatization is essential", "Weather can affect the high-pass day", "A contingency-friendly schedule is recommended"]
+    },
+
+    "kanchenjunga-base-camp-trek": {
+      highlights: ["Far-eastern Nepal wilderness", "Remote villages and deep valleys", "High Himalayan viewpoints toward Kanchenjunga", "Long expedition-style trekking away from busy trails"],
+      bestFor: ["Experienced trekkers", "Travellers prioritizing remoteness and wilderness", "Guests with enough time for a long Himalayan journey"],
+      itinerary: [
+        { day: "Days 1–3 — Reach Eastern Nepal", text: "Travel from Kathmandu toward the eastern trail region using the transport plan confirmed for your dates." },
+        { day: "Days 4–9 — Lower Valleys", text: "Trek through changing vegetation, villages and river valleys while gradually gaining elevation." },
+        { day: "Days 10–15 — High Mountain Country", text: "Move into higher terrain with acclimatization and exploration days built around the group's condition." },
+        { day: "Days 16–19 — Base Camp Sector", text: "Reach the selected Kanchenjunga base-camp viewpoint sector when trail and weather conditions permit." },
+        { day: "Days 20–24 — Return", text: "Descend through the valleys and connect with return transport to Kathmandu." }
+      ],
+      trekFacts: { maxAltitude: "High-altitude base-camp terrain; exact maximum depends on final north/south route", walking: "Typically 5–8 hours; some longer days", accommodation: "Simple teahouses/lodges with possible basic facilities", meals: "Local lodge meals; options become limited in remote sections", transport: "Domestic/road connections according to final route", permits: "Conservation, restricted-area and trekking requirements confirmed for the selected route", startEnd: "Eastern Nepal gateway → selected Kanchenjunga route → return gateway", routeNote: "North, south or combined approaches differ significantly, so the exact route is finalized before quoting." },
+      goodToKnow: ["This is a long and remote trek", "Facilities are simpler than on Everest or Annapurna routes", "Extra time for weather and transport disruption is valuable", "The final route should be matched to fitness and available days"]
+    },
+
+    "makalu-base-camp-trek": {
+      highlights: ["Remote approach to the Makalu region", "Forests, high valleys and dramatic Himalayan terrain", "Strong wilderness character", "Base-camp journey for experienced trekkers"],
+      bestFor: ["Experienced wilderness trekkers", "Guests seeking a quieter base-camp route", "Travellers comfortable with basic mountain facilities"],
+      itinerary: [
+        { day: "Days 1–3 — Journey to the Makalu Region", text: "Connect from Kathmandu to the trail region and prepare for the trek." },
+        { day: "Days 4–8 — Forest & Ridge Trails", text: "Trek through lower valleys and forested terrain, steadily gaining elevation." },
+        { day: "Days 9–13 — High Valley Approach", text: "Continue into the upper valley with acclimatization and shorter days where useful." },
+        { day: "Days 14–16 — Makalu Base Camp Sector", text: "Explore the base-camp area and surrounding viewpoints according to weather and group condition." },
+        { day: "Days 17–22 — Descent & Return", text: "Retrace or complete the planned exit route and connect with transport back toward Kathmandu." }
+      ],
+      trekFacts: { maxAltitude: "Around 5,000 m in the base-camp sector", walking: "Typically 5–8 hours; terrain can be demanding", accommodation: "Simple teahouses/lodges; standards vary by settlement", meals: "Local lodge meals with limited choices at higher elevations", transport: "Domestic/road connections according to final itinerary", permits: "Makalu-Barun and applicable trekking permits confirmed before departure", startEnd: "Makalu trail gateway → base-camp sector → return gateway", routeNote: "Remote transport and weather can affect the schedule, so contingency time is recommended." },
+      goodToKnow: ["Remote logistics require flexibility", "Good fitness and prior trekking experience are recommended", "Accommodation becomes basic at altitude", "Weather can affect flights, roads and trail conditions"]
+    },
+
+    "nar-phu-valley-trek": {
+      highlights: ["Hidden Nar and Phu valleys", "Traditional high-Himalayan settlements", "Monasteries, dry landscapes and Annapurna-region mountain views", "Option to combine with a high-pass or wider Annapurna journey"],
+      bestFor: ["Culture-focused trekkers", "Fit travellers seeking a less-crowded route", "Guests wanting remote villages without a month-long expedition"],
+      itinerary: [
+        { day: "Days 1–2 — Reach the Annapurna Trail", text: "Travel to the trail region and begin the approach toward the Nar–Phu junction." },
+        { day: "Days 3–5 — Enter the Hidden Valleys", text: "Leave the main trail and trek into increasingly remote landscapes and settlements." },
+        { day: "Days 6–9 — Phu & Nar Exploration", text: "Spend time in the high villages, visit cultural sites and acclimatize while exploring the valley." },
+        { day: "Days 10–12 — Pass or Valley Exit", text: "Follow the confirmed route toward the exit, with a high-pass option only when suitable for the group and conditions." },
+        { day: "Days 13–14 — Return", text: "Reconnect with the road corridor and return toward Kathmandu." }
+      ],
+      trekFacts: { maxAltitude: "High-altitude valley; maximum varies with pass option", walking: "Usually 5–7 hours", accommodation: "Simple teahouses / local lodges", meals: "Local teahouse meals", transport: "Road transfer to/from the Annapurna trail corridor", permits: "Restricted-area and Annapurna-region permits as required", startEnd: "Annapurna corridor → Nar/Phu valleys → selected exit", routeNote: "The itinerary can be a valley-focused trek or include a high-pass connection depending on fitness, season and current conditions." },
+      goodToKnow: ["Restricted-area requirements apply", "Facilities are basic inside the valleys", "Allow time for acclimatization", "The high-pass option is condition-dependent"]
+    },
+
+    "lower-dolpo-phoksundo-trek": {
+      highlights: ["Turquoise Shey Phoksundo Lake", "Ringmo and Dolpo village culture", "Dho Tarap and remote valley landscapes", "A fuller Lower Dolpo journey combining nature and culture"],
+      bestFor: ["Fit trekkers wanting remote Nepal", "Travellers interested in Dolpo culture", "Guests who want more than a short lake visit"],
+      itinerary: [
+        { day: "Days 1–3 — Kathmandu to Dolpo Gateway", text: "Travel to the Dolpo access region and connect to the trail according to the confirmed flight and road plan." },
+        { day: "Days 4–7 — Phoksundo & Ringmo", text: "Trek toward Phoksundo, explore the lake and Ringmo area, and allow time to enjoy the landscape rather than rush through it." },
+        { day: "Days 8–13 — Lower Dolpo & Dho Tarap", text: "Continue through remote valleys and settlements toward the Dho Tarap sector, with route days adjusted for altitude and local conditions." },
+        { day: "Days 14–18 — Exit & Return", text: "Complete the circuit or selected return route and connect with transport back toward Kathmandu." }
+      ],
+      trekFacts: { maxAltitude: "High-pass terrain; exact maximum depends on final circuit", walking: "Typically 5–8 hours with longer pass days possible", accommodation: "Simple lodges where available plus camping if required by route", meals: "Lodge/camp meals according to final itinerary", transport: "Domestic flights and local transfers according to access conditions", permits: "Dolpo restricted-area, national-park and trekking requirements as applicable to final route", startEnd: "Dolpo gateway → Phoksundo / Lower Dolpo circuit → Dolpo gateway", routeNote: "Flight schedules, permits, trail conditions and the chosen Dho Tarap connection determine the final day-by-day route." },
+      goodToKnow: ["Remote flights can be weather-sensitive", "Permit requirements depend on the final route", "Contingency days are strongly recommended", "Facilities are basic and camping may be used on remote sections"]
+    },
+
+    "upper-dolpo-expedition": {
+      highlights: ["Phoksundo Lake and Shey Gompa", "Crystal Mountain and ancient cultural landscapes", "Saldang and remote Upper Dolpo settlements", "A deep expedition-style journey across one of Nepal's most isolated regions"],
+      bestFor: ["Experienced high-altitude trekkers", "Travellers seeking deep cultural immersion", "Guests comfortable with expedition logistics and long remote journeys"],
+      itinerary: [
+        { day: "Days 1–4 — Enter Dolpo", text: "Travel from Kathmandu to the Dolpo gateway and begin the approach toward Phoksundo." },
+        { day: "Days 5–8 — Phoksundo & Acclimatization", text: "Reach the lake, explore the Ringmo area and prepare for the more remote Upper Dolpo stages." },
+        { day: "Days 9–15 — Shey & Crystal Mountain Sector", text: "Cross remote high terrain toward Shey Gompa and the Crystal Mountain cultural landscape, with acclimatization built into the schedule." },
+        { day: "Days 16–22 — Saldang & Upper Dolpo Villages", text: "Travel between isolated settlements, monasteries and high valleys with a strong focus on local culture." },
+        { day: "Days 23–27 — Dho Tarap / Return Sector", text: "Continue toward the selected exit via the Dho Tarap or confirmed circuit route." },
+        { day: "Days 28–30 — Exit Dolpo", text: "Complete the trail, connect with the return flight/road plan and keep contingency time for remote transport." }
+      ],
+      trekFacts: { maxAltitude: "Multiple high passes; exact maximum depends on the final circuit", walking: "Often 6–9 hours with demanding pass days", accommodation: "Expedition camping plus simple local lodges where suitable", meals: "Expedition/camp meals and local meals where available", transport: "Domestic flights and local transfers subject to access and weather", permits: "Upper Dolpo restricted-area, national-park and other applicable trekking requirements", startEnd: "Dolpo gateway → Phoksundo → Upper Dolpo circuit → selected exit", routeNote: "This is a customizable expedition. Passes, camps and exit route are finalized around permits, acclimatization, weather and group ability." },
+      goodToKnow: ["A contingency-friendly schedule is important", "Expect basic facilities and camping", "Strong fitness and previous high-altitude trekking experience are recommended", "Final route and permit requirements are reconfirmed before booking"]
+    },
+
+    "dolpo-mustang-expedition": {
+      highlights: ["Rare Trans-Himalayan traverse", "Remote Dolpo valleys and high passes", "Changing landscapes toward Mustang", "Expedition camping and long-distance trekking"],
+      bestFor: ["Seasoned expedition trekkers", "Guests seeking a specialist long traverse", "Travellers comfortable with camping, remoteness and long days"],
+      itinerary: [
+        { day: "Days 1–4 — Enter Dolpo", text: "Travel to the Dolpo gateway and begin the expedition with a gradual approach." },
+        { day: "Days 5–11 — Dolpo Interior", text: "Move through remote valleys, villages and high terrain while acclimatizing for the traverse." },
+        { day: "Days 12–19 — Trans-Himalayan Crossing", text: "Cross the expedition's remote central section using the confirmed camps and passes for current trail conditions." },
+        { day: "Days 20–24 — Approach Mustang", text: "Watch the landscape change as the route moves toward the Mustang corridor." },
+        { day: "Days 25–28 — Mustang / Jomsom Exit", text: "Complete the traverse at the planned Mustang-side exit and connect with return transport." }
+      ],
+      trekFacts: { maxAltitude: "Multiple high passes; varies by selected traverse", walking: "Often 6–9 hours with long remote stages", accommodation: "Predominantly expedition camping with simple lodges where available", meals: "Expedition/camp meal plan", transport: "Domestic flights and local transfers according to final entry/exit", permits: "Restricted-area and conservation/trekking permits for both sides of the confirmed route", startEnd: "Dolpo gateway → remote traverse → Mustang/Jomsom corridor", routeNote: "The exact traverse is specialist and condition-dependent; camps, passes and exit logistics are finalized before departure." },
+      goodToKnow: ["This is not a standard teahouse trek", "Prior high-altitude trekking experience is strongly recommended", "Weather and trail conditions can change camp locations", "Allow contingency days for remote transport"]
     }
   };
 

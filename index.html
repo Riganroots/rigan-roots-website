@@ -471,24 +471,9 @@ button,select{font:inherit}
   <div class="trip-top">
     <div>
       <h2 class="section-title">Featured Nepal Trips</h2>
-      <p class="section-subtitle">Real journeys with clear starting prices, duration, and travel style.</p>
+      <p class="section-subtitle">Meaningful journeys with clear duration, travel style and tailored planning.</p>
     </div>
 
-    <div class="currency-wrap">
-      <div class="currency-box">
-      <label for="currencySelect">Currency</label>
-      <select id="currencySelect" aria-describedby="currencyNote">
-        <option value="USD">USD $</option>
-        <option value="NPR">NPR रू</option>
-        <option value="GBP">GBP £</option>
-        <option value="AUD">AUD A$</option>
-        <option value="EUR">EUR €</option>
-        <option value="INR">INR ₹</option>
-        <option value="JPY">JPY ¥</option>
-      </select>
-      </div>
-      <small class="currency-note" id="currencyNote">Converted prices are estimates.</small>
-    </div>
   </div>
 
   <div class="trip-grid">
@@ -509,8 +494,8 @@ button,select{font:inherit}
         </div>
 
         <div class="trip-price">
-          <small>FROM</small>
-          <div class="price-value" data-usd="900">$900</div>
+          <small>TAILORED PRICING</small>
+          <div class="price-value">Request Quote</div>
         </div>
 
         <div class="trip-actions">
@@ -537,8 +522,8 @@ button,select{font:inherit}
         </div>
 
         <div class="trip-price">
-          <small>FROM</small>
-          <div class="price-value" data-usd="550">$550</div>
+          <small>TAILORED PRICING</small>
+          <div class="price-value">Request Quote</div>
         </div>
 
         <div class="trip-actions">
@@ -565,8 +550,8 @@ button,select{font:inherit}
         </div>
 
         <div class="trip-price">
-          <small>FROM</small>
-          <div class="price-value" data-usd="1700">$1,700</div>
+          <small>TAILORED PRICING</small>
+          <div class="price-value">Request Quote</div>
         </div>
 
         <div class="trip-actions">
@@ -868,39 +853,6 @@ navLinks.querySelectorAll("a").forEach(link => {
   });
 });
 
-const currencySelect = document.getElementById("currencySelect");
-const prices = document.querySelectorAll(".price-value");
-
-const currencyRates = {
-  USD: { rate: 1, symbol: "$", decimals: 0 },
-  NPR: { rate: 133, symbol: "रू", decimals: 0 },
-  GBP: { rate: .79, symbol: "£", decimals: 0 },
-  AUD: { rate: 1.52, symbol: "A$", decimals: 0 },
-  EUR: { rate: .92, symbol: "€", decimals: 0 },
-  INR: { rate: 83, symbol: "₹", decimals: 0 },
-  JPY: { rate: 157, symbol: "¥", decimals: 0 }
-};
-
-function updatePrices(currency) {
-  const selected = currencyRates[currency];
-
-  prices.forEach(price => {
-    const usd = Number(price.dataset.usd);
-    const converted = usd * selected.rate;
-
-    price.textContent =
-      selected.symbol +
-      converted.toLocaleString(undefined, {
-        maximumFractionDigits: selected.decimals
-      });
-  });
-}
-
-if (currencySelect) {
-  currencySelect.addEventListener("change", function () {
-    updatePrices(this.value);
-  });
-}
 </script>
 </body>
 </html>

@@ -271,6 +271,18 @@ button,select{font:inherit}
   }
 }
 </script>
+<style id="rigan-unified-nav">
+/* Unified Rigan navigation */
+.navbar,.top-nav{position:sticky!important;top:16px!important;left:auto!important;z-index:1000!important;width:min(1180px,calc(100% - 36px))!important;min-height:70px!important;margin:16px auto 0!important;padding:13px 16px 13px 20px!important;border:1px solid rgba(23,77,47,.10)!important;border-radius:999px!important;background:rgba(255,255,255,.92)!important;backdrop-filter:blur(18px)!important;box-shadow:0 16px 45px rgba(19,32,24,.08)!important}
+.navbar .logo,.top-nav .brand,.navbar .brand{display:flex!important;align-items:center!important;color:#0f3522!important}
+.navbar .logo img{height:50px!important;width:auto!important;max-width:290px!important;object-fit:contain!important;border-radius:0!important}
+.navbar .nav-links,.top-nav .nav-links{display:flex;align-items:center;gap:18px!important}
+.navbar .nav-links a,.top-nav .nav-links a{color:#475467!important;font-size:13px!important;font-weight:800!important}
+.navbar .nav-links a:hover,.navbar .nav-links a.active,.top-nav .nav-links a:hover,.top-nav .nav-links a.active{color:#174d2f!important}
+.navbar .nav-links .nav-plan,.navbar .nav-links .nav-cta,.top-nav .nav-links .nav-cta{padding:11px 16px!important;border-radius:999px!important;background:#174d2f!important;color:#fff!important}
+.top-nav .brand-mark,.navbar .brand-logo{background:linear-gradient(135deg,#a8bf6a,#d9bc58)!important;color:#174d2f!important}
+@media(max-width:900px){.navbar,.top-nav{top:8px!important;width:calc(100% - 16px)!important;margin:8px auto 0!important;padding:10px 14px!important;border-radius:22px!important}.navbar .logo img{height:43px!important}.navbar .nav-links,.top-nav .nav-links{gap:0!important}.menu-btn,.mobile-menu-btn{color:#174d2f!important;background:rgba(23,77,47,.08)!important}}
+</style>
 </head>
 <body class="home-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>

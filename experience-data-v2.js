@@ -1,3 +1,36 @@
+/* ==========================================================================
+   RIGAN CONTENT GUIDE
+   --------------------------------------------------------------------------
+   This file is the main editable source for Experience content.
+
+   To ADD an experience:
+   1. Copy one exp({ ... }) block inside the correct category.
+   2. Give it a unique id using lowercase words and hyphens.
+   3. Update name, subtitle, overview, duration, location, style and image.
+   4. Add optional badge, groupSize, difficulty, season, includes, excludes,
+      packing, goodToKnow and gallery when needed.
+   5. Save this file. Experiences and detail pages read from this shared data.
+
+   PRICING:
+   - Do not invent a "From" price.
+   - Keep pricing as "Request Quote" until Rigan has a verified selling price.
+   - When verified pricing is introduced, use the pricing object below so the
+     website can distinguish fixed, from-price and tailored products.
+
+   Example:
+   pricing: {
+     mode: "quote",        // quote | from | fixed
+     currency: "USD",
+     amount: null,
+     note: "Tailored to dates, group size and inclusions"
+   }
+
+   Images should use repository paths such as:
+   /assets/images/treks/example.jpg
+   ========================================================================== */
+
+const RIGAN_CONTENT_GUIDE = true;
+
 const defaultIncludes = [
   "Trip planning support",
   "Local coordination",
@@ -29,11 +62,17 @@ function exp(data){
     excludes: data.excludes || defaultExcludes,
     packing: data.packing || defaultPacking,
     goodToKnow: data.goodToKnow || [
-      "Final price depends on season, route, hotel level, and group size",
+      "Final quotation depends on season, route, hotel level, and group size",
       "Private customization is available",
       "Itinerary can be adjusted based on your travel style"
     ],
     gallery: data.gallery || [data.image],
+    pricing: data.pricing || {
+      mode: "quote",
+      currency: "USD",
+      amount: null,
+      note: "Tailored to dates, group size and inclusions"
+    },
     ...data
   };
 }

@@ -116,6 +116,7 @@ window.experienceDataV2 = {
         location: "Nepal",
         style: "Cultural Immersion & Village Life",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/experiences/guidewithguest.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/experiences/guidewithguest.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Traditional-dress.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/cultural%20activities%20.jpg.jpg"],
         badge: "Top Seller"
       }),
       exp({
@@ -236,6 +237,7 @@ exp({
         location: "Rural Nepal",
         style: "Community Life & Cultural Stay",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/experiences/guidewithguest.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/experiences/guidewithguest.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Traditional-dress.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/tihar.jpg.jpg"],
       })
     ]
   },
@@ -543,6 +545,7 @@ exp({
         location: "Kathmandu",
         style: "Street Food & Local Culture",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/experiences/momo.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/experiences/momo.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Newari-dress.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/cultural%20activities%20.jpg.jpg"],
         badge: "Most Popular"
       }),
       exp({
@@ -555,6 +558,7 @@ exp({
         location: "Kathmandu Valley",
         style: "Traditional Newari Cuisine",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/Newari-dress.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Newari-dress.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/experiences/momo.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Traditional-dress.jpg.jpg"],
         badge: "Cultural Favorite"
       }),
       exp({
@@ -610,6 +614,7 @@ exp({
         location: "Kathmandu Valley",
         style: "Culture & Heritage",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/Traditional-dress.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Traditional-dress.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Newari-dress.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/cultural%20activities%20.jpg.jpg"],
         badge: "Classic"
       }),
       exp({
@@ -622,6 +627,7 @@ exp({
         location: "Bhaktapur",
         style: "Living Heritage",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/cultural%20activities%20.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/cultural%20activities%20.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Newari-dress.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Traditional-dress.jpg.jpg"],
         badge: "Heritage Favorite"
       })
     ]
@@ -658,6 +664,7 @@ exp({
         location: "Kathmandu / Local Communities",
         style: "Festival Experience",
         image: "https://ik.imagekit.io/hl26wgmok/tr:w-1100,q-82,f-auto,fo-auto/rigan/culture/dashian.jpg.jpg",
+        gallery: ["https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/dashian.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/Traditional-dress.jpg.jpg", "https://ik.imagekit.io/hl26wgmok/tr:w-1200,q-82,f-auto,fo-auto/rigan/culture/cultural%20activities%20.jpg.jpg"],
         badge: "Biggest Festival"
       })
     ]

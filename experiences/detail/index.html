@@ -2374,26 +2374,17 @@ Please send me more information about availability, itinerary, inclusions, and p
 
       updateDecisionGuide(selected);
 
-      const hasDisplayedPrice = Boolean(
-        selected.price && String(selected.price).trim()
-      );
-
       document.getElementById(
         "price"
-      ).textContent =
-        hasDisplayedPrice ? selected.price : "Request Quote";
+      ).textContent = "Request Your Trip Quote";
 
       document.getElementById(
         "priceHeadingLabel"
-      ).textContent = hasDisplayedPrice
-        ? "Starting From"
-        : "Custom Quote";
+      ).textContent = "Tailored Pricing";
 
       document.getElementById(
         "priceSubLabel"
-      ).textContent = hasDisplayedPrice
-        ? "Per Person / Estimated"
-        : "Tailored to Your Dates & Group";
+      ).textContent = "Designed Around Your Journey";
 
       document.getElementById(
         "style"

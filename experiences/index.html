@@ -2396,16 +2396,6 @@ Please send me more information about availability, itinerary, inclusions, and p
       }
     );
 
-    currencySelect.addEventListener(
-      "change",
-      function () {
-        currentCurrency =
-          currencySelect.value;
-
-        createCards(currentItems);
-      }
-    );
-
     document
       .querySelectorAll(".trek-filter")
       .forEach(function (button) {

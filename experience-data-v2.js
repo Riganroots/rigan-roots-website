@@ -201,7 +201,7 @@ exp({
         price: "From US$160",
         location: "Rural Nepal",
         style: "Farming & Village Life",
-        image: "/assets/images/experiences/nepali-farmers.jfif"
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/farmers.jpg.jpg"
       }),
       exp({
         id: "rice-planting-experience",
@@ -213,7 +213,7 @@ exp({
         location: "Kathmandu Valley / Rural Nepal",
         style: "Seasonal Farming Festival",
         season: "June–July",
-        image: "/assets/images/experiences/nepali-farmers.jfif"
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/farmers.jpg.jpg"
       }),
       exp({
         id: "mountain-farming-experience",
@@ -444,7 +444,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Challenging",
         season: "Spring & Autumn",
-        image: "/assets/images/regions/upper-mustang.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/mustang.jpg.jpg",
         badge: "Hidden Valley"
       }),
       exp({
@@ -517,7 +517,7 @@ exp({
         groupSize: "2–8 Guests",
         difficulty: "Advanced",
         season: "Spring & Autumn",
-        image: "/assets/images/regions/upper-mustang.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/mustang.jpg.jpg",
         badge: "Grand Traverse",
         goodToKnow: [
           "Recommended for experienced high-altitude trekkers rather than first-time Himalayan visitors.",
@@ -542,7 +542,7 @@ exp({
         price: "From US$65",
         location: "Kathmandu",
         style: "Street Food & Local Culture",
-        image: "/assets/images/experiences/momo.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/momo.jpg.jpg",
         badge: "Most Popular"
       }),
       exp({
@@ -609,7 +609,7 @@ exp({
         price: "From US$220",
         location: "Kathmandu Valley",
         style: "Culture & Heritage",
-        image: "/assets/images/regions/kathmandu-valley.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/kathmandu-valley.jpg.jpg",
         badge: "Classic"
       }),
       exp({
@@ -657,7 +657,7 @@ exp({
         price: "From US$280",
         location: "Kathmandu / Local Communities",
         style: "Festival Experience",
-        image: "/assets/images/culture/festival-experience.jpg",
+        image: "https://ik.imagekit.io/hl26wgmok/tr:w-1000,q-82,f-auto,fo-auto/rigan/home/holi.jpg.jpg",
         badge: "Biggest Festival"
       })
     ]

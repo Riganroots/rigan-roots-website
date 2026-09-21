@@ -461,6 +461,33 @@ button,select{font:inherit}
  .home-page .moment-large,.home-page .moment-wide{grid-row:auto;grid-column:auto}
 }
 </style>
+
+<style id="rigan-home-reference-v4">
+.home-page .editorial-feature:first-of-type{overflow:hidden}
+.home-page .editorial-feature:first-of-type .editorial-feature-grid{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)}
+.home-page .editorial-feature:first-of-type .editorial-feature-copy{padding:40px 0}
+.home-page .editorial-feature:first-of-type .editorial-feature-copy::before{content:"Our Philosophy";display:block;margin-bottom:8px;color:#806b3f;font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+.home-page .editorial-feature:first-of-type .editorial-feature-copy h2{max-width:590px}
+.home-testimonial{padding:48px clamp(22px,6vw,86px);display:grid;grid-template-columns:110px minmax(0,1fr) auto;align-items:center;gap:30px;background:#fbf7ee;border-top:1px solid rgba(23,77,47,.08);border-bottom:1px solid rgba(23,77,47,.08)}
+.testimonial-photo{width:110px;height:110px;border-radius:50%;background-size:cover;background-position:center;border:7px solid #fff;box-shadow:0 10px 30px rgba(9,42,29,.14)}
+.testimonial-copy{max-width:900px;position:relative}
+.quote-mark{position:absolute;left:-26px;top:-18px;color:#174d2f;font-family:'Playfair Display',serif;font-size:70px;line-height:1}
+.testimonial-copy blockquote{font-family:'Playfair Display',serif;color:#14261c;font-size:clamp(20px,2.1vw,30px);line-height:1.45}
+.testimonial-copy p{margin-top:10px;color:#6b6b63;font-size:13px;font-weight:700}
+.home-page .home-final{text-align:left!important;min-height:420px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.home-page .home-final small{color:#d8e7a8;letter-spacing:.2em;text-transform:uppercase;font-weight:900}
+.home-page .home-final h2{max-width:760px;margin:10px 0 14px!important;color:#fff}
+.home-page .home-final p{max-width:650px!important;margin:0 0 26px!important;color:rgba(255,255,255,.84)}
+.home-page .home-final .hero-buttons{justify-content:flex-start!important}
+.home-page .home-final::before{content:"Personalized Itineraries   •   Local Support   •   Responsible Travel";position:absolute;right:6vw;bottom:42px;color:rgba(255,255,255,.78);font-size:12px;font-weight:800;letter-spacing:.05em}
+.home-page .footer{padding-top:52px}
+@media(max-width:800px){
+ .home-page .editorial-feature:first-of-type .editorial-feature-grid{grid-template-columns:1fr}
+ .home-testimonial{grid-template-columns:76px 1fr;gap:18px;padding:36px 20px}.testimonial-photo{width:76px;height:76px;border-width:5px}.home-testimonial>.text-link{grid-column:2}.quote-mark{display:none}
+ .home-page .home-final{min-height:520px;padding:72px 20px 105px!important}
+ .home-page .home-final::before{left:20px;right:20px;bottom:38px;line-height:1.8}
+}
+</style>
 <script src="/site-config.js"></script>
 <script src="/site-runtime.js" defer></script>
 </head>
@@ -581,9 +608,20 @@ button,select{font:inherit}
   </div>
 </section>
 
+
+<section class="home-testimonial" aria-label="Rigan traveller story">
+  <div class="testimonial-photo" style="background-image:url('/assets/images/treks/poon-hill.webp')" aria-hidden="true"></div>
+  <div class="testimonial-copy">
+    <span class="quote-mark">“</span>
+    <blockquote>Travel should leave you with more than photographs — it should leave you with people, stories and a deeper connection to Nepal.</blockquote>
+    <p>That is the kind of journey we build at Rigan Roots &amp; Routes.</p>
+  </div>
+  <a class="text-link" href="/about/">Our Story <i class="fa-solid fa-arrow-right"></i></a>
+</section>
+
 <section class="home-final">
-  <small>Your Nepal, Shaped Around You</small>
-  <h2>Tell us what kind of journey you want to remember.</h2>
+  <small>Plan Your Nepal Journey</small>
+  <h2>Let’s Create Your Story</h2>
   <p>Share your dates, interests, travel style and group size. We will shape a thoughtful route and prepare a tailored quotation.</p>
   <div class="hero-buttons" style="justify-content:center">
     <a href="/plan/" class="btn" style="background:var(--olive);color:#102619">Plan My Nepal Trip</a>

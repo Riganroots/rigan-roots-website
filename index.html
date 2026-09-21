@@ -322,7 +322,52 @@ button,select{font:inherit}
 .journey-path-grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.journey-path-card{display:flex;min-height:260px;flex-direction:column;align-items:flex-start;text-align:left;padding:30px;border:1px solid rgba(23,77,47,.10);border-radius:26px;background:#fffaf2;box-shadow:0 16px 42px rgba(19,32,24,.07);transition:.3s}.journey-path-card:hover{transform:translateY(-6px);box-shadow:0 24px 55px rgba(23,77,47,.13)}.journey-path-featured{background:#174d2f}.journey-path-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:17px;background:#edf5eb;color:var(--green);font-size:21px;margin-bottom:22px}.journey-path-card strong{color:#132018;font-family:'Playfair Display',serif;font-size:24px}.journey-path-card p{margin:10px 0 22px;color:var(--muted);font-size:14px;line-height:1.7}.journey-path-link{margin-top:auto;color:var(--green);font-size:13px;font-weight:900}.journey-path-link i{margin-left:5px}.journey-path-featured .journey-path-icon{background:rgba(255,255,255,.13);color:#d8e7a8}.journey-path-featured strong,.journey-path-featured .journey-path-link{color:#fff}.journey-path-featured p{color:rgba(255,255,255,.78)}
 @media(max-width:850px){.journey-path{padding:58px 18px}.journey-path-grid{grid-template-columns:1fr}.journey-path-card{min-height:220px;padding:25px}}
 </style>
-<style id="rigan-social-style">.rigan-social-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}.rigan-social-links a{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.10);color:inherit;border:1px solid rgba(255,255,255,.14);transition:transform .2s ease,background .2s ease}.rigan-social-links a:hover{transform:translateY(-2px);background:#174d2f;color:#fff}</style></head>
+<style id="rigan-social-style">.rigan-social-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}.rigan-social-links a{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.10);color:inherit;border:1px solid rgba(255,255,255,.14);transition:transform .2s ease,background .2s ease}.rigan-social-links a:hover{transform:translateY(-2px);background:#174d2f;color:#fff}</style>
+<style id="rigan-visual-refresh">
+/* Rigan homepage visual refresh: Nepal editorial theme + responsive full-image treatment */
+:root{--rigan-forest:#0f3b29;--rigan-deep:#082b1d;--rigan-cream:#f7f1e4;--rigan-gold:#c8a45b}
+.home-page{background:var(--rigan-cream)}
+.home-page .hero{min-height:92svh;background-image:linear-gradient(90deg,rgba(4,25,18,.72) 0%,rgba(4,25,18,.40) 48%,rgba(4,25,18,.12) 100%),url('/assets/images/treks/poon-hill.webp');background-position:center 44%;background-size:cover}
+.home-page .hero-content{max-width:760px;background:linear-gradient(135deg,rgba(5,34,23,.58),rgba(5,34,23,.20));border:1px solid rgba(255,255,255,.24);box-shadow:0 28px 80px rgba(0,0,0,.24)}
+.home-page .hero h1 span{color:#d8e7a8}
+.home-page .home-editorial,.home-page .moments-editorial,.home-page .editorial-feature{position:relative}
+.home-page .home-editorial,.home-page .moments-editorial{background-color:#fbf7ee;background-image:radial-gradient(circle at 12% 18%,rgba(200,164,91,.08),transparent 24%),radial-gradient(circle at 88% 70%,rgba(23,77,47,.07),transparent 26%)}
+.home-page .editorial-head h2,.home-page .editorial-feature-copy h2{color:var(--rigan-deep)}
+.home-page .editorial-cat,.home-page .moment,.home-page .editorial-feature-image{box-shadow:0 18px 45px rgba(9,42,29,.12);transition:transform .45s ease,box-shadow .45s ease,filter .45s ease}
+.home-page .editorial-cat:hover,.home-page .moment:hover,.home-page .editorial-feature-image:hover{transform:translateY(-5px);box-shadow:0 26px 62px rgba(9,42,29,.20);filter:saturate(1.06) contrast(1.03)}
+.home-page .editorial-cat{min-height:330px;border-radius:120px 120px 24px 24px;background-size:cover;background-position:center}
+.home-page .editorial-cat::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.28);border-radius:inherit;pointer-events:none}
+.home-page .moment{border-radius:24px;background-size:cover;background-position:center}
+.home-page .editorial-feature-image{border-radius:32px;background-size:cover;background-position:center;overflow:hidden}
+.home-page .editorial-feature-grid{gap:6vw}
+.home-page .editorial-feature{background:#fffaf1}
+.home-page .home-final{background:linear-gradient(135deg,#082b1d,#0f4a32);position:relative;overflow:hidden}
+.home-page .home-final::after{content:"";position:absolute;inset:auto -8% -55% auto;width:520px;height:520px;border:1px solid rgba(216,231,168,.15);border-radius:50%;box-shadow:0 0 0 45px rgba(216,231,168,.025),0 0 0 90px rgba(216,231,168,.02)}
+.home-page .footer{background:#06261a}
+@media(max-width:900px){
+ .home-page .hero{min-height:88svh;background-position:58% center}
+ .home-page .editorial-cat{min-height:290px;border-radius:90px 90px 22px 22px}
+ .home-page .editorial-feature-image{min-height:520px;background-position:center}
+}
+@media(max-width:600px){
+ .home-page .hero{min-height:100svh;background-position:56% center;padding-top:118px}
+ .home-page .hero-content{background:linear-gradient(180deg,rgba(5,34,23,.68),rgba(5,34,23,.46));backdrop-filter:blur(6px)}
+ .home-page .editorial-categories{grid-template-columns:1fr 1fr;gap:12px}
+ .home-page .editorial-cat{min-height:235px;border-radius:70px 70px 20px 20px;padding:16px;background-position:center}
+ .home-page .editorial-cat strong{font-size:18px}
+ .home-page .editorial-cat span{font-size:11px;line-height:1.35}
+ .home-page .editorial-feature-grid{gap:30px}
+ .home-page .editorial-feature-image{min-height:0;height:auto;aspect-ratio:4/5;background-size:cover;background-position:center}
+ .home-page .moments-grid{gap:12px}
+ .home-page .moment{min-height:0;aspect-ratio:4/3;border-radius:20px;background-size:cover;background-position:center}
+ .home-page .moment-large{aspect-ratio:4/5}
+}
+@media(min-width:601px) and (max-width:1100px){
+ .home-page .editorial-categories{grid-template-columns:repeat(4,1fr)}
+ .home-page .editorial-cat{min-height:260px}
+}
+</style>
+</head>
 <body class="home-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 

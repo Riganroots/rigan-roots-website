@@ -952,3 +952,24 @@ footer,
 #main-content:focus {
   outline: none;
 }
+
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .slider {
+    animation: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+}

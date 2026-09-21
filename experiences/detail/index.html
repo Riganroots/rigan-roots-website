@@ -332,6 +332,13 @@
       font-weight: 900;
     }
 
+    .decision-guide { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
+    .decision-card { padding:16px; border:1px solid var(--border); border-radius:18px; background:#fffdf8; }
+    .decision-card i { margin-bottom:8px; color:var(--brown); font-size:18px; }
+    .decision-card strong { display:block; color:var(--green); font-size:13px; }
+    .decision-card span { display:block; margin-top:4px; color:var(--muted); font-size:12px; line-height:1.45; }
+    @media (max-width:700px) { .decision-guide { grid-template-columns:1fr; gap:8px; } .decision-card { padding:13px 14px; } }
+
     /* MAIN CONTENT */
     .container {
       position: relative;
@@ -1354,6 +1361,12 @@
 
     </div>
 
+    <div class="decision-guide" aria-label="Quick trip planning guide">
+      <div class="decision-card"><i class="fa-solid fa-person-hiking"></i><strong>Is this trip for me?</strong><span id="fitSummary">Check difficulty, duration and walking style before choosing.</span></div>
+      <div class="decision-card"><i class="fa-regular fa-calendar-check"></i><strong>When should I go?</strong><span id="seasonSummary">Season and local conditions can affect the experience.</span></div>
+      <div class="decision-card"><i class="fa-solid fa-circle-info"></i><strong>Before you book</strong><span id="planningSummary">We confirm permits, transport, accommodation and final inclusions with your quotation.</span></div>
+    </div>
+
     <div class="main-grid">
 
       <!-- CONTENT -->
@@ -1803,6 +1816,16 @@
         travelDateInput.min = localDate;
       }
 
+      function updateDecisionGuide(item) {
+        const difficulty = item.difficulty || item.style || "Flexible";
+        const duration = item.duration || "Flexible";
+        const season = item.season || item.bestSeason || "Ask us for the best dates";
+        const style = item.style || "Nepal experience";
+        document.getElementById("fitSummary").textContent = `${difficulty} · ${duration} · ${style}. We can adjust the pace where the route allows.`;
+        document.getElementById("seasonSummary").textContent = `${season}. Ask us about weather, trail conditions and availability for your exact dates.`;
+        document.getElementById("planningSummary").textContent = "Your final quotation confirms permits, guide requirements, transport, accommodation, inclusions and contingency planning.";
+      }
+
       function populateList(elementId, items, fallbackItems) {
         const element =
           document.getElementById(elementId);
@@ -2211,6 +2234,8 @@ Please send me more information about availability, itinerary, inclusions, and p
         "location"
       ).textContent =
         selected.location || "Nepal";
+
+      updateDecisionGuide(selected);
 
       const hasDisplayedPrice = Boolean(
         selected.price && String(selected.price).trim()

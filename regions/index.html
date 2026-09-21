@@ -2636,8 +2636,30 @@ Please send me a suggested itinerary, estimated price, accommodation options, tr
       regionCards.innerHTML =
         filteredRegions
           .map(function (region) {
+            const recommendedExperience = ({
+              "kathmandu-valley": "kathmandu-heritage-tour",
+              "pokhara-annapurna": "annapurna-base-camp-trek",
+              "everest-region": "everest-base-camp-trek",
+              "everest-base-camp": "everest-base-camp-trek",
+              "annapurna-base-camp": "annapurna-base-camp-trek",
+              "makalu-base-camp": "makalu-base-camp-trek",
+              "kanchenjunga-base-camp": "kanchenjunga-base-camp-trek",
+              "manaslu-base-camp-circuit": "manaslu-circuit-trek",
+              "mardi-himal-base-camp": "mardi-himal-trek",
+              "upper-dolpo": "upper-dolpo-expedition",
+              "shey-phoksundo": "lower-dolpo-phoksundo-trek",
+              "nar-phu-valley": "nar-phu-valley-trek",
+              "chitwan-national-park": "bird-watching-nepal",
+              "tharu-villages": "tharu-food-culture",
+              "lumbini": "yoga-meditation-retreat"
+            })[region.slug] || "";
+
             const planLink =
-              `/plan/?region=${encodeURIComponent(region.slug)}`;
+              `/plan/?region=${encodeURIComponent(region.slug)}${recommendedExperience ? `&experience=${encodeURIComponent(recommendedExperience)}` : ""}`;
+
+            const experienceLink = recommendedExperience
+              ? `/experiences/?search=${encodeURIComponent(recommendedExperience.replace(/-/g, " "))}`
+              : `/experiences/?search=${encodeURIComponent(region.name.replace(/\s*&.*$/, "").replace(/\s+Region$/, ""))}`;
 
             const whatsappLink =
               createWhatsAppLink(region);
@@ -2724,7 +2746,7 @@ Please send me a suggested itinerary, estimated price, accommodation options, tr
 
                     <a
                       class="region-action details-btn"
-                      href="/experiences/?search=${encodeURIComponent(region.name.replace(/\s*&.*$/, "").replace(/\s+Region$/, ""))}"
+                      href="${experienceLink}"
                     >
                       <i class="fa-solid fa-person-hiking"></i>
                       Explore Related Experiences

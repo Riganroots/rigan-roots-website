@@ -519,6 +519,29 @@ button,select{font:inherit}
  .home-page .home-region-strip a{background-position:center}
 }
 </style>
+
+<style id="rigan-home-final-visual-fix">
+/* Final desktop polish after live visual QA */
+.home-page .home-editorial,
+.home-page .editorial-feature,
+.home-page .home-regions{padding-top:86px;padding-bottom:86px}
+.home-page .editorial-head{margin-bottom:38px}
+.home-page .editorial-categories{max-width:1240px}
+.home-page .editorial-cat{min-height:285px}
+.home-page .editorial-feature-grid{max-width:1240px;gap:5vw}
+.home-page .editorial-feature-image{min-height:560px}
+.home-page .home-region-strip{max-width:1240px}
+.home-page .home-region-strip a{min-height:235px}
+.home-page .moments-editorial{padding-top:86px;padding-bottom:86px}
+.home-page .moments-grid{max-width:1240px;grid-template-rows:250px 250px}
+.home-page .moment-large{min-height:516px}
+.home-page .navbar .logo img{display:block;max-width:210px;height:auto}
+@media(max-width:900px){
+ .home-page .home-editorial,.home-page .editorial-feature,.home-page .home-regions,.home-page .moments-editorial{padding-top:68px;padding-bottom:68px}
+ .home-page .editorial-feature-image{min-height:0}
+ .home-page .home-region-strip a{min-height:220px}
+}
+</style>
 <script src="/site-config.js"></script>
 <script src="/site-runtime.js" defer></script>
 </head>
@@ -553,7 +576,7 @@ button,select{font:inherit}
     <div class="hero-line"></div>
     <p>Real homes. Real food. Real stories.<br>Journeys that connect you to the heart of Nepal.</p>
     <div class="hero-buttons">
-      <a href="/plan/" class="btn btn-green">Explore Experiences</a>
+      <a href="/experiences/" class="btn btn-green">Explore Experiences</a>
       <a href="/plan/" class="btn btn-outline">Plan My Trip</a>
     </div>
     <div class="hero-proof" aria-label="Rigan trip planning features">
